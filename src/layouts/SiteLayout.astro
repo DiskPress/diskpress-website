@@ -3,7 +3,7 @@ import '../styles/global.css';
 import '../styles/content.css';
 import DownloadLink from '../components/DownloadLink.astro';
 import AppearanceControl from '../components/AppearanceControl.astro';
-import { SITE_DESCRIPTION, DEVELOPER_URL, MORE_APPS_URL, SUPPORT_EMAIL } from '../consts';
+import { SITE_DESCRIPTION, DEVELOPER_URL, BLOG_URL, MORE_APPS_URL, SUPPORT_EMAIL } from '../consts';
 interface Props { title?: string; description?: string; noindex?: boolean; }
 const { title = 'DiskPress - More room. Same files.', description = SITE_DESCRIPTION, noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -191,7 +191,7 @@ const navigation = [
         <div class="footer-brand"><a href="/" class="brand"><img src="/favicon.svg" width="32" height="32" alt="" /><span>DiskPress</span></a><p>More room for what you keep.</p><p class="fine">A Mac app by <a href={DEVELOPER_URL}>Ighor July</a>.</p></div>
         <nav aria-label="Product links"><h2>Explore</h2><a href="/#how-it-works">How it works</a><a href="/cli/">CLI guide</a><a href="/faq/">FAQ</a></nav>
         <nav aria-label="Help and legal"><h2>Help</h2><a href={`mailto:${SUPPORT_EMAIL}`}>Contact support</a><a href="/privacy-policy/">Privacy policy</a><a href="/terms-of-service/">Terms of service</a></nav>
-        <nav aria-label="Developer links"><h2>Made by Ighor July</h2><a href={MORE_APPS_URL}>More Mac apps</a><a href={DEVELOPER_URL}>Reverse Everything blog</a><span class="fine">Copyright {new Date().getFullYear()} Ighor July</span></nav>
+        <nav aria-label="Developer links"><h2>Made by <a href={DEVELOPER_URL}>Ighor July</a></h2><a href={MORE_APPS_URL}>More Mac apps</a><a href={BLOG_URL}>Reverse Everything blog</a><span class="fine">Copyright {new Date().getFullYear()} <a href={DEVELOPER_URL}>Ighor July</a></span></nav>
       </div>
     </footer>
     <script>

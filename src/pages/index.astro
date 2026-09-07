@@ -5,7 +5,7 @@ import DownloadLink from '../components/DownloadLink.astro';
 import CodeBlock from '../components/CodeBlock.astro';
 import FaqList from '../components/FaqList.astro';
 import { featuredQuestions } from '../data/faq';
-import { APP_ARCHIVER_URL, DEVELOPER_URL, MORE_APPS_URL } from '../consts';
+import { APP_ARCHIVER_URL, DEVELOPER_URL, BLOG_URL, MORE_APPS_URL } from '../consts';
 import overview from '../assets/diskpress-overview.png';
 import menuBar from '../assets/diskpress-menu-bar.png';
 import oneTimeReview from '../assets/diskpress-one-time-review.png';
@@ -121,11 +121,11 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
     <p class="safety-note">DiskPress changes how files are stored. Keep an independent backup of important data. System locations, application bundles, executables, and other unsupported targets are intentionally skipped. <a href="/faq/#verification-backup">Read about safeguards and limits</a>.</p>
   </section>
 
-  <section class="wrap companion-section" aria-labelledby="companion-heading"><div class="companion-panel"><div><p class="eyebrow">The right tool for each job</p><h2 id="companion-heading">DiskPress for your files.<br />App Archiver for your apps.</h2></div><div><p>DiskPress does not compress application bundles or executables. Optimizing installed software needs a more specialized architecture.</p><p>App Archiver is Ighor July's dedicated app for compressing, optimizing, and archiving supported Mac apps. Together, the two tools cover different parts of what you keep.</p><a class="text-link" href={APP_ARCHIVER_URL}>Discover App Archiver</a></div></div></section>
+  <section class="wrap companion-section" aria-labelledby="companion-heading"><div class="companion-panel"><div><p class="eyebrow">The right tool for each job</p><h2 id="companion-heading">DiskPress for your files.<br />App Archiver for your apps.</h2></div><div><p>DiskPress does not compress application bundles or executables. Optimizing installed software needs a more specialized architecture.</p><p>App Archiver is <a href={DEVELOPER_URL}>Ighor July</a>'s dedicated app for compressing, optimizing, and archiving supported Mac apps. Together, the two tools cover different parts of what you keep.</p><a class="text-link" href={APP_ARCHIVER_URL}>Discover App Archiver</a></div></div></section>
 
   <section class="section wrap maker-section" id="developer">
     <div><p class="eyebrow">A note from the developer</p><h2>I wanted the space.<br />I still wanted my files.</h2></div>
-    <div class="maker-story"><p>"I built DiskPress because deleting things is not always the answer. My Mac already had the filesystem features to store files more efficiently. What I wanted was a simple way to choose my folders and let those features keep working in the background."</p><p>"DiskPress is my way of making that routine. Keep the files you need, make better use of the SSD you already have, and stay in control of the work."</p><div class="maker-signature"><strong>Ighor July</strong><span>Developer of DiskPress and other focused Mac utilities</span></div><div class="maker-links"><a class="text-link" href={MORE_APPS_URL}>Explore my other apps</a><a class="text-link" href={DEVELOPER_URL}>Read Reverse Everything</a></div></div>
+    <div class="maker-story"><p>"I built DiskPress because deleting things is not always the answer. My Mac already had the filesystem features to store files more efficiently. What I wanted was a simple way to choose my folders and let those features keep working in the background."</p><p>"DiskPress is my way of making that routine. Keep the files you need, make better use of the SSD you already have, and stay in control of the work."</p><div class="maker-signature"><strong><a href={DEVELOPER_URL}>Ighor July</a></strong><span>Developer of DiskPress and other focused Mac utilities</span></div><div class="maker-links"><a class="text-link" href={MORE_APPS_URL}>Explore my other apps</a><a class="text-link" href={BLOG_URL}>Read Reverse Everything</a></div></div>
   </section>
 
   <section class="section faq-section"><div class="wrap home-faq-grid"><div class="section-heading"><p class="eyebrow">Good questions</p><h2>A few things<br />worth knowing.</h2><a class="text-link" href="/faq/">Explore the full FAQ</a></div><FaqList questions={featuredQuestions} /></div></section>

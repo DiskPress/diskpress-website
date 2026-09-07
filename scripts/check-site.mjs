@@ -8,7 +8,10 @@ const routes = ['/', '/faq/', '/cli/', '/privacy-policy/', '/terms-of-service/']
 const documents = new Map();
 const decode = value => value.replaceAll('&amp;', '&').replaceAll('&#38;', '&');
 const appStore = 'https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=www&mt=8';
+const developerProfile = 'https://reverseeverything.com/ighor/?utm_source=diskpress.app';
+const developerBlog = 'https://reverseeverything.com/?utm_source=diskpress.app';
 const iconAssets = new Set(['/favicon.ico', '/favicon.svg', '/favicon-16x16.png', '/favicon-32x32.png', '/apple-touch-icon.png']);
+let developerLinks = 0;
 
 for (const route of [...routes, '/404.html']) {
   const file = route === '/404.html' ? '404.html' : `${route.slice(1)}index.html`;
@@ -43,6 +46,12 @@ for (const route of [...routes, '/404.html']) {
   assert.ok(appearanceLabelPosition >= 0 && appearanceLabelPosition < html.indexOf('</header>'), `${route} must restore the appearance label before the header is complete`);
   assert.ok(!/in development|\/Users\/ighor\/|localhost|127\.0\.0\.1/.test(html), `${route} contains pre-release or local-only content`);
   assert.ok(!/[\u00a0\u200b-\u200f\u2028\u2029\u2060\ufeff\u2018\u2019\u201c\u201d]/.test(html), `${route} contains unsupported quote or whitespace characters`);
+  const nameLinks = [...html.matchAll(/<a\b[^>]*>Ighor July<\/a>/g)].map(match => match[0]);
+  assert.ok(nameLinks.length >= 3, `${route} must link every footer mention of the developer`);
+  assert.equal(nameLinks.length, (html.match(/Ighor July/g) || []).length, `${route} must link every developer-name mention`);
+  for (const link of nameLinks) assert.equal(decode(link.match(/\bhref="([^"]+)"/)?.[1] || ''), developerProfile, `${route} must link the developer name to the supplied profile URL`);
+  assert.ok(html.includes(`href="${developerBlog}">Reverse Everything blog</a>`), `${route} must preserve the separate blog link`);
+  developerLinks += nameLinks.length;
   for (const match of html.matchAll(/<img\b[^>]*>/g)) {
     assert.match(match[0], /\balt="[^"]*"/, `${route} image needs alt text`);
     assert.match(match[0], /\bwidth="\d+"/, `${route} image needs reserved width`);
@@ -70,6 +79,7 @@ const screenshotSpecs = [
   ['menu-bar', 720, 1012, [360, 540, 720], 'lazy'],
 ];
 const homepage = documents.get('/');
+assert.ok(homepage.includes(`href="${developerBlog}">Read Reverse Everything</a>`), 'The homepage blog link must keep its original destination');
 const homepageImages = [...homepage.matchAll(/<img\b[^>]*>/g)].map(match => match[0]);
 for (const [name, width, height, widths, loading] of screenshotSpecs) {
   const matches = homepageImages.filter(image => image.includes(`/_astro/diskpress-${name}.`));
@@ -149,4 +159,4 @@ for (const route of routes) assert.ok(sitemap.includes(`<loc>https://diskpress.a
 assert.ok((await readFile(path.join(root, 'robots.txt'), 'utf8')).includes('Sitemap: https://diskpress.app/sitemap.xml'));
 assert.match(documents.get('/404.html'), /noindex, follow/);
 assert.ok(appStoreLinks >= 7);
-console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} App Store links, ${assets} asset references, metadata, sitemap, analytics, and first-paint styling.`);
+console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} App Store links, ${developerLinks} developer profile links, ${assets} asset references, metadata, sitemap, analytics, and first-paint styling.`);

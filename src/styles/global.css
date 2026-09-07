@@ -82,7 +82,7 @@
   .footer-brand, .footer-grid nav { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
   .footer-brand p { color: var(--muted); }
   .footer-grid nav h2 { font-size: .875rem; line-height: 1.5; letter-spacing: 0; font-weight: 650; }
-  .footer-grid nav a { font-size: .9375rem; color: var(--muted); text-decoration: none; }
+  .footer-grid nav > a { font-size: .9375rem; color: var(--muted); text-decoration: none; }
   .footer-grid nav a:hover { color: var(--accent); }
 }
 @layer responsive {

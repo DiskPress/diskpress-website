@@ -14,6 +14,8 @@ All pages are prerendered. Cloudflare Workers Static Assets serves `dist` direct
 
 App links and developer links live in `src/consts.ts`. FAQ content lives in `src/data/faq.ts`. Product behavior was checked against the local DiskPress source. Commands are documented without running them against user files.
 
+Every visible mention of the developer's name links to the profile URL in `DEVELOPER_URL`. The separate `BLOG_URL` keeps blog links pointing to the Reverse Everything homepage. Both retain the supplied campaign attribution.
+
 ## Design and privacy
 
 The site follows the system appearance and offers Light and Dark overrides. A small synchronous head script applies the saved preference before paint. CSS is inlined at build time and the site uses system fonts, with no remote font requests. The sticky header has an opaque background extending above it for Safari safe areas and overscroll.
