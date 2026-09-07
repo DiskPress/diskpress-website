@@ -131,7 +131,18 @@ assert.ok(documents.get('/cli/').includes('combine file compression with file de
 assert.ok(documents.get('/cli/').includes('Deduplication must be enabled.'), 'The CLI guide must preserve its configuration requirement');
 assert.match(homepage, /<h3>File compression<\/h3>/, 'The homepage must name the file compression feature explicitly');
 assert.match(homepage, /<h3>File deduplication<\/h3>/, 'The homepage must name the file deduplication feature explicitly');
-for (const route of ['/', '/faq/']) assert.ok(documents.get(route).includes('Does file deduplication delete my duplicate files?'), `${route} must distinguish file deduplication from duplicate deletion`);
+const deduplicationFeature = [...homepage.matchAll(/<article\b[^>]*class="native-feature"[^>]*>[\s\S]*?<\/article>/g)].map(match => match[0]).find(article => article.includes('<h3>File deduplication</h3>'));
+assert.ok(deduplicationFeature?.includes('DiskPress is not a duplicate file remover.'), 'The feature description must distinguish file deduplication from duplicate deletion');
+assert.ok(deduplicationFeature.includes('APFS copy-on-write clones') && deduplicationFeature.includes('Both files keep their paths.'), 'The feature description must explain storage sharing without removing file paths');
+for (const route of ['/', '/faq/']) {
+  const answer = documents.get(route).match(/<details\b[^>]*id="deduplication"[^>]*>[\s\S]*?<\/details>/)?.[0];
+  assert.ok(answer?.includes('Is DiskPress a duplicate file remover?') && answer.includes('No. DiskPress is not a duplicate file remover.'), `${route} must explicitly answer the duplicate-remover question`);
+  assert.ok(answer.includes('Both files stay available at their existing paths.') && answer.includes('After verifying identical contents'), `${route} must explain verified replacement without losing either file`);
+  assert.ok(answer.includes('APFS (Apple File System) copy-on-write clone') && answer.includes('same physical data blocks'), `${route} must explain APFS clone storage sharing`);
+  assert.ok(answer.includes('Metadata still takes some space') && answer.includes('later edits can use more space'), `${route} must not promise zero storage overhead`);
+  assert.ok(answer.includes('edit or delete either file without changing the other') && answer.includes('same APFS volume'), `${route} must preserve file independence and the same-volume requirement`);
+  assert.ok(answer.includes('href="https://developer.apple.com/documentation/foundation/about-apple-file-system"'), `${route} must link the APFS explanation to Apple documentation`);
+}
 const originalData = 2 * 100;
 const compressedData = originalData * (1 - 30 / 100);
 const sharedData = compressedData / 2;
