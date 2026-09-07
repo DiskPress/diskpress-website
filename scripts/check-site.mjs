@@ -5,6 +5,8 @@ import path from 'node:path';
 
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const routes = ['/', '/faq/', '/cli/', '/privacy-policy/', '/terms-of-service/'];
+const unlistedRoutes = ['/application-corrupted/'];
+const noindexRoutes = new Set([...unlistedRoutes, '/404.html']);
 const documents = new Map();
 const decode = value => value.replaceAll('&amp;', '&').replaceAll('&#38;', '&');
 const appStore = 'https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=www&mt=8';
@@ -13,7 +15,7 @@ const developerBlog = 'https://reverseeverything.com/?utm_source=diskpress.app';
 const iconAssets = new Set(['/favicon.ico', '/favicon.svg', '/favicon-16x16.png', '/favicon-32x32.png', '/apple-touch-icon.png']);
 let developerLinks = 0;
 
-for (const route of [...routes, '/404.html']) {
+for (const route of [...routes, ...unlistedRoutes, '/404.html']) {
   const file = route === '/404.html' ? '404.html' : `${route.slice(1)}index.html`;
   const html = await readFile(path.join(root, file), 'utf8');
   documents.set(route, html);
@@ -23,7 +25,13 @@ for (const route of [...routes, '/404.html']) {
   assert.match(html, /<meta name="description" content="[^"]+"/, `${route} needs a description`);
   const iconLinks = [...html.matchAll(/<link\b[^>]*rel="(?:icon|apple-touch-icon)"[^>]*>/g)].map(match => match[0]);
   for (const icon of iconAssets) assert.ok(iconLinks.some(link => link.includes(`href="${icon}?v=2"`)), `${route} is missing a cache-versioned icon ${icon}`);
-  if (route !== '/404.html') assert.ok(html.includes(`rel="canonical" href="https://diskpress.app${route}"`), `${route} has the wrong canonical URL`);
+  if (noindexRoutes.has(route)) {
+    assert.match(html, /<meta name="robots" content="noindex, follow"/, `${route} must exclude itself from search indexing`);
+    assert.ok(!html.includes('rel="canonical"'), `${route} must not advertise an indexable canonical URL`);
+  } else {
+    assert.ok(html.includes(`rel="canonical" href="https://diskpress.app${route}"`), `${route} has the wrong canonical URL`);
+    assert.ok(!/<meta name="robots"[^>]*noindex/.test(html), `${route} must remain indexable`);
+  }
   assert.equal((html.match(/src="https:\/\/analytics\.diskpress\.app\/js\/script\.outbound-links\.tagged-events\.js"/g) || []).length, 1, `${route} must load Plausible once`);
   const head = html.slice(html.indexOf('<head>'), html.indexOf('</head>')).replace(/<noscript>[\s\S]*?<\/noscript>/g, '');
   const css = [...head.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/g)].map(match => match[1]).join('\n');
@@ -84,6 +92,21 @@ assert.match(documents.get('/faq/'), /id="ssd-wear"/, 'The FAQ must explain SSD 
 for (const route of ['/', '/cli/']) {
   assert.ok(documents.get(route).includes('href="/faq/#ssd-wear"'), `${route} must link to the SSD-write guidance`);
   assert.match(documents.get(route), /disk writes/, `${route} must disclose optimization writes`);
+}
+
+const integrityPage = documents.get('/application-corrupted/');
+assert.match(integrityPage, /<h1>Application integrity warning<\/h1>/, 'The unlisted help page needs a clear DiskPress warning heading');
+assert.ok(integrityPage.includes('data-domain="diskpress.app"') && integrityPage.includes('plausible.init();'), 'The unlisted help page must retain normal Plausible page-view tracking');
+assert.ok(integrityPage.includes('Move only the installed DiskPress.app application to the Trash.'), 'Recovery guidance must limit removal to the application bundle');
+assert.ok(integrityPage.includes('Do not delete your personal files, DiskPress settings, or recovery records'), 'Recovery guidance must preserve user data and unfinished recovery material');
+assert.ok(integrityPage.includes('Do not bypass the warning or disable macOS security protections.'), 'The help page must not recommend bypassing integrity protections');
+assert.ok(integrityPage.includes('mailto:support@apptrust.app?subject=DiskPress%20application%20integrity%20warning'), 'The help page must provide the DiskPress support address and a useful subject');
+assert.ok(integrityPage.includes('.document-content a:not(.download-link)'), 'Document links must not override download-button contrast');
+assert.ok(!/Parall|support@parall\.app/.test(integrityPage), 'The help page must not inherit another application\'s support details or bug claims');
+for (const [route, html] of documents) {
+  if (!unlistedRoutes.includes(route)) {
+    for (const unlistedRoute of unlistedRoutes) assert.ok(!html.includes(unlistedRoute.slice(0, -1)), `${route} must not expose the direct-only help page`);
+  }
 }
 
 const screenshotSpecs = [
@@ -244,7 +267,17 @@ for (const [index, size] of [16, 32, 48, 64].entries()) {
   assert.equal(ico.readUInt32BE(offset + 20), size, 'ICO payload height must match its directory entry');
 }
 for (const route of routes) assert.ok(sitemap.includes(`<loc>https://diskpress.app${route}</loc>`));
-assert.ok((await readFile(path.join(root, 'robots.txt'), 'utf8')).includes('Sitemap: https://diskpress.app/sitemap.xml'));
+assert.equal((sitemap.match(/<loc>/g) || []).length, routes.length, 'The sitemap must contain only the indexable public pages');
+const robots = await readFile(path.join(root, 'robots.txt'), 'utf8');
+assert.ok(robots.includes('Sitemap: https://diskpress.app/sitemap.xml'));
+assert.match(robots, /^Allow: \/$/m, 'Crawlers must be allowed to read the noindex page');
+for (const route of unlistedRoutes) {
+  assert.ok(!sitemap.includes(route.slice(0, -1)), 'The direct-only help page must stay out of the sitemap');
+  assert.ok(!robots.includes(route.slice(0, -1)), 'robots.txt must not advertise or block the direct-only help URL');
+}
+const headers = await readFile(path.join(root, '_headers'), 'utf8');
+const noindexHeaderPaths = headers.trim().split(/\n\s*\n/).filter(block => /X-Robots-Tag:[^\n]*\bnoindex\b/i.test(block)).map(block => block.split('\n')[0]);
+assert.deepEqual(noindexHeaderPaths, ['/application-corrupted', '/application-corrupted/*'], 'Cloudflare must send noindex headers only for the integrity-help route and its URL variants');
 assert.match(documents.get('/404.html'), /noindex, follow/);
 assert.ok(appStoreLinks >= 7);
 console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} App Store links, ${developerLinks} developer profile links, ${assets} asset references, metadata, sitemap, analytics, and first-paint styling.`);

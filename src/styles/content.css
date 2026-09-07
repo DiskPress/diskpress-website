@@ -121,7 +121,7 @@
   .document-content h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); }
   .document-content h3 { font-size: 1.2rem; }
   .document-content p, .document-content li { color: var(--muted); }
-  .document-content a { color: var(--accent); }
+  .document-content a:not(.download-link) { color: var(--accent); }
   .document-content ul, .document-content ol { margin: 0; padding-left: 24px; display: grid; gap: 12px; }
   .document-content :not(pre) > code { background: var(--code-bg); border-radius: 4px; padding: 2px 5px; overflow-wrap: anywhere; color: var(--text); }
   .document-content .faq-answer { gap: 16px; }

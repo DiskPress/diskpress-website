@@ -1,0 +1,5 @@
+/application-corrupted
+  X-Robots-Tag: noindex
+
+/application-corrupted/*
+  X-Robots-Tag: noindex
