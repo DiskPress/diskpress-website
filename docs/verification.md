@@ -14,7 +14,7 @@ Verified on September 7, 2026. All source edits are inside Website. The applicat
 
 ## Automated checks
 
-`npm run check` passed the production build, TypeScript check, and Cloudflare dry run. `npm run test:site` passed for six HTML pages, 128 internal links, nine App Store links, 52 asset references including favicons and responsive image variants, canonical URLs, headings, analytics count, first-paint styling, sitemap, and robots file.
+`npm run check` passed the production build, TypeScript check, and Cloudflare dry run. `npm run test:site` passed for six HTML pages, 133 internal links, nine App Store links, 52 asset references including favicons and responsive image variants, canonical URLs, headings, analytics count, first-paint styling, sitemap, and robots file.
 
 Browser checks against the actual local Cloudflare build passed on all five content pages at widths of 320, 390, 768, 1024, and 1440 pixels. Verification covered image loading, light and dark appearances, saved appearance across reloads, system appearance changes, menu navigation and Escape handling, FAQ deep links, command copying, 200% text enlargement, slash redirects, custom 404 behavior, and reading without JavaScript. No page errors or failed local assets were observed. Analytics requests were intercepted during automation to avoid polluting production statistics.
 
@@ -39,6 +39,12 @@ Browser automation used local Chrome. This is not a claim of exhaustive testing 
 ## Favicon compatibility
 
 The favicon compatibility fix preserves the DiskPress SVG artwork and adds a multi-size ICO, 16 and 32 pixel PNGs, and an Apple touch icon. All pages use versioned icon links. macOS image decoding recognized the ICO, and static checks validate its four frames and the PNG dimensions. The previous live site served the SVG but returned 404 for the conventional ICO and touch-icon paths.
+
+## SSD-write guidance
+
+The homepage workflow, FAQ, and CLI guide explain the developer-confirmed write cost of optimization and recommend mostly stable folders. Busy locations, regenerated temporary data, active logs, and download staging folders are discouraged. Recent-file protection is described as a delay, not a way to eliminate writes. CLI examples now target a specific folder of completed data rather than all Documents or Downloads.
+
+The FAQ links to [Kingston's SSD endurance explanation](https://www.kingston.com/unitedkingdom/en/blog/servers-and-data-centers/understanding-ssd-endurance-tbw-dwpd) for the general flash-memory limitation. No SSD lifespan estimate, zero-wear claim, or guaranteed lifespan improvement was added. Regression checks require the warning and FAQ link on the homepage and CLI guide. This content-only follow-up passed the production build, TypeScript check, Cloudflare dry run, static site checks, and a local HTTP response check. It did not repeat the earlier browser test matrix.
 
 ## Dependency security
 

@@ -47,6 +47,12 @@ for (const route of [...routes, '/404.html']) {
   assert.equal(new Set(ids).size, ids.length, `${route} has duplicate IDs`);
 }
 
+assert.match(documents.get('/faq/'), /id="ssd-wear"/, 'The FAQ must explain SSD writes and folder suitability');
+for (const route of ['/', '/cli/']) {
+  assert.ok(documents.get(route).includes('href="/faq/#ssd-wear"'), `${route} must link to the SSD-write guidance`);
+  assert.match(documents.get(route), /disk writes/, `${route} must disclose optimization writes`);
+}
+
 let internalLinks = 0;
 let appStoreLinks = 0;
 let assets = 0;
