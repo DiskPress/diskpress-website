@@ -20,7 +20,7 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
     <div class="hero-copy">
       <p class="eyebrow">Native storage optimization for Mac</p>
       <h1 id="hero-heading">More room.<br /><span>Same files.</span></h1>
-      <p class="lead">Save space without deleting what you want to keep. DiskPress compresses and deduplicates your files. They stay in place and open normally.</p>
+      <p class="lead">Save space without deleting what you want to keep. DiskPress uses native file compression and file deduplication. Your files stay in place and open normally.</p>
       <div class="hero-download"><DownloadLink /><p class="fine">macOS 10.15 or later. Built for APFS. Works offline.</p></div>
       <a class="text-link" href="#how-it-works">Meet your new space saver</a>
     </div>
@@ -42,7 +42,7 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
       <div class="comparison-grid">
         <div class="comparison-item"><span class="comparison-label">Remove apps and files</span><h3>Space from deletion</h3><p>A cleaner can help find things you no longer need. To get the space back, you have to let those things go.</p><p class="comparison-result">Useful when you want less stuff.</p></div>
         <div class="comparison-item"><span class="comparison-label">Clear caches</span><h3>Space for the moment</h3><p>Removing temporary data can free space now. As you keep using your apps, many caches are created again.</p><p class="comparison-result">Useful for a temporary cleanup.</p></div>
-        <div class="comparison-item featured"><span class="comparison-label">Optimize with DiskPress</span><h3>Space without deleting</h3><p>Compress supported files and let identical copies share storage. Keep the files you still want, right where they are.</p><p class="comparison-result">Made for what you want to keep.</p></div>
+        <div class="comparison-item featured"><span class="comparison-label">Optimize with DiskPress</span><h3>Space without deleting</h3><p>Save space with file compression and file deduplication. Keep supported files right where they are, without deleting duplicate copies.</p><p class="comparison-result">Made for what you want to keep.</p></div>
       </div>
     </div>
   </section>
@@ -50,8 +50,8 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
   <section class="section wrap" id="how-it-works">
     <div class="section-heading"><p class="eyebrow">Built into your Mac. Put to work.</p><h2>Two ways to save.<br />Nothing new to open.</h2><p class="lead">No archive format. No special reader. DiskPress automates native filesystem features, so your regular apps can keep reading your regular files.</p></div>
     <div class="native-grid">
-      <article class="native-feature"><span class="feature-number">01</span><h3>Compress the data</h3><p>Lossless native compression stores supported files using fewer bytes. macOS decompresses them as they are read, without changing their contents or making you unpack anything.</p><p class="feature-note">Best for compressible, uncompressed user data.</p></article>
-      <article class="native-feature"><span class="feature-number">02</span><h3>Share identical files</h3><p>When entire files match, DiskPress verifies their contents and uses APFS clones to share physical storage. Both files remain independent. Editing one does not change the other.</p><p class="feature-note">Identical files on the same compatible volume.</p></article>
+      <article class="native-feature"><span class="feature-number">01</span><h3>File compression</h3><p>Lossless native compression stores supported files using fewer bytes. macOS decompresses them as they are read, without changing their contents or making you unpack anything.</p><p class="feature-note">Best for compressible, uncompressed user data.</p></article>
+      <article class="native-feature"><span class="feature-number">02</span><h3>File deduplication</h3><p>When entire files match, DiskPress verifies their contents and uses APFS clones to share physical storage. Each file stays independent. Editing one does not change the others.</p><p class="feature-note">Identical files on the same compatible volume.</p></article>
     </div>
     <div class="savings-note"><div><span class="savings-number">Up to 50%</span><span class="savings-caption">less space for compressible user data</span></div><p>What you save depends on what you keep. Already-compressed files may save little or nothing. This is a possible result, not a promise for your whole disk. <a href="/faq/#savings-amount">Understand the numbers</a>.</p></div>
   </section>

@@ -79,6 +79,9 @@ const screenshotSpecs = [
   ['menu-bar', 720, 1012, [360, 540, 720], 'lazy'],
 ];
 const homepage = documents.get('/');
+assert.match(homepage, /<h3>File compression<\/h3>/, 'The homepage must name the file compression feature explicitly');
+assert.match(homepage, /<h3>File deduplication<\/h3>/, 'The homepage must name the file deduplication feature explicitly');
+for (const route of ['/', '/faq/']) assert.ok(documents.get(route).includes('Does file deduplication delete my duplicate files?'), `${route} must distinguish file deduplication from duplicate deletion`);
 assert.ok(homepage.includes(`href="${developerBlog}">Read Reverse Everything</a>`), 'The homepage blog link must keep its original destination');
 const homepageImages = [...homepage.matchAll(/<img\b[^>]*>/g)].map(match => match[0]);
 for (const [name, width, height, widths, loading] of screenshotSpecs) {
