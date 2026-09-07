@@ -14,7 +14,7 @@ Verified on September 7, 2026. All source edits are inside Website. The applicat
 
 ## Automated checks
 
-`npm run check` passed the production build, TypeScript check, and Cloudflare dry run. `npm run test:site` passed for six HTML pages, 128 internal links, nine App Store links, 22 asset references including responsive image variants, canonical URLs, headings, analytics count, first-paint styling, sitemap, and robots file.
+`npm run check` passed the production build, TypeScript check, and Cloudflare dry run. `npm run test:site` passed for six HTML pages, 128 internal links, nine App Store links, 52 asset references including favicons and responsive image variants, canonical URLs, headings, analytics count, first-paint styling, sitemap, and robots file.
 
 Browser checks against the actual local Cloudflare build passed on all five content pages at widths of 320, 390, 768, 1024, and 1440 pixels. Verification covered image loading, light and dark appearances, saved appearance across reloads, system appearance changes, menu navigation and Escape handling, FAQ deep links, command copying, 200% text enlargement, slash redirects, custom 404 behavior, and reading without JavaScript. No page errors or failed local assets were observed. Analytics requests were intercepted during automation to avoid polluting production statistics.
 
@@ -35,6 +35,10 @@ The permanent static checks now inspect the actual production CSS rather than ac
 The final pre-push review also corrected the selector regression assertion so a missing initialization script cannot pass with an absent-string index. The production build, TypeScript check, Cloudflare dry run, static checks, browser suite, enlarged-text suite, and six first-paint cases all passed again.
 
 Browser automation used local Chrome. This is not a claim of exhaustive testing on every Safari, Firefox, or operating-system version. Analytics was blocked or intercepted during browser tests, so these tests validate resilience and integration behavior, not server-side storage of production analytics events.
+
+## Favicon compatibility
+
+The favicon compatibility fix preserves the DiskPress SVG artwork and adds a multi-size ICO, 16 and 32 pixel PNGs, and an Apple touch icon. All pages use versioned icon links. macOS image decoding recognized the ICO, and static checks validate its four frames and the PNG dimensions. The previous live site served the SVG but returned 404 for the conventional ICO and touch-icon paths.
 
 ## Dependency security
 

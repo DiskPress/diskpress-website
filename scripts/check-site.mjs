@@ -8,6 +8,7 @@ const routes = ['/', '/faq/', '/cli/', '/privacy-policy/', '/terms-of-service/']
 const documents = new Map();
 const decode = value => value.replaceAll('&amp;', '&').replaceAll('&#38;', '&');
 const appStore = 'https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=www&mt=8';
+const iconAssets = new Set(['/favicon.ico', '/favicon.svg', '/favicon-16x16.png', '/favicon-32x32.png', '/apple-touch-icon.png']);
 
 for (const route of [...routes, '/404.html']) {
   const file = route === '/404.html' ? '404.html' : `${route.slice(1)}index.html`;
@@ -17,6 +18,8 @@ for (const route of [...routes, '/404.html']) {
   assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, `${route} needs one main heading`);
   assert.match(html, /<title>[^<]+<\/title>/, `${route} needs a title`);
   assert.match(html, /<meta name="description" content="[^"]+"/, `${route} needs a description`);
+  const iconLinks = [...html.matchAll(/<link\b[^>]*rel="(?:icon|apple-touch-icon)"[^>]*>/g)].map(match => match[0]);
+  for (const icon of iconAssets) assert.ok(iconLinks.some(link => link.includes(`href="${icon}?v=2"`)), `${route} is missing a cache-versioned icon ${icon}`);
   if (route !== '/404.html') assert.ok(html.includes(`rel="canonical" href="https://diskpress.app${route}"`), `${route} has the wrong canonical URL`);
   assert.equal((html.match(/src="https:\/\/analytics\.diskpress\.app\/js\/script\.outbound-links\.tagged-events\.js"/g) || []).length, 1, `${route} must load Plausible once`);
   const head = html.slice(html.indexOf('<head>'), html.indexOf('</head>')).replace(/<noscript>[\s\S]*?<\/noscript>/g, '');
@@ -56,7 +59,11 @@ for (const [route, html] of documents) {
     }
     if (!href.startsWith('/') && !href.startsWith('#')) continue;
     const destination = new URL(href, `https://diskpress.app${route}`);
-    if (destination.pathname === '/favicon.svg') continue;
+    if (iconAssets.has(destination.pathname)) {
+      assert.ok((await stat(path.join(root, destination.pathname))).size > 0, `${route} is missing an icon`);
+      assets++;
+      continue;
+    }
     const document = documents.get(destination.pathname);
     assert.ok(document, `${route} links to a missing page ${href}`);
     if (destination.hash) {
@@ -75,6 +82,28 @@ for (const [route, html] of documents) {
 }
 
 const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
+const pngSignature = Buffer.from('89504e470d0a1a0a', 'hex');
+for (const [filename, size] of [['favicon-16x16.png', 16], ['favicon-32x32.png', 32], ['apple-touch-icon.png', 180]]) {
+  const png = await readFile(path.join(root, filename));
+  assert.ok(png.subarray(0, 8).equals(pngSignature), `${filename} must be a PNG`);
+  assert.equal(png.readUInt32BE(16), size, `${filename} has the wrong width`);
+  assert.equal(png.readUInt32BE(20), size, `${filename} has the wrong height`);
+}
+const ico = await readFile(path.join(root, 'favicon.ico'));
+assert.equal(ico.readUInt16LE(0), 0);
+assert.equal(ico.readUInt16LE(2), 1, 'The favicon must be an ICO, not a renamed image');
+assert.equal(ico.readUInt16LE(4), 4);
+for (const [index, size] of [16, 32, 48, 64].entries()) {
+  const entry = 6 + index * 16;
+  assert.equal(ico[entry], size);
+  assert.equal(ico[entry + 1], size);
+  const length = ico.readUInt32LE(entry + 8);
+  const offset = ico.readUInt32LE(entry + 12);
+  assert.ok(offset >= 70 && offset + length <= ico.length, 'ICO image data must be complete');
+  assert.ok(ico.subarray(offset, offset + 8).equals(pngSignature), 'ICO frames must contain valid PNG payloads');
+  assert.equal(ico.readUInt32BE(offset + 16), size, 'ICO payload width must match its directory entry');
+  assert.equal(ico.readUInt32BE(offset + 20), size, 'ICO payload height must match its directory entry');
+}
 for (const route of routes) assert.ok(sitemap.includes(`<loc>https://diskpress.app${route}</loc>`));
 assert.ok((await readFile(path.join(root, 'robots.txt'), 'utf8')).includes('Sitemap: https://diskpress.app/sitemap.xml'));
 assert.match(documents.get('/404.html'), /noindex, follow/);
