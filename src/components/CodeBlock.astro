@@ -1,0 +1,9 @@
+---
+interface Props { id: string; code: string; label?: string; }
+const { id, code, label = 'Shell' } = Astro.props;
+---
+<div class="code-block">
+  <div class="code-heading"><span>{label}</span><button type="button" data-copy-target={id} aria-label={`Copy ${label.toLowerCase()}`}>Copy</button></div>
+  <pre tabindex="0" aria-label={label}><code id={id}>{code}</code></pre>
+  <span class="copy-status sr-only" role="status" aria-live="polite"></span>
+</div>

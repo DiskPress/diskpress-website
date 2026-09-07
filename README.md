@@ -1,10 +1,43 @@
 # DiskPress website
 
-The single-page website for DiskPress, built with Astro and deployed through Cloudflare Workers.
+The release website for DiskPress, built with Astro and deployed through the existing Cloudflare Workers build system.
+
+All pages are prerendered. Cloudflare Workers Static Assets serves `dist` directly, including canonical directory routes and the custom 404 page. The server adapter was removed and Astro and Wrangler were updated to address security advisories in the inherited template. The Cloudflare project name and build/deploy commands are unchanged. Use Node.js 22.12 or later.
+
+## Pages
+
+- `/` introduces native compression, deduplication, one-time work, background monitoring, the menu bar, and the developer
+- `/faq/` explains capabilities, compatibility, safeguards, savings measurements, and everyday use
+- `/cli/` documents the commands, permissions, JSON output, exit codes, and agent workflows
+- `/privacy-policy/` distinguishes the offline app from website analytics and hosting
+- `/terms-of-service/` covers the app license and product-specific responsibilities
+
+App links and developer links live in `src/consts.ts`. FAQ content lives in `src/data/faq.ts`. Product behavior was checked against the local DiskPress source. Commands are documented without running them against user files.
+
+## Design and privacy
+
+The site follows the system appearance and offers Light and Dark overrides. A small synchronous head script applies the saved preference before paint. CSS is inlined at build time and the site uses system fonts, with no remote font requests. The sticky header has an opaque background extending above it for Safari safe areas and overscroll.
+
+Appearance and copy controls work without waiting for deferred scripts. The saved appearance label is restored as the header is parsed, and copy-button dimensions stay fixed during feedback. Browser regression checks found no initial layout shifts when the final HTML chunk was delayed. The production static checks reject late stylesheet and font dependencies.
+
+Screenshots in `src/assets` are the real images supplied by the developer. Astro generates responsive WebP assets during the build. The favicon uses the application's source artwork and green icon background. No operating-system interface is recreated in HTML or CSS.
+
+The shared layout includes the supplied Plausible script once per page. No app data is sent to it. The only website preference stored locally is `diskpress-appearance`. Legal pages use the developer support address published on App Archiver and App Trust Preview.
 
 ## Commands
 
 - `npm run dev` starts the local development server
 - `npm run build` creates the production build
 - `npm run check` builds, type-checks, and validates the Cloudflare deployment
+- `npm run test:site` verifies the built pages, internal links, assets, metadata, analytics, and pre-paint styling without additional dependencies
 - `npm run deploy` deploys to Cloudflare Workers
+
+Development uses Astro's printed local URL. A production-like local preview is available through `npm run preview`. Running a check or local preview does not publish the website. Do not run the deploy command or push Git when only local testing is requested.
+
+`npm run check` includes a Cloudflare dry run, not a deployment. If the environment does not permit Wrangler's default log directory, set `WRANGLER_LOG_PATH` to a writable local log path for that command.
+
+## Release verification note
+
+The supplied Mac App Store URL is wired unchanged throughout the site. It returned HTTP 404 during verification on September 7, 2026. Verify that the listing is publicly available before launch. No price or immediate availability claim is hardcoded on the site.
+
+The final pre-push review passed all local production checks and a fresh dependency audit with zero known vulnerabilities. The Plausible script returned HTTP 200 and passed isolated pageview and outbound-link tests without recording test traffic. The App Store URL still returned HTTP 404, so publishing that listing remains the outstanding release issue. See `docs/verification.md` for the tested scope.

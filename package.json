@@ -1,8 +1,8 @@
 {
 	"name": "diskpress-website",
-	"description": "The website for DiskPress, a macOS app in development.",
+	"description": "The release website and documentation for DiskPress, a native macOS storage optimization app.",
 	"cloudflare": {
-		"label": "Astro Framework Starter",
+		"label": "DiskPress website",
 		"products": [
 			"Workers"
 		],
@@ -12,15 +12,14 @@
 		"publish": true
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "12.6.12",
-		"astro": "5.16.9",
+		"astro": "7.3.1",
 		"typescript": "5.9.3"
 	},
 	"devDependencies": {
-		"wrangler": "4.88.0"
+		"wrangler": "4.129.0"
 	},
 	"engines": {
-		"node": ">=22"
+		"node": ">=22.12.0"
 	},
 	"private": true,
 	"scripts": {
@@ -28,6 +27,7 @@
 		"build": "astro build",
 		"cf-typegen": "wrangler types",
 		"check": "astro build && tsc && wrangler deploy --dry-run",
+		"test:site": "node scripts/check-site.mjs",
 		"deploy": "wrangler deploy",
 		"dev": "astro dev",
 		"preview": "astro build && wrangler dev"

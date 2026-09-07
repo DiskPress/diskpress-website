@@ -1,0 +1,18 @@
+---
+import type { Question } from '../data/faq';
+interface Props { questions: Question[]; }
+const { questions } = Astro.props;
+---
+<div class="faq-list">
+  {questions.map(question => <details id={question.id}><summary>{question.question}<span class="faq-mark" aria-hidden="true"></span></summary><div class="faq-answer" set:html={question.answer} /></details>)}
+</div>
+<script>
+  function revealQuestion() {
+    try {
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (target instanceof HTMLDetailsElement) target.open = true;
+    } catch {}
+  }
+  revealQuestion();
+  window.addEventListener('hashchange', revealQuestion);
+</script>

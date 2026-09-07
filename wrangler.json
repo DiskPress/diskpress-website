@@ -2,10 +2,10 @@
 	"name": "diskpress-website",
 	"compatibility_date": "2025-10-08",
 	"compatibility_flags": ["nodejs_compat"],
-	"main": "./dist/_worker.js/index.js",
 	"assets": {
 		"directory": "./dist",
-		"binding": "ASSETS"
+		"html_handling": "auto-trailing-slash",
+		"not_found_handling": "404-page"
 	},
 	"observability": {
 		"enabled": true

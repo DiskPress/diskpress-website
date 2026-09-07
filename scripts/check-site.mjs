@@ -1,0 +1,82 @@
+import assert from 'node:assert/strict';
+import { readFile, stat } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+
+const root = fileURLToPath(new URL('../dist/', import.meta.url));
+const routes = ['/', '/faq/', '/cli/', '/privacy-policy/', '/terms-of-service/'];
+const documents = new Map();
+const decode = value => value.replaceAll('&amp;', '&').replaceAll('&#38;', '&');
+const appStore = 'https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=www&mt=8';
+
+for (const route of [...routes, '/404.html']) {
+  const file = route === '/404.html' ? '404.html' : `${route.slice(1)}index.html`;
+  const html = await readFile(path.join(root, file), 'utf8');
+  documents.set(route, html);
+  assert.match(html, /<!doctype html>/i, `${route} needs a doctype`);
+  assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, `${route} needs one main heading`);
+  assert.match(html, /<title>[^<]+<\/title>/, `${route} needs a title`);
+  assert.match(html, /<meta name="description" content="[^"]+"/, `${route} needs a description`);
+  if (route !== '/404.html') assert.ok(html.includes(`rel="canonical" href="https://diskpress.app${route}"`), `${route} has the wrong canonical URL`);
+  assert.equal((html.match(/src="https:\/\/analytics\.diskpress\.app\/js\/script\.outbound-links\.tagged-events\.js"/g) || []).length, 1, `${route} must load Plausible once`);
+  const head = html.slice(html.indexOf('<head>'), html.indexOf('</head>')).replace(/<noscript>[\s\S]*?<\/noscript>/g, '');
+  const css = [...head.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/g)].map(match => match[1]).join('\n');
+  assert.ok(css.length > 1000 && css.includes('.site-header') && css.includes('.code-heading'), `${route} must inline the actual site CSS in the head`);
+  assert.match(css, /font-family:-apple-system/, `${route} must use the local system font stack`);
+  assert.ok(!/@font-face|@import|<link\b[^>]*rel="stylesheet"/.test(css + html), `${route} must not depend on a late stylesheet or font download`);
+  assert.ok(!/<style\b/.test(html.slice(html.indexOf('<body>'))), `${route} must not introduce styles after the body starts`);
+  const boot = [...head.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)].find(match => match[2].includes('diskpress-appearance'));
+  assert.ok(boot && !/\basync\b|\bdefer\b|\btype=/.test(boot[1]), `${route} must set the appearance synchronously before paint`);
+  assert.ok(boot[2].includes('dataset.enhanced'), `${route} must initialize enhanced controls before paint`);
+  const appearanceLabelPosition = html.indexOf("document.getElementById('appearance').value");
+  assert.ok(appearanceLabelPosition >= 0 && appearanceLabelPosition < html.indexOf('</header>'), `${route} must restore the appearance label before the header is complete`);
+  assert.ok(!/in development|\/Users\/ighor\/|localhost|127\.0\.0\.1/.test(html), `${route} contains pre-release or local-only content`);
+  assert.ok(!/[\u00a0\u200b-\u200f\u2028\u2029\u2060\ufeff\u2018\u2019\u201c\u201d]/.test(html), `${route} contains unsupported quote or whitespace characters`);
+  for (const match of html.matchAll(/<img\b[^>]*>/g)) {
+    assert.match(match[0], /\balt="[^"]*"/, `${route} image needs alt text`);
+    assert.match(match[0], /\bwidth="\d+"/, `${route} image needs reserved width`);
+    assert.match(match[0], /\bheight="\d+"/, `${route} image needs reserved height`);
+  }
+  for (const match of html.matchAll(/<button\b[^>]*data-copy-target[^>]*>/g)) {
+    assert.ok(!/\bhidden\b/.test(match[0]), `${route} must reserve its copy controls from the first render`);
+  }
+  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  assert.equal(new Set(ids).size, ids.length, `${route} has duplicate IDs`);
+}
+
+let internalLinks = 0;
+let appStoreLinks = 0;
+let assets = 0;
+for (const [route, html] of documents) {
+  for (const match of html.matchAll(/\bhref="([^"]+)"/g)) {
+    const href = decode(match[1]);
+    if (href.includes('apps.apple.com')) {
+      assert.equal(href, appStore, `${route} must preserve the supplied download URL`);
+      appStoreLinks++;
+    }
+    if (!href.startsWith('/') && !href.startsWith('#')) continue;
+    const destination = new URL(href, `https://diskpress.app${route}`);
+    if (destination.pathname === '/favicon.svg') continue;
+    const document = documents.get(destination.pathname);
+    assert.ok(document, `${route} links to a missing page ${href}`);
+    if (destination.hash) {
+      assert.ok(document.includes(`id="${decodeURIComponent(destination.hash.slice(1))}"`), `${route} links to a missing anchor ${href}`);
+    }
+    internalLinks++;
+  }
+  const sources = [...html.matchAll(/\bsrc="(\/[^"?]+)"/g)].map(match => decode(match[1]));
+  for (const match of html.matchAll(/\bsrcset="([^"]+)"/g)) {
+    sources.push(...decode(match[1]).split(',').map(candidate => candidate.trim().split(/\s+/)[0]));
+  }
+  for (const source of sources) {
+    assert.ok((await stat(path.join(root, source))).size > 0, `${route} is missing asset ${source}`);
+    assets++;
+  }
+}
+
+const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
+for (const route of routes) assert.ok(sitemap.includes(`<loc>https://diskpress.app${route}</loc>`));
+assert.ok((await readFile(path.join(root, 'robots.txt'), 'utf8')).includes('Sitemap: https://diskpress.app/sitemap.xml'));
+assert.match(documents.get('/404.html'), /noindex, follow/);
+assert.ok(appStoreLinks >= 7);
+console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} App Store links, ${assets} asset references, metadata, sitemap, analytics, and first-paint styling.`);

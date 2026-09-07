@@ -1,0 +1,12 @@
+---
+import SiteLayout from './SiteLayout.astro';
+interface Props { title: string; description: string; eyebrow: string; heading: string; sections: { id: string; label: string }[]; updated?: string; }
+const { title, description, eyebrow, heading, sections, updated } = Astro.props;
+---
+<SiteLayout title={`${title} - DiskPress`} description={description}>
+  <header class="document-header wrap"><p class="eyebrow">{eyebrow}</p><h1>{heading}</h1><p class="lead">{description}</p>{updated && <p class="fine">Last updated {updated}</p>}</header>
+  <div class="document-grid wrap">
+    <aside class="document-toc"><nav aria-label="On this page"><p>On this page</p>{sections.map(section => <a href={`#${section.id}`}>{section.label}</a>)}</nav></aside>
+    <article class="document-content"><slot /></article>
+  </div>
+</SiteLayout>
