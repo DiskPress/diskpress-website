@@ -95,6 +95,12 @@ const screenshotSpecs = [
   ['menu-bar', 720, 1012, [360, 540, 720], 'lazy'],
 ];
 const homepage = documents.get('/');
+assert.match(homepage, /<h2>Two techniques\.<br\s*\/?>Working together\.<\/h2>/, 'The homepage must present compression and deduplication as a combined workflow');
+assert.ok(homepage.includes('combines file compression and file deduplication in one optimization workflow'), 'The feature introduction must explain that both techniques work together');
+for (const [route, html] of documents) assert.ok(!/Two ways to save|Nothing new to open/.test(html), `${route} must not present the techniques as alternative choices`);
+assert.ok(documents.get('/faq/').includes('both techniques together in one optimization workflow'), 'The FAQ must explain the combined optimization workflow');
+assert.ok(documents.get('/cli/').includes('combine file compression with file deduplication'), 'The CLI guide must explain the combined optimization workflow');
+assert.ok(documents.get('/cli/').includes('Deduplication must be enabled.'), 'The CLI guide must preserve its configuration requirement');
 assert.match(homepage, /<h3>File compression<\/h3>/, 'The homepage must name the file compression feature explicitly');
 assert.match(homepage, /<h3>File deduplication<\/h3>/, 'The homepage must name the file deduplication feature explicitly');
 for (const route of ['/', '/faq/']) assert.ok(documents.get(route).includes('Does file deduplication delete my duplicate files?'), `${route} must distinguish file deduplication from duplicate deletion`);
@@ -106,6 +112,7 @@ const savedPercent = savedData / originalData * 100;
 const savingsExample = homepage.match(/<figure\b[^>]*id="combined-savings"[^>]*>[\s\S]*?<\/figure>/)?.[0];
 assert.ok(savingsExample, 'The homepage must illustrate combined compression and deduplication savings');
 assert.ok(savingsExample.includes('aria-labelledby="savings-example-heading"'), 'The savings illustration must have an accessible caption');
+assert.ok(savingsExample.includes('After compression') && savingsExample.includes('After both techniques'), 'The example must show savings building together rather than selectable modes');
 for (const [stage, megabytes] of [['original', originalData], ['compressed', compressedData], ['combined', sharedData]]) {
   const markup = savingsExample.match(new RegExp(`<li\\b[^>]*data-savings-stage="${stage}"[^>]*>([\\s\\S]*?)<\\/li>`))?.[1];
   assert.ok(markup?.includes(`>${megabytes} MB</strong>`), `The ${stage} stage must show the calculated storage total`);

@@ -20,7 +20,7 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
     <div class="hero-copy">
       <p class="eyebrow">Native storage optimization for Mac</p>
       <h1 id="hero-heading">More room.<br /><span>Same files.</span></h1>
-      <p class="lead">Save space without deleting what you want to keep. DiskPress uses native file compression and file deduplication. Your files stay in place and open normally.</p>
+      <p class="lead">Save space without deleting what you want to keep. DiskPress combines native file compression and file deduplication. Your files stay in place and open normally.</p>
       <div class="hero-download"><DownloadLink /><p class="fine">macOS 10.15 or later. Built for APFS. Works offline.</p></div>
       <a class="text-link" href="#how-it-works">Meet your new space saver</a>
     </div>
@@ -42,16 +42,16 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
       <div class="comparison-grid">
         <div class="comparison-item"><span class="comparison-label">Remove apps and files</span><h3>Space from deletion</h3><p>A cleaner can help find things you no longer need. To get the space back, you have to let those things go.</p><p class="comparison-result">Useful when you want less stuff.</p></div>
         <div class="comparison-item"><span class="comparison-label">Clear caches</span><h3>Space for the moment</h3><p>Removing temporary data can free space now. As you keep using your apps, many caches are created again.</p><p class="comparison-result">Useful for a temporary cleanup.</p></div>
-        <div class="comparison-item featured"><span class="comparison-label">Optimize with DiskPress</span><h3>Space without deleting</h3><p>Save space with file compression and file deduplication. Keep supported files right where they are, without deleting duplicate copies.</p><p class="comparison-result">Made for what you want to keep.</p></div>
+        <div class="comparison-item featured"><span class="comparison-label">Optimize with DiskPress</span><h3>Space without deleting</h3><p>File compression and file deduplication work together to save space. Keep supported files right where they are, without deleting duplicate copies.</p><p class="comparison-result">Made for what you want to keep.</p></div>
       </div>
     </div>
   </section>
 
   <section class="section wrap" id="how-it-works">
-    <div class="section-heading"><p class="eyebrow">Built into your Mac. Put to work.</p><h2>Two ways to save.<br />Nothing new to open.</h2><p class="lead">No archive format. No special reader. DiskPress automates native filesystem features, so your regular apps can keep reading your regular files.</p></div>
+    <div class="section-heading"><p class="eyebrow">Built into your Mac. Put to work.</p><h2>Two techniques.<br />Working together.</h2><p class="lead">DiskPress combines file compression and file deduplication in one optimization workflow. Compressible files use fewer bytes, and identical files can share those bytes for even more savings. No archive format. No special reader.</p></div>
     <div class="native-grid">
       <article class="native-feature"><span class="feature-number">01</span><h3>File compression</h3><p>Lossless native compression stores supported files using fewer bytes. macOS decompresses them as they are read, without changing their contents or making you unpack anything.</p><p class="feature-note">Best for compressible, uncompressed user data.</p></article>
-      <article class="native-feature"><span class="feature-number">02</span><h3>File deduplication</h3><p>When entire files match, DiskPress verifies their contents and uses APFS clones to share physical storage. Each file stays independent. Editing one does not change the others.</p><p class="feature-note">Identical files on the same compatible volume.</p></article>
+      <article class="native-feature"><span class="feature-number">02</span><h3>File deduplication</h3><p>When entire files match, DiskPress verifies their contents and uses APFS clones to share storage, including compressed data. Each file stays independent. Editing one does not change the others.</p><p class="feature-note">Identical files on the same compatible volume.</p></article>
     </div>
     <figure class="savings-example" id="combined-savings" aria-labelledby="savings-example-heading">
       <figcaption class="savings-example-heading">
@@ -61,22 +61,22 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
       </figcaption>
       <ol class="savings-stages" role="list" aria-label="Total physical data storage in this example">
         <li data-savings-stage="original">
-          <span class="savings-stage-label">Original files</span>
+          <span class="savings-stage-label">Before optimization</span>
           <strong class="savings-value">200 MB</strong>
           <div class="savings-bar" aria-hidden="true"><span style="width: 100%"></span></div>
           <p>100 MB + 100 MB, stored separately.</p>
         </li>
         <li data-savings-stage="compressed">
-          <span class="savings-stage-label">File compression</span>
+          <span class="savings-stage-label">After compression</span>
           <strong class="savings-value">140 MB</strong>
           <div class="savings-bar" aria-hidden="true"><span style="width: 70%"></span></div>
           <p>70 MB + 70 MB after 30% compression.</p>
         </li>
         <li data-savings-stage="combined">
-          <span class="savings-stage-label">Both techniques</span>
+          <span class="savings-stage-label">After both techniques</span>
           <strong class="savings-value">70 MB</strong>
           <div class="savings-bar" aria-hidden="true"><span style="width: 35%"></span></div>
-          <p>File deduplication lets both files share the same 70 MB of compressed data.</p>
+          <p>File deduplication adds to the savings by sharing the same 70 MB of compressed data.</p>
         </li>
       </ol>
       <div class="savings-example-result">
@@ -104,7 +104,7 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
           <Image src={oneTimeReview} alt="DiskPress one-time optimization review showing the selected Design Project folder, file count, actual size, and the Optimize button." widths={[480, 768, 1024, 1280]} sizes={detailScreenshotSizes} format="webp" quality={90} loading="lazy" />
         </figure>
         <figure class="screenshot-figure">
-          <figcaption><h3>See the finished result</h3><p>Review estimated savings and the number of files compressed, deduplicated, or skipped.</p></figcaption>
+          <figcaption><h3>See the finished result</h3><p>Review combined savings, file compression and file deduplication results, and any skipped files.</p></figcaption>
           <Image src={oneTimeResults} alt="DiskPress one-time optimization results showing estimated space saved, sizes before and after, and counts of compressed and deduplicated files." widths={[480, 768, 1024, 1280]} sizes={detailScreenshotSizes} format="webp" quality={90} loading="lazy" />
         </figure>
       </div>
