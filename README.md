@@ -20,6 +20,8 @@ The site follows the system appearance and offers Light and Dark overrides. A sm
 
 Appearance and copy controls work without waiting for deferred scripts. The saved appearance label is restored as the header is parsed, and copy-button dimensions stay fixed during feedback. Browser regression checks found no initial layout shifts when the final HTML chunk was delayed. The production static checks reject late stylesheet and font dependencies.
 
+The appearance chooser has a visible Appearance label and a site-styled menu with System, Light, and Dark radio items, rather than a native select popup. The current choice is marked inside the menu and included in the trigger's screen-reader description. It supports arrow keys, Home, End, letter navigation, Enter, Space, Escape, and Tab. It dismisses on outside interaction, restores focus appropriately, and stays within narrow viewports. Its colors, spacing, and selection state use the existing site theme.
+
 Screenshots in `src/assets` are the real images supplied by the developer. Astro generates responsive WebP assets during the build. The favicon uses the application's source artwork and green icon background. No operating-system interface is recreated in HTML or CSS.
 
 The favicon includes SVG, a multi-size ICO, 16 and 32 pixel PNG fallbacks, and an Apple touch icon. Versioned icon links refresh previously cached browser icons. Run `node scripts/generate-favicons.mjs` after changing `public/favicon.svg`, and update the icon URL version when replacing the artwork.

@@ -1,0 +1,24 @@
+---
+const choices = [
+  { value: 'system', label: 'System' },
+  { value: 'light', label: 'Light' },
+  { value: 'dark', label: 'Dark' },
+];
+---
+<div class="appearance-control">
+  <button id="appearance" class="appearance-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="appearance-menu" aria-describedby="appearance-current">
+    <span>Appearance</span>
+    <svg class="appearance-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+  </button>
+  <span id="appearance-current" class="sr-only">Current setting is <span id="appearance-label">System</span>.</span>
+  <div id="appearance-menu" class="appearance-menu" role="menu" aria-label="Appearance" hidden>
+    {choices.map(({ value, label }) => <button type="button" role="menuitemradio" aria-checked={value === 'system' ? 'true' : 'false'} data-appearance-choice={value} tabindex="-1">
+      <svg class="appearance-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6" /></svg>
+      <span>{label}</span>
+    </button>)}
+  </div>
+</div>
+<script is:inline>
+  // Restore the current-setting description and selected option before the header paints.
+  document.dispatchEvent(new Event('diskpress:appearance-ready'));
+</script>

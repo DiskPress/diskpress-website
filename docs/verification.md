@@ -36,6 +36,14 @@ The final pre-push review also corrected the selector regression assertion so a 
 
 Browser automation used local Chrome. This is not a claim of exhaustive testing on every Safari, Firefox, or operating-system version. Analytics was blocked or intercepted during browser tests, so these tests validate resilience and integration behavior, not server-side storage of production analytics events.
 
+## Theme menu styling
+
+The native appearance dropdown was replaced with a site-styled menu that uses the existing surface, border, accent, spacing, and shadow tokens. The trigger visibly says Appearance so its purpose is clear before opening it. System, Light, and Dark remain the only choices. The current mode is checked in the menu and included in the trigger's screen-reader description. Its constant visible label keeps the trigger width stable across selections. The current-setting description and radio state initialize synchronously while the header is parsed. Menu styles remain in the document head.
+
+Local Chrome tests passed all 20 combinations of Light and Dark system appearances, widths of 320, 390, 768, 1024, and 1440 pixels, and 100% and 200% text size. Checks covered arrow keys, Home, End, letter navigation, Enter, Space, Escape, forward and reverse Tab, focus restoration, outside clicks, mobile-navigation interaction, persistence after reload, live system-theme changes, selected-option contrast, 44 pixel targets, and popup containment. Blocked storage and disabled JavaScript were also checked. Desktop and mobile screenshots were visually reviewed in both themes.
+
+The six delayed-final-chunk first-paint cases passed again across all five content routes, including saved and invalid preferences and blocked storage. The new menu was usable before deferred scripts ran. There were zero observed initial layout shifts and no font requests. Analytics was blocked in these tests. The permanent static checks now require the custom trigger, hidden menu, three radio choices, in-head menu styles, and synchronous label initialization.
+
 ## Favicon compatibility
 
 The favicon compatibility fix preserves the DiskPress SVG artwork and adds a multi-size ICO, 16 and 32 pixel PNGs, and an Apple touch icon. All pages use versioned icon links. macOS image decoding recognized the ICO, and static checks validate its four frames and the PNG dimensions. The previous live site served the SVG but returned 404 for the conventional ICO and touch-icon paths.

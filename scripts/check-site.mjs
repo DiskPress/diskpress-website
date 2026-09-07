@@ -31,7 +31,15 @@ for (const route of [...routes, '/404.html']) {
   const boot = [...head.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)].find(match => match[2].includes('diskpress-appearance'));
   assert.ok(boot && !/\basync\b|\bdefer\b|\btype=/.test(boot[1]), `${route} must set the appearance synchronously before paint`);
   assert.ok(boot[2].includes('dataset.enhanced'), `${route} must initialize enhanced controls before paint`);
-  const appearanceLabelPosition = html.indexOf("document.getElementById('appearance').value");
+  assert.ok(!/<select\b[^>]*id="appearance"/.test(html), `${route} must use the site-styled appearance menu`);
+  assert.match(html, /<button\b[^>]*id="appearance"[^>]*aria-haspopup="menu"[^>]*aria-expanded="false"/, `${route} needs an accessible, initially closed appearance trigger`);
+  assert.match(html, /<button\b[^>]*id="appearance"[^>]*>\s*<span>Appearance<\/span>/, `${route} must visibly identify the control as Appearance`);
+  assert.match(html, /id="appearance-menu"[^>]*role="menu"[^>]*hidden/, `${route} must keep the appearance popup hidden before interaction`);
+  assert.equal((html.match(/role="menuitemradio"/g) || []).length, 3, `${route} needs three appearance choices`);
+  for (const value of ['system', 'light', 'dark']) assert.ok(html.includes(`data-appearance-choice="${value}"`), `${route} is missing the ${value} appearance choice`);
+  assert.ok(css.includes('.appearance-menu') && css.includes('.appearance-trigger'), `${route} must inline the appearance menu styles before rendering`);
+  assert.ok(boot[2].includes("addEventListener('diskpress:appearance-ready', syncAppearanceControl)"), `${route} must prepare synchronous appearance label restoration`);
+  const appearanceLabelPosition = html.indexOf("document.dispatchEvent(new Event('diskpress:appearance-ready'))");
   assert.ok(appearanceLabelPosition >= 0 && appearanceLabelPosition < html.indexOf('</header>'), `${route} must restore the appearance label before the header is complete`);
   assert.ok(!/in development|\/Users\/ighor\/|localhost|127\.0\.0\.1/.test(html), `${route} contains pre-release or local-only content`);
   assert.ok(!/[\u00a0\u200b-\u200f\u2028\u2029\u2060\ufeff\u2018\u2019\u201c\u201d]/.test(html), `${route} contains unsupported quote or whitespace characters`);

@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '../styles/content.css';
 import DownloadLink from '../components/DownloadLink.astro';
+import AppearanceControl from '../components/AppearanceControl.astro';
 import { SITE_DESCRIPTION, DEVELOPER_URL, MORE_APPS_URL, SUPPORT_EMAIL } from '../consts';
 interface Props { title?: string; description?: string; noindex?: boolean; }
 const { title = 'DiskPress - More room. Same files.', description = SITE_DESCRIPTION, noindex = false } = Astro.props;
@@ -38,11 +39,20 @@ const navigation = [
     <script is:inline>
       (() => {
         const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+        function syncAppearanceControl() {
+          const preference = document.documentElement.dataset.appearance;
+          const label = document.getElementById('appearance-label');
+          if (label) label.textContent = { system: 'System', light: 'Light', dark: 'Dark' }[preference];
+          document.querySelectorAll('[data-appearance-choice]').forEach(choice => {
+            choice.setAttribute('aria-checked', String(choice.dataset.appearanceChoice === preference));
+          });
+        }
         function updateAppearance(preference) {
           const dark = preference === 'dark' || (preference === 'system' && systemTheme.matches);
           document.documentElement.dataset.theme = dark ? 'dark' : 'light';
           document.documentElement.dataset.appearance = preference;
           document.querySelector('meta[name="theme-color"]').content = dark ? '#111413' : '#f9fafb';
+          syncAppearanceControl();
         }
         let preference = 'system';
         try { preference = localStorage.getItem('diskpress-appearance') || 'system'; } catch {}
@@ -51,11 +61,77 @@ const navigation = [
         const followSystemTheme = () => updateAppearance(document.documentElement.dataset.appearance);
         if (systemTheme.addEventListener) systemTheme.addEventListener('change', followSystemTheme);
         else systemTheme.addListener(followSystemTheme);
-        document.addEventListener('change', event => {
-          if (!(event.target instanceof HTMLSelectElement) || event.target.id !== 'appearance') return;
-          updateAppearance(event.target.value);
-          try { localStorage.setItem('diskpress-appearance', event.target.value); } catch {}
+        document.addEventListener('diskpress:appearance-ready', syncAppearanceControl);
+
+        function closeAppearanceMenu(restoreFocus = false) {
+          const menu = document.getElementById('appearance-menu');
+          const trigger = document.getElementById('appearance');
+          if (!menu || menu.hidden) return;
+          const focusWasInMenu = menu.contains(document.activeElement);
+          menu.hidden = true;
+          trigger.setAttribute('aria-expanded', 'false');
+          if (restoreFocus || focusWasInMenu) trigger.focus();
+        }
+        function positionAppearanceMenu() {
+          const menu = document.getElementById('appearance-menu');
+          if (!menu || menu.hidden) return;
+          menu.style.removeProperty('--menu-shift');
+          const bounds = menu.getBoundingClientRect();
+          const shift = Math.max(12 - bounds.left, Math.min(0, document.documentElement.clientWidth - 12 - bounds.right));
+          menu.style.setProperty('--menu-shift', `${shift}px`);
+        }
+        function openAppearanceMenu(edge) {
+          const menu = document.getElementById('appearance-menu');
+          document.getElementById('appearance').setAttribute('aria-expanded', 'true');
+          const mobileMenu = document.querySelector('.mobile-nav');
+          if (mobileMenu) mobileMenu.open = false;
+          menu.hidden = false;
+          positionAppearanceMenu();
+          const choices = [...menu.querySelectorAll('[data-appearance-choice]')];
+          const choice = edge === 'first' ? choices[0] : edge === 'last' ? choices[choices.length - 1] : choices.find(choice => choice.getAttribute('aria-checked') === 'true');
+          choice?.focus();
+        }
+        document.addEventListener('click', event => {
+          const target = event.target instanceof Element ? event.target : null;
+          if (target?.closest('#appearance')) {
+            const menu = document.getElementById('appearance-menu');
+            if (menu.hidden) openAppearanceMenu();
+            else closeAppearanceMenu(true);
+          } else if (target?.closest('[data-appearance-choice]')) {
+            const preference = target.closest('[data-appearance-choice]').dataset.appearanceChoice;
+            updateAppearance(preference);
+            try { localStorage.setItem('diskpress-appearance', preference); } catch {}
+            closeAppearanceMenu(true);
+          } else if (!target?.closest('.appearance-control')) closeAppearanceMenu();
         });
+        document.addEventListener('keydown', event => {
+          const target = event.target instanceof Element ? event.target : null;
+          if (target?.id === 'appearance' && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
+            event.preventDefault();
+            openAppearanceMenu(event.key === 'ArrowDown' ? 'first' : 'last');
+            return;
+          }
+          const menu = document.getElementById('appearance-menu');
+          if (!menu || menu.hidden || !target?.closest('.appearance-control')) return;
+          if (event.key === 'Escape' || event.key === 'Tab') {
+            if (event.key === 'Escape') event.preventDefault();
+            closeAppearanceMenu(true);
+            return;
+          }
+          const choices = [...menu.querySelectorAll('[data-appearance-choice]')];
+          const index = choices.indexOf(target.closest('[data-appearance-choice]'));
+          let next;
+          if (event.key === 'ArrowDown') next = choices[(index + 1) % choices.length];
+          else if (event.key === 'ArrowUp') next = choices[(index + choices.length - 1) % choices.length];
+          else if (event.key === 'Home') next = choices[0];
+          else if (event.key === 'End') next = choices[choices.length - 1];
+          else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) next = choices.find(choice => choice.dataset.appearanceChoice.startsWith(event.key.toLowerCase()));
+          if (next) { event.preventDefault(); next.focus(); }
+        });
+        document.addEventListener('focusin', event => {
+          if (!(event.target instanceof Element) || !event.target.closest('.appearance-control')) closeAppearanceMenu();
+        });
+        window.addEventListener('resize', positionAppearanceMenu);
 
         // Delegate before parsing the body so copy controls never wait for a deferred script.
         const copyTimers = new WeakMap();
@@ -100,11 +176,7 @@ const navigation = [
           {navigation.map(({ label, href }) => <a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{label}</a>)}
         </nav>
         <div class="header-actions">
-          <label class="appearance-control"><span class="sr-only">Appearance</span><select id="appearance" aria-label="Appearance"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
-          <script is:inline>
-            // Restore the label while the header is parsed, before it can be painted.
-            document.getElementById('appearance').value = document.documentElement.dataset.appearance || 'system';
-          </script>
+          <AppearanceControl />
           <DownloadLink compact />
           <details class="mobile-nav">
             <summary aria-label="Navigation menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
