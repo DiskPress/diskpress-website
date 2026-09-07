@@ -95,6 +95,18 @@ const screenshotSpecs = [
   ['menu-bar', 720, 1012, [360, 540, 720], 'lazy'],
 ];
 const homepage = documents.get('/');
+const backgroundSection = homepage.match(/<section\b[^>]*id="background"[^>]*>[\s\S]*?<\/section>/)?.[0];
+assert.ok(backgroundSection?.includes('first optimization pass can keep the CPU busy'), 'The homepage must explain the initial compression workload');
+assert.ok(backgroundSection.includes('not yet compressed') && backgroundSection.includes('new or modified files'), 'The homepage must distinguish existing uncompressed files from ongoing changes');
+assert.ok(backgroundSection.includes('routine CPU use is usually much lower'), 'The homepage must describe lighter ongoing CPU usage without guaranteeing it');
+assert.ok(backgroundSection.includes('Periodic scans and new work still use CPU'), 'The homepage must disclose ongoing monitoring overhead');
+assert.ok(backgroundSection.includes('href="/faq/#performance"'), 'The homepage must link to the detailed CPU-use explanation');
+const performanceAnswer = documents.get('/faq/').match(/<details\b[^>]*id="performance"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(performanceAnswer?.includes('unchanged files that are already compressed do not need to be compressed again'), 'The FAQ must explain why ongoing compression work is lighter');
+assert.ok(performanceAnswer.includes('eligible new or modified files') && performanceAnswer.includes('between scans and optimization jobs'), 'The FAQ must qualify when CPU use is low and which files need new compression work');
+assert.ok(performanceAnswer.includes('does not mean zero overhead') && performanceAnswer.includes('another busy first pass'), 'The FAQ must qualify monitoring overhead and newly optimized locations');
+assert.ok(performanceAnswer.includes('Low CPU') && performanceAnswer.includes('pause on battery'), 'The FAQ must preserve performance and battery controls');
+assert.ok(homepage.includes('Adding a location does not immediately optimize it.'), 'The homepage must not imply adding a location starts its first optimization pass');
 const companionLink = homepage.match(/<a\b[^>]*class="text-link companion-app-link"[^>]*>[\s\S]*?<\/a>/)?.[0];
 assert.ok(companionLink?.includes('href="https://apparchiver.com/?utm_source=diskpress.app"'), 'The companion icon must keep the supplied App Archiver destination');
 assert.ok(companionLink.includes('<span>Discover App Archiver</span>'), 'The companion icon must have an accompanying text label');
