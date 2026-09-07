@@ -37,6 +37,14 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html']) {
   const css = [...head.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/g)].map(match => match[1]).join('\n');
   assert.ok(css.length > 1000 && css.includes('.site-header') && css.includes('.code-heading'), `${route} must inline the actual site CSS in the head`);
   assert.match(css, /font-family:-apple-system/, `${route} must use the local system font stack`);
+  if (html.includes('class="document-grid wrap"')) {
+    const gridRules = [...css.matchAll(/\.document-grid\{([^{}]*)\}/g)].map(match => match[1]);
+    const columns = gridRules.map(rule => rule.match(/(?:^|;)grid-template-columns:([^;]+)/)?.[1]).filter(Boolean);
+    assert.deepEqual(columns, ['210px minmax(0,1fr)', '180px minmax(0,1fr)', '1fr'], `${route} must give the article the remaining width and stack navigation on small screens`);
+    const gaps = gridRules.map(rule => rule.match(/(?:^|;)gap:([^;]+)/)?.[1]?.replace(/\s+/g, '')).filter(Boolean);
+    assert.deepEqual(gaps, ['min(32px,var(--gutter))'], `${route} must use one compact document gap that never exceeds the page inset`);
+    assert.ok(gridRules.every(rule => !/justify-content:space-(?:between|around|evenly)/.test(rule)), `${route} must not push the article away from its navigation`);
+  }
   if (route === '/') {
     assert.ok(css.includes('--screenshot-caption-gap:20px'), 'Screenshot captions must share a 20 pixel gap');
     const rules = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)];
