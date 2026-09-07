@@ -82,6 +82,29 @@ const homepage = documents.get('/');
 assert.match(homepage, /<h3>File compression<\/h3>/, 'The homepage must name the file compression feature explicitly');
 assert.match(homepage, /<h3>File deduplication<\/h3>/, 'The homepage must name the file deduplication feature explicitly');
 for (const route of ['/', '/faq/']) assert.ok(documents.get(route).includes('Does file deduplication delete my duplicate files?'), `${route} must distinguish file deduplication from duplicate deletion`);
+const originalData = 2 * 100;
+const compressedData = originalData * (1 - 30 / 100);
+const sharedData = compressedData / 2;
+const savedData = originalData - sharedData;
+const savedPercent = savedData / originalData * 100;
+const savingsExample = homepage.match(/<figure\b[^>]*id="combined-savings"[^>]*>[\s\S]*?<\/figure>/)?.[0];
+assert.ok(savingsExample, 'The homepage must illustrate combined compression and deduplication savings');
+assert.ok(savingsExample.includes('aria-labelledby="savings-example-heading"'), 'The savings illustration must have an accessible caption');
+for (const [stage, megabytes] of [['original', originalData], ['compressed', compressedData], ['combined', sharedData]]) {
+  const markup = savingsExample.match(new RegExp(`<li\\b[^>]*data-savings-stage="${stage}"[^>]*>([\\s\\S]*?)<\\/li>`))?.[1];
+  assert.ok(markup?.includes(`>${megabytes} MB</strong>`), `The ${stage} stage must show the calculated storage total`);
+  const barWidth = Number(markup.match(/style="width:\s*([\d.]+)%"/)?.[1]);
+  assert.equal(barWidth, megabytes / originalData * 100, `The ${stage} bar must use the original storage as its common scale`);
+}
+assert.ok(savingsExample.includes(`${savedData} MB saved.`), 'The example must show the calculated space saved');
+assert.ok(savingsExample.includes(`${savedPercent}% less storage.`), 'The example headline must use the original total as its denominator');
+assert.ok(savingsExample.includes(`${savedData} MB out of ${originalData} MB = `), 'The example must explain its percentage calculation');
+assert.ok(savingsExample.includes('not a benchmark or a guarantee'), 'The example must not promise the illustrated result');
+assert.ok(savingsExample.includes('filesystem overhead') && savingsExample.includes('Snapshots'), 'The example must qualify physical storage and free-space estimates');
+assert.ok(homepage.includes('href="/faq/#combined-savings"'), 'The example must link to the detailed savings explanation');
+const savingsAnswer = documents.get('/faq/').match(/<details\b[^>]*id="combined-savings"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(savingsAnswer?.includes(`${savedData} MB out of the original ${originalData} MB, or ${savedPercent}%`), 'The FAQ must use the same correct savings calculation');
+assert.ok(savingsAnswer.includes('do not already share storage') && savingsAnswer.includes('metadata and allocation overhead'), 'The FAQ must state the example assumptions');
 assert.ok(homepage.includes(`href="${developerBlog}">Read Reverse Everything</a>`), 'The homepage blog link must keep its original destination');
 const homepageImages = [...homepage.matchAll(/<img\b[^>]*>/g)].map(match => match[0]);
 for (const [name, width, height, widths, loading] of screenshotSpecs) {

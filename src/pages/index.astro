@@ -53,7 +53,38 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
       <article class="native-feature"><span class="feature-number">01</span><h3>File compression</h3><p>Lossless native compression stores supported files using fewer bytes. macOS decompresses them as they are read, without changing their contents or making you unpack anything.</p><p class="feature-note">Best for compressible, uncompressed user data.</p></article>
       <article class="native-feature"><span class="feature-number">02</span><h3>File deduplication</h3><p>When entire files match, DiskPress verifies their contents and uses APFS clones to share physical storage. Each file stays independent. Editing one does not change the others.</p><p class="feature-note">Identical files on the same compatible volume.</p></article>
     </div>
-    <div class="savings-note"><div><span class="savings-number">Up to 50%</span><span class="savings-caption">less space for compressible user data</span></div><p>What you save depends on what you keep. Already-compressed files may save little or nothing. This is a possible result, not a promise for your whole disk. <a href="/faq/#savings-amount">Understand the numbers</a>.</p></div>
+    <figure class="savings-example" id="combined-savings" aria-labelledby="savings-example-heading">
+      <figcaption class="savings-example-heading">
+        <p class="eyebrow">An illustrative example</p>
+        <h3 id="savings-example-heading">Two files. 65% less storage.</h3>
+        <p>Start with two identical, uncompressed 100 MB files stored separately on the same compatible APFS volume. Suppose file compression reduces their data by 30%.</p>
+      </figcaption>
+      <ol class="savings-stages" role="list" aria-label="Total physical data storage in this example">
+        <li data-savings-stage="original">
+          <span class="savings-stage-label">Original files</span>
+          <strong class="savings-value">200 MB</strong>
+          <div class="savings-bar" aria-hidden="true"><span style="width: 100%"></span></div>
+          <p>100 MB + 100 MB, stored separately.</p>
+        </li>
+        <li data-savings-stage="compressed">
+          <span class="savings-stage-label">File compression</span>
+          <strong class="savings-value">140 MB</strong>
+          <div class="savings-bar" aria-hidden="true"><span style="width: 70%"></span></div>
+          <p>70 MB + 70 MB after 30% compression.</p>
+        </li>
+        <li data-savings-stage="combined">
+          <span class="savings-stage-label">Both techniques</span>
+          <strong class="savings-value">70 MB</strong>
+          <div class="savings-bar" aria-hidden="true"><span style="width: 35%"></span></div>
+          <p>File deduplication lets both files share the same 70 MB of compressed data.</p>
+        </li>
+      </ol>
+      <div class="savings-example-result">
+        <p><strong>130 MB saved.</strong> Both files stay in place and open normally.</p>
+        <p class="savings-equation">130 MB out of 200 MB = <strong>65% saved</strong></p>
+      </div>
+      <p class="savings-example-note">Illustrative data sizes, not a benchmark or a guarantee. Actual savings vary with your files, settings, and filesystem overhead. Snapshots can delay an increase in free space. <a href="/faq/#combined-savings">Understand combined savings</a>.</p>
+    </figure>
   </section>
 
   <section class="section workflow-section" id="your-workflow">

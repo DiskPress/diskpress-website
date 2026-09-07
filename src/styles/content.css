@@ -17,11 +17,21 @@
   .native-feature h3 { font-size: 1.6rem; }
   .native-feature p { color: var(--muted); }
   .feature-note { font-size: .875rem; }
-  .savings-note { display: grid; grid-template-columns: .9fr 1.1fr; gap: 32px; align-items: center; margin-top: 40px; padding: 32px; border-top: 1px solid var(--line); }
-  .savings-note > div { display: grid; gap: 8px; }
-  .savings-number { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; font-weight: 600; color: var(--accent); letter-spacing: -.04em; }
-  .savings-caption { font-weight: 550; }
-  .savings-note p { font-size: .9375rem; color: var(--muted); }
+  .savings-example { display: grid; gap: 24px; margin-top: 32px; padding: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+  .savings-example-heading { display: grid; gap: 12px; max-width: 54rem; }
+  .savings-example-heading h3 { font-size: clamp(1.6rem, 3vw, 2.25rem); }
+  .savings-example p:not(.eyebrow) { color: var(--muted); }
+  .savings-stages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 24px; margin: 0; padding: 0; list-style: none; }
+  .savings-stages > li { display: grid; gap: 12px; min-width: 0; padding: 24px; background: var(--soft); border: 1px solid var(--line); border-radius: 12px; }
+  .savings-stage-label { font-size: .9375rem; font-weight: 550; }
+  .savings-value { font-size: clamp(1.75rem, 3vw, 2.25rem); line-height: 1.2; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.03em; }
+  .savings-stages p { font-size: 1rem; }
+  .savings-bar { height: 10px; border-radius: 5px; overflow: hidden; background: var(--line); }
+  .savings-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--accent); }
+  .savings-example-result { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding: 24px; background: var(--accent-bg); border-radius: 10px; }
+  .savings-example-result strong { color: var(--accent); }
+  .savings-equation { font-size: .9375rem; font-variant-numeric: tabular-nums; }
+  .savings-example-note { font-size: .875rem; }
   .workflow-grid, .automation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
   .workflow-grid .section-heading, .automation-grid .section-heading { margin-bottom: 0; }
   .workflow-steps { display: grid; gap: 24px; }
@@ -130,12 +140,12 @@
     .native-grid { gap: 24px; } .document-grid { grid-template-columns: 180px minmax(0, 1fr); gap: 32px; }
     .menu-visual { padding: 24px; } .companion-panel { padding: 32px; gap: 32px; }
   }
-  @media (max-width: 900px) { .comparison-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .comparison-grid, .savings-stages { grid-template-columns: 1fr; } }
   @media (max-width: 780px) {
-    .comparison-grid, .native-grid, .workflow-grid, .automation-grid, .menu-section, .control-grid, .maker-section, .home-faq-grid, .companion-panel, .savings-note { grid-template-columns: 1fr; gap: 24px; }
+    .comparison-grid, .native-grid, .workflow-grid, .automation-grid, .menu-section, .control-grid, .maker-section, .home-faq-grid, .companion-panel { grid-template-columns: 1fr; gap: 24px; }
     .comparison-item, .native-feature { padding: 24px; gap: 16px; }
     .comparison-item .comparison-result { padding-top: 16px; }
-    .savings-note { margin-top: 24px; padding: 24px; }
+    .savings-example { margin-top: 24px; padding: 24px; }
     .menu-copy { gap: 24px; } .menu-visual { max-width: 460px; width: 100%; margin-inline: auto; }
     .companion-panel { padding: 24px; } .companion-section { padding-block: 0; }
     .control-grid { gap: 24px; } .control-grid article { padding-top: 20px; }
