@@ -102,6 +102,21 @@ for (const route of ['/', '/cli/']) {
   assert.match(documents.get(route), /disk writes/, `${route} must disclose optimization writes`);
 }
 
+for (const route of ['/', '/faq/']) {
+  const answer = documents.get(route).match(/<details\b[^>]*id="offline"[^>]*>[\s\S]*?<\/details>/)?.[0];
+  assert.ok(answer?.includes('does not upload your files, filenames, or optimization results'), `${route} must explain that user data stays local`);
+  assert.ok(answer.includes('File optimization works offline') && answer.includes('Normal optimization activity is not reported'), `${route} must distinguish local optimization from diagnostic visits`);
+  assert.ok(answer.includes('application integrity check fails') && answer.includes('automatically opens a diagnostic webpage with a numeric check identifier'), `${route} must disclose automatic integrity-diagnostic visits`);
+  assert.ok(answer.includes('cookie-free Plausible analytics') && answer.includes('count these visits by failure code'), `${route} must explain website analytics for diagnostic visits`);
+  assert.ok(answer.includes('href="/privacy-policy/#application"'), `${route} must link to the detailed application privacy explanation`);
+}
+const privacyPolicy = documents.get('/privacy-policy/');
+assert.ok(privacyPolicy.includes('Application integrity diagnostics') && privacyPolicy.includes('numeric <code>utm_source</code> value identifying the failed check'), 'The privacy policy must explain the diagnostic campaign value');
+assert.ok(privacyPolicy.includes('also applies when the app is serving a CLI command') && privacyPolicy.includes('no filenames, local paths, optimization results, or per-user identifier'), 'The privacy policy must explain CLI diagnostics and their limited URL contents');
+assert.ok(privacyPolicy.includes('Normal use and errors optimizing individual files do not trigger this visit'), 'The privacy policy must distinguish integrity failures from routine optimization errors');
+assert.ok(documents.get('/terms-of-service/').includes('A failed application integrity check automatically opens a diagnostic webpage with a numeric check identifier'), 'The terms must preserve the diagnostic-visit disclosure');
+for (const [route, html] of documents) assert.ok(!/No app analytics or telemetry|No uploads, analytics, or telemetry|contains no analytics or telemetry|has no account, analytics, telemetry|does not include analytics or telemetry|DiskPress stays offline/.test(html), `${route} must not contradict the diagnostic-visit disclosure`);
+
 const integrityPage = documents.get('/application-corrupted/');
 assert.match(integrityPage, /<h1>Application integrity warning<\/h1>/, 'The unlisted help page needs a clear DiskPress warning heading');
 assert.ok(integrityPage.includes('data-domain="diskpress.app"') && integrityPage.includes('plausible.init();'), 'The unlisted help page must retain normal Plausible page-view tracking');
@@ -113,7 +128,7 @@ assert.ok(integrityPage.includes('.document-content a:not(.download-link)'), 'Do
 assert.ok(!/Parall|support@parall\.app/.test(integrityPage), 'The help page must not inherit another application\'s support details or bug claims');
 for (const [route, html] of documents) {
   if (!unlistedRoutes.includes(route)) {
-    for (const unlistedRoute of unlistedRoutes) assert.ok(!html.includes(unlistedRoute.slice(0, -1)), `${route} must not expose the direct-only help page`);
+    for (const unlistedRoute of unlistedRoutes) assert.ok(!html.includes(unlistedRoute.slice(1, -1)), `${route} must not expose the direct-only help page, even as plain text`);
   }
 }
 
