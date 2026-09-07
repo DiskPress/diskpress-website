@@ -8,7 +8,7 @@
   button, select { color: inherit; }
 }
 @layer base {
-  :root { color-scheme: light; --bg: #f9fafb; --surface: #fff; --soft: #eff2f1; --text: #19201d; --muted: #59665f; --line: #dce2de; --accent: #087d32; --accent-bg: #e6f5ea; --button: #147b38; --button-text: #fff; --code-bg: #edf1ee; --shadow: 0 24px 70px #142c2212; --gutter: clamp(24px, 4vw, 64px); }
+  :root { color-scheme: light; --bg: #f9fafb; --surface: #fff; --soft: #eff2f1; --text: #19201d; --muted: #59665f; --line: #dce2de; --accent: #087d32; --accent-bg: #e6f5ea; --button: #147b38; --button-text: #fff; --code-bg: #edf1ee; --shadow: 0 24px 70px #142c2212; --gutter: clamp(24px, 4vw, 64px); --screenshot-caption-gap: 20px; }
   :root[data-theme="dark"] { color-scheme: dark; --bg: #111413; --surface: #191e1b; --soft: #202722; --text: #f3f6f4; --muted: #a6b3ab; --line: #303b34; --accent: #65da88; --accent-bg: #173523; --button: #80e69d; --button-text: #10341b; --code-bg: #202923; --shadow: 0 24px 70px #0004; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme]) { color-scheme: dark; --bg: #111413; --surface: #191e1b; --soft: #202722; --text: #f3f6f4; --muted: #a6b3ab; --line: #303b34; --accent: #65da88; --accent-bg: #173523; --button: #80e69d; --button-text: #10341b; --code-bg: #202923; --shadow: 0 24px 70px #0004; } }
   html { background: var(--bg); scroll-behavior: smooth; scroll-padding-top: calc(5rem + 32px); -webkit-text-size-adjust: 100%; }
@@ -67,9 +67,9 @@
   .hero h1 span { color: var(--accent); }
   .hero .lead { max-width: 29rem; }
   .hero-download { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-  .hero-visual { min-width: 0; position: relative; padding: 20px; border-radius: 28px; background: var(--soft); }
+  .hero-visual { display: grid; align-content: start; gap: var(--screenshot-caption-gap); min-width: 0; position: relative; padding: 20px; border-radius: 28px; background: var(--soft); }
   .hero-visual img { width: 100%; }
-  .hero-visual figcaption { padding: 0 12px 8px; text-align: center; font-size: .8125rem; color: var(--muted); }
+  .hero-visual figcaption { text-align: center; font-size: .8125rem; color: var(--muted); }
   .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; border-top: 1px solid var(--line); padding-block: 32px 48px; }
   .benefit { display: flex; gap: 14px; align-items: center; }
   .benefit .check { color: var(--accent); background: var(--accent-bg); width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; flex: none; }
@@ -87,7 +87,7 @@
 }
 @layer responsive {
   @media (min-width: 1441px) { .hero { padding-block: 88px 64px; } }
-  @media (max-width: 1050px) { .desktop-nav { gap: 16px; } .header-actions { gap: 12px; } .hero { gap: 24px; grid-template-columns: .9fr 1.1fr; } h1 { font-size: clamp(3rem, 5.5vw, 4rem); } .hero-visual { padding: 8px; } .hero-visual figcaption { padding: 8px; } .footer-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 1050px) { .desktop-nav { gap: 16px; } .header-actions { gap: 12px; } .hero { gap: 24px; grid-template-columns: .9fr 1.1fr; } h1 { font-size: clamp(3rem, 5.5vw, 4rem); } .footer-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 780px) {
     .desktop-nav { display: none; } .header-inner { min-height: 72px; gap: 12px; } .header-actions { gap: 8px; }
     .header-actions > .download-link { display: none; } .mobile-nav { display: block; }
@@ -99,7 +99,7 @@
     .hero-copy { align-items: center; text-align: center; gap: 24px; }
     .hero h1 { font-size: clamp(3.5rem, 10vw, 5rem); }
     .hero .lead { max-width: 34rem; } .hero-download { align-items: center; }
-    .hero-visual { max-width: 650px; width: 100%; margin-inline: auto; padding: 12px; }
+    .hero-visual { max-width: 650px; width: 100%; margin-inline: auto; }
     .benefits { grid-template-columns: 1fr; gap: 24px; padding-block: 24px 40px; }
     .section { padding-block: 48px; } .section-heading { gap: 16px; margin-bottom: 32px; }
     .footer-grid { gap: 24px; } .footer-brand { grid-column: 1 / -1; }

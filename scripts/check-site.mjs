@@ -29,6 +29,22 @@ for (const route of [...routes, '/404.html']) {
   const css = [...head.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/g)].map(match => match[1]).join('\n');
   assert.ok(css.length > 1000 && css.includes('.site-header') && css.includes('.code-heading'), `${route} must inline the actual site CSS in the head`);
   assert.match(css, /font-family:-apple-system/, `${route} must use the local system font stack`);
+  if (route === '/') {
+    assert.ok(css.includes('--screenshot-caption-gap:20px'), 'Screenshot captions must share a 20 pixel gap');
+    const rules = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)];
+    for (const selector of ['.hero-visual', '.menu-visual', '.screenshot-figure']) {
+      const declarations = rules.filter(([, selectors]) => selectors.split(',').some(value => value.trim() === selector)).map(([, , body]) => body);
+      assert.ok(declarations.some(body => /(?:^|;)display:(?:grid|flex)(?:;|$)/.test(body)), `${selector} must use a layout that applies caption gaps`);
+      assert.ok(declarations.some(body => body.includes('gap:var(--screenshot-caption-gap)')), `${selector} must use the shared caption spacing`);
+      for (const body of declarations) {
+        const gap = body.match(/(?:^|;)gap:([^;]+)/)?.[1];
+        if (gap) assert.equal(gap, 'var(--screenshot-caption-gap)', `${selector} must preserve caption spacing at every breakpoint`);
+        const padding = body.match(/(?:^|;)padding:([^;]+)/)?.[1];
+        if (padding) assert.ok(padding.split(/\s+/).every(value => /^\d+px$/.test(value) && Number.parseInt(value) >= 20), `${selector} must keep its caption gap within the outer inset`);
+      }
+    }
+    assert.match(css, /\.screenshot-disclaimer\{[^}]*margin-top:var\(--screenshot-caption-gap\)/, 'Screenshot group descriptions must retain the same separation');
+  }
   assert.ok(!/@font-face|@import|<link\b[^>]*rel="stylesheet"/.test(css + html), `${route} must not depend on a late stylesheet or font download`);
   assert.ok(!/<style\b/.test(html.slice(html.indexOf('<body>'))), `${route} must not introduce styles after the body starts`);
   const boot = [...head.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)].find(match => match[2].includes('diskpress-appearance'));

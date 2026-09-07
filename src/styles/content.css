@@ -46,7 +46,7 @@
   .detail-list > div { display: grid; gap: 8px; }
   .detail-list h3 { font-size: 1.125rem; }
   .detail-list p { color: var(--muted); }
-  .menu-visual { padding: 32px; background: var(--soft); border-radius: 24px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .menu-visual { padding: 32px; background: var(--soft); border-radius: 24px; display: flex; flex-direction: column; align-items: center; gap: var(--screenshot-caption-gap); }
   .menu-visual img { width: 100%; max-width: 390px; }
   .menu-visual figcaption { font-size: .8125rem; color: var(--muted); text-align: center; }
   .automation-example { display: grid; gap: 24px; min-width: 0; }
@@ -70,12 +70,12 @@
   .control-grid .text-link { font-size: .9375rem; }
   .safety-note { padding: 24px; margin-top: 32px; background: var(--soft); border-radius: 10px; font-size: .875rem; color: var(--muted); }
   .screenshot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 24px; margin-top: 32px; }
-  .screenshot-figure { display: grid; align-content: start; gap: 20px; min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--soft); }
+  .screenshot-figure { display: grid; align-content: start; gap: var(--screenshot-caption-gap); min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--soft); }
   .screenshot-figure figcaption { display: grid; align-content: start; gap: 12px; }
   .screenshot-figure h3 { font-size: 1.125rem; }
   .screenshot-figure p { color: var(--muted); font-size: .9375rem; }
   .screenshot-figure img { width: 100%; height: auto; }
-  .screenshot-disclaimer { margin-top: 20px; color: var(--muted); font-size: .875rem; text-align: center; }
+  .screenshot-disclaimer { margin-top: var(--screenshot-caption-gap); color: var(--muted); font-size: .875rem; text-align: center; }
   @supports (grid-template-rows: subgrid) {
     .screenshot-figure { grid-row: span 2; grid-template-rows: subgrid; }
   }
