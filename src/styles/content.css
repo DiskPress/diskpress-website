@@ -84,6 +84,10 @@
   .companion-panel > div { display: grid; gap: 20px; }
   .companion-panel h2 { font-size: clamp(1.75rem, 2.7vw, 2.5rem); }
   .companion-panel p:not(.eyebrow) { color: var(--muted); }
+  .companion-app-link { justify-self: start; max-width: 100%; gap: 12px; }
+  .companion-app-link img { width: 56px; height: 56px; flex: none; }
+  .companion-app-link span { min-width: 0; }
+  .companion-app-link::after { flex: none; }
   .maker-section { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; }
   .maker-section > div:first-child { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
   .maker-story { display: grid; gap: 24px; }

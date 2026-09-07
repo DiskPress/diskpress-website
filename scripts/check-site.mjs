@@ -69,7 +69,7 @@ for (const route of [...routes, '/404.html']) {
   assert.ok(html.includes(`href="${developerBlog}">Reverse Everything blog</a>`), `${route} must preserve the separate blog link`);
   developerLinks += nameLinks.length;
   for (const match of html.matchAll(/<img\b[^>]*>/g)) {
-    assert.match(match[0], /\balt="[^"]*"/, `${route} image needs alt text`);
+    assert.match(match[0], /\balt(?:="[^"]*"|(?=\s|>))/, `${route} image needs an alt attribute`);
     assert.match(match[0], /\bwidth="\d+"/, `${route} image needs reserved width`);
     assert.match(match[0], /\bheight="\d+"/, `${route} image needs reserved height`);
   }
@@ -95,6 +95,22 @@ const screenshotSpecs = [
   ['menu-bar', 720, 1012, [360, 540, 720], 'lazy'],
 ];
 const homepage = documents.get('/');
+const companionLink = homepage.match(/<a\b[^>]*class="text-link companion-app-link"[^>]*>[\s\S]*?<\/a>/)?.[0];
+assert.ok(companionLink?.includes('href="https://apparchiver.com/?utm_source=diskpress.app"'), 'The companion icon must keep the supplied App Archiver destination');
+assert.ok(companionLink.includes('<span>Discover App Archiver</span>'), 'The companion icon must have an accompanying text label');
+const companionIcon = companionLink.match(/<img\b[^>]*>/)?.[0];
+assert.ok(companionIcon?.includes('/_astro/app-archiver-icon.'), 'The companion link must use the supplied App Archiver artwork');
+assert.match(companionIcon, /\balt(?:=""|(?=\s|>))/, 'The decorative companion icon must not repeat its link label');
+for (const attribute of ['width="56"', 'height="56"', 'sizes="56px"', 'loading="lazy"']) assert.ok(companionIcon.includes(attribute), `The companion icon needs ${attribute}`);
+const companionVariants = companionIcon.match(/\bsrcset="([^"]+)"/)?.[1].split(',').map(candidate => candidate.trim().split(/\s+/));
+assert.deepEqual(companionVariants?.map(([, descriptor]) => descriptor), ['56w', '112w', '168w'], 'The companion icon needs standard, 2x, and 3x display sizes');
+for (const [url] of companionVariants) {
+  assert.ok(url.startsWith('/_astro/app-archiver-icon.') && url.endsWith('.webp'), 'The companion icon must use local optimized WebP variants');
+  const icon = await readFile(path.join(root, url));
+  assert.ok(icon.length < 24 * 1024, 'Each companion icon variant must remain lightweight');
+  assert.equal(icon.toString('ascii', 0, 4), 'RIFF');
+  assert.equal(icon.toString('ascii', 8, 12), 'WEBP');
+}
 assert.match(homepage, /<h2>Two techniques\.<br\s*\/?>Working together\.<\/h2>/, 'The homepage must present compression and deduplication as a combined workflow');
 assert.ok(homepage.includes('combines file compression and file deduplication in one optimization workflow'), 'The feature introduction must explain that both techniques work together');
 for (const [route, html] of documents) assert.ok(!/Two ways to save|Nothing new to open/.test(html), `${route} must not present the techniques as alternative choices`);
