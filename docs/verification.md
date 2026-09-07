@@ -4,7 +4,7 @@ Verified on September 7, 2026. All source edits are inside Website. The applicat
 
 ## Delivered
 
-- Release homepage with the real Overview and menu bar screenshots
+- Release homepage with real Overview, one-time review and results, Locations, Exclusions, and menu bar screenshots
 - System, Light, and Dark appearances with a saved browser preference applied before paint
 - File optimization, cleaner comparison, native compression and deduplication, one-time work, background monitoring, CLI, and developer information
 - Dedicated FAQ, CLI guide, privacy policy, and terms of service
@@ -14,7 +14,7 @@ Verified on September 7, 2026. All source edits are inside Website. The applicat
 
 ## Automated checks
 
-`npm run check` passed the production build, TypeScript check, and Cloudflare dry run. `npm run test:site` passed for six HTML pages, 133 internal links, nine App Store links, 52 asset references including favicons and responsive image variants, canonical URLs, headings, analytics count, first-paint styling, sitemap, and robots file.
+`npm run check` passed the production build, TypeScript check, and Cloudflare dry run. `npm run test:site` passed for six HTML pages, 133 internal links, nine App Store links, 75 asset references including favicons and responsive image variants, canonical URLs, headings, analytics count, first-paint styling, sitemap, and robots file.
 
 Browser checks against the actual local Cloudflare build passed on all five content pages at widths of 320, 390, 768, 1024, and 1440 pixels. Verification covered image loading, light and dark appearances, saved appearance across reloads, system appearance changes, menu navigation and Escape handling, FAQ deep links, command copying, 200% text enlargement, slash redirects, custom 404 behavior, and reading without JavaScript. No page errors or failed local assets were observed. Analytics requests were intercepted during automation to avoid polluting production statistics.
 
@@ -43,6 +43,16 @@ The native appearance dropdown was replaced with a site-styled menu that uses th
 Local Chrome tests passed all 20 combinations of Light and Dark system appearances, widths of 320, 390, 768, 1024, and 1440 pixels, and 100% and 200% text size. Checks covered arrow keys, Home, End, letter navigation, Enter, Space, Escape, forward and reverse Tab, focus restoration, outside clicks, mobile-navigation interaction, persistence after reload, live system-theme changes, selected-option contrast, 44 pixel targets, and popup containment. Blocked storage and disabled JavaScript were also checked. Desktop and mobile screenshots were visually reviewed in both themes.
 
 The six delayed-final-chunk first-paint cases passed again across all five content routes, including saved and invalid preferences and blocked storage. The new menu was usable before deferred scripts ran. There were zero observed initial layout shifts and no font requests. Analytics was blocked in these tests. The permanent static checks now require the custom trigger, hidden menu, three radio choices, in-head menu styles, and synchronous label initialization.
+
+## Updated app screenshots
+
+All five developer-supplied captures in `../Fastline/generated/screenshots/raw/en-US` are included on the homepage. Overview replaces the previous hero capture. One-time review and results appear together in the workflow section, with Locations and Exclusions beside the control guidance. The existing menu-bar image remains because the new batch has no menu-bar capture. Captions and the FAQ identify screenshot savings as example data. The SSD-write guidance is unchanged, and the example locations do not replace the recommendation to monitor mostly stable folders.
+
+The copied PNGs match the supplied files byte for byte. Image inspection confirmed transparency and the original proportions in every generated WebP variant, with no upscaling. The five new captures generate 23 responsive variants, alongside three variants of the retained menu-bar capture. Only Overview is eager and high priority. The remaining images are lazy-loaded and all have reserved dimensions and descriptive alternative text.
+
+The actual local Cloudflare build was browser-tested at 320, 390, 768, 1024, and 1440 pixels in both Light and Dark appearance. All six screenshots loaded at every tested size. The paired figures aligned on desktop and stacked on mobile without clipped captions, horizontal overflow, or distorted images. Desktop and mobile views were visually reviewed, including rounded transparent corners. A mobile reload preserved the chosen appearance and selected a smaller hero asset. The temporary viewport override and appearance choice were restored after testing.
+
+No page errors were observed. The only console warnings reported that Plausible ignored localhost events. The build and permanent static checks passed again, including the existing first-paint CSS assertions. The new screenshot checks require the six captures, expected dimensions and responsive widths, WebP sources, appropriate loading priorities, descriptive alternative text, and the example-data disclaimer. This screenshot-only follow-up did not repeat the earlier full interaction or delayed-chunk browser suites.
 
 ## Favicon compatibility
 

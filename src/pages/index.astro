@@ -8,6 +8,12 @@ import { featuredQuestions } from '../data/faq';
 import { APP_ARCHIVER_URL, DEVELOPER_URL, MORE_APPS_URL } from '../consts';
 import overview from '../assets/diskpress-overview.png';
 import menuBar from '../assets/diskpress-menu-bar.png';
+import oneTimeReview from '../assets/diskpress-one-time-review.png';
+import oneTimeResults from '../assets/diskpress-one-time-results.png';
+import locations from '../assets/diskpress-locations.png';
+import exclusions from '../assets/diskpress-exclusions.png';
+
+const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width: 780px) calc(92vw - 50px), (max-width: 1440px) calc(46vw - 62px), 600px';
 ---
 <SiteLayout>
   <section class="hero wrap" aria-labelledby="hero-heading">
@@ -19,8 +25,8 @@ import menuBar from '../assets/diskpress-menu-bar.png';
       <a class="text-link" href="#how-it-works">Meet your new space saver</a>
     </div>
     <figure class="hero-visual">
-      <Image src={overview} alt="DiskPress Overview showing compression and deduplication savings, disk space, recent savings, and background monitoring controls." widths={[640, 960, 1440, 1924]} sizes="(max-width: 780px) 92vw, 57vw" format="webp" loading="eager" fetchpriority="high" />
-      <figcaption>The real DiskPress app. Example results, not a savings guarantee.</figcaption>
+      <Image src={overview} alt="DiskPress Overview in light appearance showing disk space, compression and deduplication savings, recent savings, and enabled background monitoring." widths={[480, 768, 1024, 1440, 1622]} sizes="(max-width: 780px) 90vw, (max-width: 1440px) 55vw, 760px" format="webp" quality={90} loading="eager" fetchpriority="high" />
+      <figcaption>DiskPress Overview with example data. Your savings will vary.</figcaption>
     </figure>
   </section>
   <div class="wrap">
@@ -61,6 +67,17 @@ import menuBar from '../assets/diskpress-menu-bar.png';
         </div>
       </div>
       <p class="safety-note"><strong>Save space thoughtfully.</strong> Optimization rewrites files at their existing paths and can add disk writes. Exclude locations with frequent new or changing files to avoid unnecessary SSD wear. For active work, wait until the files settle and optimize once. <a href="/faq/#ssd-wear">Learn how to choose suitable folders</a>.</p>
+      <div class="screenshot-grid">
+        <figure class="screenshot-figure">
+          <figcaption><h3>Review before you optimize</h3><p>Check the selected location, file count, and existing savings before starting.</p></figcaption>
+          <Image src={oneTimeReview} alt="DiskPress one-time optimization review showing the selected Design Project folder, file count, actual size, and the Optimize button." widths={[480, 768, 1024, 1280]} sizes={detailScreenshotSizes} format="webp" quality={90} loading="lazy" />
+        </figure>
+        <figure class="screenshot-figure">
+          <figcaption><h3>See the finished result</h3><p>Review estimated savings and the number of files compressed, deduplicated, or skipped.</p></figcaption>
+          <Image src={oneTimeResults} alt="DiskPress one-time optimization results showing estimated space saved, sizes before and after, and counts of compressed and deduplicated files." widths={[480, 768, 1024, 1280]} sizes={detailScreenshotSizes} format="webp" quality={90} loading="lazy" />
+        </figure>
+      </div>
+      <p class="screenshot-disclaimer">App screenshots use example data. Savings depend on your files and settings.</p>
     </div>
   </section>
 
@@ -90,6 +107,16 @@ import menuBar from '../assets/diskpress-menu-bar.png';
       <article><h3>Choose what is included</h3><p>Control locations, file-size limits, minimum savings, hidden files, and editable exclusion rules. Common compressed media and archive formats are excluded by default.</p></article>
       <article><h3>Know what happened</h3><p>Watch progress, cancel safely, and review per-file results in Activity. Rescan your saved locations to refresh current savings. Completed work stays optimized after cancellation.</p></article>
       <article><h3>Keep it on your Mac</h3><p>No account. No uploads. No app analytics or telemetry. Verification and recovery happen locally, along with the optimization itself.</p><a class="text-link" href="/privacy-policy/">Read the privacy policy</a></article>
+    </div>
+    <div class="screenshot-grid">
+      <figure class="screenshot-figure">
+        <figcaption><h3>Keep your locations organized</h3><p>Review saved folders and their measured savings. Enable only the locations that suit your workflow.</p></figcaption>
+        <Image src={locations} alt="DiskPress Locations listing example folders with their enabled status, total size, and measured savings, plus Add, Remove, Disable, and Optimize Now controls." widths={[480, 768, 1024, 1440, 1622]} sizes={detailScreenshotSizes} format="webp" quality={90} loading="lazy" />
+      </figure>
+      <figure class="screenshot-figure">
+        <figcaption><h3>Decide what to leave alone</h3><p>Use exclusion rules to skip unsuitable files, including common compressed media and archive formats.</p></figcaption>
+        <Image src={exclusions} alt="DiskPress Settings with the Exclusions tab selected, showing enabled file groups for archives, disk images, installers, images, audio, and video." widths={[480, 768, 1024, 1440, 1622]} sizes={detailScreenshotSizes} format="webp" quality={90} loading="lazy" />
+      </figure>
     </div>
     <p class="safety-note">DiskPress changes how files are stored. Keep an independent backup of important data. System locations, application bundles, executables, and other unsupported targets are intentionally skipped. <a href="/faq/#verification-backup">Read about safeguards and limits</a>.</p>
   </section>

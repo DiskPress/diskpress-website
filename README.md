@@ -24,6 +24,8 @@ The appearance chooser has a visible Appearance label and a site-styled menu wit
 
 Screenshots in `src/assets` are the real images supplied by the developer. Astro generates responsive WebP assets during the build. The favicon uses the application's source artwork and green icon background. No operating-system interface is recreated in HTML or CSS.
 
+The five light-appearance captures from `../Fastline/generated/screenshots/raw/en-US` are copied into `src/assets` for Overview, one-time review, one-time results, Locations, and Exclusions. The existing menu-bar capture is retained. The original PNG contents and transparency are preserved, and the build creates appropriately sized WebP variants without upscaling. Only the hero loads eagerly. The other screenshots load lazily, with their aspect ratios reserved to prevent layout shifts. Screenshot figures use example data, not promised savings or recommended default locations.
+
 The favicon includes SVG, a multi-size ICO, 16 and 32 pixel PNG fallbacks, and an Apple touch icon. Versioned icon links refresh previously cached browser icons. Run `node scripts/generate-favicons.mjs` after changing `public/favicon.svg`, and update the icon URL version when replacing the artwork.
 
 The shared layout includes the supplied Plausible script once per page. No app data is sent to it. The only website preference stored locally is `diskpress-appearance`. Legal pages use the developer support address published on App Archiver and App Trust Preview.

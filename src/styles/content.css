@@ -59,6 +59,16 @@
   .control-grid p { color: var(--muted); }
   .control-grid .text-link { font-size: .9375rem; }
   .safety-note { padding: 24px; margin-top: 32px; background: var(--soft); border-radius: 10px; font-size: .875rem; color: var(--muted); }
+  .screenshot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 24px; margin-top: 32px; }
+  .screenshot-figure { display: grid; align-content: start; gap: 20px; min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--soft); }
+  .screenshot-figure figcaption { display: grid; align-content: start; gap: 12px; }
+  .screenshot-figure h3 { font-size: 1.125rem; }
+  .screenshot-figure p { color: var(--muted); font-size: .9375rem; }
+  .screenshot-figure img { width: 100%; height: auto; }
+  .screenshot-disclaimer { margin-top: 20px; color: var(--muted); font-size: .875rem; text-align: center; }
+  @supports (grid-template-rows: subgrid) {
+    .screenshot-figure { grid-row: span 2; grid-template-rows: subgrid; }
+  }
   .companion-section { padding-block: 24px; }
   .companion-panel { padding: 40px; display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 40px; background: var(--accent-bg); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius: 20px; }
   .companion-panel > div { display: grid; gap: 20px; }
@@ -129,6 +139,7 @@
     .menu-copy { gap: 24px; } .menu-visual { max-width: 460px; width: 100%; margin-inline: auto; }
     .companion-panel { padding: 24px; } .companion-section { padding-block: 0; }
     .control-grid { gap: 24px; } .control-grid article { padding-top: 20px; }
+    .screenshot-grid { grid-template-columns: 1fr; margin-top: 24px; }
     .workflow-grid .section-heading, .automation-grid .section-heading, .home-faq-grid .section-heading { margin-bottom: 0; }
     .document-header { padding-block: 48px 32px; } .document-grid { grid-template-columns: 1fr; gap: 32px; padding-bottom: 48px; }
     .document-toc nav { flex-direction: row; flex-wrap: wrap; gap: 12px 20px; padding-block: 20px; border-bottom: 1px solid var(--line); }

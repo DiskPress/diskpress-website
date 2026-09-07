@@ -61,6 +61,33 @@ for (const route of ['/', '/cli/']) {
   assert.match(documents.get(route), /disk writes/, `${route} must disclose optimization writes`);
 }
 
+const screenshotSpecs = [
+  ['overview', 1622, 1472, [480, 768, 1024, 1440, 1622], 'eager'],
+  ['one-time-review', 1280, 1224, [480, 768, 1024, 1280], 'lazy'],
+  ['one-time-results', 1280, 1278, [480, 768, 1024, 1280], 'lazy'],
+  ['locations', 1622, 1200, [480, 768, 1024, 1440, 1622], 'lazy'],
+  ['exclusions', 1622, 1200, [480, 768, 1024, 1440, 1622], 'lazy'],
+  ['menu-bar', 812, 1104, [406, 609, 812], 'lazy'],
+];
+const homepage = documents.get('/');
+const homepageImages = [...homepage.matchAll(/<img\b[^>]*>/g)].map(match => match[0]);
+for (const [name, width, height, widths, loading] of screenshotSpecs) {
+  const matches = homepageImages.filter(image => image.includes(`/_astro/diskpress-${name}.`));
+  assert.equal(matches.length, 1, `The homepage must show the ${name} screenshot once`);
+  const image = matches[0];
+  const attribute = name => image.match(new RegExp(`\\b${name}="([^"]*)"`))?.[1];
+  assert.equal(Number(attribute('width')), width, `${name} must reserve its original width`);
+  assert.equal(Number(attribute('height')), height, `${name} must reserve its original height`);
+  assert.equal(attribute('loading'), loading, `${name} has the wrong loading priority`);
+  assert.ok(attribute('alt')?.length > 20, `${name} needs descriptive alt text`);
+  assert.ok(attribute('sizes')?.includes('max-width'), `${name} needs responsive display sizes`);
+  const variants = (attribute('srcset') || '').split(',').map(candidate => candidate.trim().split(/\s+/));
+  assert.deepEqual(variants.map(([, descriptor]) => Number.parseInt(descriptor)), widths, `${name} needs the expected responsive widths`);
+  assert.ok(variants.every(([url, descriptor]) => url.endsWith('.webp') && /^\d+w$/.test(descriptor) && Number.parseInt(descriptor) <= width), `${name} must use WebP without upscaling`);
+  if (loading === 'eager') assert.equal(attribute('fetchpriority'), 'high', 'The hero screenshot must have high fetch priority');
+}
+assert.ok(homepage.includes('App screenshots use example data.'), 'Screenshot savings must be identified as example data');
+
 let internalLinks = 0;
 let appStoreLinks = 0;
 let assets = 0;
