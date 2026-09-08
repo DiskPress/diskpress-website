@@ -5,7 +5,7 @@ import DownloadLink from '../components/DownloadLink.astro';
 import CodeBlock from '../components/CodeBlock.astro';
 import FaqList from '../components/FaqList.astro';
 import { featuredQuestions } from '../data/faq';
-import { APP_ARCHIVER_URL, DEVELOPER_URL, BLOG_URL, MORE_APPS_URL } from '../consts';
+import { APP_STORE_AVAILABLE, APP_ARCHIVER_URL, DEVELOPER_URL, BLOG_URL, MORE_APPS_URL } from '../consts';
 import overview from '../assets/diskpress-overview.png';
 import menuBar from '../assets/diskpress-menu-bar.png';
 import oneTimeReview from '../assets/diskpress-one-time-review.png';
@@ -22,7 +22,7 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
       <p class="eyebrow">Native storage optimization for Mac</p>
       <h1 id="hero-heading">More room.<br /><span>Same files.</span></h1>
       <p class="lead">Save space without deleting what you want to keep. DiskPress combines native file compression and file deduplication. Your files stay in place and open normally.</p>
-      <div class="hero-download"><DownloadLink /><p class="fine">macOS 10.15 or later. Built for APFS. Works offline.</p></div>
+      <div class="hero-download"><DownloadLink />{!APP_STORE_AVAILABLE && <p class="fine">Awaiting App Store approval. The download link will appear here after release.</p>}<p class="fine">macOS 10.15 or later. Built for APFS. Works offline.</p></div>
       <a class="text-link" href="#how-it-works">Meet your new space saver</a>
     </div>
     <figure class="hero-visual">
@@ -162,5 +162,5 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
 
   <section class="section faq-section"><div class="wrap home-faq-grid"><div class="section-heading"><p class="eyebrow">Good questions</p><h2>A few things<br />worth knowing.</h2><a class="text-link" href="/faq/">Explore the full FAQ</a></div><FaqList questions={featuredQuestions} /></div></section>
 
-  <section class="section wrap closing-section"><img src="/favicon.svg" width="64" height="64" alt="" loading="lazy" /><h2>Make room for<br />what comes next.</h2><p class="lead">Start with a folder. Keep what matters.</p><DownloadLink /><p class="fine">macOS 10.15 or later. Results vary by file and filesystem.</p></section>
+  <section class="section wrap closing-section"><img src="/favicon.svg" width="64" height="64" alt="" loading="lazy" /><h2>Make room for<br />what comes next.</h2><p class="lead">{APP_STORE_AVAILABLE ? 'Start with a folder. Keep what matters.' : 'DiskPress will be available soon. Check back here for the release.'}</p><DownloadLink /><p class="fine">macOS 10.15 or later. Results vary by file and filesystem.</p></section>
 </SiteLayout>

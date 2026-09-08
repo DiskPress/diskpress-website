@@ -10,6 +10,11 @@ const noindexRoutes = new Set([...unlistedRoutes, '/404.html']);
 const documents = new Map();
 const decode = value => value.replaceAll('&amp;', '&').replaceAll('&#38;', '&');
 const appStore = 'https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=www&mt=8';
+const siteConfig = await readFile(new URL('../src/consts.ts', import.meta.url), 'utf8');
+const availabilitySetting = siteConfig.match(/export const APP_STORE_AVAILABLE = (true|false);/);
+assert.ok(availabilitySetting, 'Availability must be an explicit shared build-time setting');
+const appStoreAvailable = availabilitySetting[1] === 'true';
+assert.equal(siteConfig.match(/export const APP_STORE_URL = '([^']+)';/)?.[1], appStore, 'Keep the supplied App Store URL intact for release');
 const developerProfile = 'https://reverseeverything.com/ighor/?utm_source=diskpress.app';
 const developerBlog = 'https://reverseeverything.com/?utm_source=diskpress.app';
 const iconAssets = new Set(['/favicon.ico', '/favicon.svg', '/favicon-16x16.png', '/favicon-32x32.png', '/apple-touch-icon.png']);
@@ -25,6 +30,8 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html']) {
   assert.match(html, /<meta name="description" content="[^"]+"/, `${route} needs a description`);
   const helpNavigation = html.match(/<nav\b[^>]*aria-label="Help and legal"[^>]*>[\s\S]*?<\/nav>/)?.[0];
   const mobileNavigation = html.match(/<nav\b[^>]*aria-label="Mobile navigation"[^>]*>[\s\S]*?<\/nav>/)?.[0];
+  const productNavigation = html.match(/<nav\b[^>]*aria-label="Product links"[^>]*>[\s\S]*?<\/nav>/)?.[0];
+  for (const navigation of [mobileNavigation, productNavigation]) assert.ok(navigation?.includes('href="/faq/#download-price">Availability</a>'), `${route} must make release information easy to find`);
   assert.match(helpNavigation || '', /<a href="\/support\/"[^>]*>Contact support<\/a>/, `${route} must route footer support through the dedicated page`);
   assert.match(mobileNavigation || '', /<a href="\/support\/"[^>]*>Support<\/a>/, `${route} must route mobile support through the dedicated page`);
   const iconLinks = [...html.matchAll(/<link\b[^>]*rel="(?:icon|apple-touch-icon)"[^>]*>/g)].map(match => match[0]);
@@ -80,7 +87,17 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html']) {
   assert.ok(boot[2].includes("addEventListener('diskpress:appearance-ready', syncAppearanceControl)"), `${route} must prepare synchronous appearance label restoration`);
   const appearanceLabelPosition = html.indexOf("document.dispatchEvent(new Event('diskpress:appearance-ready'))");
   assert.ok(appearanceLabelPosition >= 0 && appearanceLabelPosition < html.indexOf('</header>'), `${route} must restore the appearance label before the header is complete`);
-  assert.ok(!/in development|\/Users\/ighor\/|localhost|127\.0\.0\.1/.test(html), `${route} contains pre-release or local-only content`);
+  assert.ok(!/in development|\/Users\/ighor\/|localhost|127\.0\.0\.1/.test(html), `${route} contains outdated development wording or local-only content`);
+  if (appStoreAvailable) {
+    assert.ok(!/Available soon|available soon|coming soon|awaiting App Store approval|Awaiting App Store approval/.test(html), `${route} must remove pending-release wording after launch`);
+    assert.ok(!html.includes('class="release-status'), `${route} must restore the download link after launch`);
+  } else {
+    const header = html.match(/<header\b[^>]*>[\s\S]*?<\/header>/)?.[0];
+    assert.match(header || '', /<span class="release-status compact">\s*Available soon/, `${route} must show the availability status in the header`);
+    assert.ok(!/<(?:a|button)\b[^>]*class="[^"]*release-status/.test(html), `${route} must not make the pending-release status look interactive to assistive technology`);
+    assert.ok(!/Get DiskPress|Download on the Mac App Store|Download DiskPress again/.test(html), `${route} must not offer an unavailable download`);
+    assert.ok(css.includes('.release-status{') && css.includes('.header-actions>.release-status'), `${route} must include themed, responsive availability styling before paint`);
+  }
   assert.ok(!/[\u00a0\u200b-\u200f\u2028\u2029\u2060\ufeff\u2018\u2019\u201c\u201d]/.test(html), `${route} contains unsupported quote or whitespace characters`);
   const nameLinks = [...html.matchAll(/<a\b[^>]*>Ighor July<\/a>/g)].map(match => match[0]);
   assert.ok(nameLinks.length >= 3, `${route} must link every footer mention of the developer`);
@@ -101,6 +118,18 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html']) {
 }
 
 assert.match(documents.get('/faq/'), /id="ssd-wear"/, 'The FAQ must explain SSD writes and folder suitability');
+if (!appStoreAvailable) {
+  const availabilityAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];
+  assert.ok(availabilityAnswer?.includes('awaiting App Store approval') && availabilityAnswer.includes('not yet available to download') && availabilityAnswer.includes('no confirmed release date'), 'The FAQ must explain pending approval without promising a date');
+  assert.ok(availabilityAnswer.includes('price, regional availability, and requirements once it is live'), 'The FAQ must not imply a current price listing');
+  const home = documents.get('/');
+  const hero = home.match(/<section\b[^>]*class="hero wrap"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(hero?.includes('Available soon on the Mac App Store') && hero.includes('Awaiting App Store approval'), 'Availability must be prominent beside the hero');
+  assert.ok(home.includes('DiskPress will be available soon. Check back here for the release.'), 'The closing section must reflect pending availability');
+  assert.match(home, /<meta name="description" content="DiskPress is coming soon to the Mac App Store\./, 'Search and social metadata must not imply immediate availability');
+  assert.ok(documents.get('/cli/').includes('These instructions apply once the app is installed'), 'The CLI guide must explain that commands require the app');
+  assert.ok(documents.get('/terms-of-service/').includes('not yet available to download or purchase'), 'Purchase information must reflect pending availability');
+}
 for (const route of ['/', '/cli/']) {
   assert.ok(documents.get(route).includes('href="/faq/#ssd-wear"'), `${route} must link to the SSD-write guidance`);
   assert.match(documents.get(route), /disk writes/, `${route} must disclose optimization writes`);
@@ -137,7 +166,12 @@ assert.ok(privacyPolicy.includes('Issues, comments, and attachments are public')
 const integrityPage = documents.get('/application-corrupted/');
 assert.match(integrityPage, /<h1>Application integrity warning<\/h1>/, 'The unlisted help page needs a clear DiskPress warning heading');
 assert.ok(integrityPage.includes('data-domain="diskpress.app"') && integrityPage.includes('plausible.init();'), 'The unlisted help page must retain normal Plausible page-view tracking');
-assert.ok(integrityPage.includes('Move only the installed DiskPress.app application to the Trash.'), 'Recovery guidance must limit removal to the application bundle');
+if (appStoreAvailable) {
+  assert.ok(integrityPage.includes('Move only the installed DiskPress.app application to the Trash.'), 'Recovery guidance must limit removal to the application bundle');
+} else {
+  assert.ok(integrityPage.includes('before removing or replacing your copy') && integrityPage.includes('a public replacement download is not yet available'), 'Recovery guidance must direct users to support while no replacement download is available');
+  assert.ok(!integrityPage.includes('to the Trash'), 'Recovery guidance must not ask users to remove their app before a replacement is available');
+}
 assert.ok(integrityPage.includes('Do not delete your personal files, DiskPress settings, or recovery records'), 'Recovery guidance must preserve user data and unfinished recovery material');
 assert.ok(integrityPage.includes('Do not bypass the warning or disable macOS security protections.'), 'The help page must not recommend bypassing integrity protections');
 const integritySupport = integrityPage.match(/<section id="contact-support">[\s\S]*?<\/section>/)?.[0];
@@ -320,5 +354,6 @@ const headers = await readFile(path.join(root, '_headers'), 'utf8');
 const noindexHeaderPaths = headers.trim().split(/\n\s*\n/).filter(block => /X-Robots-Tag:[^\n]*\bnoindex\b/i.test(block)).map(block => block.split('\n')[0]);
 assert.deepEqual(noindexHeaderPaths, ['/application-corrupted', '/application-corrupted/*'], 'Cloudflare must send noindex headers only for the integrity-help route and its URL variants');
 assert.match(documents.get('/404.html'), /noindex, follow/);
-assert.ok(appStoreLinks >= 7);
+if (appStoreAvailable) assert.ok(appStoreLinks >= 7, 'Released pages must provide the supplied App Store download links');
+else assert.equal(appStoreLinks, 0, 'Pending-release pages must not send users to an unavailable App Store listing');
 console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} App Store links, ${developerLinks} developer profile links, ${assets} asset references, metadata, sitemap, analytics, and first-paint styling.`);

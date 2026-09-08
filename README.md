@@ -45,8 +45,8 @@ Development uses Astro's printed local URL. A production-like local preview is a
 
 `npm run check` includes a Cloudflare dry run, not a deployment. If the environment does not permit Wrangler's default log directory, set `WRANGLER_LOG_PATH` to a writable local log path for that command.
 
-## Release verification note
+## Release availability
 
-The supplied Mac App Store URL is wired unchanged throughout the site. It returned HTTP 404 during verification on September 7, 2026. Verify that the listing is publicly available before launch. No price or immediate availability claim is hardcoded on the site.
+DiskPress is awaiting App Store approval. `APP_STORE_AVAILABLE` in `src/consts.ts` is `false`, so the site shows an available-soon status instead of active download links. The homepage, metadata, FAQ, CLI guide, terms, and integrity-help guidance reflect this state. There is no announced release date or price.
 
-The final pre-push review passed all local production checks and a fresh dependency audit with zero known vulnerabilities. The Plausible script returned HTTP 200 and passed isolated pageview and outbound-link tests without recording test traffic. The App Store URL still returned HTTP 404, so publishing that listing remains the outstanding release issue. See `docs/verification.md` for the tested scope.
+The supplied Mac App Store URL is preserved unchanged in `APP_STORE_URL`. After Apple approves the app and the listing is publicly accessible, set `APP_STORE_AVAILABLE` to `true`. This restores the App Store links and release-specific copy together. Run `npm run check` and `npm run test:site` before publishing. The site tests check the configured availability state, links, and recovery guidance. See `docs/verification.md` for the earlier production review.

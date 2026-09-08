@@ -1,22 +1,25 @@
 ---
 import DocumentLayout from '../layouts/DocumentLayout.astro';
 import DownloadLink from '../components/DownloadLink.astro';
+import { APP_STORE_AVAILABLE } from '../consts';
 
 const sections = [
-  { id: 'restore-app', label: 'Restore a fresh copy' },
+  { id: 'restore-app', label: APP_STORE_AVAILABLE ? 'Restore a fresh copy' : 'Get help with your copy' },
   { id: 'possible-causes', label: 'Why this can happen' },
   { id: 'contact-support', label: 'Still seeing the warning?' },
 ];
 ---
-<DocumentLayout title="Application integrity warning" eyebrow="DiskPress support" heading="Application integrity warning" description="If DiskPress showed an integrity warning, its installed app files may be damaged, incomplete, or modified. Restore a fresh copy from the Mac App Store." sections={sections} noindex>
+<DocumentLayout title="Application integrity warning" eyebrow="DiskPress support" heading="Application integrity warning" description="If DiskPress showed an integrity warning, its installed app files may be damaged, incomplete, or modified. Stop using that copy and follow the guidance below." sections={sections} noindex>
   <section id="restore-app">
-    <h2>Restore a fresh copy</h2>
+    <h2>{APP_STORE_AVAILABLE ? 'Restore a fresh copy' : 'Get help with your copy'}</h2>
     <ol>
       <li>Quit DiskPress completely. If an optimization is running, cancel it and allow the app to finish stopping. Close any DiskPress command-line session too.</li>
-      <li>Move only the installed DiskPress.app application to the Trash.</li>
-      <li>Download DiskPress again from the Mac App Store using the link below, then open the newly installed copy.</li>
+      {APP_STORE_AVAILABLE ? <>
+        <li>Move only the installed DiskPress.app application to the Trash.</li>
+        <li>Download DiskPress again from the Mac App Store using the link below, then open the newly installed copy.</li>
+      </> : <li><a href="/support/">Contact support</a> before removing or replacing your copy. DiskPress is awaiting App Store approval, so a public replacement download is not yet available.</li>}
     </ol>
-    <p><DownloadLink /></p>
+    {APP_STORE_AVAILABLE && <p><DownloadLink /></p>}
     <div class="notice">
       <p><strong>Keep your files and recovery records.</strong> Do not delete your personal files, DiskPress settings, or recovery records as part of reinstalling the app. If DiskPress reports unfinished recovery, preserve the files it identifies and <a href="/support/">contact support</a>.</p>
     </div>

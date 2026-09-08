@@ -61,6 +61,8 @@
   .download-link { display: inline-flex; justify-content: center; align-items: center; gap: 12px; min-height: 54px; padding: 14px 22px; background: var(--button); color: var(--button-text); border: 1px solid transparent; border-radius: 10px; text-decoration: none; font-weight: 600; line-height: 1.3; }
   .download-link:hover { background: var(--text); color: var(--bg); }
   .download-link.compact { min-height: 42px; padding: 10px 16px; font-size: .875rem; }
+  .release-status { display: inline-flex; align-items: center; max-width: 100%; min-height: 54px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 999px; background: var(--accent-bg); color: var(--accent); font-weight: 600; line-height: 1.4; }
+  .release-status.compact { min-height: 42px; padding: 10px 14px; font-size: .875rem; white-space: nowrap; }
   .mobile-nav { display: none; }
   .hero { padding-block: 72px 48px; display: grid; grid-template-columns: .88fr 1.35fr; gap: 40px; align-items: center; }
   .hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -90,7 +92,7 @@
   @media (max-width: 1050px) { .desktop-nav { gap: 16px; } .header-actions { gap: 12px; } .hero { gap: 24px; grid-template-columns: .9fr 1.1fr; } h1 { font-size: clamp(3rem, 5.5vw, 4rem); } .footer-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 780px) {
     .desktop-nav { display: none; } .header-inner { min-height: 72px; gap: 12px; } .header-actions { gap: 8px; }
-    .header-actions > .download-link { display: none; } .mobile-nav { display: block; }
+    .header-actions > .download-link, .header-actions > .release-status { display: none; } .mobile-nav { display: block; }
     .mobile-nav summary { cursor: pointer; list-style: none; min-width: 44px; min-height: 44px; display: grid; place-items: center; }
     .mobile-nav summary::-webkit-details-marker { display: none; }
     .mobile-nav nav { position: absolute; inset: 100% 0 auto; background: var(--bg); border-bottom: 1px solid var(--line); padding: 24px var(--gutter); display: grid; gap: 8px; box-shadow: var(--shadow); }

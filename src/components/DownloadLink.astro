@@ -1,9 +1,15 @@
 ---
-import { APP_STORE_URL } from '../consts';
+import { APP_STORE_AVAILABLE, APP_STORE_URL } from '../consts';
 interface Props { compact?: boolean; }
 const { compact = false } = Astro.props;
 ---
-<a class:list={['download-link', { compact }]} href={APP_STORE_URL}>
-  <span>{compact ? 'Get DiskPress' : 'Download on the Mac App Store'}</span>
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-</a>
+{APP_STORE_AVAILABLE ? (
+  <a class:list={['download-link', { compact }]} href={APP_STORE_URL}>
+    <span>{compact ? 'Get DiskPress' : 'Download on the Mac App Store'}</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+  </a>
+) : (
+  <span class:list={['release-status', { compact }]}>
+    {compact ? <>Available soon<span class="sr-only"> on the Mac App Store</span></> : 'Available soon on the Mac App Store'}
+  </span>
+)}

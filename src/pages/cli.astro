@@ -1,6 +1,7 @@
 ---
 import DocumentLayout from '../layouts/DocumentLayout.astro';
 import CodeBlock from '../components/CodeBlock.astro';
+import { APP_STORE_AVAILABLE } from '../consts';
 const sections = [
   { id: 'quick-start', label: 'Quick start' }, { id: 'commands', label: 'Commands' },
   { id: 'options', label: 'Options' }, { id: 'examples', label: 'Useful examples' },
@@ -40,6 +41,7 @@ const exitCodes = [
 ];
 ---
 <DocumentLayout title="Command-line guide" eyebrow="DiskPress CLI" heading="Your automation. The same native engine." description="Use DiskPress from Terminal, scripts, or AI agents. Inspect first, optimize selected files, and get structured results without opening the main window." sections={sections}>
+  {!APP_STORE_AVAILABLE && <div class="notice"><p><strong>DiskPress will be available soon.</strong> These instructions apply once the app is installed. The CLI is included with the app, not a separate download. See <a href="/faq/#download-price">release availability</a>.</p></div>}
   <section id="quick-start"><h2>Start with the installed app</h2><p>The CLI is the executable inside DiskPress.app. There is no separate command-line download. These examples assume the app is installed in Applications. Adjust the path if yours is elsewhere.</p><CodeBlock id="cli-help" label="Read the current command reference" code={'"/Applications/DiskPress.app/Contents/MacOS/DiskPress" --help'} /><ol><li>Open DiskPress and go to Settings, then Authorized Paths.</li><li>Add the specific files or folders the command should be allowed to read and write. For a compressed file, authorize its containing folder.</li><li>Inspect the selection with <code>scan</code> before choosing <code>optimize</code>.</li></ol><div class="notice"><p>A CLI-only launch starts the DiskPress process without recurring monitoring or saved-location savings scans. It exits after its commands finish. If the app is already open, it stays open. This is windowless app execution, not a separate daemon.</p></div></section>
   <section id="commands"><h2>Commands</h2><p>Run these after the executable path. Only <code>scan</code> and <code>optimize</code> accept target paths, with a maximum of 500 per request.</p><div class="table-scroll" role="region" aria-label="CLI commands" tabindex="0"><table><thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead><tbody>{commands.map(([command, description]) => <tr><td><code>{command}</code></td><td>{description}</td></tr>)}</tbody></table></div><p><code>paths</code> means permissions. <code>locations</code> means saved optimization targets. They are not interchangeable. Configuration changes and new permission grants remain in the app's Settings.</p></section>
   <section id="options"><h2>Options</h2><div class="table-scroll" role="region" aria-label="CLI options" tabindex="0"><table><thead><tr><th scope="col">Option</th><th scope="col">Behavior</th></tr></thead><tbody>{options.map(([option, description]) => <tr><td><code>{option}</code></td><td>{description}</td></tr>)}</tbody></table></div></section>
