@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
-const routes = ['/', '/faq/', '/cli/', '/privacy-policy/', '/terms-of-service/'];
+const routes = ['/', '/faq/', '/cli/', '/support/', '/privacy-policy/', '/terms-of-service/'];
 const unlistedRoutes = ['/application-corrupted/'];
 const noindexRoutes = new Set([...unlistedRoutes, '/404.html']);
 const documents = new Map();
@@ -23,6 +23,10 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html']) {
   assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, `${route} needs one main heading`);
   assert.match(html, /<title>[^<]+<\/title>/, `${route} needs a title`);
   assert.match(html, /<meta name="description" content="[^"]+"/, `${route} needs a description`);
+  const helpNavigation = html.match(/<nav\b[^>]*aria-label="Help and legal"[^>]*>[\s\S]*?<\/nav>/)?.[0];
+  const mobileNavigation = html.match(/<nav\b[^>]*aria-label="Mobile navigation"[^>]*>[\s\S]*?<\/nav>/)?.[0];
+  assert.match(helpNavigation || '', /<a href="\/support\/"[^>]*>Contact support<\/a>/, `${route} must route footer support through the dedicated page`);
+  assert.match(mobileNavigation || '', /<a href="\/support\/"[^>]*>Support<\/a>/, `${route} must route mobile support through the dedicated page`);
   const iconLinks = [...html.matchAll(/<link\b[^>]*rel="(?:icon|apple-touch-icon)"[^>]*>/g)].map(match => match[0]);
   for (const icon of iconAssets) assert.ok(iconLinks.some(link => link.includes(`href="${icon}?v=2"`)), `${route} is missing a cache-versioned icon ${icon}`);
   if (noindexRoutes.has(route)) {
@@ -117,13 +121,27 @@ assert.ok(privacyPolicy.includes('Normal use and errors optimizing individual fi
 assert.ok(documents.get('/terms-of-service/').includes('A failed application integrity check automatically opens a diagnostic webpage with a numeric check identifier'), 'The terms must preserve the diagnostic-visit disclosure');
 for (const [route, html] of documents) assert.ok(!/No app analytics or telemetry|No uploads, analytics, or telemetry|contains no analytics or telemetry|has no account, analytics, telemetry|does not include analytics or telemetry|DiskPress stays offline/.test(html), `${route} must not contradict the diagnostic-visit disclosure`);
 
+const supportPage = documents.get('/support/');
+assert.match(supportPage, /<h1>Contact support<\/h1>/, 'The support page needs a clear primary heading');
+assert.equal((supportPage.match(/<article class="support-option"/g) || []).length, 2, 'The support page must present both contact options');
+assert.ok(supportPage.includes('href="https://github.com/JulyIghor/DiskPress/issues"'), 'Support must use the supplied GitHub issues destination');
+assert.ok(supportPage.includes('href="mailto:support@apptrust.app?subject=DiskPress%20support"'), 'Support must preserve the existing email address with a useful subject');
+assert.ok(supportPage.includes('Issues and attachments are public') && supportPage.includes('Use email for sensitive information'), 'Support must distinguish public GitHub reports from private email');
+assert.ok(supportPage.includes('Your DiskPress version and macOS version') && supportPage.includes('Remove private filenames, paths, passwords'), 'Support must request useful details while protecting private information');
+assert.ok(supportPage.includes('keep its recovery files and records intact'), 'Support must preserve unfinished recovery material');
+assert.ok(!/<form\b|<iframe\b/.test(supportPage), 'Support must use direct links without an embedded third-party form');
+const faqHelp = documents.get('/faq/').match(/<section class="help-note">[\s\S]*?<\/section>/)?.[0];
+assert.ok(faqHelp?.includes('href="/support/"'), 'The FAQ help section must lead to the dedicated support page');
+assert.ok(privacyPolicy.includes('Issues, comments, and attachments are public') && privacyPolicy.includes('github-general-privacy-statement'), 'The privacy policy must explain public GitHub support separately from email');
+
 const integrityPage = documents.get('/application-corrupted/');
 assert.match(integrityPage, /<h1>Application integrity warning<\/h1>/, 'The unlisted help page needs a clear DiskPress warning heading');
 assert.ok(integrityPage.includes('data-domain="diskpress.app"') && integrityPage.includes('plausible.init();'), 'The unlisted help page must retain normal Plausible page-view tracking');
 assert.ok(integrityPage.includes('Move only the installed DiskPress.app application to the Trash.'), 'Recovery guidance must limit removal to the application bundle');
 assert.ok(integrityPage.includes('Do not delete your personal files, DiskPress settings, or recovery records'), 'Recovery guidance must preserve user data and unfinished recovery material');
 assert.ok(integrityPage.includes('Do not bypass the warning or disable macOS security protections.'), 'The help page must not recommend bypassing integrity protections');
-assert.ok(integrityPage.includes('mailto:support@apptrust.app?subject=DiskPress%20application%20integrity%20warning'), 'The help page must provide the DiskPress support address and a useful subject');
+const integritySupport = integrityPage.match(/<section id="contact-support">[\s\S]*?<\/section>/)?.[0];
+assert.ok(integritySupport?.includes('href="/support/">Contact support</a>') && integritySupport.includes('whether the warning returned after reinstalling'), 'The help page must lead to both support options without losing its reporting guidance');
 assert.ok(integrityPage.includes('.document-content a:not(.download-link)'), 'Document links must not override download-button contrast');
 assert.ok(!/Parall|support@parall\.app/.test(integrityPage), 'The help page must not inherit another application\'s support details or bug claims');
 for (const [route, html] of documents) {

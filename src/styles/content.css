@@ -126,6 +126,9 @@
   .document-content ul, .document-content ol { margin: 0; padding-left: 24px; display: grid; gap: 12px; }
   .document-content :not(pre) > code { background: var(--code-bg); border-radius: 4px; padding: 2px 5px; overflow-wrap: anywhere; color: var(--text); }
   .document-content .faq-answer { gap: 16px; }
+  .document-content > .support-options { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 24px; }
+  .support-option { display: grid; align-content: start; gap: 16px; min-width: 0; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+  .support-option .text-link { justify-self: start; min-width: 0; max-width: 100%; }
   .notice, .help-note { background: var(--accent-bg); border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); border-radius: 12px; padding: 24px; }
   .notice p + p { margin-top: 16px; }
   .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
@@ -145,7 +148,7 @@
     .native-grid { gap: 24px; } .document-grid { grid-template-columns: 180px minmax(0, 1fr); }
     .menu-visual { padding: 24px; } .companion-panel { padding: 32px; gap: 32px; }
   }
-  @media (max-width: 900px) { .comparison-grid, .savings-stages { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .comparison-grid, .savings-stages, .document-content > .support-options { grid-template-columns: 1fr; } }
   @media (max-width: 780px) {
     .comparison-grid, .native-grid, .workflow-grid, .automation-grid, .menu-section, .control-grid, .maker-section, .home-faq-grid, .companion-panel { grid-template-columns: 1fr; gap: 24px; }
     .comparison-item, .native-feature { padding: 24px; gap: 16px; }

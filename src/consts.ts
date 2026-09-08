@@ -6,4 +6,5 @@ export const BLOG_URL = 'https://reverseeverything.com/?utm_source=diskpress.app
 export const MORE_APPS_URL = 'https://reverseeverything.com/apps/?utm_source=diskpress.app';
 export const APP_ARCHIVER_URL = 'https://apparchiver.com/?utm_source=diskpress.app';
 export const SUPPORT_EMAIL = 'support@apptrust.app';
+export const SUPPORT_ISSUES_URL = 'https://github.com/JulyIghor/DiskPress/issues';
 export const CLI_BINARY = '/Applications/DiskPress.app/Contents/MacOS/DiskPress';

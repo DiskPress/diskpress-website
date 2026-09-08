@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 
 export const prerender = true;
 export const GET: APIRoute = () => {
-  const paths = ['/', '/faq/', '/cli/', '/privacy-policy/', '/terms-of-service/'];
+  const paths = ['/', '/faq/', '/cli/', '/support/', '/privacy-policy/', '/terms-of-service/'];
   const urls = paths.map(path => `<url><loc>https://diskpress.app${path}</loc></url>`).join('');
   return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`, {
     headers: { 'Content-Type': 'application/xml; charset=utf-8' },

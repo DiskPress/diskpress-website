@@ -1,14 +1,12 @@
 ---
 import DocumentLayout from '../layouts/DocumentLayout.astro';
 import DownloadLink from '../components/DownloadLink.astro';
-import { SUPPORT_EMAIL } from '../consts';
 
 const sections = [
   { id: 'restore-app', label: 'Restore a fresh copy' },
   { id: 'possible-causes', label: 'Why this can happen' },
   { id: 'contact-support', label: 'Still seeing the warning?' },
 ];
-const supportURL = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('DiskPress application integrity warning')}`;
 ---
 <DocumentLayout title="Application integrity warning" eyebrow="DiskPress support" heading="Application integrity warning" description="If DiskPress showed an integrity warning, its installed app files may be damaged, incomplete, or modified. Restore a fresh copy from the Mac App Store." sections={sections} noindex>
   <section id="restore-app">
@@ -20,9 +18,9 @@ const supportURL = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('DiskPr
     </ol>
     <p><DownloadLink /></p>
     <div class="notice">
-      <p><strong>Keep your files and recovery records.</strong> Do not delete your personal files, DiskPress settings, or recovery records as part of reinstalling the app. If DiskPress reports unfinished recovery, preserve the files it identifies and contact support.</p>
+      <p><strong>Keep your files and recovery records.</strong> Do not delete your personal files, DiskPress settings, or recovery records as part of reinstalling the app. If DiskPress reports unfinished recovery, preserve the files it identifies and <a href="/support/">contact support</a>.</p>
     </div>
-    <p>If the warning returns with a fresh copy, stop using that copy and contact support. Do not bypass the warning or disable macOS security protections.</p>
+    <p>If the warning returns with a fresh copy, stop using that copy and <a href="/support/">contact support</a>. Do not bypass the warning or disable macOS security protections.</p>
   </section>
   <section id="possible-causes">
     <h2>Why this can happen</h2>
@@ -32,7 +30,7 @@ const supportURL = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('DiskPr
   </section>
   <section id="contact-support">
     <h2>Still seeing the warning?</h2>
-    <p>Email <a href={supportURL}>{SUPPORT_EMAIL}</a> with the warning text or a screenshot, your DiskPress and macOS versions, where you downloaded the app, and whether the warning returned after reinstalling.</p>
+    <p><a href="/support/">Contact support</a> with the warning text or a screenshot, your DiskPress and macOS versions, where you downloaded the app, and whether the warning returned after reinstalling.</p>
     <p>Mention any recent cleanup or optimization tools used on the application. Remove private filenames or other sensitive information from screenshots. Do not send personal files or recovery material unless support asks for specific information you are comfortable sharing.</p>
   </section>
 </DocumentLayout>

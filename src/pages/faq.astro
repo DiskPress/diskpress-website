@@ -2,9 +2,8 @@
 import DocumentLayout from '../layouts/DocumentLayout.astro';
 import FaqList from '../components/FaqList.astro';
 import { faqGroups } from '../data/faq';
-import { SUPPORT_EMAIL } from '../consts';
 ---
 <DocumentLayout title="Frequently asked questions" eyebrow="DiskPress FAQ" heading="A little clarity. A lot more control." description="How DiskPress saves space, which files it supports, and what to expect from background monitoring, the menu bar, and automation." sections={faqGroups.map(group => ({ id: group.id, label: group.title }))}>
   {faqGroups.map(group => <section id={group.id}><h2>{group.title}</h2><FaqList questions={group.questions} /></section>)}
-  <section class="help-note"><h2>Still have a question?</h2><p>Email <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> with your macOS version, DiskPress version, and what you were trying to do. Remove private paths and other sensitive information from any screenshots or logs you share.</p></section>
+  <section class="help-note"><h2>Still have a question?</h2><p><a href="/support/">Contact support</a> through GitHub issues or email. The support page explains which option to use and what details to include.</p></section>
 </DocumentLayout>

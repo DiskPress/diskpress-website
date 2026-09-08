@@ -1,0 +1,42 @@
+---
+import DocumentLayout from '../layouts/DocumentLayout.astro';
+import { SUPPORT_EMAIL, SUPPORT_ISSUES_URL } from '../consts';
+
+const sections = [
+  { id: 'github', label: 'GitHub issues' },
+  { id: 'email', label: 'Email support' },
+  { id: 'what-to-include', label: 'What to include' },
+];
+const emailURL = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('DiskPress support')}`;
+---
+<DocumentLayout title="Contact support" eyebrow="DiskPress support" heading="Contact support" description="Report a bug, suggest an improvement, or get help with DiskPress. Open a GitHub issue or email the developer." sections={sections}>
+  <section class="support-options" aria-label="Support options">
+    <article class="support-option" id="github">
+      <h2>GitHub issues</h2>
+      <p>Report a bug, suggest a feature, or join an existing discussion. Check existing issues before opening a new one.</p>
+      <a class="text-link" href={SUPPORT_ISSUES_URL}>Open GitHub issues</a>
+      <p class="fine">Issues and attachments are public. You need a GitHub account to post. Use email for sensitive information.</p>
+    </article>
+    <article class="support-option" id="email">
+      <h2>Email support</h2>
+      <p>Ask a question or discuss a problem privately. Use email for privacy requests, security concerns, or details you do not want to post publicly.</p>
+      <a class="text-link" href={emailURL}>{SUPPORT_EMAIL}</a>
+      <p class="fine">No GitHub account is needed. Select the address to open your email app, or copy it into your preferred mail service.</p>
+    </article>
+  </section>
+  <section id="what-to-include">
+    <h2>What to include</h2>
+    <p>A few details make it easier to understand and reproduce the problem.</p>
+    <ul>
+      <li>Your DiskPress version and macOS version.</li>
+      <li>What you were trying to do, what you expected, and what happened instead.</li>
+      <li>Whether you used one-time optimization, background monitoring, or the CLI, along with any error or warning text.</li>
+      <li>Steps to reproduce the problem and a redacted screenshot, if helpful.</li>
+    </ul>
+    <div class="notice">
+      <p><strong>Share only what is needed.</strong> Remove private filenames, paths, passwords, and other sensitive information from screenshots or logs. Do not send personal files or recovery material unless support asks for specific information you are comfortable sharing.</p>
+      <p>If DiskPress reports unfinished recovery, keep its recovery files and records intact while asking for help.</p>
+    </div>
+    <p>For answers about supported files, savings, and everyday use, check the <a href="/faq/">FAQ</a>. The <a href="/privacy-policy/#support">privacy policy</a> explains how support information is handled.</p>
+  </section>
+</DocumentLayout>
