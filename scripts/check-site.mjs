@@ -18,6 +18,8 @@ assert.equal(siteConfig.match(/export const APP_STORE_URL = '([^']+)';/)?.[1], a
 const developerProfile = 'https://reverseeverything.com/ighor/?utm_source=diskpress.app';
 const developerBlog = 'https://reverseeverything.com/?utm_source=diskpress.app';
 const iconAssets = new Set(['/favicon.ico', '/favicon.svg', '/favicon-16x16.png', '/favicon-32x32.png', '/apple-touch-icon.png']);
+const socialImage = 'https://diskpress.app/og.png?v=1';
+const socialImageAlt = 'DiskPress. More room. Same files. Native file compression and deduplication, with green layered artwork on a dark background.';
 let developerLinks = 0;
 
 for (const route of [...routes, ...unlistedRoutes, '/404.html']) {
@@ -45,6 +47,24 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html']) {
   }
   assert.equal((html.match(/src="https:\/\/analytics\.diskpress\.app\/js\/script\.outbound-links\.tagged-events\.js"/g) || []).length, 1, `${route} must load Plausible once`);
   const head = html.slice(html.indexOf('<head>'), html.indexOf('</head>')).replace(/<noscript>[\s\S]*?<\/noscript>/g, '');
+  const metaTags = [...head.matchAll(/<meta (?:name|property)="([^"]+)" content="([^"]*)"\s*\/?\s*>/g)];
+  const meta = new Map(metaTags.map(([, name, value]) => [name, value]));
+  const pageTitle = head.match(/<title>([^<]+)<\/title>/)?.[1];
+  for (const name of ['og:title', 'twitter:title']) assert.equal(meta.get(name), pageTitle, `${route} must preserve its own title in social previews`);
+  for (const name of ['og:description', 'twitter:description']) assert.equal(meta.get(name), meta.get('description'), `${route} must preserve its own description in social previews`);
+  // Astro renders the 404 file from its logical /404/ route, which remains noindex.
+  const socialPageRoute = route === '/404.html' ? '/404/' : route;
+  assert.equal(meta.get('og:url'), `https://diskpress.app${socialPageRoute}`, `${route} must use its trusted public URL in social previews`);
+  assert.equal(meta.get('twitter:card'), 'summary_large_image', `${route} must request a widescreen social card`);
+  for (const name of ['og:image', 'twitter:image']) {
+    assert.equal(metaTags.filter(([, key]) => key === name).length, 1, `${route} must declare only one ${name}`);
+    assert.equal(meta.get(name), socialImage, `${route} must use the versioned landscape card, not a cropped app icon`);
+  }
+  for (const name of ['og:image:alt', 'twitter:image:alt']) assert.equal(meta.get(name), socialImageAlt, `${route} needs descriptive social-image alternative text`);
+  assert.equal(meta.get('og:image:type'), 'image/png', `${route} must declare the correct social-image format`);
+  assert.equal(meta.get('og:image:width'), '1200', `${route} must declare the correct social-image width`);
+  assert.equal(meta.get('og:image:height'), '630', `${route} must declare the correct social-image height`);
+  assert.ok(!/<img\b[^>]*src="[^"]*\/og\.png|<link\b[^>]*rel="preload"[^>]*og\.png/.test(html), `${route} must not download the social-only image during normal page loads`);
   const css = [...head.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/g)].map(match => match[1]).join('\n');
   assert.ok(css.length > 1000 && css.includes('.site-header') && css.includes('.code-heading'), `${route} must inline the actual site CSS in the head`);
   assert.match(css, /font-family:-apple-system/, `${route} must use the local system font stack`);
@@ -320,6 +340,12 @@ for (const [route, html] of documents) {
 
 const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
 const pngSignature = Buffer.from('89504e470d0a1a0a', 'hex');
+const socialPng = await readFile(path.join(root, new URL(socialImage).pathname));
+assert.ok(socialPng.subarray(0, 8).equals(pngSignature), 'The social preview must be a real PNG');
+assert.equal(socialPng.readUInt32BE(16), 1200, 'The social preview must be 1200 pixels wide');
+assert.equal(socialPng.readUInt32BE(20), 630, 'The social preview must be 630 pixels tall');
+assert.ok(socialPng.length < 1024 * 1024, 'Keep the social preview below 1 MiB for quick crawler downloads');
+assert.ok(!socialPng.equals(await readFile(path.join(root, 'apple-touch-icon.png'))), 'The social preview must be its own landscape artwork');
 for (const [filename, size] of [['favicon-16x16.png', 16], ['favicon-32x32.png', 32], ['apple-touch-icon.png', 180]]) {
   const png = await readFile(path.join(root, filename));
   assert.ok(png.subarray(0, 8).equals(pngSignature), `${filename} must be a PNG`);
@@ -356,4 +382,4 @@ assert.deepEqual(noindexHeaderPaths, ['/application-corrupted', '/application-co
 assert.match(documents.get('/404.html'), /noindex, follow/);
 if (appStoreAvailable) assert.ok(appStoreLinks >= 7, 'Released pages must provide the supplied App Store download links');
 else assert.equal(appStoreLinks, 0, 'Pending-release pages must not send users to an unavailable App Store listing');
-console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} App Store links, ${developerLinks} developer profile links, ${assets} asset references, metadata, sitemap, analytics, and first-paint styling.`);
+console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} App Store links, ${developerLinks} developer profile links, ${assets} asset references, widescreen social previews, metadata, sitemap, analytics, and first-paint styling.`);
