@@ -252,6 +252,11 @@ assert.match(homepage, /<h3>File deduplication<\/h3>/, 'The homepage must name t
 const deduplicationFeature = [...homepage.matchAll(/<article\b[^>]*class="native-feature"[^>]*>[\s\S]*?<\/article>/g)].map(match => match[0]).find(article => article.includes('<h3>File deduplication</h3>'));
 assert.ok(deduplicationFeature?.includes('DiskPress is not a duplicate file remover.'), 'The feature description must distinguish file deduplication from duplicate deletion');
 assert.ok(deduplicationFeature.includes('APFS copy-on-write clones') && deduplicationFeature.includes('Both files keep their paths.'), 'The feature description must explain storage sharing without removing file paths');
+assert.ok(deduplicationFeature.includes('across all enabled saved locations, not just within each folder') && homepage.includes('extra deduplication savings in folders you already optimized'), 'The homepage must explain cross-location deduplication and the benefit of adding locations');
+const crossLocationAnswer = documents.get('/faq/').match(/<details\b[^>]*id="cross-location-deduplication"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(crossLocationAnswer?.includes('across all enabled saved locations, not just within each location') && crossLocationAnswer.includes('same compatible APFS volume'), 'The FAQ must explain cross-location matching without implying cross-volume sharing');
+assert.ok(crossLocationAnswer.includes('The next optimization') && crossLocationAnswer.includes('extra savings in locations you already optimized') && crossLocationAnswer.includes('Adding a location alone does not perform deduplication'), 'The FAQ must explain that additional savings require optimization, not merely adding a location');
+assert.ok(crossLocationAnswer.includes('With deduplication enabled') && crossLocationAnswer.includes('Disabled locations are not processed') && crossLocationAnswer.includes('exclusions and safety checks still apply'), 'Cross-location matching must respect the enabled locations, settings, and safety rules');
 for (const route of ['/', '/faq/']) {
   const answer = documents.get(route).match(/<details\b[^>]*id="deduplication"[^>]*>[\s\S]*?<\/details>/)?.[0];
   assert.ok(answer?.includes('Is DiskPress a duplicate file remover?') && answer.includes('No. DiskPress is not a duplicate file remover.'), `${route} must explicitly answer the duplicate-remover question`);
@@ -285,6 +290,7 @@ assert.ok(homepage.includes('href="/faq/#combined-savings"'), 'The example must 
 const savingsAnswer = documents.get('/faq/').match(/<details\b[^>]*id="combined-savings"[^>]*>[\s\S]*?<\/details>/)?.[0];
 assert.ok(savingsAnswer?.includes(`${savedData} MB out of the original ${originalData} MB, or ${savedPercent}%`), 'The FAQ must use the same correct savings calculation');
 assert.ok(savingsAnswer.includes('do not already share storage') && savingsAnswer.includes('metadata and allocation overhead'), 'The FAQ must state the example assumptions');
+for (const example of [savingsExample, savingsAnswer]) assert.ok(example.includes('two different enabled saved locations on the same compatible APFS volume'), 'Both savings examples must illustrate file deduplication across locations on one compatible volume');
 assert.ok(homepage.includes(`href="${developerBlog}">Read Reverse Everything</a>`), 'The homepage blog link must keep its original destination');
 const homepageImages = [...homepage.matchAll(/<img\b[^>]*>/g)].map(match => match[0]);
 for (const [name, width, height, widths, loading] of screenshotSpecs) {
