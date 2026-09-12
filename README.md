@@ -47,6 +47,6 @@ Development uses Astro's printed local URL. A production-like local preview is a
 
 ## Release availability
 
-DiskPress is awaiting App Store approval. `APP_STORE_AVAILABLE` in `src/consts.ts` is `false`, so the site shows an available-soon status instead of active download links. The homepage, metadata, FAQ, CLI guide, terms, and integrity-help guidance reflect this state. There is no announced release date or price.
+DiskPress is approved for the Mac App Store. `APP_STORE_AVAILABLE` in `src/consts.ts` is `true`, so the site shows active download links and release-specific copy. The homepage, metadata, FAQ, CLI guide, terms, and integrity-help guidance reflect this state. The App Store listing provides the current price and regional availability.
 
-The supplied Mac App Store URL is preserved unchanged in `APP_STORE_URL`. After Apple approves the app and the listing is publicly accessible, set `APP_STORE_AVAILABLE` to `true`. This restores the App Store links and release-specific copy together. Run `npm run check` and `npm run test:site` before publishing. The site tests check the configured availability state, links, and recovery guidance. See `docs/verification.md` for the earlier production review.
+The supplied Mac App Store URL is preserved unchanged in `APP_STORE_URL`, including its campaign parameters. The shared availability setting controls download links and release-specific copy together. Run `npm run check` and `npm run test:site` before publishing. The site tests check the configured availability state, links, and recovery guidance. See `docs/verification.md` for the earlier production review.

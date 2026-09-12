@@ -1,5 +1,5 @@
 export const SITE_TITLE = 'DiskPress';
-export const APP_STORE_AVAILABLE = false;
+export const APP_STORE_AVAILABLE = true;
 export const SITE_DESCRIPTION = APP_STORE_AVAILABLE
   ? 'Save space without deleting files. DiskPress combines native file compression and APFS file deduplication on your Mac, with background monitoring and a CLI.'
   : 'DiskPress is coming soon to the Mac App Store. Save space with native file compression and APFS file deduplication, without deleting your files.';
