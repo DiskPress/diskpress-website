@@ -31,7 +31,7 @@ The six light-appearance captures from `../Fastline/generated/screenshots/raw/en
 
 The favicon includes SVG, a multi-size ICO, 16 and 32 pixel PNG fallbacks, and an Apple touch icon. Versioned icon links refresh previously cached browser icons. Run `node scripts/generate-favicons.mjs` after changing `public/favicon.svg`, and update the icon URL version when replacing the artwork.
 
-The shared layout includes the supplied Plausible script once per page. File contents, filenames, local paths, and optimization results are not sent to it. A failed application integrity check can open a diagnostic webpage with a numeric `utm_source` value identifying the failed check, including during CLI use. These visits are covered by website analytics, not reporting of normal optimization activity. The only website preference stored locally is `diskpress-appearance`. Legal pages use the developer support address published on App Archiver and App Trust Preview.
+The shared layout includes the supplied Plausible script once per page. File contents, filenames, local paths, and optimization results are not sent to it. A failed application integrity check can open a diagnostic webpage with `utm_source=diskpress` and a numeric `utm_content` value identifying the failed check, including during CLI use. Older app versions used `utm_source` for the same numeric check identifier. These visits are covered by website analytics, not reporting of normal optimization activity. The only website preference stored locally is `diskpress-appearance`. Legal pages use the developer support address published on App Archiver and App Trust Preview.
 
 ## Commands
 

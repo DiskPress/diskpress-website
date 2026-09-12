@@ -164,7 +164,7 @@ for (const route of ['/', '/faq/']) {
   assert.ok(answer.includes('href="/privacy-policy/#application"'), `${route} must link to the detailed application privacy explanation`);
 }
 const privacyPolicy = documents.get('/privacy-policy/');
-assert.ok(privacyPolicy.includes('Application integrity diagnostics') && privacyPolicy.includes('numeric <code>utm_source</code> value identifying the failed check'), 'The privacy policy must explain the diagnostic campaign value');
+assert.ok(privacyPolicy.includes('Application integrity diagnostics') && privacyPolicy.includes('<code>utm_source=diskpress</code>') && privacyPolicy.includes('numeric <code>utm_content</code> value identifying the failed check'), 'The privacy policy must explain the diagnostic campaign value');
 assert.ok(privacyPolicy.includes('also applies when the app is serving a CLI command') && privacyPolicy.includes('no filenames, local paths, optimization results, or per-user identifier'), 'The privacy policy must explain CLI diagnostics and their limited URL contents');
 assert.ok(privacyPolicy.includes('Normal use and errors optimizing individual files do not trigger this visit'), 'The privacy policy must distinguish integrity failures from routine optimization errors');
 assert.ok(documents.get('/terms-of-service/').includes('A failed application integrity check automatically opens a diagnostic webpage with a numeric check identifier'), 'The terms must preserve the diagnostic-visit disclosure');
