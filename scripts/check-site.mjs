@@ -10,11 +10,13 @@ const noindexRoutes = new Set([...unlistedRoutes, '/404.html']);
 const documents = new Map();
 const decode = value => value.replaceAll('&amp;', '&').replaceAll('&#38;', '&');
 const appStore = 'https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=www&mt=8';
+const appBundle = 'https://apps.apple.com/app-bundle/apple-store/id6811364083?pt=127627850&ct=diskpress.app&mt=8';
 const siteConfig = await readFile(new URL('../src/consts.ts', import.meta.url), 'utf8');
 const availabilitySetting = siteConfig.match(/export const APP_STORE_AVAILABLE = (true|false);/);
 assert.ok(availabilitySetting, 'Availability must be an explicit shared build-time setting');
 const appStoreAvailable = availabilitySetting[1] === 'true';
 assert.equal(siteConfig.match(/export const APP_STORE_URL = '([^']+)';/)?.[1], appStore, 'Keep the supplied App Store URL intact for release');
+assert.equal(siteConfig.match(/export const STORAGE_SAVER_DUO_URL = '([^']+)';/)?.[1], appBundle, 'Keep the supplied bundle URL and its campaign parameters intact');
 const developerProfile = 'https://reverseeverything.com/ighor/?utm_source=diskpress.app';
 const developerBlog = 'https://reverseeverything.com/?utm_source=diskpress.app';
 const iconAssets = new Set(['/favicon.ico', '/favicon.svg', '/favicon-16x16.png', '/favicon-32x32.png', '/apple-touch-icon.png']);
@@ -213,6 +215,13 @@ const screenshotSpecs = [
   ['menu-bar', 720, 1012, [360, 540, 720], 'lazy'],
 ];
 const homepage = documents.get('/');
+if (appStoreAvailable) {
+  const bundleSection = homepage.match(/<section\b[^>]*id="storage-saver-duo"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(bundleSection?.includes('DiskPress and App Archiver together at a reduced price compared with buying them separately') && decode(bundleSection).includes(`href="${appBundle}"`), 'The companion section must explain the discounted two-app bundle and link to its exact listing');
+  assert.ok(homepage.includes('href="#storage-saver-duo"') && bundleSection.includes('Get Storage Saver Duo') && bundleSection.includes('current pricing and system requirements'), 'The bundle must be discoverable from the hero and direct visitors to current App Store details');
+  const priceAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];
+  assert.ok(priceAnswer?.includes('Storage Saver Duo') && decode(priceAnswer).includes(`href="${appBundle}"`) && priceAnswer.includes('includes both apps at a reduced price'), 'The pricing FAQ must include the bundle option alongside the standalone download');
+}
 const backgroundSection = homepage.match(/<section\b[^>]*id="background"[^>]*>[\s\S]*?<\/section>/)?.[0];
 assert.ok(backgroundSection?.includes('first optimization pass can keep the CPU busy'), 'The homepage must explain the initial compression workload');
 assert.ok(backgroundSection.includes('not yet compressed') && backgroundSection.includes('new or modified files'), 'The homepage must distinguish existing uncompressed files from ongoing changes');
@@ -312,13 +321,15 @@ assert.ok(homepage.includes('App screenshots use example data.'), 'Screenshot sa
 
 let internalLinks = 0;
 let appStoreLinks = 0;
+let appBundleLinks = 0;
 let assets = 0;
 for (const [route, html] of documents) {
   for (const match of html.matchAll(/\bhref="([^"]+)"/g)) {
     const href = decode(match[1]);
     if (href.includes('apps.apple.com')) {
-      assert.equal(href, appStore, `${route} must preserve the supplied download URL`);
-      appStoreLinks++;
+      assert.ok(href === appStore || href === appBundle, `${route} must preserve the supplied standalone or bundle URL`);
+      if (href === appStore) appStoreLinks++;
+      else appBundleLinks++;
     }
     if (!href.startsWith('/') && !href.startsWith('#')) continue;
     const destination = new URL(href, `https://diskpress.app${route}`);
@@ -388,4 +399,6 @@ assert.deepEqual(noindexHeaderPaths, ['/application-corrupted', '/application-co
 assert.match(documents.get('/404.html'), /noindex, follow/);
 if (appStoreAvailable) assert.ok(appStoreLinks >= 7, 'Released pages must provide the supplied App Store download links');
 else assert.equal(appStoreLinks, 0, 'Pending-release pages must not send users to an unavailable App Store listing');
-console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} App Store links, ${developerLinks} developer profile links, ${assets} asset references, widescreen social previews, metadata, sitemap, analytics, and first-paint styling.`);
+if (appStoreAvailable) assert.ok(appBundleLinks >= 2, 'The homepage and pricing FAQ must provide bundle links without replacing standalone downloads');
+else assert.equal(appBundleLinks, 0, 'Pending-release pages must not offer a bundle containing the unavailable app');
+console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} DiskPress download links, ${appBundleLinks} bundle links, ${developerLinks} developer profile links, ${assets} asset references, widescreen social previews, metadata, sitemap, analytics, and first-paint styling.`);

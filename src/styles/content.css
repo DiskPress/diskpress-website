@@ -84,6 +84,9 @@
   .companion-panel > div { display: grid; gap: 20px; }
   .companion-panel h2 { font-size: clamp(1.75rem, 2.7vw, 2.5rem); }
   .companion-panel p:not(.eyebrow) { color: var(--muted); }
+  .bundle-purchase { display: grid; justify-items: start; gap: 12px; min-width: 0; }
+  .bundle-purchase .download-link { max-width: 100%; }
+  .bundle-purchase svg { flex: none; }
   .companion-app-link { justify-self: start; max-width: 100%; gap: 12px; }
   .companion-app-link img { width: 56px; height: 56px; flex: none; }
   .companion-app-link span { min-width: 0; }
