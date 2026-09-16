@@ -1,0 +1,26 @@
+---
+import DocumentLayout from '../layouts/DocumentLayout.astro';
+
+const sections = [
+  { id: 'v1-0-1', label: 'Version 1.0.1' },
+];
+---
+<DocumentLayout title="Changelog" eyebrow="DiskPress changelog" heading="What's new in DiskPress" description="Release notes for DiskPress, the native Mac utility for compressing and deduplicating the files you want to keep." sections={sections}>
+  <section id="v1-0-1" class="changelog-release">
+    <div class="changelog-release-heading"><p class="eyebrow">Latest release</p><h2>DiskPress v1.0.1</h2><p>More compatibility, safer recovery, clearer measurements, and smoother everyday control.</p></div>
+    <ul class="changelog-list">
+      <li>Added support for macOS 27 Golden Gate.</li>
+      <li>Added a Linked App option for saved locations. Optimization skips these locations while the selected app is running, including manual, automatic, and CLI operations.</li>
+      <li>Fixed Show Progress becoming unavailable during automatic optimization and transitions between stages.</li>
+      <li>Improved switching to menu bar mode and handling repeated Close or Quit commands.</li>
+      <li>Fixed a sandbox permissions issue that incorrectly skipped eligible files with <code>File metadata cannot be preserved</code>.</li>
+      <li>Improved automatic recovery so affected files can be preserved and skipped while other files continue optimizing.</li>
+      <li>Fixed a persistent recovery loop involving tiny files that already used no allocated storage.</li>
+      <li>Preserved last known location sizes and savings when a rescan cannot finish, instead of displaying zero. Temporary scan failures now retry automatically.</li>
+      <li>Excluded DiskPress temporary and recovery files from savings measurements.</li>
+      <li>Updated CLI statistics to include linked apps and distinguish outdated measurements from missing data.</li>
+      <li>Added the Storage Saver Duo bundle link to Help &amp; About and updated the App Archiver tile with its app icon.</li>
+      <li>Improved Locations table sizing and column alignment. Optimization titles and subtitles now stay vertically centered beside the app logo.</li>
+    </ul>
+  </section>
+</DocumentLayout>

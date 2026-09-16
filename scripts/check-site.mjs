@@ -5,7 +5,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
-const routes = [ '/', '/faq/', '/cli/', '/support/', '/privacy-policy/', '/terms-of-service/' ];
+const routes = [ '/', '/faq/', '/cli/', '/changelog/', '/support/', '/privacy-policy/', '/terms-of-service/' ];
 const unlistedRoutes = [ '/application-corrupted/' ];
 const noindexRoutes = new Set([...unlistedRoutes, '/404.html' ]);
 const documents = new Map();
@@ -39,6 +39,7 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
     const productNavigation = html.match(/<nav\b[^>]*aria-label="Product links"[^>]*>[\s\S]*?<\/nav>/)?.[0];
     for (const navigation of [mobileNavigation, productNavigation])
         assert.ok(navigation?.includes('href="/faq/#download-price">Availability</a>'), `${route} must make release information easy to find`);
+    assert.ok(productNavigation?.includes('href="/changelog/">Changelog</a>') && mobileNavigation?.includes('href="/changelog/">Changelog</a>'), `${route} must make the changelog easy to find`);
     assert.match(helpNavigation || '', /<a href="\/support\/"[^>]*>Contact support<\/a>/, `${route} must route footer support through the dedicated page`);
     assert.match(mobileNavigation || '', /<a href="\/support\/"[^>]*>Support<\/a>/, `${route} must route mobile support through the dedicated page`);
     const iconLinks = [...html.matchAll(/<link\b[^>]*rel="(?:icon|apple-touch-icon)"[^>]*>/g) ].map(match => match[0]);
@@ -249,6 +250,10 @@ const screenshotSpecs = [
     [ 'menu-bar', 720, 1012, [ 360, 540, 720 ], 'lazy' ],
 ];
 const homepage = documents.get('/');
+const changelog = documents.get('/changelog/');
+assert.ok(changelog?.includes('DiskPress v1.0.1') && changelog.includes('Added support for macOS 27 Golden Gate.'), 'The changelog must include the v1.0.1 release');
+for (const phrase of ['Linked App option', 'Show Progress', 'File metadata cannot be preserved', 'automatic recovery', 'tiny files', 'Temporary scan failures now retry automatically', 'CLI statistics', 'Storage Saver Duo', 'Locations table sizing'])
+    assert.ok(changelog.includes(phrase), `The changelog must preserve the v1.0.1 note about ${phrase}`);
 if (appStoreAvailable)
 {
     const bundleSection = homepage.match(/<section\b[^>]*id="storage-saver-duo"[^>]*>[\s\S]*?<\/section>/)?.[0];

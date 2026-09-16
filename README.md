@@ -9,6 +9,7 @@ All pages are prerendered. Cloudflare Workers Static Assets serves `dist` direct
 - `/` introduces native compression, deduplication, one-time work, background monitoring, the menu bar, and the developer
 - `/faq/` explains capabilities, compatibility, safeguards, savings measurements, and everyday use
 - `/cli/` documents the commands, permissions, JSON output, exit codes, and agent workflows
+- `/changelog/` lists the latest DiskPress release notes
 - `/support/` offers public GitHub issues and private email support, with guidance on what to include
 - `/privacy-policy/` explains local file processing, diagnostic webpage visits, website analytics, and hosting
 - `/terms-of-service/` covers the app license and product-specific responsibilities
