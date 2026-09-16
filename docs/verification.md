@@ -74,7 +74,7 @@ Cloudflare still uses the same project name, build command, and deploy command. 
 
 ## Release note
 
-The supplied [Mac App Store URL](https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=www&mt=8) returned HTTP 404 again in the final pre-push check. The URL remains unchanged as requested. The listing must become public before the website's download links can work. This is the outstanding release issue, outside the website repository. No price or trial claim was invented.
+The supplied [Mac App Store URL](https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=diskpress.app&mt=8) returned HTTP 404 again in the final pre-push check. The URL remains unchanged as requested. The listing must become public before the website's download links can work. This is the outstanding release issue, outside the website repository. No price or trial claim was invented.
 
 The earlier external-request timeouts were resolved during the pre-push check. The supplied Plausible endpoint returned HTTP 200 with JavaScript content. An isolated browser loaded that exact live script against the locally built website using the production origin. It generated the expected pageview and outbound App Store click with the supplied attribution URL preserved. Every event request was intercepted before transmission, so no test events were recorded in production analytics. Server-side ingestion was not tested.
 
