@@ -319,6 +319,21 @@ for (const route of ['/', '/faq/'])
     assert.ok(answer.includes('edit or delete either file without changing the other') && answer.includes('same APFS volume'), `${route} must preserve file independence and the same-volume requirement`);
     assert.ok(answer.includes('href="https://developer.apple.com/documentation/foundation/about-apple-file-system"'), `${route} must link the APFS explanation to Apple documentation`);
 }
+const quitAppAnswer = documents.get('/faq/').match(/<details\b[^>]*id="quit-app"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(quitAppAnswer?.includes('not to read them') && quitAppAnswer.includes('without a proprietary DiskPress format or reader') && quitAppAnswer.includes('Another Mac'), 'The FAQ must explain that optimized files remain readable without DiskPress');
+const hyperspaceAnswer = documents.get('/faq/').match(/<details\b[^>]*id="hyperspace-comparison"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(hyperspaceAnswer?.includes('APFS clones') && hyperspaceAnswer.includes('Shortcuts automation') && hyperspaceAnswer.includes('recurring folder monitoring'), 'The FAQ must explain the combined DiskPress and Hyperspace distinction');
+const cloudAnswer = documents.get('/faq/').match(/<details\b[^>]*id="cloud-files"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(cloudAnswer?.includes('downloaded local copy') && cloudAnswer.includes('cloud-only placeholders') && cloudAnswer.includes('never downloads'), 'The FAQ must distinguish downloaded cloud files from placeholders');
+assert.ok(cloudAnswer.includes('may treat that replacement as a change') && cloudAnswer.includes('do not assume either outcome'), 'The FAQ must keep cloud re-upload behavior conditional');
+const requirementsAnswer = documents.get('/faq/').match(/<details\b[^>]*id="requirements"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(requirementsAnswer?.includes('NAS mounts') && requirementsAnswer.includes('read-only volumes are not optimization targets'), 'The FAQ must distinguish supported local storage from NAS and read-only targets');
+const backupAnswer = documents.get('/faq/').match(/<details\b[^>]*id="backup-restore"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(backupAnswer?.includes('without DiskPress') && backupAnswer.includes('may not survive copying or backup') && backupAnswer.includes('more space'), 'The FAQ must explain backup restoration without overstating storage savings');
+const linkedAppAnswer = documents.get('/faq/').match(/<details\b[^>]*id="linked-app"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(linkedAppAnswer?.includes('Linked App option') && linkedAppAnswer.includes('while the selected app is running') && linkedAppAnswer.includes('CLI operations'), 'The FAQ must document Linked App behavior across operation modes');
+const aiDevelopmentAnswer = documents.get('/faq/').match(/<details\b[^>]*id="ai-development"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(aiDevelopmentAnswer?.includes('translations, website content, artwork concepts') && aiDevelopmentAnswer.includes('review and test') && aiDevelopmentAnswer.includes('How to Use AI Without Losing Control'), 'The FAQ must explain the developer\'s AI-assisted workflow');
 const originalData = 2 * 100;
 const compressedData = originalData * (1 - 30 / 100);
 const sharedData = compressedData / 2;
