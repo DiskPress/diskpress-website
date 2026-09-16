@@ -243,11 +243,11 @@ for (const [route, html] of documents)
 
 const screenshotSpecs = [
     [ 'overview', 1622, 1472, [ 480, 768, 1024, 1440, 1622 ], 'eager' ],
-    [ 'one-time-review', 1280, 1224, [ 480, 768, 1024, 1280 ], 'lazy' ],
-    [ 'one-time-results', 1280, 1278, [ 480, 768, 1024, 1280 ], 'lazy' ],
+    [ 'one-time-review', 1280, 1188, [ 480, 768, 1024, 1280 ], 'lazy' ],
+    [ 'one-time-results', 1280, 1242, [ 480, 768, 1024, 1280 ], 'lazy' ],
     [ 'locations', 1622, 1200, [ 480, 768, 1024, 1440, 1622 ], 'lazy' ],
     [ 'exclusions', 1622, 1200, [ 480, 768, 1024, 1440, 1622 ], 'lazy' ],
-    [ 'menu-bar', 720, 1012, [ 360, 540, 720 ], 'lazy' ],
+    [ 'menu-bar', 720, 1178, [ 360, 540, 720 ], 'lazy' ],
 ];
 const homepage = documents.get('/');
 const changelog = documents.get('/changelog/');
