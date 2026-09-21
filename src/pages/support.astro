@@ -6,6 +6,7 @@ const sections = [
   { id: 'github', label: 'GitHub issues' },
   { id: 'email', label: 'Email support' },
   { id: 'what-to-include', label: 'What to include' },
+  { id: 'billing', label: 'Purchases and subscriptions' },
 ];
 const emailURL = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('DiskPress support')}`;
 ---
@@ -28,7 +29,7 @@ const emailURL = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('DiskPres
     <h2>What to include</h2>
     <p>A few details make it easier to understand and reproduce the problem.</p>
     <ul>
-      <li>Your DiskPress version and macOS version.</li>
+      <li>Your DiskPress version and macOS version, and whether you installed DiskPress from the Mac App Store or Setapp.</li>
       <li>What you were trying to do, what you expected, and what happened instead.</li>
       <li>Whether you used one-time optimization, background monitoring, or the CLI, along with any error or warning text.</li>
       <li>Steps to reproduce the problem and a redacted screenshot, if helpful.</li>
@@ -38,5 +39,13 @@ const emailURL = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('DiskPres
       <p>If DiskPress reports unfinished recovery, keep its recovery files and records intact while asking for help.</p>
     </div>
     <p>For answers about supported files, savings, and everyday use, check the <a href="/faq/">FAQ</a>. The <a href="/privacy-policy/#support">privacy policy</a> explains how support information is handled.</p>
+  </section>
+  <section id="billing">
+    <h2>Purchases and subscriptions</h2>
+    <p>Product support through GitHub or email is available for both versions. For payment, subscription, or refund questions, use the service you obtained DiskPress from.</p>
+    <ul>
+      <li>For the Mac App Store version, follow the <a href="/terms-of-service/#purchases">Mac App Store purchase and refund guidance</a>.</li>
+      <li>For the Setapp version, follow the <a href="/terms-of-service/#setapp">Setapp subscription, cancellation, and refund guidance</a>. Setapp also handles its account and activation services.</li>
+    </ul>
   </section>
 </DocumentLayout>

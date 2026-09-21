@@ -227,6 +227,10 @@ else
     assert.ok(!integrityPage.includes('to the Trash'), 'Recovery guidance must not ask users to remove their app before a replacement is available');
 }
 assert.ok(integrityPage.includes('Do not delete your personal files, DiskPress settings, or recovery records'), 'Recovery guidance must preserve user data and unfinished recovery material');
+const setappRecovery = integrityPage.match(/<h3>Setapp version<\/h3>([\s\S]*?)<\/ol>/)?.[1];
+assert.ok(setappRecovery?.includes('Choose "Remove Application"') && setappRecovery.includes('Do not choose "Uninstall Completely"'), 'Setapp recovery must preserve app data instead of recommending complete removal');
+assert.ok(setappRecovery.includes('Keep Setapp itself installed') && setappRecovery.includes('DiskPress removal dialog'), 'Recovery must target DiskPress only, never the Setapp desktop application');
+assert.ok(setappRecovery.includes('Install DiskPress again through Setapp') && !setappRecovery.includes('apps.apple.com'), 'Setapp recovery must reinstall through the original provider');
 assert.ok(integrityPage.includes('Do not bypass the warning or disable macOS security protections.'), 'The help page must not recommend bypassing integrity protections');
 const integritySupport = integrityPage.match(/<section id="contact-support">[\s\S]*?<\/section>/)?.[0];
 assert.ok(integritySupport?.includes('href="/support/">Contact support</a>') && integritySupport.includes('whether the warning returned after reinstalling'), 'The help page must lead to both support options without losing its reporting guidance');

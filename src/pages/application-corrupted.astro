@@ -4,31 +4,41 @@ import DownloadLink from '../components/DownloadLink.astro';
 import { APP_STORE_AVAILABLE } from '../consts';
 
 const sections = [
-  { id: 'restore-app', label: APP_STORE_AVAILABLE ? 'Restore a fresh copy' : 'Get help with your copy' },
+  { id: 'restore-app', label: 'Restore a fresh copy' },
   { id: 'possible-causes', label: 'Why this can happen' },
   { id: 'contact-support', label: 'Still seeing the warning?' },
 ];
 ---
 <DocumentLayout title="Application integrity warning" eyebrow="DiskPress support" heading="Application integrity warning" description="If DiskPress showed an integrity warning, its installed app files may be damaged, incomplete, or modified. Stop using that copy and follow the guidance below." sections={sections} noindex>
   <section id="restore-app">
-    <h2>{APP_STORE_AVAILABLE ? 'Restore a fresh copy' : 'Get help with your copy'}</h2>
-    <ol>
-      <li>Quit DiskPress completely. If an optimization is running, cancel it and allow the app to finish stopping. Close any DiskPress command-line session too.</li>
-      {APP_STORE_AVAILABLE ? <>
-        <li>Move only the installed DiskPress.app application to the Trash.</li>
-        <li>Download DiskPress again from the Mac App Store using the link below, then open the newly installed copy.</li>
-      </> : <li><a href="/support/">Contact support</a> before removing or replacing your copy. DiskPress is awaiting App Store approval, so a public replacement download is not yet available.</li>}
-    </ol>
-    {APP_STORE_AVAILABLE && <p><DownloadLink /></p>}
+    <h2>Restore a fresh copy</h2>
+    <p>Quit DiskPress completely. If an optimization is running, cancel it and allow the app to finish stopping. Close any DiskPress command-line session too.</p>
     <div class="notice">
       <p><strong>Keep your files and recovery records.</strong> Do not delete your personal files, DiskPress settings, or recovery records as part of reinstalling the app. If DiskPress reports unfinished recovery, preserve the files it identifies and <a href="/support/">contact support</a>.</p>
     </div>
+    <p>Reinstall through the same service you used to obtain DiskPress. The Mac App Store and Setapp versions have separate licenses.</p>
+    <h3>Mac App Store version</h3>
+    {APP_STORE_AVAILABLE ? <>
+      <ol>
+        <li>Move only the installed DiskPress.app application to the Trash.</li>
+        <li>Download DiskPress again from the Mac App Store using the link below, then open the newly installed copy.</li>
+      </ol>
+      <p><DownloadLink /></p>
+    </> : <p><a href="/support/">Contact support</a> before removing or replacing your copy. DiskPress is awaiting App Store approval, so a public replacement download is not yet available from the Mac App Store.</p>}
+    <h3>Setapp version</h3>
+    <p>Keep Setapp itself installed. The steps below remove only the DiskPress application.</p>
+    <ol>
+      <li>Open Setapp, select DiskPress in My Apps, and choose Uninstall from the menu beside DiskPress's Open button.</li>
+      <li>Choose "Remove Application" in the DiskPress removal dialog to keep its app data. Do not choose "Uninstall Completely", which removes app data as well.</li>
+      <li>Install DiskPress again through Setapp, then open the newly installed copy.</li>
+    </ol>
+    <p>Setapp's <a href="https://support.setapp.com/hc/en-us/articles/213812525-Uninstall-macOS-app">removal guide</a> explains the difference between the removal options. Its <a href="https://support.setapp.com/hc/en-us/articles/6904815588636-Install-macOS-app">installation guide</a> explains how to get a fresh copy. If you cannot reinstall or activate this version, contact <a href="https://support.setapp.com/">Setapp support</a>.</p>
     <p>If the warning returns with a fresh copy, stop using that copy and <a href="/support/">contact support</a>. Do not bypass the warning or disable macOS security protections.</p>
   </section>
   <section id="possible-causes">
     <h2>Why this can happen</h2>
     <p>An integrity warning can follow an incomplete download or update, damaged application files, or changes made by other software. Cleanup or app-slimming tools may alter the app bundle by removing resources, languages, or architectures.</p>
-    <p>If another tool changed DiskPress.app, exclude it from future modifications before reinstalling. The warning alone does not identify the cause or prove that malware is present.</p>
+    <p>If another tool changed your installed DiskPress application, exclude it from future modifications before reinstalling. The warning alone does not identify the cause or prove that malware is present.</p>
     <p>This warning concerns the installed DiskPress application. It does not, by itself, mean your personal files are damaged. DiskPress is designed to optimize ordinary user files and excludes application bundles and executables.</p>
   </section>
   <section id="contact-support">
