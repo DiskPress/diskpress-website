@@ -188,7 +188,7 @@ for (const route of ['/', '/faq/'])
 {
     const answer = documents.get(route).match(/<details\b[^>]*id="offline"[^>]*>[\s\S]*?<\/details>/)?.[0];
     assert.ok(answer?.includes('does not upload your files, filenames, or optimization results'), `${route} must explain that user data stays local`);
-    assert.ok(answer.includes('File optimization works offline') && answer.includes('Normal optimization activity is not reported'), `${route} must distinguish local optimization from diagnostic visits`);
+    assert.ok(answer.includes('File optimization works offline') && answer.includes('href="/privacy-policy/#mac-app-store"') && answer.includes('href="/privacy-policy/#setapp"'), `${route} must distinguish local optimization from each version's service reporting`);
     assert.ok(answer.includes('application integrity check fails') && answer.includes('automatically opens a diagnostic webpage with a numeric check identifier'), `${route} must disclose automatic integrity-diagnostic visits`);
     assert.ok(answer.includes('cookie-free Plausible analytics') && answer.includes('count these visits by failure code'), `${route} must explain website analytics for diagnostic visits`);
     assert.ok(answer.includes('href="/privacy-policy/#application"'), `${route} must link to the detailed application privacy explanation`);
