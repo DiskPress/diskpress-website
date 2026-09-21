@@ -1,11 +1,29 @@
 ---
 import DocumentLayout from '../layouts/DocumentLayout.astro';
+import { APP_STORE_URL } from '../consts';
 
 const sections = [
+  { id: 'v1-0-2', label: 'Version 1.0.2' },
   { id: 'v1-0-1', label: 'Version 1.0.1' },
 ];
 ---
 <DocumentLayout title="Changelog" eyebrow="DiskPress changelog" heading="What's new in DiskPress" description="Release notes for DiskPress, the native Mac utility for compressing and deduplicating the files you want to keep." sections={sections}>
+  <section id="v1-0-2" class="changelog-release">
+    <div class="changelog-release-heading"><p class="eyebrow">Latest release</p><h2>DiskPress v1.0.2</h2><p class="fine"><time datetime="2026-09-21">September 21, 2026</time></p><p>Faster repeat optimizations, more control, and smoother background operation.</p></div>
+    <ul class="changelog-list">
+      <li>Faster repeat optimizations with cached duplicate checks and compression results.</li>
+      <li>Added the option to skip deduplication during an optimization.</li>
+      <li>Saved locations can now wait until a linked app is closed before optimizing.</li>
+      <li>Automatic monitoring stays enabled across restarts and starts quietly at login.</li>
+      <li>DiskPress can stay in the menu bar for manual optimization with monitoring off.</li>
+      <li>Fixed conflicting monitoring statuses and menu actions.</li>
+      <li>Clearer progress reporting, including file counts and explanations between stages.</li>
+      <li>Fixed cases where progress became inaccessible or appeared stuck.</li>
+      <li>Savings rescans no longer compete with active optimization.</li>
+      <li>Added Ukrainian, Chinese, Spanish, and German localizations.</li>
+    </ul>
+    <p class="fine">Release notes from the <a href={APP_STORE_URL}>Mac App Store</a>.</p>
+  </section>
   <section id="v1-0-1" class="changelog-release">
     <div class="changelog-release-heading"><p class="eyebrow">Latest release</p><h2>DiskPress v1.0.1</h2><p>More compatibility, safer recovery, clearer measurements, and smoother everyday control.</p></div>
     <ul class="changelog-list">

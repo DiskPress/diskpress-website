@@ -124,6 +124,7 @@
   .document-content > section { display: grid; gap: 20px; min-width: 0; }
   .document-content > .changelog-release { gap: 28px; }
   .changelog-release-heading { display: grid; gap: 16px; }
+  .changelog-release ~ .changelog-release .changelog-release-heading > .eyebrow { display: none; }
   .changelog-release-heading > p:last-child { color: var(--muted); }
   .changelog-list { margin: 0; padding: 24px; display: grid; gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
   .changelog-list li { color: var(--muted); padding-left: 4px; }
