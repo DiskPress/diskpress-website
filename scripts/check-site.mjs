@@ -303,6 +303,40 @@ for (const [route, html] of documents)
 assert.ok(documents.get('/faq/').includes('both techniques together in one optimization workflow'), 'The FAQ must explain the combined optimization workflow');
 assert.ok(documents.get('/cli/').includes('combine file compression with file deduplication'), 'The CLI guide must explain the combined optimization workflow');
 assert.ok(documents.get('/cli/').includes('Deduplication must be enabled.'), 'The CLI guide must preserve its configuration requirement');
+const cliGuide = documents.get('/cli/');
+const cliSection = id => cliGuide.match(new RegExp(`<section id="${id}">([\\s\\S]*?)<\\/section>`))?.[1] || '';
+const cliQuickStart = cliSection('quick-start');
+assert.ok(cliQuickStart.includes('Mac App Store and Setapp editions keep separate settings and saved authorizations'), 'The CLI guide must use the permissions and executable from the same edition');
+assert.ok(cliQuickStart.includes('without recurring monitoring, automatic startup registration, or an initial saved-location savings scan') && cliQuickStart.includes('commands and that read-only refresh finish'), 'The CLI quick start must distinguish windowless startup from the refresh after optimization');
+const cliRuntime = cliSection('runtime');
+assert.ok(cliRuntime.includes('first duplicate check can take a long time') && cliRuntime.includes('cached fingerprints for unchanged files') && cliRuntime.includes('content and metadata verification'), 'The CLI guide must explain first-run cost, cached repeat checks, and verification');
+assert.ok(cliRuntime.includes('turn off "Deduplicate identical files" in Settings') && cliRuntime.includes('no per-command compression-only flag'), 'Compression-only CLI guidance must use the actual Settings control, not an invented flag');
+assert.ok(cliRuntime.includes('Recent File Protection does not delay CLI requests') && cliRuntime.includes('with or without <code>--gui</code>') && cliRuntime.includes('selected target is a saved location'), 'The CLI guide must explain the Recent File Protection exception in both presentation modes');
+assert.ok(cliRuntime.includes('Active-writer detection, file-change checks, and verification still apply'), 'Skipping the recent-file delay must not imply bypassing safety checks');
+assert.ok(cliRuntime.includes('Linked App') && cliRuntime.includes('files you name individually through the CLI') && cliRuntime.includes('<code>--ignore-exclusions</code> does not bypass it'), 'The CLI guide must preserve linked-app protection for explicit targets and overrides');
+for (const field of ['linkedApplication', 'bundleIdentifier', 'path', 'name'])
+    assert.ok(cliRuntime.includes(`<code>${field}</code>`), `The CLI guide must document linked-app field ${field}`);
+const cliOutput = cliSection('output');
+assert.ok(cliOutput.includes('NDJSON') && cliOutput.includes('CLI labels, help, and generated messages use English') && cliOutput.includes('Saved records and shared diagnostics retain their original text'), 'Automation must not assume one JSON document or match localized messages');
+assert.ok(cliOutput.includes('partial success or cancellation') && cliOutput.includes('top-level <code>reasons</code> are recent human-readable'), 'The CLI guide must distinguish result events and optimization summaries from structured scan reasons');
+assert.ok(cliOutput.includes('do not add those two file counts') && cliOutput.includes('Reasons can overlap'), 'The CLI guide must not double-count optimization outcomes or scan reasons');
+for (const field of ['alreadyCompressedFiles', 'insufficientSavingsFiles', 'noBenefitFiles'])
+    assert.ok(cliOutput.includes(`<code>${field}</code>`), `The CLI guide must document outcome counter ${field}`);
+const cliProgress = cliSection('progress');
+assert.ok(cliProgress.includes('class="cli-progress-table"') && cliProgress.includes('aria-label="CLI progress fields" tabindex="0"'), 'The progress reference must keep its dedicated table inside a keyboard-scrollable region');
+assert.match(cliGuide, /\.cli-progress-table\{min-width:600px\}/, 'Long progress field names must remain readable on small screens');
+for (const field of ['phaseProcessedFiles', 'phaseTotalFiles', 'processedFiles', 'totalFiles', 'currentPath', 'currentFile', 'grouping_duplicates'])
+    assert.ok(cliProgress.includes(field), `The CLI guide must document progress field or stage ${field}`);
+assert.ok(cliProgress.includes('total is unknown') && cliProgress.includes('counts can restart') && cliProgress.includes('absent or empty value clears the previous item'), 'CLI progress must handle indeterminate stages, counter resets, and cleared paths');
+const cliMeasurements = cliSection('measurements');
+for (const field of ['measurementAvailable', 'measurementStale', 'measurementError', 'measuredAt', 'savings.complete', 'unmeasuredLocationCount', 'staleLocationCount', 'oldestMeasurementAt', 'savings.refreshing', 'savings.refreshError', 'monitoring.serviceRunning', 'monitoring.liveStatusAvailable'])
+    assert.ok(cliMeasurements.includes(`<code>${field}</code>`), `The CLI guide must document measurement field ${field}`);
+assert.ok(cliMeasurements.includes('last successful values instead of replacing them with zero') && cliMeasurements.includes('before this read-only refresh finishes'), 'CLI measurement guidance must preserve stale values and explain the asynchronous refresh');
+const cliCancellation = cliSection('exit-codes');
+assert.ok(cliCancellation.includes('breaking its output pipe also cancels work') && cliCancellation.includes('process exit code remains authoritative'), 'The CLI guide must explain broken output pipes and safe completion');
+assert.ok(cliCancellation.includes('Exit 75 does not prove that no files changed') && cliCancellation.includes('not replayed after a host crash'), 'The CLI guide must prevent blind retries after an uncertain result');
+const cliFaq = documents.get('/faq/').match(/<details\b[^>]*id="cli-agents"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(cliFaq?.includes('do not apply the Recent File Protection delay') && cliFaq.includes('host stays open until its commands and the refresh are complete'), 'The CLI FAQ must agree with the detailed delay and host-lifetime guidance');
 assert.match(homepage, /<h3>File compression<\/h3>/, 'The homepage must name the file compression feature explicitly');
 assert.match(homepage, /<h3>File deduplication<\/h3>/, 'The homepage must name the file deduplication feature explicitly');
 const deduplicationFeature = [...homepage.matchAll(/<article\b[^>]*class="native-feature"[^>]*>[\s\S]*?<\/article>/g) ].map(match => match[0]).find(article => article.includes('<h3>File deduplication</h3>'));
