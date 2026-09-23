@@ -3,11 +3,24 @@ import DocumentLayout from '../layouts/DocumentLayout.astro';
 import { APP_STORE_URL } from '../consts';
 
 const sections = [
+  { id: 'v1-0-3', label: 'Version 1.0.3' },
   { id: 'v1-0-2', label: 'Version 1.0.2' },
   { id: 'v1-0-1', label: 'Version 1.0.1' },
 ];
 ---
 <DocumentLayout title="Changelog" eyebrow="DiskPress changelog" heading="What's new in DiskPress" description="Release notes for DiskPress, the native Mac utility for compressing and deduplicating the files you want to keep." sections={sections}>
+  <section id="v1-0-3" class="changelog-release">
+    <div class="changelog-release-heading"><p class="eyebrow">Latest release</p><h2>DiskPress v1.0.3</h2><p class="fine"><time datetime="2026-09-23">September 23, 2026</time></p><p>Lower memory use, faster deduplication, and clearer progress.</p></div>
+    <ul class="changelog-list">
+      <li>Optimizing large folders now uses less memory.</li>
+      <li>Duplicate checks run faster by carrying scan findings through the same optimization.</li>
+      <li>Duplicate discovery now shows live file counts and clearer progress.</li>
+      <li>Cancelling deduplication is smoother and keeps work that has already finished.</li>
+      <li>Corrected savings calculations for overlapping saved locations, such as a folder and one of its subfolders.</li>
+      <li>More reliable processing when a file is modified or removed during an optimization.</li>
+    </ul>
+    <p class="fine">Based on the <a href={APP_STORE_URL}>Mac App Store</a> release notes.</p>
+  </section>
   <section id="v1-0-2" class="changelog-release">
     <div class="changelog-release-heading"><p class="eyebrow">Latest release</p><h2>DiskPress v1.0.2</h2><p class="fine"><time datetime="2026-09-21">September 21, 2026</time></p><p>Faster repeat optimizations, more control, and smoother background operation.</p></div>
     <ul class="changelog-list">

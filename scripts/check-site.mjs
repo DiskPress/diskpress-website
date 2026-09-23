@@ -255,6 +255,16 @@ const screenshotSpecs = [
 ];
 const homepage = documents.get('/');
 const changelog = documents.get('/changelog/');
+const currentRelease = changelog?.match(/<section\b[^>]*id="v1-0-3"[^>]*>[\s\S]*?<\/section>/)?.[0];
+assert.ok(currentRelease?.includes('DiskPress v1.0.3'), 'The changelog must include the v1.0.3 release');
+assert.ok(currentRelease.includes('<time datetime="2026-09-23">September 23, 2026</time>'), 'The v1.0.3 entry must use the App Store release date');
+assert.equal((currentRelease.match(/<li>/g) || []).length, 6, 'The v1.0.3 entry must cover all six App Store updates');
+for (const phrase of ['large folders now uses less memory', 'carrying scan findings through the same optimization', 'live file counts and clearer progress', 'keeps work that has already finished', 'overlapping saved locations', 'modified or removed during an optimization'])
+    assert.ok(currentRelease.includes(phrase), `The v1.0.3 entry must include the update about ${phrase}`);
+assert.ok(decode(currentRelease).includes(`href="${appStore}"`), 'The v1.0.3 entry must link to the App Store source');
+assert.ok(changelog.includes('href="#v1-0-3">Version 1.0.3</a>'), 'The page navigation must link to v1.0.3');
+assert.ok(changelog.indexOf('id="v1-0-3"') < changelog.indexOf('id="v1-0-2"') && changelog.indexOf('id="v1-0-2"') < changelog.indexOf('id="v1-0-1"'), 'Changelog entries must stay in reverse release order');
+assert.ok(changelog.includes('DiskPress v1.0.2') && changelog.includes('Faster repeat optimizations with cached duplicate checks and compression results.'), 'The changelog must preserve the v1.0.2 release');
 assert.ok(changelog?.includes('DiskPress v1.0.1') && changelog.includes('Added support for macOS 27 Golden Gate.'), 'The changelog must include the v1.0.1 release');
 for (const phrase of ['Linked App option', 'Show Progress', 'File metadata cannot be preserved', 'automatic recovery', 'tiny files', 'Temporary scan failures now retry automatically', 'CLI statistics', 'Storage Saver Duo', 'Locations table sizing'])
     assert.ok(changelog.includes(phrase), `The changelog must preserve the v1.0.1 note about ${phrase}`);
