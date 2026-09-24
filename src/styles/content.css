@@ -76,9 +76,6 @@
   .screenshot-figure p { color: var(--muted); font-size: .9375rem; }
   .screenshot-figure img { width: 100%; height: auto; }
   .screenshot-disclaimer { margin-top: var(--screenshot-caption-gap); color: var(--muted); font-size: .875rem; text-align: center; }
-  @supports (grid-template-rows: subgrid) {
-    .screenshot-figure { grid-row: span 2; grid-template-rows: subgrid; }
-  }
   .companion-section { padding-block: 24px; }
   .companion-panel { padding: 40px; display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 40px; background: var(--accent-bg); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius: 20px; }
   .companion-panel > div { display: grid; gap: 20px; }

@@ -3,12 +3,33 @@ import DocumentLayout from '../layouts/DocumentLayout.astro';
 import { APP_STORE_URL } from '../consts';
 
 const sections = [
+  { id: 'v1-0-4', label: 'Version 1.0.4' },
   { id: 'v1-0-3', label: 'Version 1.0.3' },
   { id: 'v1-0-2', label: 'Version 1.0.2' },
   { id: 'v1-0-1', label: 'Version 1.0.1' },
 ];
 ---
 <DocumentLayout title="Changelog" eyebrow="DiskPress changelog" heading="What's new in DiskPress" description="Release notes for DiskPress, the native Mac utility for compressing and deduplicating the files you want to keep." sections={sections}>
+  <section id="v1-0-4" class="changelog-release">
+    <div class="changelog-release-heading"><p class="eyebrow">Latest release</p><h2>DiskPress v1.0.4</h2><p class="fine"><time datetime="2026-09-24">September 24, 2026</time></p><p>Faster compression, smarter CPU use, and smoother handling of active files.</p></div>
+    <ul class="changelog-list">
+      <li>Lower memory use for large-folder optimizations.</li>
+      <li>Faster deduplication by reusing the results of the current scan.</li>
+      <li>Live file counts make duplicate-discovery progress easier to follow.</li>
+      <li>Cancelling deduplication preserves work already completed.</li>
+      <li>Corrected savings for overlapping saved folders, including parent and child folders.</li>
+      <li>More reliable handling when files change or disappear mid-optimization.</li>
+      <li>Quicker compression when processing several files in one folder.</li>
+      <li>Fastest mode adapts to the Mac's available performance cores.</li>
+      <li>Low CPU mode limits sustained processor load on large files.</li>
+      <li>Database files and their journals are now excluded by default.</li>
+      <li>Edits from other apps are preserved with fewer unnecessary recovery prompts.</li>
+      <li>Unreadable or read-only files are skipped without needless attention alerts.</li>
+      <li>Corrected savings accounting when access to saved folders is refreshed mid-optimization.</li>
+      <li>File group editing is unavailable when every group is already excluded.</li>
+    </ul>
+    <p class="fine">Based on the <a href={APP_STORE_URL}>Mac App Store</a> release notes.</p>
+  </section>
   <section id="v1-0-3" class="changelog-release">
     <div class="changelog-release-heading"><p class="eyebrow">Latest release</p><h2>DiskPress v1.0.3</h2><p class="fine"><time datetime="2026-09-23">September 23, 2026</time></p><p>Lower memory use, faster deduplication, and clearer progress.</p></div>
     <ul class="changelog-list">

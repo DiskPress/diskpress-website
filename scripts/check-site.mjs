@@ -110,6 +110,7 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
                     assert.ok(padding.split(/\s+/).every(value => /^\d+px$/.test(value) && Number.parseInt(value) >= 20), `${selector} must keep its caption gap within the outer inset`);
             }
         }
+        assert.ok(!rules.some(([, selectors, body ]) => selectors.split(',').some(value => value.trim() === '.screenshot-figure') && /grid-template-rows:subgrid/.test(body)), 'Screenshot cards must retain their own content height when image proportions differ');
         assert.match(css, /\.screenshot-disclaimer\{[^}]*margin-top:var\(--screenshot-caption-gap\)/, 'Screenshot group descriptions must retain the same separation');
     }
     assert.ok(!/@font-face|@import|<link\b[^>]*rel="stylesheet"/.test(css + html), `${route} must not depend on a late stylesheet or font download`);
@@ -246,22 +247,31 @@ for (const [route, html] of documents)
 }
 
 const screenshotSpecs = [
-    [ 'overview', 1622, 1472, [ 480, 768, 1024, 1440, 1622 ], 'eager' ],
+    [ 'overview', 1622, 1490, [ 480, 768, 1024, 1440, 1622 ], 'eager' ],
     [ 'one-time-review', 1280, 1188, [ 480, 768, 1024, 1280 ], 'lazy' ],
-    [ 'one-time-results', 1280, 1242, [ 480, 768, 1024, 1280 ], 'lazy' ],
-    [ 'locations', 1622, 1200, [ 480, 768, 1024, 1440, 1622 ], 'lazy' ],
+    [ 'one-time-results', 1280, 1218, [ 480, 768, 1024, 1280 ], 'lazy' ],
+    [ 'locations', 1880, 1200, [ 480, 768, 1024, 1440, 1880 ], 'lazy' ],
     [ 'exclusions', 1622, 1200, [ 480, 768, 1024, 1440, 1622 ], 'lazy' ],
     [ 'menu-bar', 720, 1178, [ 360, 540, 720 ], 'lazy' ],
 ];
 const homepage = documents.get('/');
 const changelog = documents.get('/changelog/');
-const currentRelease = changelog?.match(/<section\b[^>]*id="v1-0-3"[^>]*>[\s\S]*?<\/section>/)?.[0];
-assert.ok(currentRelease?.includes('DiskPress v1.0.3'), 'The changelog must include the v1.0.3 release');
-assert.ok(currentRelease.includes('<time datetime="2026-09-23">September 23, 2026</time>'), 'The v1.0.3 entry must use the App Store release date');
-assert.equal((currentRelease.match(/<li>/g) || []).length, 6, 'The v1.0.3 entry must cover all six App Store updates');
+const currentRelease = changelog?.match(/<section\b[^>]*id="v1-0-4"[^>]*>[\s\S]*?<\/section>/)?.[0];
+assert.ok(currentRelease?.includes('DiskPress v1.0.4'), 'The changelog must include the v1.0.4 release');
+assert.ok(currentRelease.includes('<time datetime="2026-09-24">September 24, 2026</time>'), 'The v1.0.4 entry must use the App Store release date');
+assert.equal((currentRelease.match(/<li>/g) || []).length, 14, 'The v1.0.4 entry must cover all fourteen App Store updates');
+for (const phrase of ['Lower memory use', 'reusing the results of the current scan', 'Live file counts', 'preserves work already completed', 'parent and child folders', 'files change or disappear', 'several files in one folder', 'performance cores', 'Low CPU mode', 'Database files and their journals', 'Edits from other apps are preserved', 'Unreadable or read-only files', 'access to saved folders is refreshed', 'every group is already excluded'])
+    assert.ok(currentRelease.includes(phrase), `The v1.0.4 entry must include the update about ${phrase}`);
+assert.ok(decode(currentRelease).includes(`href="${appStore}"`), 'The v1.0.4 entry must link to the App Store source');
+assert.ok(changelog.includes('href="#v1-0-4">Version 1.0.4</a>'), 'The page navigation must link to v1.0.4');
+assert.ok(changelog.indexOf('id="v1-0-4"') < changelog.indexOf('id="v1-0-3"'), 'The newest changelog entry must come first');
+const release103 = changelog.match(/<section\b[^>]*id="v1-0-3"[^>]*>[\s\S]*?<\/section>/)?.[0];
+assert.ok(release103?.includes('DiskPress v1.0.3'), 'The changelog must include the v1.0.3 release');
+assert.ok(release103.includes('<time datetime="2026-09-23">September 23, 2026</time>'), 'The v1.0.3 entry must use the App Store release date');
+assert.equal((release103.match(/<li>/g) || []).length, 6, 'The v1.0.3 entry must cover all six App Store updates');
 for (const phrase of ['large folders now uses less memory', 'carrying scan findings through the same optimization', 'live file counts and clearer progress', 'keeps work that has already finished', 'overlapping saved locations', 'modified or removed during an optimization'])
-    assert.ok(currentRelease.includes(phrase), `The v1.0.3 entry must include the update about ${phrase}`);
-assert.ok(decode(currentRelease).includes(`href="${appStore}"`), 'The v1.0.3 entry must link to the App Store source');
+    assert.ok(release103.includes(phrase), `The v1.0.3 entry must include the update about ${phrase}`);
+assert.ok(decode(release103).includes(`href="${appStore}"`), 'The v1.0.3 entry must link to the App Store source');
 assert.ok(changelog.includes('href="#v1-0-3">Version 1.0.3</a>'), 'The page navigation must link to v1.0.3');
 assert.ok(changelog.indexOf('id="v1-0-3"') < changelog.indexOf('id="v1-0-2"') && changelog.indexOf('id="v1-0-2"') < changelog.indexOf('id="v1-0-1"'), 'Changelog entries must stay in reverse release order');
 assert.ok(changelog.includes('DiskPress v1.0.2') && changelog.includes('Faster repeat optimizations with cached duplicate checks and compression results.'), 'The changelog must preserve the v1.0.2 release');
