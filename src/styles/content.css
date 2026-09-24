@@ -145,6 +145,8 @@
   tbody tr:last-child td { border-bottom: 0; }
   td { color: var(--muted); }
   td:first-child { color: var(--text); }
+  .cli-command-table { min-width: 480px; }
+  .cli-command-table th:first-child, .cli-command-table td:first-child { width: 140px; white-space: nowrap; }
   .cli-progress-table { min-width: 600px; }
   .cli-progress-table th:first-child, .cli-progress-table td:first-child { width: 220px; }
   .cli-progress-table td:first-child code { overflow-wrap: normal; }
