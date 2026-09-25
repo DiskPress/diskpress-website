@@ -112,14 +112,28 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
         }
         const normalizeSelector = value => value.trim().replace(/\s*>\s*/g, '>');
         const panelRules = selector => rules.filter(([, selectors ]) => selectors.split(',').some(value => normalizeSelector(value) === normalizeSelector(selector))).map(([, , body ]) => body);
-        assert.ok(panelRules('.comparison-item').every(body => !body.includes('grid-template-rows:subgrid')), 'Comparison cards must retain their content height without stretched inner rows');
-        assert.ok(panelRules('.screenshot-grid').some(body => body.includes('align-items:stretch')), 'Paired screenshot cards must share their row height');
+        for (const [group, panel] of [
+            ['.comparison-grid', '.comparison-item'],
+            ['.native-grid', '.native-feature'],
+            ['.savings-stages', '.savings-stages > li'],
+            ['.control-grid', '.control-grid article'],
+            ['.screenshot-grid', '.screenshot-figure'],
+            ['.document-content > .support-options', '.support-option'],
+        ])
+        {
+            const groupRules = panelRules(group);
+            assert.ok(groupRules.some(body => body.includes('align-items:stretch')), `${group} must give side-by-side panels equal heights`);
+            assert.ok(groupRules.every(body => !/(?:^|;)align-items:(?!stretch(?:;|$))/.test(body)), `${group} must not override the shared equal-height rule at any breakpoint`);
+            assert.ok(groupRules.every(body => !/(?:^|;)(?:height|min-height|block-size|min-block-size|grid-auto-rows):/.test(body)), `${group} must not force unrelated stacked rows to share a height`);
+            assert.ok(panelRules(panel).every(body => !/(?:^|;)(?:min-|max-)?(?:height|block-size):/.test(body)), `${panel} must retain a natural content-driven height when stacked`);
+            assert.ok(panelRules(panel).every(body => !/(?:^|;)align-self:(?!(?:auto|stretch)(?:;|$))/.test(body)), `${panel} must not opt out of equal row heights`);
+        }
+        assert.ok(panelRules('.comparison-item').some(body => body.includes('grid-template-rows:auto auto 1fr auto')), 'Comparison result notes must keep their bottom inset when cards share a height');
+        assert.ok(panelRules('.savings-stages > li').some(body => body.includes('grid-template-rows:auto auto auto 1fr')), 'Savings tiles must keep labels, values, and bars content-sized above their descriptions');
+        assert.ok(panelRules('.support-option').some(body => body.includes('grid-template-rows:auto 1fr auto auto')), 'Support cards must retain their bottom inset and natural link heights');
         assert.ok(panelRules('.screenshot-figure').some(body => body.includes('grid-template-rows:1fr auto')), 'Screenshot cards must align image bottoms while accommodating different captions and image proportions');
-        assert.ok(panelRules('.screenshot-figure').every(body => !/(?:^|;)(?:min-|max-)?(?:height|block-size):/.test(body)), 'Screenshot cards must retain natural heights when stacked');
         assert.ok(panelRules('.screenshot-figure img').some(body => body.includes('width:100%') && body.includes('height:auto')), 'Equal-height screenshot cards must preserve each full image and its original proportions');
-        assert.ok(panelRules('.native-grid').some(body => body.includes('align-items:stretch')), 'The paired technique panels must share their row height');
         assert.ok(panelRules('.native-feature').some(body => body.includes('grid-template-rows:auto auto 1fr auto')), 'Technique panel notes must retain the bottom inset while the body adapts to the paired content');
-        assert.ok(panelRules('.native-feature').every(body => !/(?:^|;)(?:min-|max-)?(?:height|block-size):/.test(body)), 'Technique panels must size naturally when stacked, without fixed or minimum heights');
         for (const selector of ['.hero-visual', '.comparison-item', '.native-feature', '.savings-example', '.savings-stages > li', '.savings-example-result', '.menu-visual', '.code-block', '.safety-note', '.screenshot-figure', '.companion-panel', '.changelog-list', '.notice', '.help-note', '.support-option', '.appearance-menu', '.faq-list summary', 'th', 'td'])
         {
             const declarations = panelRules(selector);

@@ -1,13 +1,15 @@
 @layer components {
+  /* Sibling panels share the tallest content-driven height in each row, never across stacked rows. */
+  .comparison-grid, .native-grid, .savings-stages, .control-grid, .screenshot-grid, .document-content > .support-options { align-items: stretch; }
   .comparison-section, .workflow-section, .automation-section, .faq-section { background: var(--surface); border-block: 1px solid var(--line); }
-  .comparison-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 24px; }
-  .comparison-item { display: grid; gap: 20px; padding: 28px; border: 1px solid var(--line); border-radius: 16px; }
+  .comparison-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .comparison-item { display: grid; grid-template-rows: auto auto 1fr auto; gap: 20px; padding: 28px; border: 1px solid var(--line); border-radius: 16px; }
   .comparison-item.featured { border-color: var(--accent); background: var(--accent-bg); }
   .comparison-label { color: var(--muted); font-size: .875rem; }
   .comparison-item p { color: var(--muted); }
   .comparison-item .comparison-result { border-top: 1px solid var(--line); padding-top: 20px; font-size: .875rem; font-weight: 600; color: var(--text); }
   .comparison-item.featured .comparison-result { border-color: color-mix(in srgb, var(--accent) 25%, transparent); color: var(--accent); }
-  .native-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; gap: 32px; }
+  .native-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; }
   /* Match paired panels and bottom notes without fixed heights or enlarged grid gaps. */
   .native-feature { display: grid; grid-template-rows: auto auto 1fr auto; align-content: start; gap: 20px; padding: 32px; border-left: 2px solid var(--accent); background: var(--surface); }
   .feature-number { color: var(--accent); font-family: ui-monospace, monospace; font-size: .875rem; }
@@ -18,8 +20,8 @@
   .savings-example-heading { display: grid; gap: 12px; max-width: 54rem; }
   .savings-example-heading h3 { font-size: clamp(1.6rem, 3vw, 2.25rem); }
   .savings-example p:not(.eyebrow) { color: var(--muted); }
-  .savings-stages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 24px; margin: 0; padding: 0; list-style: none; }
-  .savings-stages > li { display: grid; gap: 12px; min-width: 0; padding: 24px; background: var(--soft); border: 1px solid var(--line); border-radius: 12px; }
+  .savings-stages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
+  .savings-stages > li { display: grid; grid-template-rows: auto auto auto 1fr; gap: 12px; min-width: 0; padding: 24px; background: var(--soft); border: 1px solid var(--line); border-radius: 12px; }
   .savings-stage-label { font-size: .9375rem; font-weight: 550; }
   .savings-value { font-size: clamp(1.75rem, 3vw, 2.25rem); line-height: 1.2; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.03em; }
   .savings-stages p { font-size: 1rem; }
@@ -61,12 +63,12 @@
   .command-list > div { display: grid; grid-template-columns: 100px 1fr; gap: 16px; align-items: baseline; }
   .command-list code { color: var(--accent); font-weight: 600; }
   .command-list span { color: var(--muted); font-size: .9375rem; }
-  .control-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; align-items: start; }
-  .control-grid article { display: grid; gap: 16px; border-top: 1px solid var(--line); padding-top: 24px; }
+  .control-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .control-grid article { display: grid; align-content: start; gap: 16px; border-top: 1px solid var(--line); padding-top: 24px; }
   .control-grid p { color: var(--muted); }
   .control-grid .text-link { font-size: .9375rem; }
   .safety-note { padding: 24px; margin-top: 32px; background: var(--soft); border-radius: 10px; font-size: .875rem; color: var(--muted); }
-  .screenshot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; gap: 24px; margin-top: 32px; }
+  .screenshot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 32px; }
   /* Equal paired cards keep each uncropped image anchored to the same bottom inset. */
   .screenshot-figure { display: grid; grid-template-rows: 1fr auto; align-content: start; gap: var(--screenshot-caption-gap); min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--soft); }
   .screenshot-figure figcaption { display: grid; align-content: start; gap: 12px; }
@@ -131,8 +133,8 @@
   .document-content ul:not(.changelog-list), .document-content ol { margin: 0; padding-left: 24px; display: grid; gap: 12px; }
   .document-content :not(pre) > code { background: var(--code-bg); border-radius: 4px; padding: 2px 5px; overflow-wrap: anywhere; color: var(--text); }
   .document-content .faq-answer { gap: 16px; }
-  .document-content > .support-options { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 24px; }
-  .support-option { display: grid; align-content: start; gap: 16px; min-width: 0; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+  .document-content > .support-options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .support-option { display: grid; grid-template-rows: auto 1fr auto auto; align-content: start; gap: 16px; min-width: 0; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
   .support-option .text-link { justify-self: start; min-width: 0; max-width: 100%; }
   .notice, .help-note { background: var(--accent-bg); border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); border-radius: 12px; padding: 24px; }
   .notice p + p { margin-top: 16px; }
