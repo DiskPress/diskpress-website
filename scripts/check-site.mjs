@@ -110,7 +110,25 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
                     assert.ok(padding.split(/\s+/).every(value => /^\d+px$/.test(value) && Number.parseInt(value) >= 20), `${selector} must keep its caption gap within the outer inset`);
             }
         }
-        assert.ok(!rules.some(([, selectors, body ]) => selectors.split(',').some(value => value.trim() === '.screenshot-figure') && /grid-template-rows:subgrid/.test(body)), 'Screenshot cards must retain their own content height when image proportions differ');
+        for (const selector of ['.screenshot-figure', '.comparison-item'])
+            assert.ok(!rules.some(([, selectors, body ]) => selectors.split(',').some(value => value.trim() === selector) && /grid-template-rows:subgrid/.test(body)), `${selector} must retain its content height without stretched inner rows`);
+        const normalizeSelector = value => value.trim().replace(/\s*>\s*/g, '>');
+        const panelRules = selector => rules.filter(([, selectors ]) => selectors.split(',').some(value => normalizeSelector(value) === normalizeSelector(selector))).map(([, , body ]) => body);
+        for (const selector of ['.hero-visual', '.comparison-item', '.native-feature', '.savings-example', '.savings-stages > li', '.savings-example-result', '.menu-visual', '.code-block', '.safety-note', '.screenshot-figure', '.companion-panel', '.changelog-list', '.notice', '.help-note', '.support-option', '.appearance-menu', '.faq-list summary', 'th', 'td'])
+        {
+            const declarations = panelRules(selector);
+            const paddings = declarations.map(body => body.match(/(?:^|;)padding:([^;]+)/)?.[1]).filter(Boolean);
+            assert.ok(paddings.length > 0, `${selector} must declare its inner inset`);
+            assert.ok(paddings.every(value => /^\d+px$/.test(value)), `${selector} must use one equal inset on all four sides at every breakpoint`);
+            assert.ok(declarations.every(body => !/(?:^|;)padding-(?:top|right|bottom|left|inline|block)/.test(body)), `${selector} must not override individual panel edges`);
+        }
+        const changelogItemRules = panelRules('.changelog-list li').join(';');
+        assert.ok(changelogItemRules.includes('margin-inline-start:1em') && changelogItemRules.includes('padding-inline-start:4px'), 'Changelog bullets need their own gutter inside the panel inset');
+        assert.ok(panelRules('.document-content ul:not(.changelog-list)').length > 0, 'Generic document lists must not override changelog panel spacing');
+        assert.ok(panelRules('.code-block').some(body => body.includes('padding:24px') && body.includes('gap:12px')), 'Code panels must own their equal outer inset and compact internal gap');
+        assert.ok(panelRules('pre').every(body => !/(?:^|;)padding:(?!0(?:;|$))/.test(body)), 'Code content must not add a second inset inside its padded panel');
+        assert.ok(panelRules('.faq-answer').some(body => body.includes('padding:0 24px 24px')), 'Expanded FAQ answers must align with the summary and retain the same bottom inset');
+        assert.ok(panelRules('.menu-visual').some(body => body.includes('max-width:454px') && body.includes('padding:32px')) && panelRules('.menu-visual').some(body => body.includes('max-width:438px') && body.includes('padding:24px')), 'Menu screenshot panels must fit the 390 pixel image plus their equal insets');
         assert.match(css, /\.screenshot-disclaimer\{[^}]*margin-top:var\(--screenshot-caption-gap\)/, 'Screenshot group descriptions must retain the same separation');
     }
     assert.ok(!/@font-face|@import|<link\b[^>]*rel="stylesheet"/.test(css + html), `${route} must not depend on a late stylesheet or font download`);
