@@ -7,8 +7,9 @@
   .comparison-item p { color: var(--muted); }
   .comparison-item .comparison-result { border-top: 1px solid var(--line); padding-top: 20px; font-size: .875rem; font-weight: 600; color: var(--text); }
   .comparison-item.featured .comparison-result { border-color: color-mix(in srgb, var(--accent) 25%, transparent); color: var(--accent); }
-  .native-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 32px; }
-  .native-feature { display: grid; align-content: start; gap: 20px; padding: 32px; border-left: 2px solid var(--accent); background: var(--surface); }
+  .native-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; gap: 32px; }
+  /* Match paired panels and bottom notes without fixed heights or enlarged grid gaps. */
+  .native-feature { display: grid; grid-template-rows: auto auto 1fr auto; align-content: start; gap: 20px; padding: 32px; border-left: 2px solid var(--accent); background: var(--surface); }
   .feature-number { color: var(--accent); font-family: ui-monospace, monospace; font-size: .875rem; }
   .native-feature h3 { font-size: 1.6rem; }
   .native-feature p { color: var(--muted); }

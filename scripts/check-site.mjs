@@ -114,6 +114,9 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
             assert.ok(!rules.some(([, selectors, body ]) => selectors.split(',').some(value => value.trim() === selector) && /grid-template-rows:subgrid/.test(body)), `${selector} must retain its content height without stretched inner rows`);
         const normalizeSelector = value => value.trim().replace(/\s*>\s*/g, '>');
         const panelRules = selector => rules.filter(([, selectors ]) => selectors.split(',').some(value => normalizeSelector(value) === normalizeSelector(selector))).map(([, , body ]) => body);
+        assert.ok(panelRules('.native-grid').some(body => body.includes('align-items:stretch')), 'The paired technique panels must share their row height');
+        assert.ok(panelRules('.native-feature').some(body => body.includes('grid-template-rows:auto auto 1fr auto')), 'Technique panel notes must retain the bottom inset while the body adapts to the paired content');
+        assert.ok(panelRules('.native-feature').every(body => !/(?:^|;)(?:min-|max-)?(?:height|block-size):/.test(body)), 'Technique panels must size naturally when stacked, without fixed or minimum heights');
         for (const selector of ['.hero-visual', '.comparison-item', '.native-feature', '.savings-example', '.savings-stages > li', '.savings-example-result', '.menu-visual', '.code-block', '.safety-note', '.screenshot-figure', '.companion-panel', '.changelog-list', '.notice', '.help-note', '.support-option', '.appearance-menu', '.faq-list summary', 'th', 'td'])
         {
             const declarations = panelRules(selector);
