@@ -294,15 +294,24 @@ const screenshotSpecs = [
 ];
 const homepage = documents.get('/');
 const changelog = documents.get('/changelog/');
-const currentRelease = changelog?.match(/<section\b[^>]*id="v1-0-4"[^>]*>[\s\S]*?<\/section>/)?.[0];
-assert.ok(currentRelease?.includes('DiskPress v1.0.4'), 'The changelog must include the v1.0.4 release');
-assert.ok(currentRelease.includes('<time datetime="2026-09-24">September 24, 2026</time>'), 'The v1.0.4 entry must use the App Store release date');
-assert.equal((currentRelease.match(/<li>/g) || []).length, 14, 'The v1.0.4 entry must cover all fourteen App Store updates');
+const currentRelease = changelog?.match(/<section\b[^>]*id="v1-0-5"[^>]*>[\s\S]*?<\/section>/)?.[0];
+assert.ok(currentRelease?.includes('DiskPress v1.0.5'), 'The changelog must include the v1.0.5 release');
+assert.ok(currentRelease.includes('<time datetime="2026-09-25">September 25, 2026</time>'), 'The v1.0.5 entry must use the App Store release date');
+assert.equal((currentRelease.match(/<li>/g) || []).length, 4, 'The v1.0.5 entry must cover all four App Store updates');
+for (const note of ['Faster compression, especially for folders containing many small files.', 'Faster scanning and deduplication.', 'Less time spent saving results and finishing an optimization.', 'More efficient parallel compression in Fastest mode.'])
+    assert.ok(currentRelease.includes(`<li>${note}</li>`), `The v1.0.5 entry must preserve the App Store note about ${note}`);
+assert.ok(decode(currentRelease).includes(`href="${appStore}"`), 'The v1.0.5 entry must link to the App Store source');
+assert.ok(changelog.includes('href="#v1-0-5">Version 1.0.5</a>'), 'The page navigation must link to v1.0.5');
+assert.ok(changelog.indexOf('id="v1-0-5"') < changelog.indexOf('id="v1-0-4"'), 'The newest changelog entry must come first');
+const release104 = changelog.match(/<section\b[^>]*id="v1-0-4"[^>]*>[\s\S]*?<\/section>/)?.[0];
+assert.ok(release104?.includes('DiskPress v1.0.4'), 'The changelog must preserve the v1.0.4 release');
+assert.ok(release104.includes('<time datetime="2026-09-24">September 24, 2026</time>'), 'The v1.0.4 entry must use the App Store release date');
+assert.equal((release104.match(/<li>/g) || []).length, 14, 'The v1.0.4 entry must cover all fourteen App Store updates');
 for (const phrase of ['Lower memory use', 'reusing the results of the current scan', 'Live file counts', 'preserves work already completed', 'parent and child folders', 'files change or disappear', 'several files in one folder', 'performance cores', 'Low CPU mode', 'Database files and their journals', 'Edits from other apps are preserved', 'Unreadable or read-only files', 'access to saved folders is refreshed', 'every group is already excluded'])
-    assert.ok(currentRelease.includes(phrase), `The v1.0.4 entry must include the update about ${phrase}`);
-assert.ok(decode(currentRelease).includes(`href="${appStore}"`), 'The v1.0.4 entry must link to the App Store source');
+    assert.ok(release104.includes(phrase), `The v1.0.4 entry must include the update about ${phrase}`);
+assert.ok(decode(release104).includes(`href="${appStore}"`), 'The v1.0.4 entry must link to the App Store source');
 assert.ok(changelog.includes('href="#v1-0-4">Version 1.0.4</a>'), 'The page navigation must link to v1.0.4');
-assert.ok(changelog.indexOf('id="v1-0-4"') < changelog.indexOf('id="v1-0-3"'), 'The newest changelog entry must come first');
+assert.ok(changelog.indexOf('id="v1-0-4"') < changelog.indexOf('id="v1-0-3"'), 'The v1.0.4 entry must stay ahead of v1.0.3');
 const release103 = changelog.match(/<section\b[^>]*id="v1-0-3"[^>]*>[\s\S]*?<\/section>/)?.[0];
 assert.ok(release103?.includes('DiskPress v1.0.3'), 'The changelog must include the v1.0.3 release');
 assert.ok(release103.includes('<time datetime="2026-09-23">September 23, 2026</time>'), 'The v1.0.3 entry must use the App Store release date');
