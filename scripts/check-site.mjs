@@ -110,10 +110,13 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
                     assert.ok(padding.split(/\s+/).every(value => /^\d+px$/.test(value) && Number.parseInt(value) >= 20), `${selector} must keep its caption gap within the outer inset`);
             }
         }
-        for (const selector of ['.screenshot-figure', '.comparison-item'])
-            assert.ok(!rules.some(([, selectors, body ]) => selectors.split(',').some(value => value.trim() === selector) && /grid-template-rows:subgrid/.test(body)), `${selector} must retain its content height without stretched inner rows`);
         const normalizeSelector = value => value.trim().replace(/\s*>\s*/g, '>');
         const panelRules = selector => rules.filter(([, selectors ]) => selectors.split(',').some(value => normalizeSelector(value) === normalizeSelector(selector))).map(([, , body ]) => body);
+        assert.ok(panelRules('.comparison-item').every(body => !body.includes('grid-template-rows:subgrid')), 'Comparison cards must retain their content height without stretched inner rows');
+        assert.ok(panelRules('.screenshot-grid').some(body => body.includes('align-items:stretch')), 'Paired screenshot cards must share their row height');
+        assert.ok(panelRules('.screenshot-figure').some(body => body.includes('grid-template-rows:1fr auto')), 'Screenshot cards must align image bottoms while accommodating different captions and image proportions');
+        assert.ok(panelRules('.screenshot-figure').every(body => !/(?:^|;)(?:min-|max-)?(?:height|block-size):/.test(body)), 'Screenshot cards must retain natural heights when stacked');
+        assert.ok(panelRules('.screenshot-figure img').some(body => body.includes('width:100%') && body.includes('height:auto')), 'Equal-height screenshot cards must preserve each full image and its original proportions');
         assert.ok(panelRules('.native-grid').some(body => body.includes('align-items:stretch')), 'The paired technique panels must share their row height');
         assert.ok(panelRules('.native-feature').some(body => body.includes('grid-template-rows:auto auto 1fr auto')), 'Technique panel notes must retain the bottom inset while the body adapts to the paired content');
         assert.ok(panelRules('.native-feature').every(body => !/(?:^|;)(?:min-|max-)?(?:height|block-size):/.test(body)), 'Technique panels must size naturally when stacked, without fixed or minimum heights');
