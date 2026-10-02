@@ -11,12 +11,14 @@ const noindexRoutes = new Set([...unlistedRoutes, '/404.html' ]);
 const documents = new Map();
 const decode = value => value.replaceAll('&amp;', '&').replaceAll('&#38;', '&');
 const appStore = 'https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=diskpress.app&mt=8';
+const setapp = 'https://setapp.com/apps/diskpress';
 const appBundle = 'https://apps.apple.com/app-bundle/apple-store/id6811364083?pt=127627850&ct=diskpress.app&mt=8';
 const siteConfig = await readFile(new URL('../src/consts.ts', import.meta.url), 'utf8');
 const availabilitySetting = siteConfig.match(/export const APP_STORE_AVAILABLE = (true|false);/);
 assert.ok(availabilitySetting, 'Availability must be an explicit shared build-time setting');
 const appStoreAvailable = availabilitySetting[1] === 'true';
 assert.equal(siteConfig.match(/export const APP_STORE_URL = '([^']+)';/)?.[1], appStore, 'Keep the supplied App Store URL intact for release');
+assert.equal(siteConfig.match(/export const SETAPP_URL = '([^']+)';/)?.[1], setapp, 'Keep the supplied Setapp URL intact');
 assert.equal(siteConfig.match(/export const STORAGE_SAVER_DUO_URL = '([^']+)';/)?.[1], appBundle, 'Keep the supplied bundle URL and its campaign parameters intact');
 const developerProfile = 'https://reverseeverything.com/ighor/?utm_source=diskpress.app';
 const developerBlog = 'https://reverseeverything.com/?utm_source=diskpress.app';
@@ -38,7 +40,12 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
     const mobileNavigation = html.match(/<nav\b[^>]*aria-label="Mobile navigation"[^>]*>[\s\S]*?<\/nav>/)?.[0];
     const productNavigation = html.match(/<nav\b[^>]*aria-label="Product links"[^>]*>[\s\S]*?<\/nav>/)?.[0];
     for (const navigation of [mobileNavigation, productNavigation])
+    {
         assert.ok(navigation?.includes('href="/faq/#download-price">Availability</a>'), `${route} must make release information easy to find`);
+        assert.ok(navigation.includes('href="/#download">Get DiskPress</a>'), `${route} must make both download choices accessible from mobile and footer navigation`);
+    }
+    const siteHeader = html.match(/<header\b[^>]*class="site-header"[^>]*>[\s\S]*?<\/header>/)?.[0];
+    assert.match(siteHeader || '', /<a class="download-link compact" href="\/#download">/, `${route} must let header visitors choose their store`);
     assert.ok(productNavigation?.includes('href="/changelog/">Changelog</a>') && mobileNavigation?.includes('href="/changelog/">Changelog</a>'), `${route} must make the changelog easy to find`);
     assert.match(helpNavigation || '', /<a href="\/support\/"[^>]*>Contact support<\/a>/, `${route} must route footer support through the dedicated page`);
     assert.match(mobileNavigation || '', /<a href="\/support\/"[^>]*>Support<\/a>/, `${route} must route mobile support through the dedicated page`);
@@ -175,12 +182,11 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
     }
     else
     {
-        const header = html.match(/<header\b[^>]*>[\s\S]*?<\/header>/)?.[0];
-        assert.match(header || '', /<span class="release-status compact">\s*Available soon/, `${route} must show the availability status in the header`);
         assert.ok(!/<(?:a|button)\b[^>]*class="[^"]*release-status/.test(html), `${route} must not make the pending-release status look interactive to assistive technology`);
-        assert.ok(!/Get DiskPress|Download on the Mac App Store|Download DiskPress again/.test(html), `${route} must not offer an unavailable download`);
-        assert.ok(css.includes('.release-status{') && css.includes('.header-actions>.release-status'), `${route} must include themed, responsive availability styling before paint`);
+        assert.ok(!/Download on the Mac App Store|Download DiskPress again/.test(html), `${route} must not offer an unavailable Mac App Store download`);
     }
+    assert.ok(css.includes('.download-options{') && css.includes('.download-link.secondary{'), `${route} must load store-choice styling before rendering`);
+    assert.ok(!html.includes('utm_source=chatgpt'), `${route} must not add unwanted campaign attribution`);
     assert.ok(!/[\u00a0\u200b-\u200f\u2028\u2029\u2060\ufeff\u2018\u2019\u201c\u201d]/.test(html), `${route} contains unsupported quote or whitespace characters`);
     const nameLinks = [...html.matchAll(/<a\b[^>]*>Ighor July<\/a>/g) ].map(match => match[0]);
     assert.ok(nameLinks.length >= 3, `${route} must link every footer mention of the developer`);
@@ -207,14 +213,10 @@ assert.match(documents.get('/faq/'), /id="ssd-wear"/, 'The FAQ must explain SSD 
 if (!appStoreAvailable)
 {
     const availabilityAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];
-    assert.ok(availabilityAnswer?.includes('awaiting App Store approval') && availabilityAnswer.includes('not yet available to download') && availabilityAnswer.includes('no confirmed release date'), 'The FAQ must explain pending approval without promising a date');
-    assert.ok(availabilityAnswer.includes('price, regional availability, and requirements once it is live'), 'The FAQ must not imply a current price listing');
+    assert.ok(availabilityAnswer?.includes('Mac App Store version is awaiting approval') && availabilityAnswer.includes('already get DiskPress through Setapp'), 'Mac App Store availability must not hide the released Setapp version');
     const home = documents.get('/');
     const hero = home.match(/<section\b[^>]*class="hero wrap"[^>]*>[\s\S]*?<\/section>/)?.[0];
-    assert.ok(hero?.includes('Available soon on the Mac App Store') && hero.includes('Awaiting App Store approval'), 'Availability must be prominent beside the hero');
-    assert.ok(home.includes('DiskPress will be available soon. Check back here for the release.'), 'The closing section must reflect pending availability');
-    assert.match(home, /<meta name="description" content="DiskPress is coming soon to the Mac App Store\./, 'Search and social metadata must not imply immediate availability');
-    assert.ok(documents.get('/cli/').includes('These instructions apply once the app is installed'), 'The CLI guide must explain that commands require the app');
+    assert.ok(hero?.includes('Available soon on the Mac App Store') && hero.includes(`href="${setapp}"`), 'The hero must retain the Setapp download when Mac App Store access is pending');
     assert.ok(documents.get('/terms-of-service/').includes('not yet available to download or purchase'), 'Purchase information must reflect pending availability');
 }
 for (const route of ['/', '/cli/'])
@@ -293,6 +295,25 @@ const screenshotSpecs = [
     [ 'menu-bar', 720, 1178, [ 360, 540, 720 ], 'lazy' ],
 ];
 const homepage = documents.get('/');
+const downloadGroups = [...homepage.matchAll(/<div\b[^>]*class="download-options"[^>]*>[\s\S]*?<\/div>/g)].map(match => match[0]);
+assert.equal(downloadGroups.length, 2, 'Both the hero and closing section must offer a store choice');
+assert.ok(homepage.includes('id="download"'), 'Global download navigation needs a stable homepage target');
+for (const group of downloadGroups)
+{
+    assert.ok(group.includes('role="group" aria-label="Download DiskPress"'), 'Download choices must form an accessible action group');
+    assert.equal(group.split(`href="${setapp}"`).length - 1, 1, 'Each download group must offer the exact Setapp listing once');
+    assert.ok(group.includes('aria-label="Get DiskPress on Setapp"'), 'The Setapp button must identify the app and store');
+    if (appStoreAvailable)
+        assert.ok(decode(group).includes(`href="${appStore}"`) && group.includes('aria-label="Download DiskPress on the Mac App Store"'), 'The Setapp option must not replace the Mac App Store download');
+}
+assert.ok(homepage.includes('Same features in both versions.') && homepage.includes('Setapp subscription'), 'The homepage must explain feature parity and the Setapp option');
+assert.ok(homepage.includes('No separate DiskPress account') && !homepage.includes('No account or file uploads'), 'Local file processing must not imply that the stores require no account');
+const downloadAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(downloadAnswer?.includes(`href="${setapp}"`) && downloadAnswer.includes('Same features in both versions.'), 'The existing pricing FAQ must link Setapp and explain feature parity');
+for (const feature of ['file compression', 'file deduplication', 'one-time optimization', 'automatic monitoring', 'menu bar controls', 'the CLI'])
+    assert.ok(downloadAnswer.includes(feature), `Both editions must include ${feature}`);
+assert.ok(downloadAnswer.includes('subscription, activation, and updates'), 'The FAQ must explain how Setapp access is provided');
+assert.ok(!/script installation|install a script|install the script|manual script/i.test(homepage + downloadAnswer + documents.get('/cli/')), 'Store comparisons must not claim a script-installation difference');
 const changelog = documents.get('/changelog/');
 const currentRelease = changelog?.match(/<section\b[^>]*id="v1-0-7"[^>]*>[\s\S]*?<\/section>/)?.[0];
 assert.ok(currentRelease?.includes('DiskPress v1.0.7'), 'The changelog must include the v1.0.7 release');
@@ -395,6 +416,7 @@ assert.match(cliGuide, /\.cli-command-table\{min-width:480px\}/, 'The command re
 const cliCommandColumn = cliGuide.match(/\.cli-command-table th:first-child,\.cli-command-table td:first-child\{([^}]+)\}/)?.[1] || '';
 assert.ok(cliCommandColumn.includes('width:140px') && cliCommandColumn.includes('white-space:nowrap'), 'Command names must not split across lines');
 const cliQuickStart = cliSection('quick-start');
+assert.ok(cliQuickStart.includes('Mac App Store and Setapp versions include the same CLI features') && cliQuickStart.includes('href="/#download"'), 'The CLI guide must include both download options without claiming feature differences');
 assert.ok(cliQuickStart.includes('Mac App Store and Setapp editions keep separate settings and saved authorizations'), 'The CLI guide must use the permissions and executable from the same edition');
 assert.ok(cliQuickStart.includes('without recurring monitoring, automatic startup registration, or an initial saved-location savings scan') && cliQuickStart.includes('commands and that read-only refresh finish'), 'The CLI quick start must distinguish windowless startup from the refresh after optimization');
 const cliRuntime = cliSection('runtime');
@@ -468,6 +490,7 @@ assert.ok(cloudAnswer?.includes('downloaded local copy') && cloudAnswer.includes
 assert.ok(cloudAnswer.includes('may treat that replacement as a change') && cloudAnswer.includes('do not assume either outcome'), 'The FAQ must keep cloud re-upload behavior conditional');
 const requirementsAnswer = documents.get('/faq/').match(/<details\b[^>]*id="requirements"[^>]*>[\s\S]*?<\/details>/)?.[0];
 assert.ok(requirementsAnswer?.includes('NAS mounts') && requirementsAnswer.includes('read-only volumes are not optimization targets'), 'The FAQ must distinguish supported local storage from NAS and read-only targets');
+assert.ok(requirementsAnswer.includes('Mac App Store version supports macOS 10.15') && requirementsAnswer.includes(`href="${setapp}"`) && requirementsAnswer.includes('current macOS requirements'), 'Requirements must not apply the Mac App Store minimum to Setapp access');
 const backupAnswer = documents.get('/faq/').match(/<details\b[^>]*id="backup-restore"[^>]*>[\s\S]*?<\/details>/)?.[0];
 assert.ok(backupAnswer?.includes('without DiskPress') && backupAnswer.includes('may not survive copying or backup') && backupAnswer.includes('more space'), 'The FAQ must explain backup restoration without overstating storage savings');
 const diskSpaceAnswer = documents.get('/faq/').match(/<details\b[^>]*id="disk-space-numbers"[^>]*>[\s\S]*?<\/details>/)?.[0];
@@ -530,6 +553,7 @@ assert.ok(homepage.includes('App screenshots use example data.'), 'Screenshot sa
 
 let internalLinks = 0;
 let appStoreLinks = 0;
+let setappLinks = 0;
 let appBundleLinks = 0;
 let assets = 0;
 for (const [route, html] of documents)
@@ -537,6 +561,11 @@ for (const [route, html] of documents)
     for (const match of html.matchAll(/\bhref="([^"]+)"/g))
     {
         const href = decode(match[1]);
+        if (href.startsWith('https://setapp.com/apps/'))
+        {
+            assert.equal(href, setapp, `${route} must use the supplied Setapp listing`);
+            setappLinks++;
+        }
         if (href.includes('apps.apple.com'))
         {
             assert.ok(href === appStore || href === appBundle, `${route} must preserve the supplied standalone or bundle URL`);
@@ -628,4 +657,5 @@ if (appStoreAvailable)
     assert.ok(appBundleLinks >= 2, 'The homepage and pricing FAQ must provide bundle links without replacing standalone downloads');
 else
     assert.equal(appBundleLinks, 0, 'Pending-release pages must not offer a bundle containing the unavailable app');
-console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} DiskPress download links, ${appBundleLinks} bundle links, ${developerLinks} developer profile links, ${assets} asset references, widescreen social previews, metadata, sitemap, analytics, and first-paint styling.`);
+assert.ok(setappLinks >= 4, 'The homepage and relevant FAQ answers must offer Setapp access');
+console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} Mac App Store links, ${setappLinks} Setapp links, ${appBundleLinks} bundle links, ${developerLinks} developer profile links, ${assets} asset references, widescreen social previews, metadata, sitemap, analytics, and first-paint styling.`);

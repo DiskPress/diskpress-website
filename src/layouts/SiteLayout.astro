@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 import '../styles/content.css';
-import DownloadLink from '../components/DownloadLink.astro';
 import AppearanceControl from '../components/AppearanceControl.astro';
 import { SITE_DESCRIPTION, DEVELOPER_URL, BLOG_URL, MORE_APPS_URL } from '../consts';
 interface Props { title?: string; description?: string; noindex?: boolean; }
@@ -189,10 +188,10 @@ const navigation = [
         </nav>
         <div class="header-actions">
           <AppearanceControl />
-          <DownloadLink compact />
+          <a class="download-link compact" href="/#download"><span>Get DiskPress</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></a>
           <details class="mobile-nav">
             <summary aria-label="Navigation menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
-            <nav aria-label="Mobile navigation">{navigation.map(({ label, href }) => <a href={href}>{label}</a>)}<a href="/faq/#download-price">Availability</a><a href="/support/" aria-current={Astro.url.pathname === '/support/' ? 'page' : undefined}>Support</a></nav>
+            <nav aria-label="Mobile navigation">{navigation.map(({ label, href }) => <a href={href}>{label}</a>)}<a href="/#download">Get DiskPress</a><a href="/faq/#download-price">Availability</a><a href="/support/" aria-current={Astro.url.pathname === '/support/' ? 'page' : undefined}>Support</a></nav>
           </details>
         </div>
       </div>
@@ -201,7 +200,7 @@ const navigation = [
     <footer class="site-footer">
       <div class="wrap footer-grid">
         <div class="footer-brand"><a href="/" class="brand"><img src="/favicon.svg" width="32" height="32" alt="" /><span>DiskPress</span></a><p>More room for what you keep.</p><p class="fine">A Mac app by <a href={DEVELOPER_URL}>Ighor July</a>.</p></div>
-        <nav aria-label="Product links"><h2>Explore</h2><a href="/#how-it-works">How it works</a><a href="/cli/">CLI guide</a><a href="/faq/">FAQ</a><a href="/changelog/">Changelog</a><a href="/faq/#download-price">Availability</a></nav>
+        <nav aria-label="Product links"><h2>Explore</h2><a href="/#how-it-works">How it works</a><a href="/cli/">CLI guide</a><a href="/faq/">FAQ</a><a href="/changelog/">Changelog</a><a href="/#download">Get DiskPress</a><a href="/faq/#download-price">Availability</a></nav>
         <nav aria-label="Help and legal"><h2>Help</h2><a href="/support/" aria-current={Astro.url.pathname === '/support/' ? 'page' : undefined}>Contact support</a><a href="/privacy-policy/">Privacy policy</a><a href="/terms-of-service/">Terms of service</a></nav>
         <nav aria-label="Developer links"><h2>Made by <a href={DEVELOPER_URL}>Ighor July</a></h2><a href={MORE_APPS_URL}>More Mac apps</a><a href={BLOG_URL}>Reverse Everything blog</a><span class="fine">Copyright {new Date().getFullYear()} <a href={DEVELOPER_URL}>Ighor July</a></span></nav>
       </div>

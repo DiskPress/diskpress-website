@@ -1,0 +1,11 @@
+---
+import DownloadLink from './DownloadLink.astro';
+import { SETAPP_URL } from '../consts';
+---
+<div class="download-options" role="group" aria-label="Download DiskPress">
+  <DownloadLink shortLabel />
+  <a class="download-link secondary" href={SETAPP_URL} aria-label="Get DiskPress on Setapp">
+    <span>Get on Setapp</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+  </a>
+</div>

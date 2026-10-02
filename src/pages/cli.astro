@@ -1,7 +1,6 @@
 ---
 import DocumentLayout from '../layouts/DocumentLayout.astro';
 import CodeBlock from '../components/CodeBlock.astro';
-import { APP_STORE_AVAILABLE } from '../consts';
 
 const sections = [
   { id: 'quick-start', label: 'Quick start' },
@@ -62,11 +61,9 @@ const exitCodes = [
 ---
 
 <DocumentLayout title="Command-line guide" eyebrow="DiskPress CLI" heading="Your automation. The same native engine." description="Use DiskPress from Terminal, scripts, or AI agents. Inspect first, optimize selected files, and get structured results without opening the main window." sections={sections}>
-  {!APP_STORE_AVAILABLE && <div class="notice"><p><strong>DiskPress will be available soon.</strong> These instructions apply once the app is installed. The CLI is included with the app, not a separate download. See <a href="/faq/#download-price">release availability</a>.</p></div>}
-
   <section id="quick-start">
     <h2>Start with the installed app</h2>
-    <p>The CLI is the executable inside the app bundle. There is no separate command-line download. These examples use the Mac App Store copy at <code>/Applications/DiskPress.app</code>. Adjust the executable path if your copy is elsewhere.</p>
+    <p>Both the Mac App Store and Setapp versions include the same CLI features. <a href="/#download">Choose your download</a>. The CLI is the executable inside the app bundle. There is no separate command-line download. These examples use the Mac App Store copy at <code>/Applications/DiskPress.app</code>. Adjust the executable path if your copy is elsewhere.</p>
     <CodeBlock id="cli-help" label="Read the current command reference" code={'"/Applications/DiskPress.app/Contents/MacOS/DiskPress" --help'} />
     <p>For Setapp, use the executable inside your Setapp installation. Its bundle name and location may differ. The Mac App Store and Setapp editions keep separate settings and saved authorizations, so configure the same edition you invoke. Its built-in <code>--help</code> shows examples using that installation's executable path.</p>
     <ol>
