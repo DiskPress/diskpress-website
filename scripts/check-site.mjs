@@ -466,6 +466,7 @@ assert.match(homepage, /<h3>File deduplication<\/h3>/, 'The homepage must name t
 const deduplicationFeature = [...homepage.matchAll(/<article\b[^>]*class="native-feature"[^>]*>[\s\S]*?<\/article>/g) ].map(match => match[0]).find(article => article.includes('<h3>File deduplication</h3>'));
 assert.ok(deduplicationFeature?.includes('DiskPress is not a duplicate file remover.'), 'The feature description must distinguish file deduplication from duplicate deletion');
 assert.ok(deduplicationFeature.includes('APFS copy-on-write clones') && deduplicationFeature.includes('Both files keep their paths.'), 'The feature description must explain storage sharing without removing file paths');
+assert.ok(deduplicationFeature.includes('APFS copy-on-write clones, not hard links') && deduplicationFeature.includes('href="/faq/#clones-vs-hard-links"'), 'The homepage must distinguish clones from hard links and link the detailed comparison');
 assert.ok(deduplicationFeature.includes('across all enabled saved locations, not just within each folder') && homepage.includes('extra deduplication savings in folders you already optimized'), 'The homepage must explain cross-location deduplication and the benefit of adding locations');
 const crossLocationAnswer = documents.get('/faq/').match(/<details\b[^>]*id="cross-location-deduplication"[^>]*>[\s\S]*?<\/details>/)?.[0];
 assert.ok(crossLocationAnswer?.includes('across all enabled saved locations, not just within each location') && crossLocationAnswer.includes('same compatible APFS volume'), 'The FAQ must explain cross-location matching without implying cross-volume sharing');
@@ -479,8 +480,17 @@ for (const route of ['/', '/faq/'])
     assert.ok(answer.includes('APFS (Apple File System) copy-on-write clone') && answer.includes('same physical data blocks'), `${route} must explain APFS clone storage sharing`);
     assert.ok(answer.includes('Metadata still takes some space') && answer.includes('later edits can use more space'), `${route} must not promise zero storage overhead`);
     assert.ok(answer.includes('edit or delete either file without changing the other') && answer.includes('same APFS volume'), `${route} must preserve file independence and the same-volume requirement`);
-    assert.ok(answer.includes('href="https://developer.apple.com/documentation/foundation/about-apple-file-system"'), `${route} must link the APFS explanation to Apple documentation`);
+    assert.ok(answer.includes('DiskPress does not use hard links.') && answer.includes('href="/faq/#clones-vs-hard-links"'), `${route} must explain that DiskPress does not deduplicate with hard links and link the comparison`);
 }
+const cloneComparison = documents.get('/faq/').match(/<details\b[^>]*id="clones-vs-hard-links"[^>]*>[\s\S]*?<\/details>/)?.[0];
+assert.ok(cloneComparison?.includes('DiskPress deduplicates with APFS clones, not hard links'), 'The clone comparison must state which mechanism DiskPress uses');
+assert.ok(cloneComparison.includes('different names for the same file') && cloneComparison.includes('Changing its contents in place') && cloneComparison.includes('changes what all of them read') && cloneComparison.includes('replacing the file instead can break that link'), 'Hard-link guidance must distinguish shared in-place changes from replacement saves');
+assert.ok(cloneComparison.includes('Editing one does not change the contents of the other') && cloneComparison.includes('leaving untouched blocks shared'), 'APFS clones must remain independently editable while sharing unchanged blocks');
+assert.ok(cloneComparison.includes('uncompressed 10 MB file') && cloneComparison.includes('on the same volume') && cloneComparison.includes('logical size of 10 MB') && cloneComparison.includes('10 MB of file data, plus metadata, rather than using 20 MB'), 'The storage example must distinguish logical size from shared physical data and include overhead');
+assert.ok(cloneComparison.includes('100 bytes in place') && cloneComparison.includes('10 MB plus the newly written blocks and metadata') && cloneComparison.includes('not exactly 10 MB + 100 bytes') && cloneComparison.includes('allocated in blocks, not individual bytes'), 'The small-edit example must explain block allocation rather than promise byte-exact growth');
+assert.ok(cloneComparison.includes('Rewriting or replacing the whole file') && cloneComparison.includes('editing compressed files can expand them'), 'The example must qualify app save behavior and compression');
+for (const source of ['https://developer.apple.com/documentation/foundation/about-apple-file-system', 'https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/link.2.html'])
+    assert.ok(cloneComparison.includes(`href="${source}"`), 'The clone and hard-link comparison must cite Apple documentation');
 const quitAppAnswer = documents.get('/faq/').match(/<details\b[^>]*id="quit-app"[^>]*>[\s\S]*?<\/details>/)?.[0];
 assert.ok(quitAppAnswer?.includes('not to read them') && quitAppAnswer.includes('without a proprietary DiskPress format or reader') && quitAppAnswer.includes('Another Mac'), 'The FAQ must explain that optimized files remain readable without DiskPress');
 const hyperspaceAnswer = documents.get('/faq/').match(/<details\b[^>]*id="hyperspace-comparison"[^>]*>[\s\S]*?<\/details>/)?.[0];
