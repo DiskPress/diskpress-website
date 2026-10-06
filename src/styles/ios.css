@@ -1,0 +1,51 @@
+@layer components {
+  .product-copy { display: grid; align-content: start; gap: 24px; min-width: 0; }
+  .product-copy > p:not(.eyebrow) { color: var(--muted); }
+  .ios-availability { display: grid; justify-items: start; gap: 12px; min-width: 0; }
+  .ios-availability .download-link, .ios-availability .release-status { max-width: 100%; }
+  .ios-availability svg { flex: none; }
+  .ios-preview-panel { display: grid; grid-template-columns: minmax(0, 1fr) 280px; align-items: center; gap: 32px; padding: 32px; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); }
+  .ios-preview-panel .product-copy { max-width: 46rem; }
+  .ios-preview-visual, .ios-hero-visual { display: grid; justify-items: center; align-content: start; gap: 24px; min-width: 0; }
+  .ios-preview-visual img { width: 240px; height: auto; }
+  .ios-preview-visual figcaption, .ios-hero-visual figcaption { color: var(--muted); font-size: .8125rem; text-align: center; }
+  .ios-hero { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: min(48px, var(--gutter)); align-items: center; padding-block: 48px; }
+  .ios-hero h1 { font-size: clamp(2.75rem, 5.4vw, 5rem); }
+  .ios-hero h1 span { color: var(--accent); }
+  .ios-hero-visual img { width: 280px; height: auto; }
+  .ios-feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+  .ios-feature-grid.two-up, .platform-downloads { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .product-card, .platform-card { display: grid; align-content: start; gap: 20px; min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+  .product-card > p:not(.eyebrow), .platform-card > p:not(.eyebrow) { color: var(--muted); }
+  .product-card h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+  .platform-downloads { display: grid; align-items: stretch; gap: 24px; width: 100%; text-align: left; }
+  .platform-card h3 { font-size: 1.75rem; }
+  .platform-card .download-options { max-width: none; }
+  .ios-screenshot-grid { max-width: 960px; margin-inline: auto; }
+  .ios-screenshot img { width: min(100%, 280px); justify-self: center; }
+  .platform-notes { margin-top: 24px; }
+  .platform-comparison table { min-width: 620px; table-layout: fixed; }
+  .platform-comparison th, .platform-comparison td { vertical-align: middle; }
+  .platform-comparison tbody tr:last-child th { border-bottom: 0; }
+  .platform-comparison:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+}
+@layer responsive {
+  /* Leave room for the platform link without wrapping the desktop navigation. */
+  @media (max-width: 1120px) {
+    .desktop-nav, .header-actions > .download-link { display: none; }
+    .mobile-nav { display: block; }
+  }
+  @media (max-width: 900px) {
+    .ios-feature-grid { grid-template-columns: 1fr; }
+    .ios-hero { grid-template-columns: minmax(0, 1fr) 280px; }
+  }
+  @media (max-width: 780px) {
+    .ios-hero, .ios-preview-panel, .ios-feature-grid.two-up, .platform-downloads { grid-template-columns: 1fr; gap: 24px; }
+    .ios-preview-panel { padding: 24px; }
+    .ios-preview-panel .product-copy { max-width: none; }
+  }
+  @media (max-width: 600px) {
+    .ios-preview-visual img { width: 200px; }
+    .ios-hero-visual img { width: min(100%, 240px); }
+  }
+}

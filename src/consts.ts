@@ -1,7 +1,9 @@
 export const SITE_TITLE = 'DiskPress';
 export const APP_STORE_AVAILABLE = true;
-export const SITE_DESCRIPTION = 'Save space without deleting files. DiskPress combines native file compression and APFS file deduplication on your Mac, with background monitoring and a CLI.';
+export const IOS_APP_STORE_AVAILABLE = false;
+export const SITE_DESCRIPTION = 'Keep your files and use less storage with native compression and APFS deduplication. DiskPress for Mac, and DiskPress for Files for iPhone and iPad.';
 export const APP_STORE_URL = 'https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=diskpress.app&mt=8';
+export const IOS_APP_STORE_URL = 'https://apps.apple.com/app/apple-store/id6814957268?pt=127627850&ct=diskpress.app&mt=8';
 export const SETAPP_URL = 'https://setapp.com/apps/diskpress';
 export const STORAGE_SAVER_DUO_URL = 'https://apps.apple.com/app-bundle/apple-store/id6811364083?pt=127627850&ct=diskpress.app&mt=8';
 export const DEVELOPER_URL = 'https://reverseeverything.com/ighor/?utm_source=diskpress.app';

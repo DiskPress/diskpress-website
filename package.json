@@ -1,6 +1,6 @@
 {
 	"name": "diskpress-website",
-	"description": "The release website and documentation for DiskPress, a native macOS storage optimization app.",
+	"description": "The website and documentation for DiskPress for Mac and DiskPress for Files for iPhone and iPad.",
 	"cloudflare": {
 		"label": "DiskPress website",
 		"products": [

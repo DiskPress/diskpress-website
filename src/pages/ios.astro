@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import IosDownload from '../components/IosDownload.astro';
+import FaqList from '../components/FaqList.astro';
+import { iosQuestions } from '../data/faq';
+import { DEVELOPER_URL, IOS_APP_STORE_AVAILABLE } from '../consts';
+import overview from '../assets/diskpress-for-files-overview.png';
+import selection from '../assets/diskpress-for-files-selection.png';
+import results from '../assets/diskpress-for-files-results.png';
+---
+<SiteLayout title="DiskPress for Files - File compression and deduplication for iPhone and iPad" description={`${IOS_APP_STORE_AVAILABLE ? '' : 'Available soon. '}Make supported local files in the Files app use less storage with lossless compression and APFS deduplication on iPhone and iPad.`}>
+  <section class="ios-hero wrap" aria-labelledby="ios-heading">
+    <div class="product-copy">
+      <p class="eyebrow">DiskPress for Files for iPhone &amp; iPad</p>
+      <h1 id="ios-heading">Your files.<br /><span>A smaller footprint.</span></h1>
+      <p class="lead">Keep a lot of documents and project files on your device? Make supported local files in the Files app use less space, while keeping them right where they belong.</p>
+      <p>DiskPress for Files brings the same lossless compression and APFS file deduplication core as DiskPress for Mac to iPhone and iPad. Your files keep their contents and open normally. No archives to unpack.</p>
+      <IosDownload />
+      <p class="fine">Local files only. Not a Photos library cleaner or a way to optimize cloud storage. <a href="#supported-files">See what is supported</a>.</p>
+      <a class="text-link" href="#platforms">Compare with DiskPress for Mac</a>
+    </div>
+    <figure class="ios-hero-visual">
+      <Image src={overview} alt="DiskPress for Files Overview on iPhone showing storage available, estimated saved space, and compression and deduplication totals." widths={[280, 560, 840]} sizes="(max-width: 600px) 240px, 280px" format="webp" quality={85} loading="eager" fetchpriority="high" />
+      <figcaption>Actual app screenshot with example data. Your savings will vary.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section workflow-section" id="ios-workflow">
+    <div class="wrap">
+      <div class="section-heading"><p class="eyebrow">A deliberate, local workflow</p><h2>Choose your files.<br />Make a little more room.</h2><p class="lead">Select a supported local folder or individual files. Review the selection, choose your optimization mode, and start when you are ready.</p></div>
+      <div class="ios-feature-grid">
+        <article class="product-card"><h3>Two techniques together</h3><p>Compress eligible files and let verified identical files share storage through APFS clones, not hard links. Each copy stays independently editable.</p><a class="text-link" href="/faq/#clones-vs-hard-links">Understand clone sharing</a></article>
+        <article class="product-card"><h3>A choice for each folder</h3><p>Use compression, deduplication, or both. Save locations for next time, optimize one separately, or include selected locations in Optimize All.</p></article>
+        <article class="product-card"><h3>Know what changed</h3><p>See existing savings separately from savings added by the current run. Review completed, skipped, and unsuccessful work in Activity.</p></article>
+      </div>
+      <div class="screenshot-grid ios-screenshot-grid">
+        <figure class="screenshot-figure ios-screenshot">
+          <figcaption><h3>Review before starting</h3><p>Check the selected files, choose a mode, and decide whether to save the locations for later.</p></figcaption>
+          <Image src={selection} alt="DiskPress for Files Review Selection on iPhone with file count, optimization modes, Save these locations, and the Optimize button." widths={[280, 560, 840]} sizes="(max-width: 420px) calc(100vw - 98px), 280px" format="webp" quality={85} loading="lazy" />
+        </figure>
+        <figure class="screenshot-figure ios-screenshot">
+          <figcaption><h3>See the result of this run</h3><p>Separate new savings from storage already saved, with counts for compressed, deduplicated, and skipped files.</p></figcaption>
+          <Image src={results} alt="DiskPress for Files Results on iPhone showing optimization complete, previous savings, savings added by this run, and file counts." widths={[280, 560, 840]} sizes="(max-width: 420px) calc(100vw - 98px), 280px" format="webp" quality={85} loading="lazy" />
+        </figure>
+      </div>
+      <p class="screenshot-disclaimer">App screenshots use example data. Savings depend on your files and settings.</p>
+    </div>
+  </section>
+
+  <section class="section wrap" id="supported-files">
+    <div class="section-heading"><p class="eyebrow">Made for files, not everything on your device</p><h2>A clear boundary.<br />Your local folders.</h2><p class="lead">The Files app shows many kinds of storage. DiskPress for Files works only with supported, writable local files on APFS that you grant it permission to access.</p></div>
+    <div class="ios-feature-grid two-up">
+      <article class="product-card"><h3>A good place to start</h3><p>Choose a supported folder inside "On My iPhone" or "On My iPad", rather than the top-level location itself. Mostly stable documents and completed project files are useful candidates.</p><p>Already-compressed files may save little or nothing. Eligibility also depends on the folder's permissions and the operations its provider allows.</p></article>
+      <article class="product-card"><h3>Intentionally out of reach</h3><p>The app cannot compress or deduplicate your Photos library, iCloud Drive, other cloud or network providers, installed apps, or protected system and app paths.</p><p>Seeing an item in Files does not mean it is a supported local file. Downloading a cloud item does not make its cloud-provider location a supported target.</p></article>
+    </div>
+    <p class="safety-note"><strong>Keep an independent backup.</strong> Optimization rewrites files at their existing paths and adds storage writes. Prefer settled files over folders with constant changes. Verification and recovery checks help protect the work, but are not a substitute for a backup.</p>
+  </section>
+
+  <section class="section comparison-section" id="platforms">
+    <div class="wrap">
+      <div class="section-heading"><p class="eyebrow">Same core, different platforms</p><h2>Desktop automation.<br />On-device control.</h2><p class="lead">Both apps reduce physical storage without changing file contents. iOS limits access and automation, so DiskPress for Files is built around work you start yourself.</p></div>
+      <div class="table-scroll platform-comparison" role="region" aria-label="Mac and iPhone or iPad feature comparison" tabindex="0">
+        <table>
+          <caption class="sr-only">Features of DiskPress for Mac and DiskPress for Files</caption>
+          <thead><tr><th scope="col">Capability</th><th scope="col">DiskPress for Mac</th><th scope="col">DiskPress for Files</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Compression and APFS deduplication</th><td>Yes, using the shared core</td><td>Yes, using the same core</td></tr>
+            <tr><th scope="row">One-time work and saved locations</th><td>Yes</td><td>Yes</td></tr>
+            <tr><th scope="row">Automatic folder monitoring</th><td>Optional recurring optimization</td><td>No automatic monitoring</td></tr>
+            <tr><th scope="row">Command line and menu bar</th><td>CLI and menu bar controls</td><td>No CLI or menu bar</td></tr>
+            <tr><th scope="row">Supported storage</th><td>Eligible local files and compatible external volumes</td><td>Eligible local files selected through Files, not Photos, cloud storage, or protected paths</td></tr>
+            <tr><th scope="row">Where to get it</th><td>Mac App Store or Setapp, with the same Mac features</td><td>Separate iPhone and iPad App Store app</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ios-feature-grid two-up platform-notes">
+        <article class="product-card"><h3>You start every optimization</h3><p>DiskPress for Files does not watch folders or schedule future runs. On iOS or iPadOS 26 or later, a run you already started may continue in the background if the system allows it. Otherwise, leaving the app pauses work safely so you can resume when you return.</p><p>That is continuation of your current task, not automatic monitoring for new files.</p></article>
+        <article class="product-card"><h3>The savings do not need the app</h3><p>Once optimization finishes, native compression and clone sharing keep working without DiskPress for Files running. Edits, copies, or replacements can change those savings.</p><p>Keep the files you want. Open them normally. No separate reader required.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="ios-feature-grid two-up">
+      <article class="product-card"><p class="eyebrow">Private by design</p><h2>Your device.<br />Your files.</h2><p>DiskPress for Files makes no Internet connections. No separate app account, no analytics, no telemetry, and no file uploads. Settings, permissions, Activity, and recovery records stay on your device.</p><p>Reports leave the app only when you choose to share them. Opening a website link visits that website in your browser.</p><a class="text-link" href="/privacy-policy/#ios">Read the iPhone and iPad privacy details</a></article>
+      <article class="product-card"><p class="eyebrow">Built for iPhone and iPad</p><h2>Familiar purpose.<br />A new home.</h2><p>A dedicated touch interface, with tabs on iPhone and a sidebar on iPad. Requires iOS or iPadOS 14 or later and supported local APFS storage. Some background continuation features require iOS or iPadOS 26 or later.</p><p>Made by <a href={DEVELOPER_URL}>Ighor July</a>, the developer of DiskPress for Mac. Mac purchases, Setapp access, and the Storage Saver Duo Mac bundle are separate from this app.</p><a class="text-link" href="/terms-of-service/#ios">Read the iPhone and iPad terms</a></article>
+    </div>
+  </section>
+
+  <section class="section faq-section"><div class="wrap home-faq-grid"><div class="section-heading"><p class="eyebrow">Before you start</p><h2>A few useful<br />answers.</h2><a class="text-link" href="/support/">Contact support</a></div><FaqList questions={iosQuestions} /></div></section>
+  <section class="section wrap closing-section"><h2>Keep more of what matters.</h2><p class="lead">DiskPress for Files for iPhone and iPad.</p><IosDownload /><a class="text-link" href="/#mac-download">Looking for DiskPress for Mac?</a></section>
+</SiteLayout>

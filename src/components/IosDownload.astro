@@ -1,0 +1,14 @@
+---
+import { IOS_APP_STORE_AVAILABLE, IOS_APP_STORE_URL } from '../consts';
+---
+<div class="ios-availability">
+  {IOS_APP_STORE_AVAILABLE ? (
+    <a class="download-link" href={IOS_APP_STORE_URL} aria-label="Download DiskPress for Files on the App Store">
+      <span>Download on the App Store</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+    </a>
+  ) : (
+    <span class="release-status" data-platform="ios">Available soon on the App Store</span>
+  )}
+  <p class="fine">{IOS_APP_STORE_AVAILABLE ? 'For iPhone and iPad. See the listing for pricing and compatibility.' : 'For iPhone and iPad. Awaiting App Store approval, not yet available to download.'}</p>
+</div>

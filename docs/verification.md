@@ -1,5 +1,21 @@
 # DiskPress website verification
 
+## iPhone and iPad introduction on October 5, 2026
+
+Added a dedicated `/ios/` page, homepage preview, platform-specific download cards, navigation, and sitemap entry for DiskPress for Files. Updated the FAQ, privacy policy, terms, support, and Mac-only CLI and recovery guidance. Existing changelog posts are unchanged. App source and Fastline metadata were inspected read-only. Only Website was modified.
+
+The developer confirmed that the iOS app is awaiting App Store approval. Mac downloads remain active. The separate iOS availability flag stays false, with a non-interactive Available soon status. The future App Store link is prepared for app ID 6814957268. No price, cross-platform purchase entitlement, or iOS inclusion in the Mac bundle is promised.
+
+Three supplied iPhone screenshots retain their full original content and proportions. Responsive WebP variants are generated at build time without upscaling. Image dimensions are reserved, below-the-fold captures are lazy-loaded, and the iOS hero has high fetch priority. Example data is identified as illustrative.
+
+The production build, TypeScript check, and Cloudflare dry run passed. Static checks cover 10 HTML pages, 400 internal links, 123 asset references, independent platform availability, the new FAQ and legal disclosures, canonical URLs, sitemap membership, private-route exclusions, and in-head CSS. The iOS image checks require the expected dimensions, responsive WebP sources, correct loading priorities, and variants below 200 KiB.
+
+Browser checks covered the homepage, iOS page, FAQ, privacy policy, terms, and support at 1280, 900, 390, and 320 pixels in Dark appearance and at 1280, 390, and 320 pixels in Light appearance. No horizontal page overflow or unequal side-by-side card heights was observed. The iOS layout was also checked at 1120 and 780 pixels. FAQ deep links opened their answers. The comparison table scrolled with the keyboard at 320 pixels without widening the page. At 900 by 390 pixels, the navigation menu remained within the viewport and scrolled to its remaining links. No browser console errors were observed.
+
+The existing synchronous appearance initialization, system-font stack, opaque safe-area header, and in-head CSS remain in place. These checks do not claim exhaustive testing on physical iPhones or iPads, and do not validate the app itself, legal compliance in every jurisdiction, or server-side analytics ingestion. Signing, notarization, provisioning, and localization were not tested.
+
+The sections below record earlier website reviews and their state at the time.
+
 Verified on September 7, 2026. All source edits are inside Website. The application source was read, not modified. This report covers the repository and local Cloudflare build. Publishing uses the existing Git-connected Cloudflare pipeline.
 
 ## Delivered

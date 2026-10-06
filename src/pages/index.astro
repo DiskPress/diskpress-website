@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import DownloadOptions from '../components/DownloadOptions.astro';
+import IosDownload from '../components/IosDownload.astro';
 import CodeBlock from '../components/CodeBlock.astro';
 import FaqList from '../components/FaqList.astro';
 import { featuredQuestions } from '../data/faq';
@@ -13,6 +14,7 @@ import oneTimeResults from '../assets/diskpress-one-time-results.png';
 import locations from '../assets/diskpress-locations.png';
 import exclusions from '../assets/diskpress-exclusions.png';
 import appArchiverIcon from '../assets/app-archiver-icon.png';
+import iosOverview from '../assets/diskpress-for-files-overview.png';
 
 const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width: 780px) calc(92vw - 50px), (max-width: 1440px) calc(46vw - 62px), 600px';
 ---
@@ -22,11 +24,12 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
       <p class="eyebrow">Native storage optimization for Mac</p>
       <h1 id="hero-heading">More room.<br /><span>Same files.</span></h1>
       <p class="lead">Save space without deleting what you want to keep. DiskPress combines native file compression and file deduplication. Your files stay in place and open normally.</p>
-      <div class="hero-download" id="download">
+      <div class="hero-download" id="mac-download">
         <DownloadOptions />
-        <p class="fine">Same features in both versions. Buy on the Mac App Store or get DiskPress with your Setapp subscription. <a href="/faq/#download-price">Explore your options</a>.</p>
+        <p class="fine">Same features in both Mac versions. Buy on the Mac App Store or get DiskPress with your Setapp subscription. <a href="/faq/#download-price">Explore your options</a>.</p>
         <p class="fine">Built for APFS. File optimization works offline. <a href="/faq/#requirements">Check macOS requirements</a>.</p>
         {APP_STORE_AVAILABLE && <p class="fine">Save on DiskPress and App Archiver with <a href="#storage-saver-duo">Storage Saver Duo</a>.</p>}
+        <p class="fine">On iPhone or iPad? <a href="/ios/">Meet DiskPress for Files</a>.</p>
       </div>
       <a class="text-link" href="#how-it-works">Meet your new space saver</a>
     </div>
@@ -42,6 +45,22 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
       <div class="benefit"><span class="check" aria-hidden="true">✓</span><div><h2>Entirely on your Mac</h2><p>Your files and optimization results stay local.</p></div></div>
     </div>
   </div>
+  <section class="section wrap" aria-labelledby="ios-preview-heading">
+    <div class="ios-preview-panel">
+      <div class="product-copy">
+        <p class="eyebrow">Introducing DiskPress for Files</p>
+        <h2 id="ios-preview-heading">More room for the files<br />you carry with you.</h2>
+        <p class="lead">The same compression and deduplication core, made for iPhone and iPad. Give supported local files in the Files app a smaller footprint, without packing them into archives.</p>
+        <p>Choose files or folders and start an optimization when you need it. No automatic monitoring or CLI. Local files only, not your Photos library, cloud storage, or protected paths.</p>
+        <IosDownload />
+        <a class="text-link" href="/ios/">Explore DiskPress for Files</a>
+      </div>
+      <figure class="ios-preview-visual">
+        <Image src={iosOverview} alt="DiskPress for Files on iPhone showing device storage and estimated compression and deduplication savings." widths={[240, 480, 720]} sizes="(max-width: 600px) 200px, 240px" format="webp" quality={85} loading="lazy" />
+        <figcaption>iPhone screenshot with example data.</figcaption>
+      </figure>
+    </div>
+  </section>
   <section class="section comparison-section" id="why-diskpress">
     <div class="wrap">
       <div class="section-heading"><p class="eyebrow">A different way to make room</p><h2>You need more space.<br />Not fewer things.</h2><p class="lead">Cleaning has its place. But deleting useful files is a compromise, and cleared caches can quickly grow back. DiskPress gives you another option.</p></div>
@@ -164,7 +183,7 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
         <p class="eyebrow">{APP_STORE_AVAILABLE ? 'Storage Saver Duo' : 'The right tool for each job'}</p>
         <h2 id="companion-heading">DiskPress for your files.<br />App Archiver for your apps.</h2>
         {APP_STORE_AVAILABLE && <>
-          <p>Get DiskPress and App Archiver together at a reduced price compared with buying them separately.</p>
+          <p>Get DiskPress for Mac and App Archiver together at a reduced price compared with buying them separately. This is a Mac app bundle, separate from DiskPress for Files for iPhone and iPad.</p>
           <div class="bundle-purchase">
             <a class="download-link" href={STORAGE_SAVER_DUO_URL}>
               <span>Get Storage Saver Duo</span>
@@ -189,5 +208,24 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
 
   <section class="section faq-section"><div class="wrap home-faq-grid"><div class="section-heading"><p class="eyebrow">Good questions</p><h2>A few things<br />worth knowing.</h2><a class="text-link" href="/faq/">Explore the full FAQ</a></div><FaqList questions={featuredQuestions} /></div></section>
 
-  <section class="section wrap closing-section"><img src="/favicon.svg" width="64" height="64" alt="" loading="lazy" /><h2>Make room for<br />what comes next.</h2><p class="lead">Same features. Choose the store that works for you.</p><DownloadOptions /><p class="fine">See your store for pricing and macOS requirements. Results vary by file and filesystem.</p></section>
+  <section class="section wrap closing-section" id="download" aria-labelledby="download-heading">
+    <img src="/favicon.svg" width="64" height="64" alt="" loading="lazy" />
+    <h2 id="download-heading">Make room on your device.</h2>
+    <p class="lead">One shared core. A workflow for each platform.</p>
+    <div class="platform-downloads">
+      <article class="platform-card">
+        <p class="eyebrow">Mac</p><h3>DiskPress</h3>
+        <p>Optimize once, monitor selected folders automatically, or use the CLI. The Mac App Store and Setapp versions have the same features.</p>
+        <DownloadOptions />
+        <p class="fine">See your store for pricing and macOS requirements.</p>
+      </article>
+      <article class="platform-card">
+        <p class="eyebrow">iPhone &amp; iPad</p><h3>DiskPress for Files</h3>
+        <p>Manually optimize supported local files and folders from the Files app. No automatic monitoring or CLI.</p>
+        <IosDownload />
+        <a class="text-link" href="/ios/">See features and requirements</a>
+      </article>
+    </div>
+    <p class="fine">Separate apps for Mac and iPhone or iPad. Savings vary by file, settings, and filesystem.</p>
+  </section>
 </SiteLayout>

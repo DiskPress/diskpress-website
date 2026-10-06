@@ -10,7 +10,7 @@ const sections = [
 ];
 const emailURL = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('DiskPress support')}`;
 ---
-<DocumentLayout title="Contact support" eyebrow="DiskPress support" heading="Contact support" description="Report a bug, suggest an improvement, or get help with DiskPress. Open a GitHub issue or email the developer." sections={sections}>
+<DocumentLayout title="Contact support" eyebrow="DiskPress support" heading="Contact support" description="Get help with DiskPress for Mac or DiskPress for Files for iPhone and iPad. Report a bug, suggest an improvement, or ask a question through GitHub or email." sections={sections}>
   <section class="support-options" aria-label="Support options">
     <article class="support-option" id="github">
       <h2>GitHub issues</h2>
@@ -29,9 +29,10 @@ const emailURL = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('DiskPres
     <h2>What to include</h2>
     <p>A few details make it easier to understand and reproduce the problem.</p>
     <ul>
-      <li>Your DiskPress version and macOS version, and whether you installed DiskPress from the Mac App Store or Setapp.</li>
+      <li>The app name, app version, and macOS, iOS, or iPadOS version. For DiskPress for Mac, say whether you installed it from the Mac App Store or Setapp.</li>
       <li>What you were trying to do, what you expected, and what happened instead.</li>
-      <li>Whether you used one-time optimization, background monitoring, or the CLI, along with any error or warning text.</li>
+      <li>Whether you optimized a saved location or a one-time selection, along with any error or warning text. On Mac, also mention background monitoring or the CLI if relevant.</li>
+      <li>For DiskPress for Files, whether the selection is inside a local "On My iPhone" or "On My iPad" folder or a cloud-provider location. Do not include private paths.</li>
       <li>Steps to reproduce the problem and a redacted screenshot, if helpful.</li>
     </ul>
     <div class="notice">
@@ -42,9 +43,10 @@ const emailURL = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('DiskPres
   </section>
   <section id="billing">
     <h2>Purchases and subscriptions</h2>
-    <p>Product support through GitHub or email is available for both versions. For payment, subscription, or refund questions, use the service you obtained DiskPress from.</p>
+    <p>Product support through GitHub or email covers both apps. For payment, subscription, or refund questions, use the service you obtained your app from.</p>
     <ul>
       <li>For the Mac App Store version, follow the <a href="/terms-of-service/#purchases">Mac App Store purchase and refund guidance</a>.</li>
+      <li>For DiskPress for Files for iPhone and iPad, see the <a href="/terms-of-service/#ios">App Store availability, purchase, and refund guidance</a>.</li>
       <li>For the Setapp version, follow the <a href="/terms-of-service/#setapp">Setapp subscription, cancellation, and refund guidance</a>. Setapp also handles its account and activation services.</li>
     </ul>
   </section>

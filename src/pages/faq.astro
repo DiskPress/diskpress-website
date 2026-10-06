@@ -3,7 +3,8 @@ import DocumentLayout from '../layouts/DocumentLayout.astro';
 import FaqList from '../components/FaqList.astro';
 import { faqGroups } from '../data/faq';
 ---
-<DocumentLayout title="Frequently asked questions" eyebrow="DiskPress FAQ" heading="A little clarity. A lot more control." description="How DiskPress saves space, which files it supports, and what to expect from background monitoring, the menu bar, and automation." sections={faqGroups.map(group => ({ id: group.id, label: group.title }))}>
+<DocumentLayout title="Frequently asked questions" eyebrow="DiskPress FAQ" heading="A little clarity. A lot more control." description="Answers for DiskPress for Mac and DiskPress for Files for iPhone and iPad. Learn which files are supported and how the platforms differ." sections={faqGroups.map(group => ({ id: group.id, label: group.title }))}>
+  <section class="notice"><h2>Choose your platform</h2><p><a href="#iphone-and-ipad">DiskPress for Files</a> is the iPhone and iPad app for manually optimizing supported local files. The sections below it describe DiskPress for Mac, including Mac-only monitoring, menu bar controls, and the CLI. <a href="/ios/#platforms">Compare the two apps</a>.</p></section>
   {faqGroups.map(group => <section id={group.id}><h2>{group.title}</h2><FaqList questions={group.questions} /></section>)}
   <section class="help-note"><h2>Still have a question?</h2><p><a href="/support/">Contact support</a> through GitHub issues or email. The support page explains which option to use and what details to include.</p></section>
 </DocumentLayout>

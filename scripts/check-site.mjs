@@ -5,18 +5,23 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
-const routes = [ '/', '/faq/', '/cli/', '/changelog/', '/support/', '/privacy-policy/', '/terms-of-service/' ];
+const routes = [ '/', '/ios/', '/faq/', '/cli/', '/changelog/', '/support/', '/privacy-policy/', '/terms-of-service/' ];
 const unlistedRoutes = [ '/application-corrupted/' ];
 const noindexRoutes = new Set([...unlistedRoutes, '/404.html' ]);
 const documents = new Map();
 const decode = value => value.replaceAll('&amp;', '&').replaceAll('&#38;', '&');
 const appStore = 'https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=diskpress.app&mt=8';
+const iosAppStore = 'https://apps.apple.com/app/apple-store/id6814957268?pt=127627850&ct=diskpress.app&mt=8';
 const setapp = 'https://setapp.com/apps/diskpress';
 const appBundle = 'https://apps.apple.com/app-bundle/apple-store/id6811364083?pt=127627850&ct=diskpress.app&mt=8';
 const siteConfig = await readFile(new URL('../src/consts.ts', import.meta.url), 'utf8');
 const availabilitySetting = siteConfig.match(/export const APP_STORE_AVAILABLE = (true|false);/);
 assert.ok(availabilitySetting, 'Availability must be an explicit shared build-time setting');
 const appStoreAvailable = availabilitySetting[1] === 'true';
+const iosAvailabilitySetting = siteConfig.match(/export const IOS_APP_STORE_AVAILABLE = (true|false);/);
+assert.ok(iosAvailabilitySetting, 'iOS availability must be independent of the Mac release');
+const iosAppStoreAvailable = iosAvailabilitySetting[1] === 'true';
+assert.equal(siteConfig.match(/export const IOS_APP_STORE_URL = '([^']+)';/)?.[1], iosAppStore, 'Keep the supplied iOS app ID and campaign parameters ready for approval');
 assert.equal(siteConfig.match(/export const APP_STORE_URL = '([^']+)';/)?.[1], appStore, 'Keep the supplied App Store URL intact for release');
 assert.equal(siteConfig.match(/export const SETAPP_URL = '([^']+)';/)?.[1], setapp, 'Keep the supplied Setapp URL intact');
 assert.equal(siteConfig.match(/export const STORAGE_SAVER_DUO_URL = '([^']+)';/)?.[1], appBundle, 'Keep the supplied bundle URL and its campaign parameters intact');
@@ -126,6 +131,8 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
             ['.control-grid', '.control-grid article'],
             ['.screenshot-grid', '.screenshot-figure'],
             ['.document-content > .support-options', '.support-option'],
+            ['.ios-feature-grid', '.product-card'],
+            ['.platform-downloads', '.platform-card'],
         ])
         {
             const groupRules = panelRules(group);
@@ -175,16 +182,20 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
     const appearanceLabelPosition = html.indexOf("document.dispatchEvent(new Event('diskpress:appearance-ready'))");
     assert.ok(appearanceLabelPosition >= 0 && appearanceLabelPosition < html.indexOf('</header>'), `${route} must restore the appearance label before the header is complete`);
     assert.ok(!/in development|\/Users\/ighor\/|localhost|127\.0\.0\.1/.test(html), `${route} contains outdated development wording or local-only content`);
-    if (appStoreAvailable)
+    if (appStoreAvailable && iosAppStoreAvailable)
     {
         assert.ok(!/Available soon|available soon|coming soon|awaiting App Store approval|Awaiting App Store approval/.test(html), `${route} must remove pending-release wording after launch`);
         assert.ok(!html.includes('class="release-status'), `${route} must restore the download link after launch`);
     }
-    else
+    if (!appStoreAvailable)
     {
         assert.ok(!/<(?:a|button)\b[^>]*class="[^"]*release-status/.test(html), `${route} must not make the pending-release status look interactive to assistive technology`);
         assert.ok(!/Download on the Mac App Store|Download DiskPress again/.test(html), `${route} must not offer an unavailable Mac App Store download`);
     }
+    if (appStoreAvailable)
+        assert.ok(!/Available soon on the Mac App Store|Mac App Store version is awaiting approval/.test(html), `${route} must not mark the released Mac app as pending`);
+    assert.ok(!/<(?:a|button)\b[^>]*class="[^"]*release-status/.test(html), `${route} must keep pending availability non-interactive`);
+    assert.ok(html.includes('href="/ios/"'), `${route} navigation must include the iPhone and iPad page`);
     assert.ok(css.includes('.download-options{') && css.includes('.download-link.secondary{'), `${route} must load store-choice styling before rendering`);
     assert.ok(!html.includes('utm_source=chatgpt'), `${route} must not add unwanted campaign attribution`);
     assert.ok(!/[\u00a0\u200b-\u200f\u2028\u2029\u2060\ufeff\u2018\u2019\u201c\u201d]/.test(html), `${route} contains unsupported quote or whitespace characters`);
@@ -248,7 +259,8 @@ assert.equal((supportPage.match(/<article class="support-option"/g) || []).lengt
 assert.ok(supportPage.includes('href="https://github.com/JulyIghor/DiskPress/issues"'), 'Support must use the supplied GitHub issues destination');
 assert.ok(supportPage.includes('href="mailto:support@apptrust.app?subject=DiskPress%20support"'), 'Support must preserve the existing email address with a useful subject');
 assert.ok(supportPage.includes('Issues and attachments are public') && supportPage.includes('Use email for sensitive information'), 'Support must distinguish public GitHub reports from private email');
-assert.ok(supportPage.includes('Your DiskPress version and macOS version') && supportPage.includes('Remove private filenames, paths, passwords'), 'Support must request useful details while protecting private information');
+assert.ok(supportPage.includes('app name, app version, and macOS, iOS, or iPadOS version') && supportPage.includes('Remove private filenames, paths, passwords'), 'Support must request platform-specific details while protecting private information');
+assert.ok(supportPage.includes('href="/terms-of-service/#ios"'), 'Support must explain iPhone and iPad App Store help separately');
 assert.ok(supportPage.includes('keep its recovery files and records intact'), 'Support must preserve unfinished recovery material');
 assert.ok(!/<form\b|<iframe\b/.test(supportPage), 'Support must use direct links without an embedded third-party form');
 const faqHelp = documents.get('/faq/').match(/<section class="help-note">[\s\S]*?<\/section>/)?.[0];
@@ -306,10 +318,10 @@ for (const group of downloadGroups)
     if (appStoreAvailable)
         assert.ok(decode(group).includes(`href="${appStore}"`) && group.includes('aria-label="Download DiskPress on the Mac App Store"'), 'The Setapp option must not replace the Mac App Store download');
 }
-assert.ok(homepage.includes('Same features in both versions.') && homepage.includes('Setapp subscription'), 'The homepage must explain feature parity and the Setapp option');
+assert.ok(homepage.includes('Same features in both Mac versions.') && homepage.includes('Setapp subscription'), 'The homepage must scope store feature parity to Mac');
 assert.ok(homepage.includes('No separate DiskPress account') && !homepage.includes('No account or file uploads'), 'Local file processing must not imply that the stores require no account');
 const downloadAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];
-assert.ok(downloadAnswer?.includes(`href="${setapp}"`) && downloadAnswer.includes('Same features in both versions.'), 'The existing pricing FAQ must link Setapp and explain feature parity');
+assert.ok(downloadAnswer?.includes(`href="${setapp}"`) && downloadAnswer.includes('Same features in both Mac versions.'), 'The existing pricing FAQ must link Setapp and explain Mac feature parity');
 for (const feature of ['file compression', 'file deduplication', 'one-time optimization', 'automatic monitoring', 'menu bar controls', 'the CLI'])
     assert.ok(downloadAnswer.includes(feature), `Both editions must include ${feature}`);
 assert.ok(downloadAnswer.includes('subscription, activation, and updates'), 'The FAQ must explain how Setapp access is provided');
@@ -367,10 +379,10 @@ for (const phrase of ['Linked App option', 'Show Progress', 'File metadata canno
 if (appStoreAvailable)
 {
     const bundleSection = homepage.match(/<section\b[^>]*id="storage-saver-duo"[^>]*>[\s\S]*?<\/section>/)?.[0];
-    assert.ok(bundleSection?.includes('DiskPress and App Archiver together at a reduced price compared with buying them separately') && decode(bundleSection).includes(`href="${appBundle}"`), 'The companion section must explain the discounted two-app bundle and link to its exact listing');
+    assert.ok(bundleSection?.includes('DiskPress for Mac and App Archiver together at a reduced price compared with buying them separately') && decode(bundleSection).includes(`href="${appBundle}"`), 'The companion section must explain the discounted Mac bundle and link to its exact listing');
     assert.ok(homepage.includes('href="#storage-saver-duo"') && bundleSection.includes('Get Storage Saver Duo') && bundleSection.includes('current pricing and system requirements'), 'The bundle must be discoverable from the hero and direct visitors to current App Store details');
     const priceAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];
-    assert.ok(priceAnswer?.includes('Storage Saver Duo') && decode(priceAnswer).includes(`href="${appBundle}"`) && priceAnswer.includes('includes both apps at a reduced price'), 'The pricing FAQ must include the bundle option alongside the standalone download');
+    assert.ok(priceAnswer?.includes('Storage Saver Duo') && decode(priceAnswer).includes(`href="${appBundle}"`) && priceAnswer.includes('includes both Mac apps at a reduced price'), 'The pricing FAQ must include the Mac bundle alongside the standalone download');
 }
 const backgroundSection = homepage.match(/<section\b[^>]*id="background"[^>]*>[\s\S]*?<\/section>/)?.[0];
 assert.ok(backgroundSection?.includes('first optimization pass can keep the CPU busy'), 'The homepage must explain the initial compression workload');
@@ -561,8 +573,76 @@ for (const [name, width, height, widths, loading] of screenshotSpecs)
 }
 assert.ok(homepage.includes('App screenshots use example data.'), 'Screenshot savings must be identified as example data');
 
+const iosPage = documents.get('/ios/');
+const iosDetails = (html, id) => html.match(new RegExp(`<details\\b[^>]*id="${id}"[^>]*>[\\s\\S]*?<\\/details>`))?.[0];
+assert.ok(iosPage.includes('same lossless compression and APFS file deduplication core') && iosPage.includes('No archives to unpack'), 'The iOS page must explain the shared core and normal file access');
+assert.ok(iosPage.includes('No automatic monitoring') && iosPage.includes('No CLI or menu bar'), 'The platform comparison must not promise Mac-only features on iOS');
+assert.ok(iosPage.includes('Photos library, iCloud Drive, other cloud or network providers') && iosPage.includes('protected system and app paths'), 'The iOS page must disclose storage boundaries');
+assert.ok(iosPage.includes('On My iPhone') && iosPage.includes('rather than the top-level location itself'), 'The iOS page must explain selecting an eligible inner folder');
+assert.ok(iosPage.includes('role="region" aria-label="Mac and iPhone or iPad feature comparison" tabindex="0"'), 'The comparison must be keyboard-scrollable on narrow screens');
+assert.ok(iosPage.includes('scope="row"') && iosPage.includes('scope="col"'), 'The comparison needs accessible row and column headers');
+assert.ok(iosPage.includes('adds storage writes') && iosPage.includes('independent backup'), 'iOS safety guidance must cover storage writes and backups');
+assert.ok(homepage.includes('id="mac-download"') && homepage.includes('class="platform-downloads"'), 'The homepage needs both a Mac target and the shared platform choice');
+assert.ok(homepage.includes('Mac app bundle, separate from DiskPress for Files'), 'The bundle must not imply iOS access');
+assert.ok(documents.get('/cli/').includes('DiskPress for Files for iPhone and iPad</a> has no CLI'), 'The CLI documentation must be Mac-specific');
+assert.ok(integrityPage.includes('instructions apply to DiskPress for Mac only'), 'The direct-only recovery route must not tell iOS users to remove a Mac app bundle');
+for (const route of ['/ios/', '/faq/'])
+{
+    const html = documents.get(route);
+    for (const id of ['ios-availability', 'ios-local-files', 'ios-background', 'ios-savings', 'ios-privacy'])
+        assert.ok(iosDetails(html, id), `${route} must include the shared ${id} answer`);
+    const background = iosDetails(html, 'ios-background');
+    assert.ok(background.includes('iOS or iPadOS 26 or later') && background.includes('when the system grants permission') && background.includes('does not add automatic monitoring'), 'Continuation must be conditional and separate from monitoring');
+    if (!iosAppStoreAvailable)
+        assert.ok(iosDetails(html, 'ios-availability').includes('awaiting App Store approval') && iosDetails(html, 'ios-availability').includes('not yet available to download'), 'iOS availability must be explicit in each shared FAQ');
+}
+for (const route of ['/', '/ios/'])
+{
+    const html = documents.get(route);
+    if (!iosAppStoreAvailable)
+        assert.ok(html.includes('<span class="release-status" data-platform="ios">Available soon on the App Store</span>'), `${route} must show an honest, non-interactive iOS release status`);
+}
+const iosPrivacy = privacyPolicy.match(/<section id="ios">[\s\S]*?<\/section>/)?.[0];
+assert.ok(iosPrivacy?.includes('makes no Internet connections') && iosPrivacy.includes('no analytics or telemetry SDK') && iosPrivacy.includes('no file uploads'), 'iOS privacy must explain offline operation and no app analytics');
+assert.ok(iosPrivacy.includes('permission bookmarks') && iosPrivacy.includes('recovery records') && iosPrivacy.includes('filenames and paths'), 'iOS privacy must disclose local functional records');
+assert.ok(iosPrivacy.includes('only when you choose to share') && iosPrivacy.includes('Website links open in your browser when you select them'), 'iOS privacy must distinguish voluntary sharing and browsing');
+assert.ok(iosPrivacy.includes('does not include the Setapp framework') && iosPrivacy.includes('Apple handles the Apple Account'), 'iOS privacy must distinguish the store services');
+const iosTerms = documents.get('/terms-of-service/').match(/<section id="ios">[\s\S]*?<\/section>/)?.[0];
+assert.ok(iosTerms?.includes('stdeula') && iosTerms.includes('support.apple.com/118223'), 'iOS terms must link to the Apple license and refund process');
+assert.ok(iosTerms.includes('separate product from DiskPress for Mac') && iosTerms.includes('No cross-platform purchase'), 'Terms must not invent cross-platform entitlements');
+assert.ok(iosTerms.includes('There is no automatic folder monitoring, scheduled optimization, or CLI') && iosTerms.includes('Photos library'), 'iOS terms must reflect platform limitations');
+if (!iosAppStoreAvailable)
+    assert.ok(iosTerms.includes('not yet available to download or purchase'), 'iOS terms must state that purchases are not available yet');
+for (const route of ['/ios/', '/'])
+{
+    const names = route === '/ios/' ? ['overview', 'selection', 'results'] : ['overview'];
+    const images = [...documents.get(route).matchAll(/<img\b[^>]*>/g)].map(match => match[0]);
+    for (const name of names)
+    {
+        const matches = images.filter(tag => tag.includes(`/_astro/diskpress-for-files-${name}.`));
+        assert.equal(matches.length, 1, `${route} needs one ${name} iOS screenshot`);
+        const tag = matches[0];
+        const attr = key => tag.match(new RegExp(`\\b${key}="([^"]*)"`))?.[1];
+        assert.equal(attr('width'), '1320', 'iOS screenshots must reserve their original width');
+        assert.equal(attr('height'), '2868', 'iOS screenshots must reserve their original height');
+        const eager = route === '/ios/' && name === 'overview';
+        assert.equal(attr('loading'), eager ? 'eager' : 'lazy', 'Only the iOS page hero should load eagerly');
+        if (eager) assert.equal(attr('fetchpriority'), 'high');
+        assert.ok(attr('alt').length > 30 && attr('sizes'), 'iOS captures need descriptive alt text and responsive sizes');
+        const widths = route === '/' ? [240, 480, 720] : [280, 560, 840];
+        const variants = attr('srcset').split(',').map(value => value.trim().split(/\s+/));
+        assert.deepEqual(variants.map(([, width]) => Number.parseInt(width)), widths, 'Use responsive iOS image widths without upscaling');
+        for (const [url] of variants)
+        {
+            assert.ok(url.endsWith('.webp'), 'Serve iOS screenshots as WebP');
+            assert.ok((await stat(path.join(root, url))).size < 200 * 1024, 'Keep each mobile screenshot variant below 200 KiB');
+        }
+    }
+}
+
 let internalLinks = 0;
 let appStoreLinks = 0;
+let iosAppStoreLinks = 0;
 let setappLinks = 0;
 let appBundleLinks = 0;
 let assets = 0;
@@ -578,9 +658,11 @@ for (const [route, html] of documents)
         }
         if (href.includes('apps.apple.com'))
         {
-            assert.ok(href === appStore || href === appBundle, `${route} must preserve the supplied standalone or bundle URL`);
+            assert.ok(href === appStore || href === appBundle || href === iosAppStore, `${route} must preserve the supplied app or bundle URL`);
             if (href === appStore)
                 appStoreLinks++;
+            else if (href === iosAppStore)
+                iosAppStoreLinks++;
             else
                 appBundleLinks++;
         }
@@ -668,4 +750,8 @@ if (appStoreAvailable)
 else
     assert.equal(appBundleLinks, 0, 'Pending-release pages must not offer a bundle containing the unavailable app');
 assert.ok(setappLinks >= 4, 'The homepage and relevant FAQ answers must offer Setapp access');
-console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} Mac App Store links, ${setappLinks} Setapp links, ${appBundleLinks} bundle links, ${developerLinks} developer profile links, ${assets} asset references, widescreen social previews, metadata, sitemap, analytics, and first-paint styling.`);
+if (iosAppStoreAvailable)
+    assert.ok(iosAppStoreLinks >= 4, 'The released iOS app must have its own App Store links');
+else
+    assert.equal(iosAppStoreLinks, 0, 'Do not link to the unavailable iOS listing before approval');
+console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} Mac App Store links, ${iosAppStoreLinks} iOS App Store links, ${setappLinks} Setapp links, ${appBundleLinks} bundle links, ${developerLinks} developer profile links, ${assets} asset references, widescreen social previews, metadata, sitemap, analytics, and first-paint styling.`);
