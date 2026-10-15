@@ -11,7 +11,7 @@ const noindexRoutes = new Set([...unlistedRoutes, '/404.html' ]);
 const documents = new Map();
 const decode = value => value.replaceAll('&amp;', '&').replaceAll('&#38;', '&');
 const appStore = 'https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=diskpress.app&mt=8';
-const iosAppStore = 'https://apps.apple.com/app/apple-store/id6814957268?pt=127627850&ct=diskpress.app&mt=8';
+const iosAppStore = 'https://apps.apple.com/app/apple-store/id6814957268?pt=127627850&ct=www&mt=8';
 const setapp = 'https://setapp.com/apps/diskpress';
 const appBundle = 'https://apps.apple.com/app-bundle/apple-store/id6811364083?pt=127627850&ct=diskpress.app&mt=8';
 const siteConfig = await readFile(new URL('../src/consts.ts', import.meta.url), 'utf8');
@@ -21,7 +21,7 @@ const appStoreAvailable = availabilitySetting[1] === 'true';
 const iosAvailabilitySetting = siteConfig.match(/export const IOS_APP_STORE_AVAILABLE = (true|false);/);
 assert.ok(iosAvailabilitySetting, 'iOS availability must be independent of the Mac release');
 const iosAppStoreAvailable = iosAvailabilitySetting[1] === 'true';
-assert.equal(siteConfig.match(/export const IOS_APP_STORE_URL = '([^']+)';/)?.[1], iosAppStore, 'Keep the supplied iOS app ID and campaign parameters ready for approval');
+assert.equal(siteConfig.match(/export const IOS_APP_STORE_URL = '([^']+)';/)?.[1], iosAppStore, 'Keep the supplied iOS App Store URL and campaign parameters intact');
 assert.equal(siteConfig.match(/export const APP_STORE_URL = '([^']+)';/)?.[1], appStore, 'Keep the supplied App Store URL intact for release');
 assert.equal(siteConfig.match(/export const SETAPP_URL = '([^']+)';/)?.[1], setapp, 'Keep the supplied Setapp URL intact');
 assert.equal(siteConfig.match(/export const STORAGE_SAVER_DUO_URL = '([^']+)';/)?.[1], appBundle, 'Keep the supplied bundle URL and its campaign parameters intact');
@@ -575,7 +575,10 @@ assert.ok(homepage.includes('App screenshots use example data.'), 'Screenshot sa
 
 const iosPage = documents.get('/ios/');
 const iosDetails = (html, id) => html.match(new RegExp(`<details\\b[^>]*id="${id}"[^>]*>[\\s\\S]*?<\\/details>`))?.[0];
-assert.ok(iosPage.includes('same lossless compression and APFS file deduplication core') && iosPage.includes('No archives to unpack'), 'The iOS page must explain the shared core and normal file access');
+assert.ok(iosPage.includes('same lossless compression and APFS file deduplication engine as DiskPress for Mac') && iosPage.includes('No archives to unpack'), 'The iOS page must explain the shared engine and normal file access');
+assert.ok(homepage.includes('same compression and deduplication engine as DiskPress for Mac') && homepage.includes('No automatic monitoring or CLI'), 'The homepage must distinguish the shared engine from Mac-only automation');
+for (const html of [homepage, iosPage])
+    assert.ok(html.includes('not photo or video optimization') && html.includes('local files in the Files app'), 'The iOS introduction must make its local-file purpose and media limitations explicit');
 assert.ok(iosPage.includes('No automatic monitoring') && iosPage.includes('No CLI or menu bar'), 'The platform comparison must not promise Mac-only features on iOS');
 assert.ok(iosPage.includes('Photos library, iCloud Drive, other cloud or network providers') && iosPage.includes('protected system and app paths'), 'The iOS page must disclose storage boundaries');
 assert.ok(iosPage.includes('On My iPhone') && iosPage.includes('rather than the top-level location itself'), 'The iOS page must explain selecting an eligible inner folder');
@@ -593,13 +596,22 @@ for (const route of ['/ios/', '/faq/'])
         assert.ok(iosDetails(html, id), `${route} must include the shared ${id} answer`);
     const background = iosDetails(html, 'ios-background');
     assert.ok(background.includes('iOS or iPadOS 26 or later') && background.includes('when the system grants permission') && background.includes('does not add automatic monitoring'), 'Continuation must be conditional and separate from monitoring');
-    if (!iosAppStoreAvailable)
+    assert.ok(iosDetails(html, 'ios-local-files').includes('not a photo or video optimizer') && iosDetails(html, 'ios-local-files').includes('photos and videos in the Photos app are not processed'), 'The shared FAQ must clearly exclude Photos media optimization');
+    if (iosAppStoreAvailable)
+        assert.ok(decode(iosDetails(html, 'ios-availability')).includes(`href="${iosAppStore}"`) && iosDetails(html, 'ios-availability').includes('available now'), 'Each shared FAQ must link to the released iOS app');
+    else
         assert.ok(iosDetails(html, 'ios-availability').includes('awaiting App Store approval') && iosDetails(html, 'ios-availability').includes('not yet available to download'), 'iOS availability must be explicit in each shared FAQ');
 }
 for (const route of ['/', '/ios/'])
 {
     const html = documents.get(route);
-    if (!iosAppStoreAvailable)
+    if (iosAppStoreAvailable)
+    {
+        const buttons = [...html.matchAll(/<a\b[^>]*aria-label="Download DiskPress for Files on the App Store"[^>]*>/g)];
+        assert.equal(buttons.length, 2, `${route} must offer iOS downloads in both the introduction and closing section`);
+        assert.ok(buttons.every(([tag]) => decode(tag).includes(`href="${iosAppStore}"`)), `${route} must keep every iOS button pointed to the supplied App Store URL`);
+    }
+    else
         assert.ok(html.includes('<span class="release-status" data-platform="ios">Available soon on the App Store</span>'), `${route} must show an honest, non-interactive iOS release status`);
 }
 const iosPrivacy = privacyPolicy.match(/<section id="ios">[\s\S]*?<\/section>/)?.[0];
@@ -613,6 +625,8 @@ assert.ok(iosTerms.includes('separate product from DiskPress for Mac') && iosTer
 assert.ok(iosTerms.includes('There is no automatic folder monitoring, scheduled optimization, or CLI') && iosTerms.includes('Photos library'), 'iOS terms must reflect platform limitations');
 if (!iosAppStoreAvailable)
     assert.ok(iosTerms.includes('not yet available to download or purchase'), 'iOS terms must state that purchases are not available yet');
+else
+    assert.ok(!/when available|not yet available|awaiting App Store approval/i.test(iosTerms), 'Released iOS terms must not describe an unavailable listing');
 for (const route of ['/ios/', '/'])
 {
     const names = route === '/ios/' ? ['overview', 'selection', 'results'] : ['overview'];

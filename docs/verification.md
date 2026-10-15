@@ -1,5 +1,15 @@
 # DiskPress website verification
 
+## iPhone and iPad release on October 15, 2026
+
+Enabled the released DiskPress for Files download links using the developer-supplied App Store URL and campaign parameters. Apple's public lookup returned the published listing for app ID 6814957268. The homepage and iOS page each offer downloads in their introduction and closing sections. The shared FAQ also links to the listing, and the rendered terms no longer describe a pending release.
+
+The updated copy explains that DiskPress for Files uses the same compression and deduplication engine as DiskPress for Mac, but requires user-started optimization without automatic monitoring or a CLI. It works with supported local files selected through Files, not photo or video optimization, the Photos library, cloud storage, or protected paths. Existing privacy disclosures and platform-specific purchase terms remain in place. Mac downloads, screenshots, dependency versions, and existing changelog posts are unchanged.
+
+The production build, TypeScript check, Cloudflare dry run, and static site checks passed. Checks covered 10 pages, 400 internal links, 6 iOS App Store links, 123 asset references, canonical URLs, sitemap membership, analytics integration, and first-paint styling. New assertions cover the released iOS buttons, campaign parameters, shared-engine explanation, media limitations, FAQ availability, and absence of pending-release terms.
+
+Local browser checks covered the homepage and iOS page at widths of 1280, 900, 390, and 320 pixels in Light appearance, plus the iOS page at 1280 pixels in Dark appearance. Download buttons fit their containers, side-by-side cards had equal heights, and there was no horizontal page overflow. The iOS local-files FAQ deep link opened its answer at 320 pixels. Desktop and mobile views were visually reviewed. The temporary viewport override and appearance choice were restored after testing.
+
 ## iPhone and iPad introduction on October 5, 2026
 
 Added a dedicated `/ios/` page, homepage preview, platform-specific download cards, navigation, and sitemap entry for DiskPress for Files. Updated the FAQ, privacy policy, terms, support, and Mac-only CLI and recovery guidance. Existing changelog posts are unchanged. App source and Fastline metadata were inspected read-only. Only Website was modified.
