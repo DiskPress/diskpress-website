@@ -94,6 +94,11 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
     const css = [...head.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/g) ].map(match => match[1]).join('\n');
     assert.ok(css.length > 1000 && css.includes('.site-header') && css.includes('.code-heading'), `${route} must inline the actual site CSS in the head`);
     assert.match(css, /font-family:-apple-system/, `${route} must use the local system font stack`);
+    if (route === '/' || route === '/ios/')
+    {
+        assert.match(css, /\.ios-availability\{[^}]*justify-items:start(?:;|\})/, `${route} must keep iOS downloads left-aligned in product copy and platform cards`);
+        assert.match(css, /\.closing-section\s*>\s*\.ios-availability\{[^}]*justify-items:center(?:;|\})/, `${route} must center standalone iOS downloads in the closing section`);
+    }
     if (html.includes('class="document-grid wrap"'))
     {
         const gridRules = [...css.matchAll(/\.document-grid\{([^{}]*)\}/g) ].map(match => match[1]);
