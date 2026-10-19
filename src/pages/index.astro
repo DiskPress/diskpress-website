@@ -6,7 +6,7 @@ import IosDownload from '../components/IosDownload.astro';
 import CodeBlock from '../components/CodeBlock.astro';
 import FaqList from '../components/FaqList.astro';
 import { featuredQuestions } from '../data/faq';
-import { APP_STORE_AVAILABLE, APP_ARCHIVER_URL, STORAGE_SAVER_DUO_URL, DEVELOPER_URL, BLOG_URL, MORE_APPS_URL } from '../consts';
+import { APP_STORE_AVAILABLE, IOS_APP_STORE_AVAILABLE, APP_ARCHIVER_URL, STORAGE_SAVER_DUO_URL, STORAGE_SAVER_TRIO_URL, DEVELOPER_URL, BLOG_URL, MORE_APPS_URL } from '../consts';
 import overview from '../assets/diskpress-overview.png';
 import menuBar from '../assets/diskpress-menu-bar.png';
 import oneTimeReview from '../assets/diskpress-one-time-review.png';
@@ -28,7 +28,7 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
         <DownloadOptions includeIos />
         <p class="fine">Choose your platform. Separate apps for Mac and iPhone or iPad. <a href="/ios/#platforms">Compare the versions</a>.</p>
         <p class="fine">Built for APFS. File optimization works offline. <a href="/faq/#requirements">Check macOS requirements</a>.</p>
-        {APP_STORE_AVAILABLE && <p class="fine">Save on DiskPress and App Archiver with <a href="#storage-saver-duo">Storage Saver Duo</a>.</p>}
+        {APP_STORE_AVAILABLE && <p class="fine">Save on DiskPress for Mac and App Archiver with <a href="#storage-saver-duo">Storage Saver Duo</a>.{IOS_APP_STORE_AVAILABLE && <> Or get both Mac apps plus DiskPress for Files for iPhone and iPad with <a href="#storage-saver-trio">Storage Saver Trio</a>.</>}</p>}
         <p class="fine">On iPhone or iPad? <a href="/ios/">Meet DiskPress for Files</a>.</p>
       </div>
       <a class="text-link" href="#how-it-works">Meet your new space saver</a>
@@ -181,24 +181,41 @@ const detailScreenshotSizes = '(max-width: 600px) calc(100vw - 98px), (max-width
   <section class="wrap companion-section" id="storage-saver-duo" aria-labelledby="companion-heading">
     <div class="companion-panel">
       <div>
-        <p class="eyebrow">{APP_STORE_AVAILABLE ? 'Storage Saver Duo' : 'The right tool for each job'}</p>
+        <p class="eyebrow">{APP_STORE_AVAILABLE ? 'Storage saver bundles' : 'The right tool for each job'}</p>
         <h2 id="companion-heading">DiskPress for your files.<br />App Archiver for your apps.</h2>
-        {APP_STORE_AVAILABLE && <>
-          <p>Get DiskPress for Mac and App Archiver together at a reduced price compared with buying them separately. This is a Mac app bundle, separate from DiskPress for Files for iPhone and iPad.</p>
-          <div class="bundle-purchase">
-            <a class="download-link" href={STORAGE_SAVER_DUO_URL}>
-              <span>Get Storage Saver Duo</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-            </a>
-            <p class="fine">See current pricing and system requirements on the Mac App Store.</p>
-          </div>
-        </>}
+        {APP_STORE_AVAILABLE && <p>{IOS_APP_STORE_AVAILABLE ? 'Choose two Mac apps, or bring file optimization to your iPhone and iPad too.' : 'Get two focused Mac utilities together in one bundle.'}</p>}
       </div>
       <div>
         <p>DiskPress does not compress application bundles or executables. Optimizing installed software needs a more specialized architecture.</p>
         <p>App Archiver is <a href={DEVELOPER_URL}>Ighor July</a>'s dedicated app for compressing, optimizing, and archiving supported Mac apps. Together, the two tools cover different parts of what you keep.</p>
         <a class="text-link companion-app-link" href={APP_ARCHIVER_URL}><Image src={appArchiverIcon} alt="" width={56} height={56} widths={[56, 112, 168]} sizes="56px" format="webp" quality={90} loading="lazy" /><span>Discover App Archiver</span></a>
       </div>
+      {APP_STORE_AVAILABLE && <div class="bundle-options">
+        <article class="bundle-card" aria-labelledby="duo-heading">
+          <p class="eyebrow">Two apps for Mac</p>
+          <h3 id="duo-heading">Storage Saver Duo</h3>
+          <p>Get DiskPress for Mac and App Archiver together at a reduced price compared with buying them separately. This is a Mac app bundle, separate from DiskPress for Files for iPhone and iPad.</p>
+          <div class="bundle-purchase">
+            <a class="download-link" href={STORAGE_SAVER_DUO_URL}>
+              <span>Get Storage Saver Duo</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+            <p class="fine">See current pricing and system requirements on the App Store.</p>
+          </div>
+        </article>
+        {IOS_APP_STORE_AVAILABLE && <article class="bundle-card" id="storage-saver-trio" aria-labelledby="trio-heading">
+          <p class="eyebrow">Mac, iPhone, and iPad</p>
+          <h3 id="trio-heading">Storage Saver Trio</h3>
+          <p>Get DiskPress for Mac, App Archiver for Mac, and DiskPress for Files for iPhone and iPad in one App Store bundle. Optimize the files on your devices and the apps on your Mac.</p>
+          <div class="bundle-purchase">
+            <a class="download-link" href={STORAGE_SAVER_TRIO_URL}>
+              <span>Get Storage Saver Trio</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+            <p class="fine">See current pricing and system requirements on the App Store.</p>
+          </div>
+        </article>}
+      </div>}
     </div>
   </section>
 

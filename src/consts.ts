@@ -6,6 +6,7 @@ export const APP_STORE_URL = 'https://apps.apple.com/app/apple-store/id680050445
 export const IOS_APP_STORE_URL = 'https://apps.apple.com/app/apple-store/id6814957268?pt=127627850&ct=www&mt=8';
 export const SETAPP_URL = 'https://setapp.com/apps/diskpress';
 export const STORAGE_SAVER_DUO_URL = 'https://apps.apple.com/app-bundle/apple-store/id6811364083?pt=127627850&ct=diskpress.app&mt=8';
+export const STORAGE_SAVER_TRIO_URL = 'https://apps.apple.com/app-bundle/apple-store/id6824053957?pt=127627850&ct=www&mt=8';
 export const DEVELOPER_URL = 'https://reverseeverything.com/ighor/?utm_source=diskpress.app';
 export const BLOG_URL = 'https://reverseeverything.com/?utm_source=diskpress.app';
 export const MORE_APPS_URL = 'https://reverseeverything.com/apps/?utm_source=diskpress.app';

@@ -4,7 +4,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import IosDownload from '../components/IosDownload.astro';
 import FaqList from '../components/FaqList.astro';
 import { iosQuestions } from '../data/faq';
-import { DEVELOPER_URL, IOS_APP_STORE_AVAILABLE } from '../consts';
+import { DEVELOPER_URL, APP_STORE_AVAILABLE, IOS_APP_STORE_AVAILABLE, STORAGE_SAVER_TRIO_URL } from '../consts';
 import overview from '../assets/diskpress-for-files-overview.png';
 import selection from '../assets/diskpress-for-files-selection.png';
 import results from '../assets/diskpress-for-files-results.png';
@@ -118,7 +118,7 @@ import filecopy from '../assets/diskpress-for-files-filecopy.png';
   <section class="section wrap">
     <div class="ios-feature-grid two-up">
       <article class="product-card"><p class="eyebrow">Private by design</p><h2>Your device.<br />Your files.</h2><p>DiskPress for Files makes no Internet connections. No separate app account, no analytics, no telemetry, and no file uploads. Settings, permissions, Activity, and recovery records stay on your device.</p><p>You choose whether to share reports or pass files and results to a shortcut. Other actions in that workflow can have their own privacy practices. Website links open in your browser.</p><a class="text-link" href="/privacy-policy/#ios">Read the iPhone and iPad privacy details</a></article>
-      <article class="product-card"><p class="eyebrow">Built for iPhone and iPad</p><h2>Familiar purpose.<br />A new home.</h2><p>A dedicated touch interface with live progress, saved folders, and Activity. The app requires iOS or iPadOS 14 or later and supported local APFS storage.</p><p>Shortcuts actions require iOS 16 or later. Continuation of an app-started run in the background requires iOS 26 or later. Background folder actions and Compress File Copy require iOS 27 or later. The same version requirements apply to iPadOS.</p><p>Made by <a href={DEVELOPER_URL}>Ighor July</a>, the developer of DiskPress for Mac. Mac purchases, Setapp access, and the Storage Saver Duo Mac bundle are separate from this app unless an offer states otherwise.</p><a class="text-link" href="/terms-of-service/#ios">Read the iPhone and iPad terms</a></article>
+      <article class="product-card"><p class="eyebrow">Built for iPhone and iPad</p><h2>Familiar purpose.<br />A new home.</h2><p>A dedicated touch interface with live progress, saved folders, and Activity. The app requires iOS or iPadOS 14 or later and supported local APFS storage.</p><p>Shortcuts actions require iOS 16 or later. Continuation of an app-started run in the background requires iOS 26 or later. Background folder actions and Compress File Copy require iOS 27 or later. The same version requirements apply to iPadOS.</p><p>Made by <a href={DEVELOPER_URL}>Ighor July</a>, the developer of DiskPress for Mac. Standalone Mac purchases, Setapp access, and the Storage Saver Duo Mac bundle do not include this app.</p>{APP_STORE_AVAILABLE && IOS_APP_STORE_AVAILABLE && <p>Want all three apps? <a href={STORAGE_SAVER_TRIO_URL}>Storage Saver Trio</a> includes DiskPress for Mac, App Archiver for Mac, and DiskPress for Files for iPhone and iPad in one App Store bundle.</p>}<a class="text-link" href="/terms-of-service/#ios">Read the iPhone and iPad terms</a></article>
     </div>
   </section>
 

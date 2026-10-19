@@ -1,5 +1,15 @@
 # DiskPress website verification
 
+## Storage Saver Trio on October 19, 2026
+
+Added Storage Saver Trio beside Storage Saver Duo in the homepage introduction and bundle section, using the supplied App Store URL without changing its campaign parameters. Equal-height cards distinguish Duo's two Mac apps from Trio's DiskPress for Mac, App Archiver for Mac, and DiskPress for Files for iPhone and iPad. Updated the iOS page, shared availability and pricing answers, and factual bundle access explanation in the terms. Existing changelog posts remain unchanged. Standalone Mac and iOS App Store downloads remain primary, with Setapp secondary.
+
+TypeScript, test-script syntax, changelog verification, whitespace checks, and source-rendered bundle, download, iOS, FAQ, privacy, and terms assertions passed. All four Mac and iOS availability combinations passed, with Trio links hidden whenever either app is unavailable. The released configuration contains six exact Trio listing links and passed 201 internal-anchor checks.
+
+Browser checks passed 14 homepage layout cases at widths from 320 to 1440 pixels in light and dark appearances, including both sides of the stacking breakpoint. Bundle cards have equal heights and aligned titles when side by side, equal padding, equally sized buttons, and centered wrapped button labels. Stacked cards use their own content height. Six additional mobile and desktop checks covered the iOS page, pricing FAQ, and terms. No horizontal overflow or browser errors were observed. Keyboard navigation reached the Trio card and the pricing FAQ deep link opened its answer. Styles remain in the document head with system fonts.
+
+Verification used the plain-JavaScript source preview, not a fresh Astro production build. No unsigned native build tools, dependency changes, push, or deployment were used. The developer-supplied bundle link was checked for exact preservation, but its live App Store listing could not be retrieved by the web lookup tool. No fixed price or discount percentage was added.
+
 ## Combined local-change review on October 19, 2026
 
 Reviewed both pending commits together, covering App Store download priority and the iPhone Duo screenshots and Shortcuts update. Corrected the iOS hero image's responsive sizing hint for the stacked tablet layout between 601 and 780 pixels. The image displays at 320 pixels there, but its previous hint advertised 280 pixels. A built-site regression assertion now preserves the correct breakpoint.

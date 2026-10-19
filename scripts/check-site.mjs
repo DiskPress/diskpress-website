@@ -15,6 +15,7 @@ const appStore = 'https://apps.apple.com/app/apple-store/id6800504458?pt=1276278
 const iosAppStore = 'https://apps.apple.com/app/apple-store/id6814957268?pt=127627850&ct=www&mt=8';
 const setapp = 'https://setapp.com/apps/diskpress';
 const appBundle = 'https://apps.apple.com/app-bundle/apple-store/id6811364083?pt=127627850&ct=diskpress.app&mt=8';
+const trioBundle = 'https://apps.apple.com/app-bundle/apple-store/id6824053957?pt=127627850&ct=www&mt=8';
 const siteConfig = await readFile(new URL('../src/consts.ts', import.meta.url), 'utf8');
 const availabilitySetting = siteConfig.match(/export const APP_STORE_AVAILABLE = (true|false);/);
 assert.ok(availabilitySetting, 'Availability must be an explicit shared build-time setting');
@@ -26,6 +27,7 @@ assert.equal(siteConfig.match(/export const IOS_APP_STORE_URL = '([^']+)';/)?.[1
 assert.equal(siteConfig.match(/export const APP_STORE_URL = '([^']+)';/)?.[1], appStore, 'Keep the supplied App Store URL intact for release');
 assert.equal(siteConfig.match(/export const SETAPP_URL = '([^']+)';/)?.[1], setapp, 'Keep the supplied Setapp URL intact');
 assert.equal(siteConfig.match(/export const STORAGE_SAVER_DUO_URL = '([^']+)';/)?.[1], appBundle, 'Keep the supplied bundle URL and its campaign parameters intact');
+assert.equal(siteConfig.match(/export const STORAGE_SAVER_TRIO_URL = '([^']+)';/)?.[1], trioBundle, 'Keep the supplied Trio bundle URL and its campaign parameters intact');
 const developerProfile = 'https://reverseeverything.com/ighor/?utm_source=diskpress.app';
 const developerBlog = 'https://reverseeverything.com/?utm_source=diskpress.app';
 const iconAssets = new Set([ '/favicon.ico', '/favicon.svg', '/favicon-16x16.png', '/favicon-32x32.png', '/apple-touch-icon.png' ]);
@@ -394,13 +396,35 @@ assert.ok(changelog.includes('DiskPress v1.0.2') && changelog.includes('Faster r
 assert.ok(changelog?.includes('DiskPress v1.0.1') && changelog.includes('Added support for macOS 27 Golden Gate.'), 'The changelog must include the v1.0.1 release');
 for (const phrase of ['Linked App option', 'Show Progress', 'File metadata cannot be preserved', 'automatic recovery', 'tiny files', 'Temporary scan failures now retry automatically', 'CLI statistics', 'Storage Saver Duo', 'Locations table sizing'])
     assert.ok(changelog.includes(phrase), `The changelog must preserve the v1.0.1 note about ${phrase}`);
+const bundleSection = homepage.match(/<section\b[^>]*id="storage-saver-duo"[^>]*>[\s\S]*?<\/section>/)?.[0];
 if (appStoreAvailable)
 {
-    const bundleSection = homepage.match(/<section\b[^>]*id="storage-saver-duo"[^>]*>[\s\S]*?<\/section>/)?.[0];
     assert.ok(bundleSection?.includes('DiskPress for Mac and App Archiver together at a reduced price compared with buying them separately') && decode(bundleSection).includes(`href="${appBundle}"`), 'The companion section must explain the discounted Mac bundle and link to its exact listing');
     assert.ok(homepage.includes('href="#storage-saver-duo"') && bundleSection.includes('Get Storage Saver Duo') && bundleSection.includes('current pricing and system requirements'), 'The bundle must be discoverable from the hero and direct visitors to current App Store details');
     const priceAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];
     assert.ok(priceAnswer?.includes('Storage Saver Duo') && decode(priceAnswer).includes(`href="${appBundle}"`) && priceAnswer.includes('includes both Mac apps at a reduced price'), 'The pricing FAQ must include the Mac bundle alongside the standalone download');
+}
+if (appStoreAvailable && iosAppStoreAvailable)
+{
+    const trioCard = bundleSection.match(/<article\b[^>]*id="storage-saver-trio"[^>]*>[\s\S]*?<\/article>/)?.[0];
+    assert.ok(trioCard?.includes('Get Storage Saver Trio') && decode(trioCard).includes(`href="${trioBundle}"`), 'Trio must sit beside Duo and link to the supplied bundle');
+    assert.ok(trioCard.includes('DiskPress for Mac, App Archiver for Mac, and DiskPress for Files for iPhone and iPad'), 'Trio must name all three apps and their platforms');
+    assert.equal((bundleSection.match(/class="bundle-card"/g) || []).length, 2, 'The bundle comparison must have separate Duo and Trio cards');
+    assert.ok(homepage.includes('href="#storage-saver-trio"'), 'The hero must make the Trio card discoverable');
+    assert.ok(trioCard.includes('current pricing and system requirements'), 'Trio must send readers to current store details rather than hard-code a price');
+    for (const route of ['/ios/', '/faq/', '/terms-of-service/'])
+        assert.ok(decode(documents.get(route)).includes(`href="${trioBundle}"`), `${route} must explain and link the cross-platform bundle`);
+    for (const id of ['download-price', 'ios-availability'])
+    {
+        const answer = documents.get('/faq/').match(new RegExp(`<details\\b[^>]*id="${id}"[^>]*>[\\s\\S]*?<\\/details>`))?.[0];
+        assert.ok(answer?.includes('Unlike the Mac-only Duo, Trio includes the iPhone and iPad app') && decode(answer).includes(`href="${trioBundle}"`), `${id} must distinguish Duo from Trio`);
+    }
+}
+else
+{
+    for (const [route, html] of documents)
+        assert.ok(!decode(html).includes(`href="${trioBundle}"`), `${route} must not offer Trio while one of its platforms is unavailable`);
+    assert.ok(!homepage.includes('href="#storage-saver-trio"'), 'The hero must not link to an unavailable Trio card');
 }
 const backgroundSection = homepage.match(/<section\b[^>]*id="background"[^>]*>[\s\S]*?<\/section>/)?.[0];
 assert.ok(backgroundSection?.includes('first optimization pass can keep the CPU busy'), 'The homepage must explain the initial compression workload');
@@ -613,7 +637,8 @@ assert.ok(iosPage.includes('role="region" aria-label="Mac and iPhone or iPad fea
 assert.ok(iosPage.includes('scope="row"') && iosPage.includes('scope="col"'), 'The comparison needs accessible row and column headers');
 assert.ok(iosPage.includes('adds storage writes') && iosPage.includes('independent backup'), 'iOS safety guidance must cover storage writes and backups');
 assert.ok(homepage.includes('id="mac-download"') && homepage.includes('class="platform-downloads"'), 'The homepage needs both a Mac target and the shared platform choice');
-assert.ok(homepage.includes('Mac app bundle, separate from DiskPress for Files'), 'The bundle must not imply iOS access');
+if (appStoreAvailable)
+    assert.ok(homepage.includes('Mac app bundle, separate from DiskPress for Files'), 'Duo must not imply iOS access');
 assert.ok(documents.get('/cli/').includes('DiskPress for Files for iPhone and iPad</a> has no CLI'), 'The CLI documentation must be Mac-specific');
 assert.ok(integrityPage.includes('instructions apply to DiskPress for Mac only'), 'The direct-only recovery route must not tell iOS users to remove a Mac app bundle');
 for (const route of ['/ios/', '/faq/'])
@@ -652,7 +677,9 @@ assert.ok(iosPrivacy.includes('does not include the Setapp framework') && iosPri
 assert.ok(iosPrivacy.includes('completion summaries') && iosPrivacy.includes('DiskPress/Shortcut Results') && iosPrivacy.includes('may store or transmit information'), 'iOS privacy must disclose local Shortcuts output and downstream services');
 const iosTerms = documents.get('/terms-of-service/').match(/<section id="ios">[\s\S]*?<\/section>/)?.[0];
 assert.ok(iosTerms?.includes('stdeula') && iosTerms.includes('support.apple.com/118223'), 'iOS terms must link to the Apple license and refund process');
-assert.ok(iosTerms.includes('separate product from DiskPress for Mac') && iosTerms.includes('No cross-platform purchase'), 'Terms must not invent cross-platform entitlements');
+assert.ok(iosTerms.includes('separate product from DiskPress for Mac') && iosTerms.includes('standalone Mac App Store purchase, Setapp entitlement, or the Storage Saver Duo Mac bundle does not grant access'), 'Terms must distinguish standalone Mac access and Duo from the iOS app');
+if (appStoreAvailable && iosAppStoreAvailable)
+    assert.ok(decode(iosTerms).includes(`href="${trioBundle}"`) && iosTerms.includes('includes DiskPress for Mac, App Archiver for Mac, and DiskPress for Files for iPhone and iPad') && iosTerms.includes('does not include a Setapp subscription'), 'Terms must accurately identify Trio without implying Setapp access');
 assert.ok(iosTerms.includes('There is no continuous folder monitoring or CLI') && iosTerms.includes('Photos library'), 'iOS terms must reflect platform limitations');
 assert.ok(iosTerms.includes('create and schedule workflows') && iosTerms.includes('Compress File Copy') && iosTerms.includes('iOS or iPadOS 27 or later') && iosTerms.includes('No uninterrupted or unattended completion is guaranteed'), 'iOS terms must cover Shortcuts, copy outputs, and system-controlled background execution');
 if (!iosAppStoreAvailable)
@@ -695,6 +722,7 @@ let appStoreLinks = 0;
 let iosAppStoreLinks = 0;
 let setappLinks = 0;
 let appBundleLinks = 0;
+let trioBundleLinks = 0;
 let assets = 0;
 for (const [route, html] of documents)
 {
@@ -708,11 +736,13 @@ for (const [route, html] of documents)
         }
         if (href.includes('apps.apple.com'))
         {
-            assert.ok(href === appStore || href === appBundle || href === iosAppStore, `${route} must preserve the supplied app or bundle URL`);
+            assert.ok(href === appStore || href === appBundle || href === trioBundle || href === iosAppStore, `${route} must preserve the supplied app or bundle URL`);
             if (href === appStore)
                 appStoreLinks++;
             else if (href === iosAppStore)
                 iosAppStoreLinks++;
+            else if (href === trioBundle)
+                trioBundleLinks++;
             else
                 appBundleLinks++;
         }
@@ -799,9 +829,13 @@ if (appStoreAvailable)
     assert.ok(appBundleLinks >= 2, 'The homepage and pricing FAQ must provide bundle links without replacing standalone downloads');
 else
     assert.equal(appBundleLinks, 0, 'Pending-release pages must not offer a bundle containing the unavailable app');
+if (appStoreAvailable && iosAppStoreAvailable)
+    assert.ok(trioBundleLinks >= 6, 'The homepage, iOS page, FAQ, and terms must offer Trio alongside the relevant Duo mentions');
+else
+    assert.equal(trioBundleLinks, 0, 'Trio must not be offered while either platform is unavailable');
 assert.ok(setappLinks >= 4, 'The homepage and relevant FAQ answers must offer Setapp access');
 if (iosAppStoreAvailable)
     assert.ok(iosAppStoreLinks >= 4, 'The released iOS app must have its own App Store links');
 else
     assert.equal(iosAppStoreLinks, 0, 'Do not link to the unavailable iOS listing before approval');
-console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} Mac App Store links, ${iosAppStoreLinks} iOS App Store links, ${setappLinks} Setapp links, ${appBundleLinks} bundle links, ${developerLinks} developer profile links, ${assets} asset references, widescreen social previews, metadata, sitemap, analytics, and first-paint styling.`);
+console.log(`Verified ${documents.size} pages, ${internalLinks} internal links, ${appStoreLinks} Mac App Store links, ${iosAppStoreLinks} iOS App Store links, ${setappLinks} Setapp links, ${appBundleLinks} Duo bundle links, ${trioBundleLinks} Trio bundle links, ${developerLinks} developer profile links, ${assets} asset references, widescreen social previews, metadata, sitemap, analytics, and first-paint styling.`);
