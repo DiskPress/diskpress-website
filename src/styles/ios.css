@@ -13,7 +13,7 @@
   .ios-hero { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: min(48px, var(--gutter)); align-items: center; padding-block: 48px; }
   .ios-hero h1 { font-size: clamp(2.75rem, 5.4vw, 5rem); }
   .ios-hero h1 span { color: var(--accent); }
-  .ios-hero-visual img { width: 280px; height: auto; }
+  .ios-hero-visual img { width: min(100%, 320px); height: auto; }
   .ios-feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
   .ios-feature-grid.two-up, .platform-downloads { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .product-card, .platform-card { display: grid; align-content: start; gap: 20px; min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
@@ -24,7 +24,7 @@
   .platform-card .download-group, .platform-card .download-options { max-width: none; }
   .platform-card .download-link { width: 100%; }
   .ios-screenshot-grid { max-width: 960px; margin-inline: auto; }
-  .ios-screenshot img { width: min(100%, 280px); justify-self: center; }
+  .ios-screenshot img { width: min(100%, 360px); justify-self: center; }
   .platform-notes { margin-top: 24px; }
   .platform-comparison table { min-width: 620px; table-layout: fixed; }
   .platform-comparison th, .platform-comparison td { vertical-align: middle; }

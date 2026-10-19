@@ -594,10 +594,19 @@ assert.ok(homepage.includes('App screenshots use example data.'), 'Screenshot sa
 const iosPage = documents.get('/ios/');
 const iosDetails = (html, id) => html.match(new RegExp(`<details\\b[^>]*id="${id}"[^>]*>[\\s\\S]*?<\\/details>`))?.[0];
 assert.ok(iosPage.includes('same lossless compression and APFS file deduplication engine as DiskPress for Mac') && iosPage.includes('No archives to unpack'), 'The iOS page must explain the shared engine and normal file access');
-assert.ok(homepage.includes('same compression and deduplication engine as DiskPress for Mac') && homepage.includes('No automatic monitoring or CLI'), 'The homepage must distinguish the shared engine from Mac-only automation');
+assert.ok(homepage.includes('same compression and deduplication engine as DiskPress for Mac') && homepage.includes('No continuous monitoring or CLI'), 'The homepage must distinguish the shared engine from Mac-only continuous monitoring and CLI');
 for (const html of [homepage, iosPage])
     assert.ok(html.includes('not photo or video optimization') && html.includes('local files in the Files app'), 'The iOS introduction must make its local-file purpose and media limitations explicit');
-assert.ok(iosPage.includes('No automatic monitoring') && iosPage.includes('No CLI or menu bar'), 'The platform comparison must not promise Mac-only features on iOS');
+assert.ok(iosPage.includes('No continuous monitoring') && iosPage.includes('No CLI or menu bar'), 'The platform comparison must not promise Mac-only features on iOS');
+assert.ok(homepage.includes('href="/ios/#shortcuts"') && homepage.includes('iOS 16') && homepage.includes('iOS 27'), 'The homepage must introduce Shortcuts with version requirements');
+assert.ok(iosPage.includes('id="shortcuts"') && iosPage.includes('id="compressed-copy"'), 'Shortcuts and compressed copies need stable, linkable sections');
+for (const phrase of ['Start Location Optimization', 'Optimize Saved Location', 'Optimize Authorized Folder', 'Compress File Copy', 'iOS and iPadOS 16 or later', 'iOS and iPadOS 27 or later', 'iOS or iPadOS 26 or later', 'A path alone never grants access', 'sharing a shortcut does not share your folder permissions', 'original untouched', 'some copies', 'DiskPress/Shortcut Results'])
+    assert.ok(iosPage.includes(phrase), `The iOS page must explain ${phrase}`);
+for (const phrase of ['minimum savings', 'file size limits', 'recent-file protection', 'performance preferences', 'Pause and resume', 'live file counts'])
+    assert.ok(iosPage.includes(phrase), `The iOS page must cover ${phrase}`);
+assert.ok(iosPage.includes('system may stop background work or require an unlock') && iosPage.includes('may remove native compression'), 'Automation and exported savings must not be guaranteed');
+for (const route of ['/', '/ios/', '/faq/', '/privacy-policy/', '/terms-of-service/'])
+    assert.ok(!/start each optimization yourself|start every optimization|no automatic folder monitoring, scheduled optimization|app with a manual workflow|does not watch folders or schedule future runs/i.test(documents.get(route)), `${route} must not describe the iOS app as manual-only`);
 assert.ok(iosPage.includes('Photos library, iCloud Drive, other cloud or network providers') && iosPage.includes('protected system and app paths'), 'The iOS page must disclose storage boundaries');
 assert.ok(iosPage.includes('On My iPhone') && iosPage.includes('rather than the top-level location itself'), 'The iOS page must explain selecting an eligible inner folder');
 assert.ok(iosPage.includes('role="region" aria-label="Mac and iPhone or iPad feature comparison" tabindex="0"'), 'The comparison must be keyboard-scrollable on narrow screens');
@@ -610,10 +619,13 @@ assert.ok(integrityPage.includes('instructions apply to DiskPress for Mac only')
 for (const route of ['/ios/', '/faq/'])
 {
     const html = documents.get(route);
-    for (const id of ['ios-availability', 'ios-local-files', 'ios-background', 'ios-savings', 'ios-privacy'])
+    for (const id of ['ios-availability', 'ios-local-files', 'ios-background', 'ios-shortcuts', 'ios-compressed-copy', 'ios-savings', 'ios-privacy'])
         assert.ok(iosDetails(html, id), `${route} must include the shared ${id} answer`);
     const background = iosDetails(html, 'ios-background');
     assert.ok(background.includes('iOS or iPadOS 26 or later') && background.includes('when the system grants permission') && background.includes('does not add automatic monitoring'), 'Continuation must be conditional and separate from monitoring');
+    assert.ok(background.includes('schedule workflows') && background.includes('iOS or iPadOS 27 or later'), 'The FAQ must distinguish Shortcuts scheduling and background actions from continuous monitoring');
+    assert.ok(iosDetails(html, 'ios-shortcuts').includes('iOS or iPadOS 16 or later') && iosDetails(html, 'ios-shortcuts').includes('Shared shortcuts do not transfer folder permissions'), 'The Shortcuts FAQ must cover compatibility and authorization');
+    assert.ok(iosDetails(html, 'ios-compressed-copy').includes('original untouched') && iosDetails(html, 'ios-compressed-copy').includes('may remove compression') && iosDetails(html, 'ios-compressed-copy').includes('additional storage'), 'The copy FAQ must explain unchanged originals and copy limitations');
     assert.ok(iosDetails(html, 'ios-local-files').includes('not a photo or video optimizer') && iosDetails(html, 'ios-local-files').includes('photos and videos in the Photos app are not processed'), 'The shared FAQ must clearly exclude Photos media optimization');
     if (iosAppStoreAvailable)
         assert.ok(decode(iosDetails(html, 'ios-availability')).includes(`href="${iosAppStore}"`) && iosDetails(html, 'ios-availability').includes('available now'), 'Each shared FAQ must link to the released iOS app');
@@ -637,17 +649,19 @@ assert.ok(iosPrivacy?.includes('makes no Internet connections') && iosPrivacy.in
 assert.ok(iosPrivacy.includes('permission bookmarks') && iosPrivacy.includes('recovery records') && iosPrivacy.includes('filenames and paths'), 'iOS privacy must disclose local functional records');
 assert.ok(iosPrivacy.includes('only when you choose to share') && iosPrivacy.includes('Website links open in your browser when you select them'), 'iOS privacy must distinguish voluntary sharing and browsing');
 assert.ok(iosPrivacy.includes('does not include the Setapp framework') && iosPrivacy.includes('Apple handles the Apple Account'), 'iOS privacy must distinguish the store services');
+assert.ok(iosPrivacy.includes('completion summaries') && iosPrivacy.includes('DiskPress/Shortcut Results') && iosPrivacy.includes('may store or transmit information'), 'iOS privacy must disclose local Shortcuts output and downstream services');
 const iosTerms = documents.get('/terms-of-service/').match(/<section id="ios">[\s\S]*?<\/section>/)?.[0];
 assert.ok(iosTerms?.includes('stdeula') && iosTerms.includes('support.apple.com/118223'), 'iOS terms must link to the Apple license and refund process');
 assert.ok(iosTerms.includes('separate product from DiskPress for Mac') && iosTerms.includes('No cross-platform purchase'), 'Terms must not invent cross-platform entitlements');
-assert.ok(iosTerms.includes('There is no automatic folder monitoring, scheduled optimization, or CLI') && iosTerms.includes('Photos library'), 'iOS terms must reflect platform limitations');
+assert.ok(iosTerms.includes('There is no continuous folder monitoring or CLI') && iosTerms.includes('Photos library'), 'iOS terms must reflect platform limitations');
+assert.ok(iosTerms.includes('create and schedule workflows') && iosTerms.includes('Compress File Copy') && iosTerms.includes('iOS or iPadOS 27 or later') && iosTerms.includes('No uninterrupted or unattended completion is guaranteed'), 'iOS terms must cover Shortcuts, copy outputs, and system-controlled background execution');
 if (!iosAppStoreAvailable)
     assert.ok(iosTerms.includes('not yet available to download or purchase'), 'iOS terms must state that purchases are not available yet');
 else
     assert.ok(!/when available|not yet available|awaiting App Store approval/i.test(iosTerms), 'Released iOS terms must not describe an unavailable listing');
 for (const route of ['/ios/', '/'])
 {
-    const names = route === '/ios/' ? ['overview', 'selection', 'results'] : ['overview'];
+    const names = route === '/ios/' ? ['overview', 'selection', 'results', 'automation', 'filecopy'] : ['overview'];
     const images = [...documents.get(route).matchAll(/<img\b[^>]*>/g)].map(match => match[0]);
     for (const name of names)
     {
@@ -655,13 +669,13 @@ for (const route of ['/ios/', '/'])
         assert.equal(matches.length, 1, `${route} needs one ${name} iOS screenshot`);
         const tag = matches[0];
         const attr = key => tag.match(new RegExp(`\\b${key}="([^"]*)"`))?.[1];
-        assert.equal(attr('width'), '1320', 'iOS screenshots must reserve their original width');
-        assert.equal(attr('height'), '2868', 'iOS screenshots must reserve their original height');
+        assert.equal(attr('width'), '1398', 'iPhone Duo screenshots must reserve their original width');
+        assert.equal(attr('height'), '2034', 'iPhone Duo screenshots must reserve their original height');
         const eager = route === '/ios/' && name === 'overview';
         assert.equal(attr('loading'), eager ? 'eager' : 'lazy', 'Only the iOS page hero should load eagerly');
         if (eager) assert.equal(attr('fetchpriority'), 'high');
         assert.ok(attr('alt').length > 30 && attr('sizes'), 'iOS captures need descriptive alt text and responsive sizes');
-        const widths = route === '/' ? [240, 480, 720] : [280, 560, 840];
+        const widths = route === '/' ? [240, 480, 720] : [360, 720, 1080];
         const variants = attr('srcset').split(',').map(value => value.trim().split(/\s+/));
         assert.deepEqual(variants.map(([, width]) => Number.parseInt(width)), widths, 'Use responsive iOS image widths without upscaling');
         for (const [url] of variants)

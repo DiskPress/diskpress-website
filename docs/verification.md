@@ -1,5 +1,17 @@
 # DiskPress website verification
 
+## iPhone Duo screenshots and Shortcuts on October 19, 2026
+
+Updated the iOS product page, homepage introduction and download card, shared FAQ, support guidance, Mac CLI cross-reference, and factual iOS privacy and terms descriptions from the supplied English Fastline metadata. The site now distinguishes iOS 16 Shortcuts actions, iOS 26 continuation of app-started work, and iOS 27 background folder actions and Compress File Copy. It explains permissions, system-controlled background execution, unchanged originals, locally retained copy outputs, and the possibility of losing compression when another app saves a copy. Continuous folder monitoring and the CLI remain Mac-only features.
+
+Replaced Overview, Review Selection, and Results with the latest English iPhone Duo outer-display captures. Added the saved-folder Automation and file-copy help captures. All five original PNGs are 1398 by 2034 pixels and remain uncropped. The existing Astro image pipeline is configured for responsive WebP output up to 1080 pixels on the iOS page and 720 pixels on the homepage, without upscaling. Dimensions are reserved, the iOS hero has high fetch priority, and the other captures load lazily.
+
+TypeScript, template syntax, targeted rendered-content assertions, 200 internal-anchor checks, screenshot-source identity checks, and the existing changelog verification passed. The updated assertions cover Shortcuts requirements, copy behavior, authorization, privacy, terms, and removal of outdated manual-only descriptions. Existing changelog posts, store URLs, Mac screenshots, and dependencies are unchanged.
+
+Browser review used a local static preview with the current page source, current CSS, original PNG assets, and the existing layout shell and scripts. Light and dark layout checks covered widths from 320 to 1440 pixels. Side-by-side cards retained equal heights, image proportions were preserved, closing download buttons were centered, and there was no horizontal page overflow. Related FAQ, privacy, terms, support, and CLI pages were checked at 320 pixels. FAQ deep links and keyboard disclosure worked. The Mac and iOS App Store buttons remain equally prominent, with Setapp secondary. No browser console errors were observed. Browser appearance and viewport overrides were restored afterward.
+
+No Astro, Vite, native image processor, or deployment command was run. The preview is not a fresh production build and does not validate generated WebP sizes or Cloudflare output. Production image generation and the complete built-site check remain for the normal build environment. CSS still loads in the document head with the system font stack. This update was prepared for a local commit only, with no push or deployment.
+
 ## App Store download priority on October 19, 2026
 
 The homepage hero now gives Mac App Store and iOS App Store equal primary buttons. Setapp remains available as a smaller text link below the buttons and below the Mac platform card's download. Both platform cards retain equal heights on desktop and equally wide primary buttons. The standalone iOS download section keeps its centered alignment. App Store URLs and attribution parameters are unchanged, as are existing changelog posts.
