@@ -1,0 +1,75 @@
+{
+  "retrievedOn": "2026-10-18",
+  "displayTimeZone": "America/Los_Angeles",
+  "sources": {
+    "mac": "https://apps.apple.com/us/app/diskpress/id6800504458",
+    "ios": "https://apps.apple.com/us/app/diskpress-for-files/id6814957268"
+  },
+  "releases": [
+    {
+      "platform": "mac",
+      "version": "1.1.1",
+      "releasedAt": "2026-10-19T00:53:12Z",
+      "notes": [
+        "Fixed an issue that could incorrectly mark saved locations as invalid after restarting your Mac or reconnecting a drive.",
+        "Fixed an issue where the savings panel could remain at zero after optimization",
+        "Improved optimization speed for large folders."
+      ]
+    },
+    {
+      "platform": "ios",
+      "version": "1.0.2",
+      "releasedAt": "2026-10-18T13:39:04Z",
+      "notes": [
+        "Added Apple Shortcuts actions to list saved folders and start optimization using their configured modes and exclusions on iOS 16 or later.",
+        "Added background optimization of saved folders and subfolders on iOS 27 or later, including paths within previously authorized locations.",
+        "Added Compress File Copy on iOS 27 or later. Pass a file from another action or a shortcut enabled in the share sheet and receive a separate compressed copy, leaving the original untouched.",
+        "Added an Automation section to saved folders, with Add Location Shortcut, folder path copying and setup guidance.",
+        "Added help for creating, sharing and running shortcuts, including compatibility and compression limitations.",
+        "Updated loading icons and popover dismissal handling.",
+        "Improved progress feedback for large selections, with live file counts and clearer status messages."
+      ]
+    },
+    {
+      "platform": "ios",
+      "version": "1.0.1",
+      "releasedAt": "2026-10-17T14:11:19Z",
+      "notes": [
+        "Added German, Ukrainian, Spanish, Latin American Spanish, Simplified Chinese and Traditional Chinese.",
+        "Improved recovery of interrupted compression and deduplication operations when storage identifiers change.",
+        "Updated iPad navigation with native tabs and a sidebar.",
+        "Improved interface adaptation to changing screen sizes.",
+        "Preserved entered text and keyboard focus during navigation layout changes.",
+        "Improved share-sheet positioning when rotating or resizing.",
+        "Improved regional formatting for numbers, percentages and durations."
+      ]
+    },
+    {
+      "platform": "ios",
+      "version": "1.0.0",
+      "releasedAt": "2026-10-15T15:21:31Z",
+      "notes": []
+    },
+    {
+      "platform": "mac",
+      "version": "1.0.8",
+      "releasedAt": "2026-10-03T20:03:36Z",
+      "notes": [
+        "Faster optimization of large folders, especially when files are already compressed.",
+        "Removed unnecessary repeat folder scans after successful optimization.",
+        "Corrected scan counters and misleading time estimates while counting files.",
+        "Simplified optimization summaries, with convenient buttons to open Activity, Locations, or Settings.",
+        "Activity now explains why files in saved locations were left unchanged.",
+        "Improved recovery messages and cancellation of runs waiting for recovery.",
+        "Fixed a scan stall in Wine bottles and other folders containing symbolic links.",
+        "Updated interface wording and translations."
+      ]
+    },
+    {
+      "platform": "mac",
+      "version": "1.0.0",
+      "releasedAt": "2026-09-12T12:23:14Z",
+      "notes": []
+    }
+  ]
+}

@@ -28,6 +28,7 @@
 		"cf-typegen": "wrangler types",
 		"check": "astro build && tsc && wrangler deploy --dry-run",
 		"test:site": "node scripts/check-site.mjs",
+		"test:changelog": "node scripts/check-changelog.mjs",
 		"deploy": "wrangler deploy",
 		"dev": "astro dev",
 		"preview": "astro build && wrangler dev"

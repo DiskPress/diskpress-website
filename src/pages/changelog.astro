@@ -1,18 +1,78 @@
 ---
 import DocumentLayout from '../layouts/DocumentLayout.astro';
-import { APP_STORE_URL } from '../consts';
+import { APP_STORE_URL, IOS_APP_STORE_URL } from '../consts';
 
 const sections = [
-  { id: 'v1-0-7', label: 'Version 1.0.7' },
-  { id: 'v1-0-6', label: 'Version 1.0.6' },
-  { id: 'v1-0-5', label: 'Version 1.0.5' },
-  { id: 'v1-0-4', label: 'Version 1.0.4' },
-  { id: 'v1-0-3', label: 'Version 1.0.3' },
-  { id: 'v1-0-2', label: 'Version 1.0.2' },
-  { id: 'v1-0-1', label: 'Version 1.0.1' },
+  { id: 'v1-1-1', label: 'Mac 1.1.1' },
+  { id: 'ios-v1-0-2', label: 'iOS 1.0.2' },
+  { id: 'ios-v1-0-1', label: 'iOS 1.0.1' },
+  { id: 'ios-v1-0-0', label: 'iOS 1.0.0' },
+  { id: 'v1-0-8', label: 'Mac 1.0.8' },
+  { id: 'v1-0-7', label: 'Mac 1.0.7' },
+  { id: 'v1-0-6', label: 'Mac 1.0.6' },
+  { id: 'v1-0-5', label: 'Mac 1.0.5' },
+  { id: 'v1-0-4', label: 'Mac 1.0.4' },
+  { id: 'v1-0-3', label: 'Mac 1.0.3' },
+  { id: 'v1-0-2', label: 'Mac 1.0.2' },
+  { id: 'v1-0-1', label: 'Mac 1.0.1' },
+  { id: 'v1-0-0', label: 'Mac 1.0.0' },
 ];
 ---
-<DocumentLayout title="Changelog" eyebrow="DiskPress changelog" heading="What's new in DiskPress" description="Release notes for DiskPress, the native Mac utility for compressing and deduplicating the files you want to keep." sections={sections}>
+<DocumentLayout title="Changelog" eyebrow="DiskPress changelog" heading="What's new in DiskPress" description="Release notes for DiskPress for Mac and DiskPress for Files for iPhone and iPad." sections={sections}>
+  <section id="v1-1-1" class="changelog-release">
+    <div class="changelog-release-heading"><p class="eyebrow">Latest Mac release</p><h2>DiskPress v1.1.1</h2><p class="fine">Mac - <time datetime="2026-10-19T00:53:12Z">October 18, 2026</time></p><p>More reliable saved locations and savings reporting, with faster optimization of large folders.</p></div>
+    <ul class="changelog-list">
+      <li>Fixed an issue that could incorrectly mark saved locations as invalid after restarting your Mac or reconnecting a drive.</li>
+      <li>Fixed an issue where the savings panel could remain at zero after optimization</li>
+      <li>Improved optimization speed for large folders.</li>
+    </ul>
+    <p class="fine">Release notes from the <a href={APP_STORE_URL}>Mac App Store</a>.</p>
+  </section>
+  <section id="ios-v1-0-2" class="changelog-release">
+    <div class="changelog-release-heading"><h2>DiskPress for Files v1.0.2</h2><p class="fine">iPhone and iPad - <time datetime="2026-10-18T13:39:04Z">October 18, 2026</time></p><p>Apple Shortcuts support, background optimization on iOS 27 or later, and clearer progress.</p></div>
+    <ul class="changelog-list">
+      <li>Added Apple Shortcuts actions to list saved folders and start optimization using their configured modes and exclusions on iOS 16 or later.</li>
+      <li>Added background optimization of saved folders and subfolders on iOS 27 or later, including paths within previously authorized locations.</li>
+      <li>Added Compress File Copy on iOS 27 or later. Pass a file from another action or a shortcut enabled in the share sheet and receive a separate compressed copy, leaving the original untouched.</li>
+      <li>Added an Automation section to saved folders, with Add Location Shortcut, folder path copying and setup guidance.</li>
+      <li>Added help for creating, sharing and running shortcuts, including compatibility and compression limitations.</li>
+      <li>Updated loading icons and popover dismissal handling.</li>
+      <li>Improved progress feedback for large selections, with live file counts and clearer status messages.</li>
+    </ul>
+    <p class="fine">Release notes from the <a href={IOS_APP_STORE_URL}>App Store</a>.</p>
+  </section>
+  <section id="ios-v1-0-1" class="changelog-release">
+    <div class="changelog-release-heading"><h2>DiskPress for Files v1.0.1</h2><p class="fine">iPhone and iPad - <time datetime="2026-10-17T14:11:19Z">October 17, 2026</time></p><p>More languages, improved recovery, and a more adaptable iPad interface.</p></div>
+    <ul class="changelog-list">
+      <li>Added German, Ukrainian, Spanish, Latin American Spanish, Simplified Chinese and Traditional Chinese.</li>
+      <li>Improved recovery of interrupted compression and deduplication operations when storage identifiers change.</li>
+      <li>Updated iPad navigation with native tabs and a sidebar.</li>
+      <li>Improved interface adaptation to changing screen sizes.</li>
+      <li>Preserved entered text and keyboard focus during navigation layout changes.</li>
+      <li>Improved share-sheet positioning when rotating or resizing.</li>
+      <li>Improved regional formatting for numbers, percentages and durations.</li>
+    </ul>
+    <p class="fine">Release notes from the <a href={IOS_APP_STORE_URL}>App Store</a>.</p>
+  </section>
+  <section id="ios-v1-0-0" class="changelog-release">
+    <div class="changelog-release-heading"><h2>DiskPress for Files v1.0.0</h2><p class="fine">iPhone and iPad - <time datetime="2026-10-15T15:21:31Z">October 15, 2026</time></p><p>Initial release of DiskPress for Files for iPhone and iPad.</p></div>
+    <p>Apple did not publish release notes for this initial version.</p>
+    <p class="fine">Release history from the <a href={IOS_APP_STORE_URL}>App Store</a>.</p>
+  </section>
+  <section id="v1-0-8" class="changelog-release">
+    <div class="changelog-release-heading"><h2>DiskPress v1.0.8</h2><p class="fine">Mac - <time datetime="2026-10-03T20:03:36Z">October 3, 2026</time></p><p>Faster large-folder optimization, clearer results, and more reliable scanning and recovery.</p></div>
+    <ul class="changelog-list">
+      <li>Faster optimization of large folders, especially when files are already compressed.</li>
+      <li>Removed unnecessary repeat folder scans after successful optimization.</li>
+      <li>Corrected scan counters and misleading time estimates while counting files.</li>
+      <li>Simplified optimization summaries, with convenient buttons to open Activity, Locations, or Settings.</li>
+      <li>Activity now explains why files in saved locations were left unchanged.</li>
+      <li>Improved recovery messages and cancellation of runs waiting for recovery.</li>
+      <li>Fixed a scan stall in Wine bottles and other folders containing symbolic links.</li>
+      <li>Updated interface wording and translations.</li>
+    </ul>
+    <p class="fine">Release notes from the <a href={APP_STORE_URL}>Mac App Store</a>.</p>
+  </section>
   <section id="v1-0-7" class="changelog-release">
     <div class="changelog-release-heading"><p class="eyebrow">Latest release</p><h2>DiskPress v1.0.7</h2><p class="fine"><time datetime="2026-09-29">September 29, 2026</time></p><p>Faster folder scans and fewer background rescans, with savings updated during optimization.</p></div>
     <ul class="changelog-list">
@@ -106,5 +166,10 @@ const sections = [
       <li>Added the Storage Saver Duo bundle link to Help &amp; About and updated the App Archiver tile with its app icon.</li>
       <li>Improved Locations table sizing and column alignment. Optimization titles and subtitles now stay vertically centered beside the app logo.</li>
     </ul>
+  </section>
+  <section id="v1-0-0" class="changelog-release">
+    <div class="changelog-release-heading"><h2>DiskPress v1.0.0</h2><p class="fine">Mac - <time datetime="2026-09-12T12:23:14Z">September 12, 2026</time></p><p>Initial release of DiskPress for Mac.</p></div>
+    <p>Apple did not publish release notes for this initial version.</p>
+    <p class="fine">Release history from the <a href={APP_STORE_URL}>Mac App Store</a>.</p>
   </section>
 </DocumentLayout>
