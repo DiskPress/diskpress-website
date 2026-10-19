@@ -21,7 +21,8 @@
   .product-card h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
   .platform-downloads { display: grid; align-items: stretch; gap: 24px; width: 100%; text-align: left; }
   .platform-card h3 { font-size: 1.75rem; }
-  .platform-card .download-options { max-width: none; }
+  .platform-card .download-group, .platform-card .download-options { max-width: none; }
+  .platform-card .download-link { width: 100%; }
   .ios-screenshot-grid { max-width: 960px; margin-inline: auto; }
   .ios-screenshot img { width: min(100%, 280px); justify-self: center; }
   .platform-notes { margin-top: 24px; }

@@ -202,7 +202,7 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
         assert.ok(!/Available soon on the Mac App Store|Mac App Store version is awaiting approval/.test(html), `${route} must not mark the released Mac app as pending`);
     assert.ok(!/<(?:a|button)\b[^>]*class="[^"]*release-status/.test(html), `${route} must keep pending availability non-interactive`);
     assert.ok(html.includes('href="/ios/"'), `${route} navigation must include the iPhone and iPad page`);
-    assert.ok(css.includes('.download-options{') && css.includes('.download-link.secondary{'), `${route} must load store-choice styling before rendering`);
+    assert.ok(css.includes('.download-group{') && css.includes('.download-options{'), `${route} must load store-choice styling before rendering`);
     assert.ok(!html.includes('utm_source=chatgpt'), `${route} must not add unwanted campaign attribution`);
     assert.ok(!/[\u00a0\u200b-\u200f\u2028\u2029\u2060\ufeff\u2018\u2019\u201c\u201d]/.test(html), `${route} contains unsupported quote or whitespace characters`);
     const nameLinks = [...html.matchAll(/<a\b[^>]*>Ighor July<\/a>/g) ].map(match => match[0]);
@@ -314,17 +314,28 @@ const screenshotSpecs = [
 ];
 const homepage = documents.get('/');
 const downloadGroups = [...homepage.matchAll(/<div\b[^>]*class="download-options"[^>]*>[\s\S]*?<\/div>/g)].map(match => match[0]);
-assert.equal(downloadGroups.length, 2, 'Both the hero and closing section must offer a store choice');
+assert.equal(downloadGroups.length, 2, 'Both the hero and closing section must offer App Store downloads');
 assert.ok(homepage.includes('id="download"'), 'Global download navigation needs a stable homepage target');
-for (const group of downloadGroups)
+for (const [index, group] of downloadGroups.entries())
 {
-    assert.ok(group.includes('role="group" aria-label="Download DiskPress"'), 'Download choices must form an accessible action group');
-    assert.equal(group.split(`href="${setapp}"`).length - 1, 1, 'Each download group must offer the exact Setapp listing once');
-    assert.ok(group.includes('aria-label="Get DiskPress on Setapp"'), 'The Setapp button must identify the app and store');
+    const label = index === 0 ? 'Download DiskPress for your device' : 'Download DiskPress for Mac';
+    assert.ok(group.includes(`role="group" aria-label="${label}"`), 'Download choices must form a platform-specific accessible action group');
+    assert.ok(!group.includes(setapp), 'Setapp must remain outside the primary App Store button group');
     if (appStoreAvailable)
-        assert.ok(decode(group).includes(`href="${appStore}"`) && group.includes('aria-label="Download DiskPress on the Mac App Store"'), 'The Setapp option must not replace the Mac App Store download');
+        assert.ok(decode(group).includes(`href="${appStore}"`) && group.includes('aria-label="Download DiskPress on the Mac App Store"'), 'Mac App Store must remain a primary download');
+    if (index === 0 && iosAppStoreAvailable)
+        assert.ok(decode(group).includes(`href="${iosAppStore}"`) && group.includes('>iOS App Store</span>') && group.includes('aria-label="Download DiskPress for Files on the iOS App Store"'), 'The hero must offer iOS App Store alongside Mac App Store with its visible label in the accessible name');
+    if (index === 1)
+        assert.ok(!group.includes('id6814957268'), 'The Mac platform card must keep its download specific to Mac');
+    const buttons = [...group.matchAll(/<a\b[^>]*>/g)].map(([tag]) => tag);
+    assert.ok(buttons.every(tag => /class="download-link"/.test(tag)), 'App Store buttons must share the same primary styling');
 }
-assert.ok(homepage.includes('Same features in both Mac versions.') && homepage.includes('Setapp subscription'), 'The homepage must scope store feature parity to Mac');
+const setappOptions = [...homepage.matchAll(/<p class="fine setapp-option">[\s\S]*?<\/p>/g)].map(([paragraph]) => paragraph);
+assert.equal(setappOptions.length, 2, 'Keep a secondary Setapp text option below both Mac download groups');
+for (const option of setappOptions)
+    assert.ok(option.includes(`<a href="${setapp}">Setapp subscription</a>`), 'Setapp must use a plain text link with its exact listing URL');
+assert.ok(![...homepage.matchAll(/<a\b[^>]*>/g)].some(([tag]) => tag.includes(setapp) && /\bclass="[^"]*download-link/.test(tag)), 'Setapp must not appear as a download button');
+assert.ok(homepage.includes('Same features as the Mac App Store version.') && homepage.includes('Setapp subscription'), 'The homepage must scope store feature parity to Mac');
 assert.ok(homepage.includes('No separate DiskPress account') && !homepage.includes('No account or file uploads'), 'Local file processing must not imply that the stores require no account');
 const downloadAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];
 assert.ok(downloadAnswer?.includes(`href="${setapp}"`) && downloadAnswer.includes('Same features in both Mac versions.'), 'The existing pricing FAQ must link Setapp and explain Mac feature parity');
@@ -614,8 +625,8 @@ for (const route of ['/', '/ios/'])
     const html = documents.get(route);
     if (iosAppStoreAvailable)
     {
-        const buttons = [...html.matchAll(/<a\b[^>]*aria-label="Download DiskPress for Files on the App Store"[^>]*>/g)];
-        assert.equal(buttons.length, 2, `${route} must offer iOS downloads in both the introduction and closing section`);
+        const buttons = [...html.matchAll(/<a\b[^>]*aria-label="Download DiskPress for Files on the (?:iOS )?App Store"[^>]*>/g)];
+        assert.equal(buttons.length, route === '/' ? 3 : 2, `${route} must offer iOS downloads in the introduction and closing section, plus the homepage hero`);
         assert.ok(buttons.every(([tag]) => decode(tag).includes(`href="${iosAppStore}"`)), `${route} must keep every iOS button pointed to the supplied App Store URL`);
     }
     else

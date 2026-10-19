@@ -1,5 +1,13 @@
 # DiskPress website verification
 
+## App Store download priority on October 19, 2026
+
+The homepage hero now gives Mac App Store and iOS App Store equal primary buttons. Setapp remains available as a smaller text link below the buttons and below the Mac platform card's download. Both platform cards retain equal heights on desktop and equally wide primary buttons. The standalone iOS download section keeps its centered alignment. App Store URLs and attribution parameters are unchanged, as are existing changelog posts.
+
+The TypeScript check, component syntax checks, four Mac/iOS availability combinations, targeted rendered-markup assertions, and changelog checks passed. Browser checks of a local static preview covered widths from 320 to 1440 pixels, light and dark appearances, equal button dimensions, platform-card heights, link destinations, keyboard focus, and the iOS page's download alignment. No horizontal overflow or browser errors were observed. Styles remain in the document head and use the system font stack.
+
+The preview reused previously generated page markup and image assets, rendered the updated download components with a plain-JavaScript test renderer, and loaded the current CSS. It was not a fresh Astro production build. No native build tools or deployment commands were run. This change was prepared for a local commit only, with no push or deployment.
+
 ## iPhone and iPad release on October 15, 2026
 
 Enabled the released DiskPress for Files download links using the developer-supplied App Store URL and campaign parameters. Apple's public lookup returned the published listing for app ID 6814957268. The homepage and iOS page each offer downloads in their introduction and closing sections. The shared FAQ also links to the listing, and the rendered terms no longer describe a pending release.
