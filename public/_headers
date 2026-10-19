@@ -3,3 +3,39 @@
 
 /application-corrupted/*
   X-Robots-Tag: noindex
+
+/zh-hans/application-corrupted
+  X-Robots-Tag: noindex
+
+/zh-hans/application-corrupted/*
+  X-Robots-Tag: noindex
+
+/zh-hant/application-corrupted
+  X-Robots-Tag: noindex
+
+/zh-hant/application-corrupted/*
+  X-Robots-Tag: noindex
+
+/de/application-corrupted
+  X-Robots-Tag: noindex
+
+/de/application-corrupted/*
+  X-Robots-Tag: noindex
+
+/es-mx/application-corrupted
+  X-Robots-Tag: noindex
+
+/es-mx/application-corrupted/*
+  X-Robots-Tag: noindex
+
+/es-es/application-corrupted
+  X-Robots-Tag: noindex
+
+/es-es/application-corrupted/*
+  X-Robots-Tag: noindex
+
+/uk/application-corrupted
+  X-Robots-Tag: noindex
+
+/uk/application-corrupted/*
+  X-Robots-Tag: noindex

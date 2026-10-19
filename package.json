@@ -29,6 +29,9 @@
 		"check": "astro build && tsc && wrangler deploy --dry-run",
 		"test:site": "node scripts/check-site.mjs",
 		"test:changelog": "node scripts/check-changelog.mjs",
+		"test:i18n": "node scripts/check-i18n.mjs",
+		"test:source": "DISKPRESS_PREVIEW_CHECK_ONLY=1 node scripts/preview-source.mjs",
+		"preview:source": "node scripts/preview-source.mjs",
 		"deploy": "wrangler deploy",
 		"dev": "astro dev",
 		"preview": "astro build && wrangler dev"

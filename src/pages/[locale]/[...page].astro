@@ -1,0 +1,22 @@
+---
+import Home from '../index.astro';
+import Ios from '../ios.astro';
+import Faq from '../faq.astro';
+import Cli from '../cli.astro';
+import Changelog from '../changelog.astro';
+import Support from '../support.astro';
+import Privacy from '../privacy-policy.astro';
+import Terms from '../terms-of-service.astro';
+import Integrity from '../application-corrupted.astro';
+import NotFound from '../404.astro';
+import { allPaths, translatedLocales } from '../../i18n/routes.mjs';
+
+export function getStaticPaths() {
+  return translatedLocales.flatMap(locale => allPaths.map(path => ({
+    params: { locale, page: path === '/' ? undefined : path.slice(1, -1) },
+  })));
+}
+const pages = { home: Home, ios: Ios, faq: Faq, cli: Cli, changelog: Changelog, support: Support, 'privacy-policy': Privacy, 'terms-of-service': Terms, 'application-corrupted': Integrity, '404': NotFound };
+const Page = pages[(Astro.params.page || 'home') as keyof typeof pages];
+---
+<Page />

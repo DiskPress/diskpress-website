@@ -1,5 +1,17 @@
 # DiskPress website verification
 
+## Full website localization on October 19, 2026
+
+Added Simplified Chinese, Traditional Chinese, German, Mexican Spanish, Spanish from Spain, and Ukrainian for all ten page types. This includes the homepage, iOS page, FAQ, CLI guide, changelog, support, both legal pages, direct-only integrity help, and the error page. The separate catalogs contain 987 source messages with six directly authored translations each. Original English changelog posts, executable examples, product identifiers, and app screenshots remain unchanged. Screenshot descriptions and alternative text are localized.
+
+The language selector opens the same page in another language and retains the query string and anchor. First-visit detection respects explicit language URLs, records its visited marker before redirecting, and does not repeat on later visits. Automatic redirection is disabled when browser storage is blocked. The privacy policy explains the new local preferences. Localized HTML is generated during static prerendering, not replaced after rendering in the browser. Inline CSS and system fonts remain in use.
+
+TypeScript, JavaScript syntax, changelog verification, whitespace checks, and structural localization tests passed. Tests cover 19 browser-language combinations, one-time behavior, explicit choices, blocked storage, all route mappings, inline markup preservation, compiler whitespace differences, copyable prose, and localized 404 output. The source preview rendered all 70 English and translated pages with strict catalog coverage, valid placeholders, unique IDs, and valid internal links and anchors. It also checked all 56 indexable URLs, self-referencing canonicals, reciprocal language alternatives, sitemap entries, and the exclusion of integrity help and error pages from indexing.
+
+Browser review covered all six homepage languages at desktop width and all six iOS pages at phone width. All ten German page types were checked at 320 pixels. Additional checks covered Ukrainian CLI controls, Spanish iOS downloads, Traditional Chinese missing-page behavior, keyboard dismissal, mutually exclusive menus, appearance changes, same-page language links, query and anchor preservation, and manual return to English without another redirect. Side-by-side homepage cards had equal heights in every language, and no horizontal page overflow was observed. No browser errors were recorded in the final preview session. Temporary browser overrides were restored after review.
+
+Verification used the plain-JavaScript source preview, not a fresh Astro production build. The preview's missing-file response was fixed during testing. Native build tools, responsive image generation, Astro bundling, and Cloudflare deployment output were not run or newly verified. No security bypass, dependency change, push, or deployment was performed. The commit is local only.
+
 ## Storage Saver Trio on October 19, 2026
 
 Added Storage Saver Trio beside Storage Saver Duo in the homepage introduction and bundle section, using the supplied App Store URL without changing its campaign parameters. Equal-height cards distinguish Duo's two Mac apps from Trio's DiskPress for Mac, App Archiver for Mac, and DiskPress for Files for iPhone and iPad. Updated the iOS page, shared availability and pricing answers, and factual bundle access explanation in the terms. Existing changelog posts remain unchanged. Standalone Mac and iOS App Store downloads remain primary, with Setapp secondary.

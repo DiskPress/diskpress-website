@@ -1,0 +1,10 @@
+---
+import { localeCodes, locales, localePath, splitLocale } from '../i18n/routes.mjs';
+const { locale, basePath } = splitLocale(Astro.url.pathname);
+---
+<details class="language-control" data-language-control>
+  <summary aria-label="Choose language"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><span translate="no">{locales[locale].short}</span></summary>
+  <nav class="language-menu" aria-label="Website language">
+    {localeCodes.map(code => <a href={localePath(code, basePath)} lang={locales[code].lang} hreflang={locales[code].lang} data-language={code} aria-current={locale === code ? 'page' : undefined} translate="no">{locales[code].label}</a>)}
+  </nav>
+</details>

@@ -4,6 +4,8 @@ import {readFile,
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import { verifyChangelog } from './check-changelog.mjs';
+import { readLocalizedPages } from './check-localized-site.mjs';
+import { localeCodes, localePath, translatedLocales } from '../src/i18n/routes.mjs';
 
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const routes = [ '/', '/ios/', '/faq/', '/cli/', '/changelog/', '/support/', '/privacy-policy/', '/terms-of-service/' ];
@@ -724,6 +726,9 @@ let setappLinks = 0;
 let appBundleLinks = 0;
 let trioBundleLinks = 0;
 let assets = 0;
+for (const [route, html] of await readLocalizedPages(root)) documents.set(route, html);
+// Cloudflare serves the root 404.html through its extensionless URL as well.
+documents.set('/404/', documents.get('/404.html'));
 for (const [route, html] of documents)
 {
     for (const match of html.matchAll(/\bhref="([^"]+)"/g))
@@ -808,7 +813,8 @@ for (const [index, size] of [16, 32, 48, 64].entries())
 }
 for (const route of routes)
     assert.ok(sitemap.includes(`<loc>https://diskpress.app${route}</loc>`));
-assert.equal((sitemap.match(/<loc>/g) || []).length, routes.length, 'The sitemap must contain only the indexable public pages');
+assert.equal((sitemap.match(/<loc>/g) || []).length, routes.length * localeCodes.length, 'The sitemap must contain every indexable language variant');
+for (const locale of localeCodes) for (const route of routes) assert.ok(sitemap.includes(`<loc>https://diskpress.app${localePath(locale, route)}</loc>`));
 const robots = await readFile(path.join(root, 'robots.txt'), 'utf8');
 assert.ok(robots.includes('Sitemap: https://diskpress.app/sitemap.xml'));
 assert.match(robots, /^Allow: \/$/m, 'Crawlers must be allowed to read the noindex page');
@@ -819,7 +825,7 @@ for (const route of unlistedRoutes)
 }
 const headers = await readFile(path.join(root, '_headers'), 'utf8');
 const noindexHeaderPaths = headers.trim().split(/\n\s*\n/).filter(block => /X-Robots-Tag:[^\n]*\bnoindex\b/i.test(block)).map(block => block.split('\n')[0]);
-assert.deepEqual(noindexHeaderPaths, [ '/application-corrupted', '/application-corrupted/*' ], 'Cloudflare must send noindex headers only for the integrity-help route and its URL variants');
+assert.deepEqual(noindexHeaderPaths, ['', ...translatedLocales.map(locale => '/' + locale)].flatMap(prefix => [prefix + '/application-corrupted', prefix + '/application-corrupted/*']), 'Cloudflare must send noindex headers for all language variants of direct-only help');
 assert.match(documents.get('/404.html'), /noindex, follow/);
 if (appStoreAvailable)
     assert.ok(appStoreLinks >= 7, 'Released pages must provide the supplied App Store download links');

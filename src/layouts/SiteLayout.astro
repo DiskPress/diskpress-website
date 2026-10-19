@@ -3,10 +3,14 @@ import '../styles/global.css';
 import '../styles/content.css';
 import '../styles/ios.css';
 import AppearanceControl from '../components/AppearanceControl.astro';
+import LanguageControl from '../components/LanguageControl.astro';
+import { languageScript } from '../i18n/browser.mjs';
+import { localeCodes, locales, localePath, publicPaths, splitLocale } from '../i18n/routes.mjs';
 import { SITE_DESCRIPTION, DEVELOPER_URL, BLOG_URL, MORE_APPS_URL } from '../consts';
 interface Props { title?: string; description?: string; noindex?: boolean; }
 const { title = 'DiskPress - More room. Same files.', description = SITE_DESCRIPTION, noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { locale, basePath } = splitLocale(Astro.url.pathname);
 const socialImageURL = new URL('/og.png?v=1', Astro.site);
 const socialImageAlt = 'DiskPress. More room. Same files. Native file compression and deduplication, with green layered artwork on a dark background.';
 const navigation = [
@@ -18,18 +22,23 @@ const navigation = [
 ];
 ---
 <!doctype html>
-<html lang="en">
+<html lang={locales[locale].lang} data-copy-label="Copy" data-copied-label="Copied" data-copy-success="Copied to clipboard." data-copy-failure="Command selected. Use your keyboard or context menu to copy.">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#f9fafb" />
+    <script is:inline set:html={languageScript} />
     <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64" href="/favicon.ico?v=2" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
     <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?v=2" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
     {!noindex && <link rel="canonical" href={canonicalURL} />}
+    {!noindex && publicPaths.includes(basePath) && <>
+      {localeCodes.map(code => <link rel="alternate" hreflang={locales[code].lang} href={new URL(localePath(code, basePath), Astro.site)} />)}
+      <link rel="alternate" hreflang="x-default" href={new URL(basePath, Astro.site)} />
+    </>}
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, follow" />}
@@ -55,7 +64,8 @@ const navigation = [
         function syncAppearanceControl() {
           const preference = document.documentElement.dataset.appearance;
           const label = document.getElementById('appearance-label');
-          if (label) label.textContent = { system: 'System', light: 'Light', dark: 'Dark' }[preference];
+          const selectedChoice = document.querySelector(`[data-appearance-choice="${preference}"] span`);
+          if (label && selectedChoice) label.textContent = selectedChoice.textContent;
           document.querySelectorAll('[data-appearance-choice]').forEach(choice => {
             choice.setAttribute('aria-checked', String(choice.dataset.appearanceChoice === preference));
           });
@@ -98,6 +108,8 @@ const navigation = [
           document.getElementById('appearance').setAttribute('aria-expanded', 'true');
           const mobileMenu = document.querySelector('.mobile-nav');
           if (mobileMenu) mobileMenu.open = false;
+          const languageMenu = document.querySelector('[data-language-control]');
+          if (languageMenu) languageMenu.open = false;
           menu.hidden = false;
           positionAppearanceMenu();
           const choices = [...menu.querySelectorAll('[data-appearance-choice]')];
@@ -138,7 +150,7 @@ const navigation = [
           else if (event.key === 'ArrowUp') next = choices[(index + choices.length - 1) % choices.length];
           else if (event.key === 'Home') next = choices[0];
           else if (event.key === 'End') next = choices[choices.length - 1];
-          else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) next = choices.find(choice => choice.dataset.appearanceChoice.startsWith(event.key.toLowerCase()));
+          else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) next = choices.find(choice => choice.textContent.trim().toLocaleLowerCase().startsWith(event.key.toLocaleLowerCase()));
           if (next) { event.preventDefault(); next.focus(); }
         });
         document.addEventListener('focusin', event => {
@@ -156,17 +168,17 @@ const navigation = [
           if (!code) return;
           try {
             await navigator.clipboard.writeText(code.textContent || '');
-            button.textContent = 'Copied';
-            if (status) { status.classList.add('sr-only'); status.textContent = 'Copied to clipboard.'; }
+            button.textContent = document.documentElement.dataset.copiedLabel;
+            if (status) { status.classList.add('sr-only'); status.textContent = document.documentElement.dataset.copySuccess; }
             clearTimeout(copyTimers.get(button));
-            copyTimers.set(button, setTimeout(() => { button.textContent = 'Copy'; }, 2000));
+            copyTimers.set(button, setTimeout(() => { button.textContent = document.documentElement.dataset.copyLabel; }, 2000));
           } catch {
             const range = document.createRange();
             range.selectNodeContents(code);
             const selection = window.getSelection();
             selection?.removeAllRanges();
             selection?.addRange(range);
-            if (status) { status.classList.remove('sr-only'); status.textContent = 'Command selected. Use your keyboard or context menu to copy.'; }
+            if (status) { status.classList.remove('sr-only'); status.textContent = document.documentElement.dataset.copyFailure; }
           }
         });
         document.documentElement.dataset.enhanced = '';
@@ -186,14 +198,15 @@ const navigation = [
       <div class="header-inner wrap">
         <a href="/" class="brand" aria-label="DiskPress home"><img src="/favicon.svg" width="36" height="36" alt="" /><span>DiskPress</span></a>
         <nav class="desktop-nav" aria-label="Main navigation">
-          {navigation.map(({ label, href }) => <a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{label}</a>)}
+          {navigation.map(({ label, href }) => <a href={href} aria-current={basePath === href ? 'page' : undefined}>{label}</a>)}
         </nav>
         <div class="header-actions">
+          <LanguageControl />
           <AppearanceControl />
           <a class="download-link compact" href="/#download"><span>Get DiskPress</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></a>
           <details class="mobile-nav">
             <summary aria-label="Navigation menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
-            <nav aria-label="Mobile navigation">{navigation.map(({ label, href }) => <a href={href}>{label}</a>)}<a href="/#download">Get DiskPress</a><a href="/faq/#download-price">Availability</a><a href="/support/" aria-current={Astro.url.pathname === '/support/' ? 'page' : undefined}>Support</a></nav>
+            <nav aria-label="Mobile navigation">{navigation.map(({ label, href }) => <a href={href} aria-current={basePath === href ? 'page' : undefined}>{label}</a>)}<a href="/#download">Get DiskPress</a><a href="/faq/#download-price">Availability</a><a href="/support/" aria-current={basePath === '/support/' ? 'page' : undefined}>Support</a></nav>
           </details>
         </div>
       </div>
@@ -203,11 +216,17 @@ const navigation = [
       <div class="wrap footer-grid">
         <div class="footer-brand"><a href="/" class="brand"><img src="/favicon.svg" width="32" height="32" alt="" /><span>DiskPress</span></a><p>More room for what you keep.</p><p class="fine">Apps by <a href={DEVELOPER_URL}>Ighor July</a>.</p></div>
         <nav aria-label="Product links"><h2>Explore</h2><a href="/#how-it-works">How it works</a><a href="/ios/">iPhone &amp; iPad</a><a href="/cli/">CLI guide</a><a href="/faq/">FAQ</a><a href="/changelog/">Changelog</a><a href="/#download">Get DiskPress</a><a href="/faq/#download-price">Availability</a></nav>
-        <nav aria-label="Help and legal"><h2>Help</h2><a href="/support/" aria-current={Astro.url.pathname === '/support/' ? 'page' : undefined}>Contact support</a><a href="/privacy-policy/">Privacy policy</a><a href="/terms-of-service/">Terms of service</a></nav>
-        <nav aria-label="Developer links"><h2>Made by <a href={DEVELOPER_URL}>Ighor July</a></h2><a href={MORE_APPS_URL}>More apps</a><a href={BLOG_URL}>Reverse Everything blog</a><span class="fine">Copyright {new Date().getFullYear()} <a href={DEVELOPER_URL}>Ighor July</a></span></nav>
+        <nav aria-label="Help and legal"><h2>Help</h2><a href="/support/" aria-current={basePath === '/support/' ? 'page' : undefined}>Contact support</a><a href="/privacy-policy/">Privacy policy</a><a href="/terms-of-service/">Terms of service</a></nav>
+        <nav aria-label="Developer links"><h2>Made by <a href={DEVELOPER_URL}>Ighor July</a></h2><a href={MORE_APPS_URL}>More apps</a><a href={BLOG_URL}>Reverse Everything blog</a><span class="fine">Copyright <span translate="no">{new Date().getFullYear()}</span> <a href={DEVELOPER_URL}>Ighor July</a></span></nav>
       </div>
     </footer>
     <script>
+      // Language and text zoom can make the header taller on small screens.
+      // Only anchor/menu clearance is dynamic. Visible layout stays entirely in CSS.
+      const header = document.querySelector<HTMLElement>('.site-header');
+      if (header && typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(() => document.documentElement.style.setProperty('--header-height', `${header.getBoundingClientRect().height}px`)).observe(header);
+      }
       const mobileMenu = document.querySelector<HTMLDetailsElement>('.mobile-nav');
       mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { mobileMenu.open = false; }));
       document.addEventListener('keydown', event => { if (event.key === 'Escape' && mobileMenu?.open) { mobileMenu.open = false; mobileMenu.querySelector('summary')?.focus(); } });

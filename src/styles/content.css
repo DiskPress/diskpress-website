@@ -52,7 +52,8 @@
   .code-block { display: grid; gap: 12px; padding: 24px; background: var(--code-bg); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; min-width: 0; width: 100%; }
   .code-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); font-size: .875rem; color: var(--muted); }
   .code-heading > span { flex: 1 1 12ch; min-width: 0; }
-  .code-heading button { flex: none; width: 5.5em; min-height: 44px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 12px; font-size: .875rem; cursor: pointer; }
+  .code-heading button { flex: none; width: 8.5em; min-height: 44px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 12px; font-size: .875rem; cursor: pointer; }
+  pre[data-localize="prose"] { white-space: pre-wrap; overflow-wrap: anywhere; }
   :root:not([data-enhanced]) [data-copy-target] { visibility: hidden; }
   .code-heading button:hover { color: var(--accent); border-color: var(--accent); }
   pre { min-width: 0; overflow-x: auto; padding: 0; font-size: .875rem; line-height: 1.85; tab-size: 2; }
