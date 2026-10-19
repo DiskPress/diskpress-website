@@ -1,5 +1,13 @@
 # DiskPress website verification
 
+## Combined local-change review on October 19, 2026
+
+Reviewed both pending commits together, covering App Store download priority and the iPhone Duo screenshots and Shortcuts update. Corrected the iOS hero image's responsive sizing hint for the stacked tablet layout between 601 and 780 pixels. The image displays at 320 pixels there, but its previous hint advertised 280 pixels. A built-site regression assertion now preserves the correct breakpoint.
+
+Re-ran TypeScript, script syntax, changelog verification, screenshot-source identity, whitespace checks, targeted source-rendered content assertions, all four Mac/iOS availability combinations, and 200 internal-anchor checks. Browser review passed 20 iOS layout cases across ten widths in both appearances, including both sides of the responsive breakpoints, and 12 related-page cases at mobile and desktop widths. Checks covered overflow, equal card heights and padding, accurate hero sizing hints, centered closing downloads, FAQ deep links and keyboard toggling, CSS in the head, and primary Mac/iOS buttons with a secondary Setapp link. No console errors were observed.
+
+The review used the documented plain-JavaScript source preview, not a fresh Astro build. Generated WebP sizes and Cloudflare build output remain unverified because the native toolchain was not run. Existing changelog posts, store URLs, and dependencies remain unchanged. No push or deployment was performed.
+
 ## iPhone Duo screenshots and Shortcuts on October 19, 2026
 
 Updated the iOS product page, homepage introduction and download card, shared FAQ, support guidance, Mac CLI cross-reference, and factual iOS privacy and terms descriptions from the supplied English Fastline metadata. The site now distinguishes iOS 16 Shortcuts actions, iOS 26 continuation of app-started work, and iOS 27 background folder actions and Compress File Copy. It explains permissions, system-controlled background execution, unchanged originals, locally retained copy outputs, and the possibility of losing compression when another app saves a copy. Continuous folder monitoring and the CLI remain Mac-only features.

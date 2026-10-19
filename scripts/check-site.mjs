@@ -673,7 +673,11 @@ for (const route of ['/ios/', '/'])
         assert.equal(attr('height'), '2034', 'iPhone Duo screenshots must reserve their original height');
         const eager = route === '/ios/' && name === 'overview';
         assert.equal(attr('loading'), eager ? 'eager' : 'lazy', 'Only the iOS page hero should load eagerly');
-        if (eager) assert.equal(attr('fetchpriority'), 'high');
+        if (eager)
+        {
+            assert.equal(attr('fetchpriority'), 'high');
+            assert.equal(attr('sizes'), '(max-width: 600px) 240px, (max-width: 780px) 320px, (max-width: 900px) 280px, 320px', 'The iOS hero must advertise its 320 pixel width when the tablet layout stacks');
+        }
         assert.ok(attr('alt').length > 30 && attr('sizes'), 'iOS captures need descriptive alt text and responsive sizes');
         const widths = route === '/' ? [240, 480, 720] : [360, 720, 1080];
         const variants = attr('srcset').split(',').map(value => value.trim().split(/\s+/));
