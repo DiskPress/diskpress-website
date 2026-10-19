@@ -5,6 +5,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import { verifyChangelog } from './check-changelog.mjs';
 import { readLocalizedPages } from './check-localized-site.mjs';
+import { verifySetappPurchase } from './check-setapp-purchase.mjs';
 import { localeCodes, localePath, translatedLocales } from '../src/i18n/routes.mjs';
 
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
@@ -317,6 +318,7 @@ const screenshotSpecs = [
     [ 'menu-bar', 720, 1178, [ 360, 540, 720 ], 'lazy' ],
 ];
 const homepage = documents.get('/');
+verifySetappPurchase(documents);
 const downloadGroups = [...homepage.matchAll(/<div\b[^>]*class="download-options"[^>]*>[\s\S]*?<\/div>/g)].map(match => match[0]);
 assert.equal(downloadGroups.length, 2, 'Both the hero and closing section must offer App Store downloads');
 assert.ok(homepage.includes('id="download"'), 'Global download navigation needs a stable homepage target');
@@ -337,15 +339,15 @@ for (const [index, group] of downloadGroups.entries())
 const setappOptions = [...homepage.matchAll(/<p class="fine setapp-option">[\s\S]*?<\/p>/g)].map(([paragraph]) => paragraph);
 assert.equal(setappOptions.length, 2, 'Keep a secondary Setapp text option below both Mac download groups');
 for (const option of setappOptions)
-    assert.ok(option.includes(`<a href="${setapp}">Setapp subscription</a>`), 'Setapp must use a plain text link with its exact listing URL');
+    assert.ok(option.includes(`<a href="${setapp}">Setapp</a>`) && option.includes('one-time purchase'), 'Setapp must use a plain text link with its exact listing URL and one-time purchase wording');
 assert.ok(![...homepage.matchAll(/<a\b[^>]*>/g)].some(([tag]) => tag.includes(setapp) && /\bclass="[^"]*download-link/.test(tag)), 'Setapp must not appear as a download button');
-assert.ok(homepage.includes('Same features as the Mac App Store version.') && homepage.includes('Setapp subscription'), 'The homepage must scope store feature parity to Mac');
+assert.ok(homepage.includes('Same features as the Mac App Store version.') && homepage.includes('one-time purchase on'), 'The homepage must scope store feature parity to Mac and describe the Setapp purchase');
 assert.ok(homepage.includes('No separate DiskPress account') && !homepage.includes('No account or file uploads'), 'Local file processing must not imply that the stores require no account');
 const downloadAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];
 assert.ok(downloadAnswer?.includes(`href="${setapp}"`) && downloadAnswer.includes('Same features in both Mac versions.'), 'The existing pricing FAQ must link Setapp and explain Mac feature parity');
 for (const feature of ['file compression', 'file deduplication', 'one-time optimization', 'automatic monitoring', 'menu bar controls', 'the CLI'])
     assert.ok(downloadAnswer.includes(feature), `Both editions must include ${feature}`);
-assert.ok(downloadAnswer.includes('subscription, activation, and updates'), 'The FAQ must explain how Setapp access is provided');
+assert.ok(downloadAnswer.includes('purchase, download, activation, and updates'), 'The FAQ must explain how Setapp access is provided');
 assert.ok(!/script installation|install a script|install the script|manual script/i.test(homepage + downloadAnswer + documents.get('/cli/')), 'Store comparisons must not claim a script-installation difference');
 const changelog = documents.get('/changelog/');
 verifyChangelog(changelog, { rendered: true });
@@ -681,7 +683,7 @@ const iosTerms = documents.get('/terms-of-service/').match(/<section id="ios">[\
 assert.ok(iosTerms?.includes('stdeula') && iosTerms.includes('support.apple.com/118223'), 'iOS terms must link to the Apple license and refund process');
 assert.ok(iosTerms.includes('separate product from DiskPress for Mac') && iosTerms.includes('standalone Mac App Store purchase, Setapp entitlement, or the Storage Saver Duo Mac bundle does not grant access'), 'Terms must distinguish standalone Mac access and Duo from the iOS app');
 if (appStoreAvailable && iosAppStoreAvailable)
-    assert.ok(decode(iosTerms).includes(`href="${trioBundle}"`) && iosTerms.includes('includes DiskPress for Mac, App Archiver for Mac, and DiskPress for Files for iPhone and iPad') && iosTerms.includes('does not include a Setapp subscription'), 'Terms must accurately identify Trio without implying Setapp access');
+    assert.ok(decode(iosTerms).includes(`href="${trioBundle}"`) && iosTerms.includes('includes DiskPress for Mac, App Archiver for Mac, and DiskPress for Files for iPhone and iPad') && iosTerms.includes('does not include the Setapp version'), 'Terms must accurately identify Trio without implying Setapp access');
 assert.ok(iosTerms.includes('There is no continuous folder monitoring or CLI') && iosTerms.includes('Photos library'), 'iOS terms must reflect platform limitations');
 assert.ok(iosTerms.includes('create and schedule workflows') && iosTerms.includes('Compress File Copy') && iosTerms.includes('iOS or iPadOS 27 or later') && iosTerms.includes('No uninterrupted or unattended completion is guaranteed'), 'iOS terms must cover Shortcuts, copy outputs, and system-controlled background execution');
 if (!iosAppStoreAvailable)

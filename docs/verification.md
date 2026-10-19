@@ -1,5 +1,17 @@
 # DiskPress website verification
 
+## Setapp one-time purchase correction on October 19, 2026
+
+Corrected the download options, pricing FAQ, support page, and terms to describe DiskPress on Setapp as a standalone one-time purchase, not an app included in a Setapp subscription. The supplied Setapp listing identifies it as a standalone app with a Buy now option. Removed renewal, cancellation, and subscription-expiry guidance. Added the same purchase clarification to the privacy policy without changing its existing activation and usage-reporting disclosures. No fixed price or entitlement to future upgrades was promised.
+
+Updated 14 messages directly in all six language catalogs and removed the obsolete entries. Mac and iOS App Store buttons remain primary, with Setapp as a secondary text link. App screenshots, store URLs, dependencies, and all existing changelog posts and translations remain unchanged.
+
+TypeScript, script syntax, changelog verification, whitespace checks, and structural routing and catalog checks passed. The pure-JavaScript source renderer checked all 70 page variants, their link targets and placeholders, and all 56 sitemap URLs. A shared regression check now validates the English Setapp purchase facts in both source-rendered and built-site output and rejects the former subscription wording.
+
+Browser review covered the homepage, pricing FAQ, support, privacy, and terms at desktop and 320-pixel widths. No horizontal page overflow or browser console errors were observed. The FAQ deep link opened its answer, and the support link reached the Setapp terms section. The primary App Store buttons retained equal dimensions. Styles remain in the document head. The temporary browser viewport was restored after review.
+
+Verification used the existing pure-JavaScript source preview, not a fresh Astro production build. No unsigned native build tools, image processing, security bypasses, or dependency changes were used. Astro bundling and Cloudflare deployment output were not newly verified locally.
+
 ## Full website localization on October 19, 2026
 
 Added Simplified Chinese, Traditional Chinese, German, Mexican Spanish, Spanish from Spain, and Ukrainian for all ten page types. This includes the homepage, iOS page, FAQ, CLI guide, changelog, support, both legal pages, direct-only integrity help, and the error page. The separate catalogs contain 987 source messages with six directly authored translations each. Original English changelog posts, executable examples, product identifiers, and app screenshots remain unchanged. Screenshot descriptions and alternative text are localized.

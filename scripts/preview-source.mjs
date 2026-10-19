@@ -13,6 +13,7 @@ import { transformHtml, parseHtml } from '../src/i18n/html.mjs';
 import catalogs from '../src/i18n/catalogs.mjs';
 import { writeLocalizedNotFound } from '../src/i18n/build.mjs';
 import { readLocalizedPages } from './check-localized-site.mjs';
+import { verifySetappPurchase } from './check-setapp-purchase.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const read = file => readFile(path.join(root, file), 'utf8');
@@ -94,6 +95,8 @@ await mkdir(path.join(root,'.wrangler/qa/localization'),{recursive:true});
 for(const[name,entries]of Object.entries(groups)) await writeFile(path.join(root,`.wrangler/qa/localization/${name}.json`),JSON.stringify(Object.fromEntries(entries),null,2)+'\n');
 console.log('Extracted source messages '+messages.size+' across '+english.size+' pages. '+Object.entries(groups).map(([name,items])=>name+'='+items.length).join(', '));
 if(process.env.DISKPRESS_EXTRACT_ONLY) process.exit(0);
+verifySetappPurchase(english);
+console.log('Verified standalone Setapp purchase information across downloads, FAQ, support, privacy, and terms.');
 for(const[route,html]of pages){
   assert.equal((html.match(/<h1(?:\s|>)/g)||[]).length,1,route+' heading');
   const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]); assert.equal(ids.length,new Set(ids).size,route+' duplicate IDs');
