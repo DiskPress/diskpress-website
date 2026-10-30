@@ -1,5 +1,13 @@
 # DiskPress website verification
 
+## Larger homepage iPhone preview on October 30, 2026
+
+Replaced the fixed 280 pixel media column and 240 pixel image with proportional columns and an image that fills its column. Removed the separate copy-width limit that left unused horizontal space. Text and media now align at the top with a 32 pixel gap. At a 1440 pixel desktop viewport the screenshot is about 457 pixels wide, compared with 240 pixels before. The image retains its full original proportions.
+
+The panel stacks at 1050 pixels. The stacked preview uses the available width up to 560 pixels, including on phones where the old 200 pixel cap is removed. Responsive image hints follow the new layout, with WebP variants through 1440 pixels for sharp display on high-density screens. No wording, translations, native captures, or changelog posts changed.
+
+Browser checks passed 40 cases across all seven languages at 320, 780, 1050, 1051, and 1440 pixels, plus English checks at 600, 601, 781, 1280, and 1920 pixels. They verified column fill, desktop top alignment, the 32 pixel desktop gap, natural stacking, and absence of horizontal overflow. The production build, TypeScript check, Cloudflare deployment dry run, built-site checks, source rendering checks, and whitespace checks passed. All 98 original localized captures retain their source hashes.
+
 ## Optimization focus and screenshot alignment on October 30, 2026
 
 The Mac and iOS product pages now lead with native compression and deduplication. The copy explains that duplicate files remain available and share identical data on the same compatible APFS volume, while file metadata still takes some space. Optional cleanup follows the core feature explanation and includes automatic log removal through Mac monitoring or scheduled iOS Shortcuts.

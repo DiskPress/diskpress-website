@@ -709,7 +709,7 @@ for (const route of ['/ios/', '/'])
             assert.equal(attr('sizes'), '(max-width: 600px) 240px, (max-width: 780px) 320px, (max-width: 900px) 280px, 320px', 'The iOS hero must advertise its 320 pixel width when the tablet layout stacks');
         }
         assert.ok(attr('alt').length > 30 && attr('sizes'), 'iOS captures need descriptive alt text and responsive sizes');
-        const widths = route === '/' ? [240, 480, 720] : [360, 720, 1080];
+        const widths = route === '/' ? [480, 720, 1080, 1440] : [360, 720, 1080];
         const variants = attr('srcset').split(',').map(value => value.trim().split(/\s+/));
         assert.deepEqual(variants.map(([, width]) => Number.parseInt(width)), widths, 'Use responsive iOS image widths without upscaling');
         for (const [url] of variants)
