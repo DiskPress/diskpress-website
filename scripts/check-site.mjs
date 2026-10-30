@@ -137,7 +137,6 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
         const normalizeSelector = value => value.trim().replace(/\s*>\s*/g, '>');
         const panelRules = selector => rules.filter(([, selectors ]) => selectors.split(',').some(value => normalizeSelector(value) === normalizeSelector(selector))).map(([, , body ]) => body);
         for (const [group, panel] of [
-            ['.comparison-grid', '.comparison-item'],
             ['.native-grid', '.native-feature'],
             ['.savings-stages', '.savings-stages > li'],
             ['.control-grid', '.control-grid article'],
@@ -154,13 +153,14 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
             assert.ok(panelRules(panel).every(body => !/(?:^|;)(?:min-|max-)?(?:height|block-size):/.test(body)), `${panel} must retain a natural content-driven height when stacked`);
             assert.ok(panelRules(panel).every(body => !/(?:^|;)align-self:(?!(?:auto|stretch)(?:;|$))/.test(body)), `${panel} must not opt out of equal row heights`);
         }
-        assert.ok(panelRules('.comparison-item').some(body => body.includes('grid-template-rows:auto auto 1fr auto')), 'Comparison result notes must keep their bottom inset when cards share a height');
         assert.ok(panelRules('.savings-stages > li').some(body => body.includes('grid-template-rows:auto auto auto 1fr')), 'Savings tiles must keep labels, values, and bars content-sized above their descriptions');
         assert.ok(panelRules('.support-option').some(body => body.includes('grid-template-rows:auto 1fr auto auto')), 'Support cards must retain their bottom inset and natural link heights');
-        assert.ok(panelRules('.screenshot-figure').some(body => body.includes('grid-template-rows:1fr auto')), 'Screenshot cards must align image bottoms while accommodating different captions and image proportions');
+        assert.ok(panelRules('.screenshot-figure').some(body => body.includes('grid-template-rows:auto auto') && body.includes('align-content:start')), 'Screenshot captions and images must remain content-sized and top-aligned');
+        assert.ok(panelRules('.screenshot-figure').every(body => !body.includes('grid-template-rows:1fr auto')), 'Screenshot cards must not stretch captions to bottom-align images');
+        assert.ok(panelRules('.screenshot-grid').some(body => body.includes('--screenshot-first-share')), 'Paired captures must allow widths that follow their original aspect ratios');
         assert.ok(panelRules('.screenshot-figure img').some(body => body.includes('width:100%') && body.includes('height:auto')), 'Equal-height screenshot cards must preserve each full image and its original proportions');
         assert.ok(panelRules('.native-feature').some(body => body.includes('grid-template-rows:auto auto 1fr auto')), 'Technique panel notes must retain the bottom inset while the body adapts to the paired content');
-        for (const selector of ['.hero-visual', '.comparison-item', '.native-feature', '.savings-example', '.savings-stages > li', '.savings-example-result', '.menu-visual', '.code-block', '.safety-note', '.screenshot-figure', '.companion-panel', '.changelog-list', '.notice', '.help-note', '.support-option', '.appearance-menu', '.faq-list summary', 'th', 'td'])
+        for (const selector of ['.hero-visual', '.native-feature', '.savings-example', '.savings-stages > li', '.savings-example-result', '.menu-visual', '.code-block', '.safety-note', '.screenshot-figure', '.companion-panel', '.changelog-list', '.notice', '.help-note', '.support-option', '.appearance-menu', '.faq-list summary', 'th', 'td'])
         {
             const declarations = panelRules(selector);
             const paddings = declarations.map(body => body.match(/(?:^|;)padding:([^;]+)/)?.[1]).filter(Boolean);
@@ -519,9 +519,9 @@ assert.match(homepage, /<h3>File compression<\/h3>/, 'The homepage must name the
 assert.match(homepage, /<h3>File deduplication<\/h3>/, 'The homepage must name the file deduplication feature explicitly');
 const deduplicationFeature = [...homepage.matchAll(/<article\b[^>]*class="native-feature"[^>]*>[\s\S]*?<\/article>/g) ].map(match => match[0]).find(article => article.includes('<h3>File deduplication</h3>'));
 assert.ok(deduplicationFeature?.includes('DiskPress is not a duplicate file remover.'), 'The feature description must distinguish file deduplication from duplicate deletion');
-assert.ok(deduplicationFeature.includes('APFS copy-on-write clones') && deduplicationFeature.includes('Both files keep their paths.'), 'The feature description must explain storage sharing without removing file paths');
+assert.ok(deduplicationFeature.includes('APFS copy-on-write clones') && deduplicationFeature.includes('Each file keeps its path.'), 'The feature description must explain storage sharing without removing file paths');
 assert.ok(deduplicationFeature.includes('APFS copy-on-write clones, not hard links') && deduplicationFeature.includes('href="/faq/#clones-vs-hard-links"'), 'The homepage must distinguish clones from hard links and link the detailed comparison');
-assert.ok(deduplicationFeature.includes('across all enabled saved locations, not just within each folder') && homepage.includes('extra deduplication savings in folders you already optimized'), 'The homepage must explain cross-location deduplication and the benefit of adding locations');
+assert.ok(deduplicationFeature.includes('across enabled saved locations') && homepage.includes('extra deduplication savings in folders you already optimized'), 'The homepage must explain cross-location deduplication and the benefit of adding locations');
 const crossLocationAnswer = documents.get('/faq/').match(/<details\b[^>]*id="cross-location-deduplication"[^>]*>[\s\S]*?<\/details>/)?.[0];
 assert.ok(crossLocationAnswer?.includes('across all enabled saved locations, not just within each location') && crossLocationAnswer.includes('same compatible APFS volume'), 'The FAQ must explain cross-location matching without implying cross-volume sharing');
 assert.ok(crossLocationAnswer.includes('The next optimization') && crossLocationAnswer.includes('extra savings in locations you already optimized') && crossLocationAnswer.includes('Adding a location alone does not perform deduplication'), 'The FAQ must explain that additional savings require optimization, not merely adding a location');
@@ -617,8 +617,11 @@ assert.ok(homepage.includes('App screenshots use example data.'), 'Screenshot sa
 
 const iosPage = documents.get('/ios/');
 const iosDetails = (html, id) => html.match(new RegExp(`<details\\b[^>]*id="${id}"[^>]*>[\\s\\S]*?<\\/details>`))?.[0];
-assert.ok(iosPage.includes('same cleanup and native optimization engine as DiskPress for Mac') && iosPage.includes('No archives to unpack'), 'The iOS page must explain the shared engine and normal file access');
-assert.ok(homepage.includes('same cleanup, compression and deduplication engine') && homepage.includes('No continuous monitoring or CLI'), 'The homepage must distinguish the shared engine from Mac-only continuous monitoring and CLI');
+assert.ok(iosPage.includes('same native compression and deduplication engine as DiskPress for Mac') && iosPage.includes('No archives to unpack'), 'The iOS page must explain the shared engine and normal file access');
+assert.ok(homepage.includes('same compression and deduplication engine') && homepage.includes('No continuous monitoring or CLI'), 'The homepage must distinguish the shared engine from Mac-only continuous monitoring and CLI');
+assert.ok(homepage.indexOf('id="how-it-works"') < homepage.indexOf('id="cleanup"'), 'The core storage optimization explanation must precede optional cleanup');
+assert.ok(homepage.includes('duplicates use no additional space for that shared data') && homepage.includes('File metadata still uses some space'), 'Shared-data savings must preserve duplicates and qualify filesystem overhead');
+assert.ok(homepage.includes('Cleanup runs only in locations where you enable it and choose a profile'), 'Cleanup must remain an explicit per-location choice');
 for (const html of [homepage, iosPage])
     assert.ok(html.includes('not photo or video optimization') && /supported local (?:folders|files)/.test(html), 'The iOS introduction must make its local-file purpose and media limitations explicit');
 assert.ok(iosPage.includes('No continuous monitoring') && iosPage.includes('No CLI or menu bar'), 'The platform comparison must not promise Mac-only features on iOS');

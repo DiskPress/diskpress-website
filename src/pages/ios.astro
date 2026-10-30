@@ -16,13 +16,13 @@ const automation = getScreenshot('diskpress-for-files-automation', locale);
 const cleanup = getScreenshot('diskpress-for-files-cleanup', locale);
 const filecopy = getScreenshot('diskpress-for-files-filecopy', locale);
 ---
-<SiteLayout title="DiskPress for Files - Cleanup, compression and deduplication" description={`${IOS_APP_STORE_AVAILABLE ? '' : 'Available soon. '}Clean up supported local folders, then deduplicate and compress the files you keep. Build your own profiles and schedule workflows with Apple Shortcuts.`}>
+<SiteLayout title="DiskPress for Files - Compression and deduplication" description={`${IOS_APP_STORE_AVAILABLE ? '' : 'Available soon. '}Compress and deduplicate supported local files on iPhone and iPad. Keep every duplicate while sharing its data. Add optional cleanup and Apple Shortcuts workflows.`}>
   <section class="ios-hero wrap" aria-labelledby="ios-heading">
     <div class="product-copy">
       <p class="eyebrow">DiskPress for Files for iPhone &amp; iPad</p>
       <h1 id="ios-heading">Your files.<br /><span>A smaller footprint.</span></h1>
-      <p class="lead">Clear unwanted files with your own cleanup rules, then deduplicate and compress the rest. Give every supported local folder a workflow of its own.</p>
-      <p>DiskPress for Files brings the same cleanup and native optimization engine as DiskPress for Mac to iPhone and iPad. Files you keep retain their contents and open normally. No archives to unpack.</p>
+      <p class="lead">Compress and deduplicate supported local files without changing their contents. Duplicate files remain separate while sharing their stored data on the same APFS volume.</p>
+      <p>The same native compression and deduplication engine as DiskPress for Mac, made for iPhone and iPad. Open your files normally. No archives to unpack.</p>
       <p>Optimize a selection once, keep your favorite folders ready, or build a workflow with <a href="#shortcuts">Apple Shortcuts</a>. Shortcuts actions start with iOS 16, with background folder actions and compressed file copies on iOS 27.</p>
       <IosDownload />
       <p class="fine">For local files in the Files app, not photo or video optimization. Your Photos library, cloud storage, and protected paths are not supported. <a href="#supported-files">See what is supported</a>.</p>
@@ -38,8 +38,8 @@ const filecopy = getScreenshot('diskpress-for-files-filecopy', locale);
     <div class="wrap">
       <div class="section-heading"><p class="eyebrow">A deliberate, local workflow</p><h2>Choose your files.<br />Make a little more room.</h2><p class="lead">Select a supported local folder or individual files. Review the selection, choose your optimization mode, and start when you are ready.</p></div>
       <div class="ios-feature-grid two-up">
-        <article class="product-card"><h3>Cleanup before optimization</h3><p>Remove files with a cleanup profile, then deduplicate and compress the rest. Keep rules protect matching files and folders. Recently modified files wait until your protection period ends.</p><a class="text-link" href="/faq/#clones-vs-hard-links">Understand clone sharing</a></article>
-        <article class="product-card"><h3>A choice for each folder</h3><p>Choose any of the seven combinations of cleanup, deduplication and compression. Select a cleanup profile whenever cleanup is enabled. Optimize one saved location or include it in Optimize All.</p></article>
+        <article class="product-card"><h3>Keep duplicates. Share their data.</h3><p>Deduplication keeps both files and stores identical data once on the same compatible APFS volume. Each file keeps its name and path. File metadata still takes some space, and editing one file does not change the other.</p><a class="text-link" href="/faq/#clones-vs-hard-links">Understand clone sharing</a></article>
+        <article class="product-card"><h3>A choice for each folder</h3><p>Choose compression, deduplication, or both for each folder. Optional cleanup can run first with a profile you select. Optimize one saved location or include it in Optimize All.</p></article>
         <article class="product-card"><h3>Settings that fit your files</h3><p>Set exclusions, minimum savings, file size limits, recent-file protection, and performance preferences. Keep unsuitable files out of the work and focus on the data worth optimizing.</p></article>
         <article class="product-card"><h3>Follow every run</h3><p>Watch live file counts and status messages while DiskPress scans, compares, and optimizes. Pause and resume when needed. Results separate new savings from existing savings, and Activity records completed, skipped, and failed operations.</p></article>
       </div>
@@ -59,7 +59,7 @@ const filecopy = getScreenshot('diskpress-for-files-filecopy', locale);
 
   <section class="section wrap" id="cleanup-profiles">
     <div class="ios-hero cleanup-layout">
-      <div class="product-copy"><p class="eyebrow">Cleanup profiles in 1.2.0</p><h2>Keep rules.<br />Remove clutter.</h2><p>Start with an editable preset for logs or temporary files. Match names or relative paths with wildcard masks or regular expressions, then add keep rules for files and folders you want to protect.</p><p>Choose a removal method for each profile. Permanent deletion cannot be undone. Moving to Trash depends on the selected location and is not available everywhere on iOS. If Trash is unsupported, the item stays in place. Recoverable items may still occupy space.</p><p>Schedule the saved folder with Apple Shortcuts to apply its cleanup profile before deduplication and compression. DiskPress does not continuously monitor folders.</p><a class="text-link" href="/faq/#ios-cleanup">Cleanup on iPhone and iPad</a></div>
+      <div class="product-copy"><p class="eyebrow">Optional cleanup in 1.2.0</p><h2>Keep rules.<br />Remove clutter.</h2><p>Start with an editable preset for logs or temporary files. Match names or relative paths with wildcard masks or regular expressions, then add keep rules for files and folders you want to protect.</p><p>Choose a removal method for each profile. Permanent deletion cannot be undone. Moving to Trash depends on the selected location and is not available everywhere on iOS. If Trash is unsupported, the item stays in place. Recoverable items may still occupy space.</p><p>To remove logs automatically, choose a cleanup profile for a saved folder and schedule it with Apple Shortcuts. Cleanup runs before any enabled deduplication and compression stages. DiskPress does not continuously monitor folders.</p><a class="text-link" href="/faq/#ios-cleanup">Cleanup on iPhone and iPad</a></div>
       <figure class="ios-hero-visual"><Image src={cleanup} alt="DiskPress for Files cleanup profile editor on iPhone Duo with removal and keep patterns and a per-profile removal method." widths={[360, 720, 1080]} sizes="(max-width: 600px) 240px, (max-width: 780px) 320px, (max-width: 900px) 280px, 320px" format="webp" quality={85} loading="lazy" /><figcaption>Editable profiles for the folders you choose.</figcaption></figure>
     </div>
   </section>
@@ -103,7 +103,7 @@ const filecopy = getScreenshot('diskpress-for-files-filecopy', locale);
 
   <section class="section comparison-section" id="platforms">
     <div class="wrap">
-      <div class="section-heading"><p class="eyebrow">Same engine, different platforms</p><h2>One purpose.<br />Different ways to work.</h2><p class="lead">Both apps offer cleanup profiles and native optimization of the files you keep. Mac adds automatic folder monitoring and a CLI for compression and deduplication. iPhone and iPad use Apple Shortcuts for scheduled workflows.</p></div>
+      <div class="section-heading"><p class="eyebrow">Same engine, different platforms</p><h2>One purpose.<br />Different ways to work.</h2><p class="lead">Both apps offer native compression, deduplication and optional cleanup profiles. Mac adds automatic folder monitoring and a CLI for compression and deduplication. iPhone and iPad use Apple Shortcuts for scheduled workflows.</p></div>
       <div class="table-scroll platform-comparison" role="region" aria-label="Mac and iPhone or iPad feature comparison" tabindex="0">
         <table>
           <caption class="sr-only">Features of DiskPress for Mac and DiskPress for Files</caption>

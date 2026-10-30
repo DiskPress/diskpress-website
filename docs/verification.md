@@ -1,5 +1,17 @@
 # DiskPress website verification
 
+## Optimization focus and screenshot alignment on October 30, 2026
+
+The Mac and iOS product pages now lead with native compression and deduplication. The copy explains that duplicate files remain available and share identical data on the same compatible APFS volume, while file metadata still takes some space. Optional cleanup follows the core feature explanation and includes automatic log removal through Mac monitoring or scheduled iOS Shortcuts.
+
+Removed the screenshot cards' stretched caption row. Paired Mac columns now use the captures' actual aspect ratios, so full images share a height without cropping or a large empty caption area. Content-sized shared rows align the captions and image tops. Stacked cards retain their natural heights. Responsive image size hints use the same proportions. Removed unused comparison-card styles and 38 obsolete catalog entries.
+
+Directly authored six translations for all 27 new source messages. Structural checks passed for all 1,010 active source messages and 70 page variants, covering catalog presence, placeholders, markup, localized links, and metadata. No tool was used to generate or judge translated wording. Published changelog posts and their translations are unchanged.
+
+The production build, TypeScript check, Cloudflare deployment dry run, built-site verification, language-routing tests, changelog checks, and whitespace checks passed. Built output verification covers 71 served routes, 3,459 internal links, 1,036 asset references, and all 98 unchanged localized native captures. Verification used the existing local official WebAssembly compiler backends described below.
+
+Browser geometry checks passed 37 cases across all seven languages on the Mac and iOS pages at 320 and 1440 pixels, plus Mac checks at 780, 781, and 1024 pixels in English, German, and Ukrainian. All screenshot caption gaps were 20 pixels. Side-by-side cards had equal heights and aligned image tops. Paired Mac capture heights matched within one pixel, and stacked cards had their natural 25 pixel bottom inset including the border. No horizontal page overflow occurred. The hero link opens the core optimization section, and a final desktop capture confirms the cleanup panels no longer contain the oversized blank area.
+
 ## Version 1.2.0 website update on October 30, 2026
 
 Updated the Mac and iOS product pages, FAQ, CLI guide, and cleanup responsibilities to match the released 1.2.0 apps. The pages describe all seven stage combinations, editable cleanup profiles, removal and keep patterns, recent-file protection, Mac automatic monitoring, iOS Shortcuts, and the limits of iOS Trash support. Both Mac download areas now show a Setapp button and retain the one-time purchase explanation.

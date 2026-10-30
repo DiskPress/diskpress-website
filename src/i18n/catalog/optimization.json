@@ -1,0 +1,218 @@
+{
+  "8ce13e42ba66": [
+    "DiskPress - 文件压缩与去重",
+    "DiskPress - 檔案壓縮與去重",
+    "DiskPress - Dateikomprimierung und Deduplizierung",
+    "DiskPress - Compresión y deduplicación de archivos",
+    "DiskPress - Compresión y deduplicación de archivos",
+    "DiskPress - Стиснення та дедуплікація файлів"
+  ],
+  "41f09cacc4dc": [
+    "通过原生压缩和去重节省空间，保留每个文件。还可添加日志和临时文件的清理规则。适用于 Mac、iPhone 和 iPad。",
+    "透過原生壓縮與去重節省空間，保留每個檔案。還可加入記錄檔和暫存檔的清理規則。適用於 Mac、iPhone 和 iPad。",
+    "Spare Platz mit nativer Komprimierung und Deduplizierung, die jede Datei erhält. Ergänze bei Bedarf Bereinigungsregeln für Protokolle und temporäre Dateien. Mac, iPhone und iPad.",
+    "Ahorra espacio con compresión nativa y deduplicación que conserva todos los archivos. Agrega reglas de limpieza opcionales para registros y archivos temporales. Mac, iPhone y iPad.",
+    "Ahorra espacio con compresión nativa y deduplicación que conserva todos los archivos. Añade reglas de limpieza opcionales para registros y archivos temporales. Mac, iPhone y iPad.",
+    "Заощаджуйте місце завдяки системному стисненню та дедуплікації зі збереженням кожного файлу. За бажанням додайте правила очищення журналів і тимчасових файлів. Mac, iPhone та iPad."
+  ],
+  "e2e3eae79079": [
+    "原生压缩与去重",
+    "原生壓縮與去重",
+    "Native Komprimierung und Deduplizierung",
+    "Compresión nativa y deduplicación",
+    "Compresión nativa y deduplicación",
+    "Системне стиснення та дедуплікація"
+  ],
+  "d51e64875449": [
+    "更多空间。{1}{2}文件不变。{/2}",
+    "更多空間。{1}{2}檔案不變。{/2}",
+    "Mehr Platz.{1}{2}Dieselben Dateien.{/2}",
+    "Más espacio.{1}{2}Los mismos archivos.{/2}",
+    "Más espacio.{1}{2}Los mismos archivos.{/2}",
+    "Більше місця.{1}{2}Ті самі файли.{/2}"
+  ],
+  "f5742083ba46": [
+    "通过原生压缩和去重节省磁盘空间。保留每个文件，照常打开，相同的文件数据只存储一份。",
+    "透過原生壓縮與去重節省磁碟空間。保留每個檔案，照常開啟，相同的檔案資料只儲存一份。",
+    "Spare Speicherplatz mit nativer Komprimierung und Deduplizierung. Behalte jede Datei, öffne sie wie gewohnt und speichere identische Dateidaten nur einmal.",
+    "Ahorra espacio en disco con compresión nativa y deduplicación. Conserva todos los archivos, ábrelos normalmente y almacena los datos idénticos una sola vez.",
+    "Ahorra espacio en disco con compresión nativa y deduplicación. Conserva todos los archivos, ábrelos normalmente y almacena los datos idénticos una sola vez.",
+    "Заощаджуйте місце на диску завдяки системному стисненню та дедуплікації. Зберігайте кожен файл, відкривайте його як завжди, а однакові дані файлів зберігайте лише один раз."
+  ],
+  "8b6531a03169": [
+    "了解如何节省空间",
+    "了解如何節省空間",
+    "So entsteht die Platzersparnis",
+    "Descubre cómo se ahorra espacio",
+    "Descubre cómo se ahorra espacio",
+    "Дізнайтеся, як заощаджується місце"
+  ],
+  "4693a6f03267": [
+    "保留每个重复文件",
+    "保留每個重複檔案",
+    "Jedes Duplikat bleibt",
+    "Conserva todos los duplicados",
+    "Conserva todos los duplicados",
+    "Зберігайте кожен дублікат"
+  ],
+  "22aebb9e56da": [
+    "去重通过共享数据节省空间，不删除文件。",
+    "去重透過共用資料節省空間，不刪除檔案。",
+    "Deduplizierung teilt Daten, ohne Dateien zu löschen.",
+    "La deduplicación comparte datos sin eliminar archivos.",
+    "La deduplicación comparte datos sin eliminar archivos.",
+    "Дедуплікація забезпечує спільне використання даних без видалення файлів."
+  ],
+  "39696a3b9ada": [
+    "DiskPress 不是重复文件删除工具。它保留两个文件，相同数据只存储一份，因此重复文件的这部分共享数据不再占用额外空间。已启用的保存位置之间的匹配文件使用{1}写入时复制的 APFS 克隆，而非硬链接{/1}。每个文件都保留原路径。编辑或删除其中一个不会改变另一个。",
+    "DiskPress 不是重複檔案刪除工具。它保留兩個檔案，相同資料只儲存一份，因此重複檔案的這部分共用資料不再占用額外空間。已啟用的已儲存位置之間的相符檔案使用{1}寫入時複製的 APFS 複製檔，而非硬連結{/1}。每個檔案都保留原路徑。編輯或刪除其中一個不會改變另一個。",
+    "DiskPress ist kein Programm zum Löschen doppelter Dateien. Es behält beide Dateien und speichert ihre identischen Daten nur einmal. Duplikate benötigen deshalb keinen zusätzlichen Platz für diese gemeinsam genutzten Daten. Übereinstimmungen zwischen aktivierten gespeicherten Speicherorten nutzen {1}APFS-Klone mit Copy-on-Write, keine Hardlinks{/1}. Jede Datei behält ihren Pfad. Das Bearbeiten oder Löschen einer Datei ändert die andere nicht.",
+    "DiskPress no elimina archivos duplicados. Conserva ambos archivos y almacena sus datos idénticos una sola vez, de modo que los duplicados no ocupan espacio adicional para esos datos compartidos. Las coincidencias entre ubicaciones guardadas habilitadas usan {1}clones APFS con copia en escritura, no enlaces duros{/1}. Cada archivo conserva su ruta. Editar o eliminar uno no cambia el otro.",
+    "DiskPress no elimina archivos duplicados. Conserva ambos archivos y almacena sus datos idénticos una sola vez, de modo que los duplicados no ocupan espacio adicional para esos datos compartidos. Las coincidencias entre ubicaciones guardadas activadas usan {1}clones APFS con copia en escritura, no enlaces duros{/1}. Cada archivo conserva su ruta. Editar o eliminar uno no cambia el otro.",
+    "DiskPress не є засобом видалення дублікатів. Він зберігає обидва файли, а їхні однакові дані записує лише один раз, тому дублікати не займають додаткового місця для цих спільних даних. Для збігів між увімкненими збереженими розташуваннями використовуються {1}клони APFS із копіюванням під час запису, а не жорсткі посилання{/1}. Кожен файл зберігає свій шлях. Редагування або видалення одного не змінює іншого."
+  ],
+  "82305468ee24": [
+    "适用于同一 APFS 卷上的兼容文件。文件元数据仍会占用一些空间。{1}了解多个位置如何协同工作{/1}。",
+    "適用於同一 APFS 卷宗上的相容檔案。檔案中繼資料仍會占用一些空間。{1}了解多個位置如何協同運作{/1}。",
+    "Kompatible Dateien auf demselben APFS-Volume. Dateimetadaten belegen weiterhin etwas Platz. {1}So arbeiten Speicherorte zusammen{/1}.",
+    "Archivos compatibles en el mismo volumen APFS. Los metadatos de los archivos siguen ocupando algo de espacio. {1}Cómo funcionan juntas las ubicaciones{/1}.",
+    "Archivos compatibles en el mismo volumen APFS. Los metadatos de los archivos siguen ocupando algo de espacio. {1}Cómo funcionan juntas las ubicaciones{/1}.",
+    "Сумісні файли на одному томі APFS. Метадані файлів усе одно займають певне місце. {1}Як розташування працюють разом{/1}."
+  ],
+  "7e7f9350ce86": [
+    "启用自动监控，按计划压缩和去重。如果某个位置启用了可选清理，将先运行选定的清理配置。近期文件保护会让修改过的文件等待一段时间再处理。",
+    "啟用自動監控，依排程壓縮與去重。如果某個位置啟用了選用清理，將先執行選定的清理設定檔。近期檔案保護會讓修改過的檔案等待一段時間再處理。",
+    "Aktiviere die automatische Überwachung, um nach Zeitplan zu komprimieren und zu deduplizieren. An Speicherorten mit aktivierter optionaler Bereinigung läuft zuerst das ausgewählte Profil. Der Schutz kürzlich geänderter Dateien lässt Änderungen zunächst zur Ruhe kommen.",
+    "Activa el monitoreo automático para comprimir y deduplicar según un horario. En las ubicaciones con limpieza opcional habilitada, se ejecuta primero el perfil seleccionado. La protección de archivos recientes da tiempo a que los archivos modificados se estabilicen.",
+    "Activa la supervisión automática para comprimir y deduplicar según un horario. En las ubicaciones con limpieza opcional activada, se ejecuta primero el perfil seleccionado. La protección de archivos recientes da tiempo a que los archivos modificados se estabilicen.",
+    "Увімкніть автоматичний моніторинг для стиснення й дедуплікації за розкладом. У розташуваннях з увімкненим необов'язковим очищенням спочатку виконується вибраний профіль. Захист нещодавно змінених файлів дає їм час стабілізуватися."
+  ],
+  "6faafeda4b1e": [
+    "1.2.0 中的可选清理",
+    "1.2.0 中的選用清理",
+    "Optionale Bereinigung in 1.2.0",
+    "Limpieza opcional en 1.2.0",
+    "Limpieza opcional en 1.2.0",
+    "Необов'язкове очищення у версії 1.2.0"
+  ],
+  "116c8b58a1e3": [
+    "文件都会保留。{1}除非您选择清理。",
+    "檔案都會保留。{1}除非你選擇清理。",
+    "Deine Dateien bleiben.{1}Außer du wählst die Bereinigung.",
+    "Tus archivos se quedan.{1}A menos que elijas limpiarlos.",
+    "Tus archivos se quedan.{1}A menos que elijas limpiarlos.",
+    "Ваші файли залишаються.{1}Якщо ви не вибрали очищення."
+  ],
+  "c7b5cd8f4870": [
+    "通过清理配置自动删除日志或临时文件，再为其余文件去重和压缩。清理只会在您启用清理并选择了配置的位置运行。",
+    "透過清理設定檔自動刪除記錄檔或暫存檔，再為其餘檔案去重與壓縮。清理只會在你啟用清理並選擇了設定檔的位置執行。",
+    "Entferne Protokolle oder temporäre Dateien automatisch mit einem Bereinigungsprofil und dedupliziere und komprimiere anschließend den Rest. Die Bereinigung läuft nur an Speicherorten, an denen du sie aktivierst und ein Profil auswählst.",
+    "Elimina registros o archivos temporales automáticamente con un perfil de limpieza y luego deduplica y comprime el resto. La limpieza solo se ejecuta en las ubicaciones donde la habilitas y eliges un perfil.",
+    "Elimina registros o archivos temporales automáticamente con un perfil de limpieza y luego deduplica y comprime el resto. La limpieza solo se ejecuta en las ubicaciones donde la activas y eliges un perfil.",
+    "Автоматично видаляйте журнали або тимчасові файли за допомогою профілю очищення, а потім дедуплікуйте й стискайте решту. Очищення виконується лише в тих розташуваннях, де ви його ввімкнули та вибрали профіль."
+  ],
+  "7a3933d51a25": [
+    "同样的压缩和去重引擎，专为触控设计。优化受支持的本地文件，照常打开。还可为想要删除的文件添加可选清理配置。",
+    "同樣的壓縮與去重引擎，專為觸控設計。最佳化支援的本機檔案，照常開啟。還可為想要刪除的檔案加入選用清理設定檔。",
+    "Dieselbe Komprimierungs- und Deduplizierungsengine, für Touch entwickelt. Optimiere unterstützte lokale Dateien und öffne sie wie gewohnt. Ergänze bei Bedarf Bereinigungsprofile für Dateien, die du entfernen möchtest.",
+    "El mismo motor de compresión y deduplicación, diseñado para pantallas táctiles. Optimiza archivos locales compatibles y ábrelos normalmente. Agrega perfiles de limpieza opcionales para los archivos que quieras eliminar.",
+    "El mismo motor de compresión y deduplicación, diseñado para pantallas táctiles. Optimiza archivos locales compatibles y ábrelos normalmente. Añade perfiles de limpieza opcionales para los archivos que quieras eliminar.",
+    "Той самий рушій стиснення та дедуплікації, створений для сенсорного керування. Оптимізуйте підтримувані локальні файли та відкривайте їх як завжди. За бажанням додайте профілі очищення для файлів, які хочете видалити."
+  ],
+  "ea85aee04f91": [
+    "自动压缩和去重，对所选项目进行一次性优化，或使用 CLI。还可为保存的文件夹添加可选清理规则。Mac App Store 与 Setapp 版本的功能相同。",
+    "自動壓縮與去重，對所選項目進行單次最佳化，或使用 CLI。還可為已儲存的資料夾加入選用清理規則。Mac App Store 與 Setapp 版本的功能相同。",
+    "Komprimiere und dedupliziere automatisch, optimiere eine Auswahl einmalig oder nutze die CLI. Ergänze gespeicherte Ordner bei Bedarf um Bereinigungsregeln. Die Versionen im Mac App Store und bei Setapp bieten dieselben Funktionen.",
+    "Comprime y deduplica automáticamente, optimiza una selección una sola vez o usa la CLI. Agrega reglas de limpieza opcionales a las carpetas guardadas. Las versiones del Mac App Store y Setapp tienen las mismas funciones.",
+    "Comprime y deduplica automáticamente, optimiza una selección una sola vez o usa la CLI. Añade reglas de limpieza opcionales a las carpetas guardadas. Las versiones del Mac App Store y Setapp tienen las mismas funciones.",
+    "Стискайте й дедуплікуйте автоматично, оптимізуйте вибране один раз або використовуйте CLI. За бажанням додайте правила очищення до збережених папок. Версії з Mac App Store та Setapp мають однакові функції."
+  ],
+  "94963b79584b": [
+    "压缩和去重受支持的本地文件，并可为保存的文件夹启用可选清理。在受支持的 iOS 版本上通过 Apple 快捷指令安排工作流程。不提供持续监控或 CLI。不用于照片或视频优化。",
+    "壓縮與去重支援的本機檔案，並可為已儲存的資料夾啟用選用清理。在支援的 iOS 版本上透過 Apple 捷徑安排工作流程。不提供持續監控或 CLI。不用於照片或影片最佳化。",
+    "Komprimiere und dedupliziere unterstützte lokale Dateien, mit optionaler Bereinigung für gespeicherte Ordner. Plane Abläufe mit Apple Kurzbefehle auf unterstützten iOS-Versionen. Keine kontinuierliche Überwachung oder CLI. Keine Foto- oder Videooptimierung.",
+    "Comprime y deduplica archivos locales compatibles, con limpieza opcional para carpetas guardadas. Programa flujos con Atajos de Apple en versiones compatibles de iOS. Sin monitoreo continuo ni CLI. No optimiza fotos ni videos.",
+    "Comprime y deduplica archivos locales compatibles, con limpieza opcional para carpetas guardadas. Programa flujos con Atajos de Apple en versiones compatibles de iOS. Sin supervisión continua ni CLI. No optimiza fotos ni vídeos.",
+    "Стискайте й дедуплікуйте підтримувані локальні файли та за бажанням очищуйте збережені папки. Плануйте процеси через Команди Apple на підтримуваних версіях iOS. Без постійного моніторингу чи CLI. Не призначено для оптимізації фото та відео."
+  ],
+  "3dd48d61da9c": [
+    "DiskPress for Files - 压缩与去重",
+    "DiskPress for Files - 壓縮與去重",
+    "DiskPress for Files - Komprimierung und Deduplizierung",
+    "DiskPress for Files - Compresión y deduplicación",
+    "DiskPress for Files - Compresión y deduplicación",
+    "DiskPress for Files - Стиснення та дедуплікація"
+  ],
+  "70f94bf30c14": [
+    "在 iPhone 和 iPad 上压缩和去重受支持的本地文件。共享数据，同时保留每个重复文件。还可添加可选清理和 Apple 快捷指令工作流程。",
+    "在 iPhone 和 iPad 上壓縮與去重支援的本機檔案。共用資料，同時保留每個重複檔案。還可加入選用清理和 Apple 捷徑工作流程。",
+    "Komprimiere und dedupliziere unterstützte lokale Dateien auf iPhone und iPad. Behalte jedes Duplikat und teile seine Daten. Ergänze bei Bedarf Bereinigung und Abläufe mit Apple Kurzbefehle.",
+    "Comprime y deduplica archivos locales compatibles en iPhone y iPad. Conserva todos los duplicados compartiendo sus datos. Agrega limpieza opcional y flujos con Atajos de Apple.",
+    "Comprime y deduplica archivos locales compatibles en iPhone y iPad. Conserva todos los duplicados compartiendo sus datos. Añade limpieza opcional y flujos con Atajos de Apple.",
+    "Стискайте й дедуплікуйте підтримувані локальні файли на iPhone та iPad. Зберігайте кожен дублікат зі спільним використанням даних. За бажанням додайте очищення та процеси з Командами Apple."
+  ],
+  "9c7baef76ccf": [
+    "压缩和去重受支持的本地文件，不改变其内容。重复文件仍然各自独立，同时在同一 APFS 卷上共享存储的数据。",
+    "壓縮與去重支援的本機檔案，不改變其內容。重複檔案仍然各自獨立，同時在同一 APFS 卷宗上共用儲存的資料。",
+    "Komprimiere und dedupliziere unterstützte lokale Dateien, ohne ihre Inhalte zu ändern. Duplikate bleiben eigenständige Dateien und teilen ihre gespeicherten Daten auf demselben APFS-Volume.",
+    "Comprime y deduplica archivos locales compatibles sin cambiar su contenido. Los duplicados siguen siendo archivos separados mientras comparten sus datos almacenados en el mismo volumen APFS.",
+    "Comprime y deduplica archivos locales compatibles sin cambiar su contenido. Los duplicados siguen siendo archivos separados mientras comparten sus datos almacenados en el mismo volumen APFS.",
+    "Стискайте й дедуплікуйте підтримувані локальні файли без зміни їхнього вмісту. Дублікати залишаються окремими файлами, спільно використовуючи збережені дані на одному томі APFS."
+  ],
+  "ee94a3220bec": [
+    "与 Mac 版 DiskPress 相同的原生压缩和去重引擎，专为 iPhone 和 iPad 设计。文件照常打开，无需解压归档。",
+    "與 Mac 版 DiskPress 相同的原生壓縮與去重引擎，專為 iPhone 和 iPad 設計。檔案照常開啟，無須解壓縮封存檔。",
+    "Dieselbe Engine für native Komprimierung und Deduplizierung wie in DiskPress für Mac, entwickelt für iPhone und iPad. Öffne deine Dateien wie gewohnt. Keine Archive zum Entpacken.",
+    "El mismo motor de compresión nativa y deduplicación de DiskPress para Mac, diseñado para iPhone y iPad. Abre tus archivos normalmente. Sin archivos comprimidos que tengas que extraer.",
+    "El mismo motor de compresión nativa y deduplicación de DiskPress para Mac, diseñado para iPhone y iPad. Abre tus archivos normalmente. Sin archivos comprimidos que tengas que extraer.",
+    "Той самий рушій системного стиснення та дедуплікації, що й у DiskPress для Mac, створений для iPhone та iPad. Відкривайте файли як завжди. Без архівів, які потрібно розпаковувати."
+  ],
+  "2d40a4d7873a": [
+    "保留重复文件。共享文件数据。",
+    "保留重複檔案。共用檔案資料。",
+    "Duplikate behalten. Daten teilen.",
+    "Conserva duplicados. Comparte sus datos.",
+    "Conserva duplicados. Comparte sus datos.",
+    "Зберігайте дублікати. Використовуйте спільні дані."
+  ],
+  "910a12e84b41": [
+    "去重会保留两个文件，在同一个兼容的 APFS 卷上将相同数据只存储一份。每个文件都保留自己的名称和路径。文件元数据仍会占用一些空间，编辑其中一个文件不会改变另一个。",
+    "去重會保留兩個檔案，在同一個相容的 APFS 卷宗上將相同資料只儲存一份。每個檔案都保留自己的名稱與路徑。檔案中繼資料仍會占用一些空間，編輯其中一個檔案不會改變另一個。",
+    "Deduplizierung behält beide Dateien und speichert identische Daten auf demselben kompatiblen APFS-Volume nur einmal. Jede Datei behält ihren Namen und Pfad. Dateimetadaten belegen weiterhin etwas Platz, und das Bearbeiten einer Datei ändert die andere nicht.",
+    "La deduplicación conserva ambos archivos y almacena los datos idénticos una sola vez en el mismo volumen APFS compatible. Cada archivo mantiene su nombre y ruta. Los metadatos siguen ocupando algo de espacio, y editar un archivo no cambia el otro.",
+    "La deduplicación conserva ambos archivos y almacena los datos idénticos una sola vez en el mismo volumen APFS compatible. Cada archivo mantiene su nombre y ruta. Los metadatos siguen ocupando algo de espacio, y editar un archivo no cambia el otro.",
+    "Дедуплікація зберігає обидва файли, а однакові дані записує лише один раз на тому самому сумісному томі APFS. Кожен файл зберігає свою назву та шлях. Метадані файлів усе одно займають певне місце, а редагування одного файлу не змінює іншого."
+  ],
+  "001ff075ec0c": [
+    "为每个文件夹选择压缩、去重，或两者兼用。可选清理可使用您选择的配置先行运行。单独优化一个保存的位置，或将其纳入全部优化。",
+    "為每個資料夾選擇壓縮、去重，或兩者並用。選用清理可使用你選擇的設定檔先行執行。單獨最佳化一個已儲存的位置，或將其納入全部最佳化。",
+    "Wähle für jeden Ordner Komprimierung, Deduplizierung oder beides. Eine optionale Bereinigung kann mit deinem gewählten Profil zuerst laufen. Optimiere einen gespeicherten Speicherort einzeln oder beziehe ihn in Alle optimieren ein.",
+    "Elige compresión, deduplicación o ambas para cada carpeta. La limpieza opcional puede ejecutarse primero con el perfil que selecciones. Optimiza una ubicación guardada o inclúyela en Optimizar todo.",
+    "Elige compresión, deduplicación o ambas para cada carpeta. La limpieza opcional puede ejecutarse primero con el perfil que selecciones. Optimiza una ubicación guardada o inclúyela en Optimizar todo.",
+    "Виберіть стиснення, дедуплікацію або обидва етапи для кожної папки. Необов'язкове очищення може виконуватися першим за вибраним профілем. Оптимізуйте одне збережене розташування або включіть його до оптимізації всіх."
+  ],
+  "30388a0d9c24": [
+    "要自动删除日志，请为保存的文件夹选择清理配置，并通过 Apple 快捷指令安排运行。清理会在任何已启用的去重和压缩阶段之前运行。DiskPress 不会持续监控文件夹。",
+    "若要自動刪除記錄檔，請為已儲存的資料夾選擇清理設定檔，並透過 Apple 捷徑安排執行。清理會在任何已啟用的去重與壓縮階段之前執行。DiskPress 不會持續監控資料夾。",
+    "Um Protokolle automatisch zu entfernen, wähle ein Bereinigungsprofil für einen gespeicherten Ordner und plane es mit Apple Kurzbefehle. Die Bereinigung läuft vor allen aktivierten Deduplizierungs- und Komprimierungsschritten. DiskPress überwacht Ordner nicht kontinuierlich.",
+    "Para eliminar registros automáticamente, elige un perfil de limpieza para una carpeta guardada y prográmalo con Atajos de Apple. La limpieza se ejecuta antes de las etapas de deduplicación y compresión que estén habilitadas. DiskPress no monitorea carpetas continuamente.",
+    "Para eliminar registros automáticamente, elige un perfil de limpieza para una carpeta guardada y prográmalo con Atajos de Apple. La limpieza se ejecuta antes de las etapas de deduplicación y compresión que estén activadas. DiskPress no supervisa carpetas continuamente.",
+    "Щоб автоматично видаляти журнали, виберіть профіль очищення для збереженої папки та заплануйте його через Команди Apple. Очищення виконується перед усіма ввімкненими етапами дедуплікації та стиснення. DiskPress не стежить за папками постійно."
+  ],
+  "06e1982b16ae": [
+    "两个应用都提供原生压缩、去重和可选清理配置。Mac 版还提供文件夹自动监控，以及用于压缩和去重的 CLI。iPhone 和 iPad 版通过 Apple 快捷指令安排工作流程。",
+    "兩個 App 都提供原生壓縮、去重和選用清理設定檔。Mac 版還提供資料夾自動監控，以及用於壓縮與去重的 CLI。iPhone 和 iPad 版透過 Apple 捷徑安排工作流程。",
+    "Beide Apps bieten native Komprimierung, Deduplizierung und optionale Bereinigungsprofile. Mac ergänzt automatische Ordnerüberwachung und eine CLI für Komprimierung und Deduplizierung. iPhone und iPad nutzen Apple Kurzbefehle für geplante Abläufe.",
+    "Ambas apps ofrecen compresión nativa, deduplicación y perfiles de limpieza opcionales. Mac agrega monitoreo automático de carpetas y una CLI para compresión y deduplicación. iPhone y iPad usan Atajos de Apple para programar flujos.",
+    "Ambas apps ofrecen compresión nativa, deduplicación y perfiles de limpieza opcionales. Mac añade supervisión automática de carpetas y una CLI para compresión y deduplicación. iPhone y iPad usan Atajos de Apple para programar flujos.",
+    "Обидва застосунки пропонують системне стиснення, дедуплікацію та необов'язкові профілі очищення. На Mac додатково є автоматичний моніторинг папок і CLI для стиснення та дедуплікації. iPhone та iPad використовують Команди Apple для процесів за розкладом."
+  ],
+  "97bb2ae50412": [
+    "DiskPress 通过原生压缩和 APFS 去重减少文件占用的空间。去重会保留重复文件并共享其相同数据，而不是删除它们。可选清理可按照您选择的配置自动删除日志或其他匹配的文件。",
+    "DiskPress 透過原生壓縮與 APFS 去重減少檔案占用的空間。去重會保留重複檔案並共用其相同資料，而不是刪除它們。選用清理可依照你選擇的設定檔自動刪除記錄檔或其他相符的檔案。",
+    "DiskPress verringert den Speicherbedarf deiner Dateien durch native Komprimierung und APFS-Deduplizierung. Die Deduplizierung behält doppelte Dateien und teilt ihre identischen Daten, statt sie zu löschen. Die optionale Bereinigung kann Protokolle oder andere Dateien, die einem von dir gewählten Profil entsprechen, automatisch entfernen.",
+    "DiskPress reduce el espacio que ocupan tus archivos con compresión nativa y deduplicación APFS. La deduplicación conserva los duplicados y comparte sus datos idénticos en lugar de eliminarlos. La limpieza opcional puede eliminar automáticamente registros u otros archivos que coincidan con el perfil que elijas.",
+    "DiskPress reduce el espacio que ocupan tus archivos con compresión nativa y deduplicación APFS. La deduplicación conserva los duplicados y comparte sus datos idénticos en lugar de eliminarlos. La limpieza opcional puede eliminar automáticamente registros u otros archivos que coincidan con el perfil que elijas.",
+    "DiskPress зменшує місце, яке займають ваші файли, завдяки системному стисненню та дедуплікації APFS. Дедуплікація зберігає дублікати та забезпечує спільне використання їхніх однакових даних замість видалення. Необов'язкове очищення може автоматично видаляти журнали чи інші файли, що відповідають вибраному профілю."
+  ]
+}

@@ -1,36 +1,4 @@
 {
-  "f68f8c014bf1": [
-    "按自己的规则清理不需要的文件，再为其余文件去重和压缩。DiskPress 适用于 Mac、iPhone 和 iPad。",
-    "依照自己的規則清理不需要的檔案，再為其餘檔案去重與壓縮。DiskPress 適用於 Mac、iPhone 和 iPad。",
-    "Entferne unnötige Dateien nach deinen Regeln. Dedupliziere und komprimiere den Rest. DiskPress für Mac, iPhone und iPad.",
-    "Limpia archivos que no necesitas con tus propias reglas, luego deduplica y comprime el resto. DiskPress para Mac, iPhone y iPad.",
-    "Limpia archivos que no necesitas con tus propias reglas, luego deduplica y comprime el resto. DiskPress para Mac, iPhone y iPad.",
-    "Очищуйте непотрібні файли за власними правилами, а потім дедуплікуйте й стискайте решту. DiskPress для Mac, iPhone та iPad."
-  ],
-  "ab9bf730fa81": [
-    "清理与原生存储优化",
-    "清理與原生儲存最佳化",
-    "Bereinigung und native Speicheroptimierung",
-    "Limpieza y optimización nativa del almacenamiento",
-    "Limpieza y optimización nativa del almacenamiento",
-    "Очищення та системна оптимізація сховища"
-  ],
-  "55100e88461b": [
-    "更少杂乱。{1}{2}更多空间。{/2}",
-    "更少雜亂。{1}{2}更多空間。{/2}",
-    "Weniger Ballast.{1}{2}Mehr Platz.{/2}",
-    "Menos desorden.{1}{2}Más espacio.{/2}",
-    "Menos desorden.{1}{2}Más espacio.{/2}",
-    "Менше зайвого.{1}{2}Більше місця.{/2}"
-  ],
-  "6c4f50606509": [
-    "用自己掌控的规则删除不再需要的文件，为保留的文件去重和压缩。DiskPress 将这三个步骤整合为文件夹的统一工作流程。",
-    "用自己掌控的規則刪除不再需要的檔案，為保留的檔案去重與壓縮。DiskPress 將這三個步驟整合為資料夾的統一工作流程。",
-    "Entferne mit deinen eigenen Regeln, was du nicht mehr brauchst. Dedupliziere und komprimiere, was bleibt. DiskPress verbindet alle drei Schritte in einem Ablauf für deine Ordner.",
-    "Elimina lo que ya no necesitas con reglas que tú controlas. Deduplica y comprime lo que conservas. DiskPress reúne los tres pasos en un solo flujo para tus carpetas.",
-    "Elimina lo que ya no necesitas con reglas que tú controlas. Deduplica y comprime lo que conservas. DiskPress reúne los tres pasos en un solo flujo para tus carpetas.",
-    "Видаляйте непотрібне за правилами, які визначаєте самі. Дедуплікуйте й стискайте те, що залишається. DiskPress об'єднує ці три кроки в один процес для ваших папок."
-  ],
   "623d3746f227": [
     "在 Setapp 获取 Mac 版 DiskPress",
     "在 Setapp 取得 Mac 版 DiskPress",
@@ -54,134 +22,6 @@
     "Setapp ofrece la versión para Mac mediante un pago único. Las mismas funciones que en la versión del Mac App Store.",
     "Setapp ofrece la versión para Mac mediante un pago único. Las mismas funciones que en la versión del Mac App Store.",
     "У Setapp версія для Mac доступна за одноразову оплату. Функції такі самі, як у версії з Mac App Store."
-  ],
-  "b5ee460df423": [
-    "了解 1.2.0 的工作流程",
-    "探索 1.2.0 的工作流程",
-    "Den Ablauf in 1.2.0 entdecken",
-    "Explora el flujo de trabajo de 1.2.0",
-    "Explora el flujo de trabajo de 1.2.0",
-    "Дізнайтеся про робочий процес у 1.2.0"
-  ],
-  "079af0822a1a": [
-    "以您的规则为准",
-    "以你的規則為準",
-    "Deine Regeln stehen an erster Stelle",
-    "Tus reglas primero",
-    "Tus reglas primero",
-    "Ваші правила насамперед"
-  ],
-  "004eeea5d3cd": [
-    "选择要删除和保留的内容。",
-    "選擇要刪除和保留的內容。",
-    "Bestimme, was entfernt wird und was bleibt.",
-    "Elige qué eliminar y qué conservar.",
-    "Elige qué eliminar y qué conservar.",
-    "Вибирайте, що видалити, а що залишити."
-  ],
-  "f45f6152cf00": [
-    "Mac、iPhone 和 iPad 版 1.2.0 新功能",
-    "Mac、iPhone 和 iPad 版 1.2.0 新功能",
-    "Neu in 1.2.0 auf Mac, iPhone und iPad",
-    "Novedades de 1.2.0 en Mac, iPhone y iPad",
-    "Novedades de 1.2.0 en Mac, iPhone y iPad",
-    "Нове у 1.2.0 на Mac, iPhone та iPad"
-  ],
-  "d32fac3baf9a": [
-    "先清理。{1}再让其余文件更小。",
-    "先清理。{1}再讓其餘檔案更小。",
-    "Erst aufräumen.{1}Dann den Rest verkleinern.",
-    "Primero limpia.{1}Reduce el espacio del resto.",
-    "Primero limpia.{1}Reduce el espacio del resto.",
-    "Спершу очистьте.{1}Зменште розмір решти."
-  ],
-  "19713d649bce": [
-    "为每个已保存位置任意组合清理、去重和压缩。可以运行全部三个阶段、任意两个或仅一个。启用的阶段始终按此顺序执行。",
-    "為每個已儲存位置任意組合清理、去重與壓縮。可以執行全部三個階段、任意兩個或僅一個。啟用的階段一律依此順序執行。",
-    "Kombiniere Bereinigung, Deduplizierung und Komprimierung für jeden gespeicherten Ordner. Nutze alle drei Schritte, zwei beliebige oder nur einen. Aktivierte Schritte laufen immer in dieser Reihenfolge.",
-    "Combina limpieza, deduplicación y compresión como quieras para cada ubicación guardada. Ejecuta las tres etapas, dos cualesquiera o solo una. Las etapas activadas siempre siguen ese orden.",
-    "Combina limpieza, deduplicación y compresión como quieras para cada ubicación guardada. Ejecuta las tres etapas, dos cualesquiera o solo una. Las etapas activadas siempre siguen ese orden.",
-    "Поєднуйте очищення, дедуплікацію й стиснення для кожного збереженого розташування. Запускайте всі три етапи, будь-які два або лише один. Увімкнені етапи завжди виконуються в такому порядку."
-  ],
-  "f938c3286fd7": [
-    "清理",
-    "清理",
-    "Bereinigen",
-    "Limpiar",
-    "Limpiar",
-    "Очищення"
-  ],
-  "219693c80674": [
-    "使用可编辑方案删除匹配的文件及匹配的空子文件夹。保留规则保护文件及整个文件夹。所选根文件夹留在原处。",
-    "使用可編輯設定檔刪除符合條件的檔案及空的子資料夾。保留規則保護檔案與整個資料夾。選取的根資料夾會保留。",
-    "Entferne passende Dateien und passende leere Unterordner mit einem bearbeitbaren Profil. Behalteregeln schützen Dateien und ganze Ordner. Der ausgewählte Stammordner bleibt erhalten.",
-    "Elimina archivos y subcarpetas vacías que coincidan con un perfil editable. Las reglas de conservación protegen archivos y carpetas completas. La carpeta raíz seleccionada permanece en su lugar.",
-    "Elimina archivos y subcarpetas vacías que coincidan con un perfil editable. Las reglas de conservación protegen archivos y carpetas completas. La carpeta raíz seleccionada permanece en su lugar.",
-    "Видаляйте відповідні файли й порожні підпапки за редагованим профілем. Правила збереження захищають файли й цілі папки. Вибрана коренева папка залишається на місці."
-  ],
-  "eb8f3ff36528": [
-    "仅在您启用清理并选择方案的位置运行。",
-    "僅在你啟用清理並選擇設定檔的位置執行。",
-    "Nur dort, wo du Bereinigung aktivierst und ein Profil auswählst.",
-    "Solo donde actives la limpieza y elijas un perfil.",
-    "Solo donde actives la limpieza y elijas un perfil.",
-    "Лише там, де ви ввімкнули очищення й вибрали профіль."
-  ],
-  "f0dd6a72a6c0": [
-    "去重",
-    "去重",
-    "Deduplizieren",
-    "Deduplicar",
-    "Deduplicar",
-    "Дедуплікація"
-  ],
-  "cba340b9db78": [
-    "让剩余的相同文件共享同一 APFS 宗卷上的物理存储空间。每个副本保留名称和路径，并可独立编辑。",
-    "讓其餘相同的檔案共用同一 APFS 卷宗上的實體儲存空間。每個副本保留名稱與路徑，並可獨立編輯。",
-    "Lass identische verbleibende Dateien auf demselben APFS-Volume physischen Speicher teilen. Jede Kopie behält ihren Namen und Pfad und bleibt unabhängig bearbeitbar.",
-    "Haz que los archivos idénticos restantes compartan almacenamiento físico en el mismo volumen APFS. Cada copia conserva su nombre y ruta y se puede editar de forma independiente.",
-    "Haz que los archivos idénticos restantes compartan almacenamiento físico en el mismo volumen APFS. Cada copia conserva su nombre y ruta y se puede editar de forma independiente.",
-    "Дозвольте однаковим файлам, що залишилися, спільно використовувати фізичне сховище на одному томі APFS. Кожна копія зберігає назву й шлях і редагується незалежно."
-  ],
-  "e0746fcda661": [
-    "保留两个副本，数据无需存储两次。",
-    "保留兩個副本，資料不必儲存兩次。",
-    "Behalte beide Kopien, ohne ihre Daten doppelt zu speichern.",
-    "Conserva ambas copias sin almacenar sus datos dos veces.",
-    "Conserva ambas copias sin almacenar sus datos dos veces.",
-    "Зберігайте обидві копії без подвійного зберігання даних."
-  ],
-  "033fc0445b90": [
-    "压缩",
-    "壓縮",
-    "Komprimieren",
-    "Comprimir",
-    "Comprimir",
-    "Стиснення"
-  ],
-  "5cafecca86ba": [
-    "对其余符合条件的文件使用无损文件系统压缩。内容保持不变，无需解压即可在常用应用中打开。",
-    "對其餘符合條件的檔案使用無損檔案系統壓縮。內容保持不變，不必解壓縮即可在慣用的 App 中開啟。",
-    "Nutze verlustfreie Dateisystemkompression für geeignete verbleibende Dateien. Ihre Inhalte bleiben erhalten und sie öffnen sich ohne Entpacken in deinen gewohnten Apps.",
-    "Usa compresión sin pérdida del sistema de archivos para los archivos restantes compatibles. Conservan su contenido y se abren en tus apps habituales sin descomprimir.",
-    "Usa compresión sin pérdida del sistema de archivos para los archivos restantes compatibles. Conservan su contenido y se abren en tus apps habituales sin descomprimir.",
-    "Застосовуйте стиснення файлової системи без втрат до решти придатних файлів. Вони зберігають вміст і відкриваються у звичних програмах без розпакування."
-  ],
-  "1b43d378cf84": [
-    "占用更小。文件如常。",
-    "佔用更小。檔案如常。",
-    "Weniger Speicher. Vertraute Dateien.",
-    "Menos espacio. Los mismos archivos.",
-    "Menos espacio. Los mismos archivos.",
-    "Менше місця. Звичні файли."
-  ],
-  "7798ac7c5e29": [
-    "创建方案。{1}为每个文件夹设定用途。",
-    "建立設定檔。{1}為每個資料夾設定用途。",
-    "Erstelle ein Profil.{1}Gib jedem Ordner einen Zweck.",
-    "Crea un perfil.{1}Dale un propósito a cada carpeta.",
-    "Crea un perfil.{1}Dale un propósito a cada carpeta.",
-    "Створіть профіль.{1}Визначте призначення кожної папки."
   ],
   "aa332431c2d8": [
     "使用 *.log 和 *.tmp 等通配符或正则表达式匹配名称或相对路径。为必须保留的内容添加保留规则。从可编辑的日志、临时文件预设开始，Mac 上还提供构建输出预设。",
@@ -247,22 +87,6 @@
     "La limpieza omite archivos modificados dentro del periodo de protección que elijas. La eliminación permanente no se puede deshacer. Los archivos en la papelera siguen ocupando espacio hasta vaciarla. Revisa el perfil antes de activar la supervisión automática. {1}Cómo funcionan las reglas de limpieza{/1}.",
     "Очищення пропускає файли, змінені протягом вибраного періоду захисту. Остаточне видалення не можна скасувати. Файли у Смітнику займають місце до його спорожнення. Перевірте профіль, перш ніж увімкнути його для автоматичного моніторингу. {1}Як працюють правила очищення{/1}."
   ],
-  "dbf9d030b9ae": [
-    "同样的清理、压缩和去重引擎，专为触控打造。为支持的本地文件夹配置方案，让需要保留的文件随时可用。",
-    "相同的清理、壓縮與去重引擎，專為觸控打造。為支援的本機資料夾設定設定檔，讓想保留的檔案隨時可用。",
-    "Dieselbe Engine für Bereinigung, Komprimierung und Deduplizierung, für Touch-Bedienung entwickelt. Richte Profile für unterstützte lokale Ordner ein. Deine gewünschten Dateien bleiben jederzeit nutzbar.",
-    "El mismo motor de limpieza, compresión y deduplicación, diseñado para uso táctil. Configura perfiles para carpetas locales compatibles y mantén listos los archivos que quieras conservar.",
-    "El mismo motor de limpieza, compresión y deduplicación, diseñado para uso táctil. Configura perfiles para carpetas locales compatibles y mantén listos los archivos que quieras conservar.",
-    "Той самий рушій очищення, стиснення й дедуплікації, пристосований до дотиків. Налаштовуйте профілі для підтримуваних локальних папок і залишайте потрібні файли готовими до відкриття."
-  ],
-  "e4a97d3e85d8": [
-    "启用自动监控，按计划运行每个位置所选的清理方案和优化阶段。最近修改文件保护会让更改过的文件等待一段时间。",
-    "啟用自動監控，依排程執行每個位置所選的清理設定檔與最佳化階段。最近修改檔案保護會讓變更過的檔案等待一段時間。",
-    "Aktiviere die automatische Überwachung, um das gewählte Bereinigungsprofil und die Optimierungsschritte jedes Speicherorts nach Zeitplan auszuführen. Der Schutz kürzlich geänderter Dateien lässt Änderungen erst zur Ruhe kommen.",
-    "Activa el monitoreo automático para ejecutar el perfil de limpieza y las etapas elegidas de cada ubicación según un horario. La protección de archivos recientes da tiempo a que terminen los cambios.",
-    "Activa la supervisión automática para ejecutar el perfil de limpieza y las etapas elegidas de cada ubicación según un horario. La protección de archivos recientes da tiempo a que terminen los cambios.",
-    "Увімкніть автоматичний моніторинг, щоб запускати вибраний профіль очищення й етапи оптимізації кожного розташування за розкладом. Захист нещодавно змінених файлів дає час завершити зміни."
-  ],
   "b5a82f93f566": [
     "为每个已保存文件夹选择阶段和清理方案。在优化模式和测量的节省空间旁查看所选方案。",
     "為每個已儲存資料夾選擇階段與清理設定檔。在最佳化模式與測量的節省空間旁查看所選設定檔。",
@@ -270,78 +94,6 @@
     "Elige las etapas y el perfil de limpieza de cada carpeta guardada. Consulta el perfil seleccionado junto al modo de optimización y el ahorro medido.",
     "Elige las etapas y el perfil de limpieza de cada carpeta guardada. Consulta el perfil seleccionado junto al modo de optimización y el ahorro medido.",
     "Вибирайте етапи й профіль очищення для кожної збереженої папки. Переглядайте вибраний профіль поруч із режимом оптимізації та виміряною економією."
-  ],
-  "131f3ebfdaaa": [
-    "自动清理和优化已保存文件夹，一次性优化所选内容，或使用 CLI 进行压缩和去重。Mac App Store 和 Setapp 版本功能相同。",
-    "自動清理與最佳化已儲存資料夾，一次最佳化所選內容，或使用 CLI 壓縮與去重。Mac App Store 和 Setapp 版本功能相同。",
-    "Bereinige und optimiere gespeicherte Ordner automatisch, optimiere eine Auswahl einmalig oder nutze die CLI für Komprimierung und Deduplizierung. Die Versionen im Mac App Store und bei Setapp haben dieselben Funktionen.",
-    "Limpia y optimiza carpetas guardadas automáticamente, optimiza una selección una vez o usa la CLI para comprimir y deduplicar. Las versiones del Mac App Store y Setapp tienen las mismas funciones.",
-    "Limpia y optimiza carpetas guardadas automáticamente, optimiza una selección una vez o usa la CLI para comprimir y deduplicar. Las versiones del Mac App Store y Setapp tienen las mismas funciones.",
-    "Автоматично очищуйте й оптимізуйте збережені папки, разово оптимізуйте вибране або використовуйте CLI для стиснення й дедуплікації. Версії з Mac App Store і Setapp мають однакові функції."
-  ],
-  "bd42d5dbe976": [
-    "清理、去重和压缩支持的本地文件夹。在支持的 iOS 版本上，使用 Apple 快捷指令为已保存文件夹安排工作流程。无持续监控或 CLI。不用于照片或视频优化。",
-    "清理、去重與壓縮支援的本機資料夾。在支援的 iOS 版本上，使用 Apple 捷徑為已儲存資料夾安排工作流程。沒有持續監控或 CLI。不用於照片或影片最佳化。",
-    "Bereinige, dedupliziere und komprimiere unterstützte lokale Ordner. Plane Abläufe für gespeicherte Ordner mit Apple Kurzbefehle auf unterstützten iOS-Versionen. Keine kontinuierliche Überwachung oder CLI. Kein Foto- oder Videooptimierer.",
-    "Limpia, deduplica y comprime carpetas locales compatibles. Programa flujos de carpetas guardadas con Atajos de Apple en versiones de iOS compatibles. Sin monitoreo continuo ni CLI. No optimiza fotos ni videos.",
-    "Limpia, deduplica y comprime carpetas locales compatibles. Programa flujos de carpetas guardadas con Atajos de Apple en versiones de iOS compatibles. Sin supervisión continua ni CLI. No optimiza fotos ni vídeos.",
-    "Очищуйте, дедуплікуйте й стискайте підтримувані локальні папки. Плануйте процеси для збережених папок через Apple Shortcuts у підтримуваних версіях iOS. Без постійного моніторингу чи CLI. Не для оптимізації фото й відео."
-  ],
-  "913452711a71": [
-    "DiskPress for Files - 清理、压缩与去重",
-    "DiskPress for Files - 清理、壓縮與去重",
-    "DiskPress for Files - Bereinigung, Komprimierung und Deduplizierung",
-    "DiskPress for Files - Limpieza, compresión y deduplicación",
-    "DiskPress for Files - Limpieza, compresión y deduplicación",
-    "DiskPress for Files - Очищення, стиснення й дедуплікація"
-  ],
-  "3637c1bec6a9": [
-    "清理支持的本地文件夹，再为保留的文件去重和压缩。创建自己的方案，并用 Apple 快捷指令安排工作流程。",
-    "清理支援的本機資料夾，再為保留的檔案去重與壓縮。建立自己的設定檔，並用 Apple 捷徑安排工作流程。",
-    "Bereinige unterstützte lokale Ordner und dedupliziere und komprimiere die Dateien, die bleiben. Erstelle eigene Profile und plane Abläufe mit Apple Kurzbefehle.",
-    "Limpia carpetas locales compatibles, luego deduplica y comprime los archivos que conservas. Crea tus propios perfiles y programa flujos con Atajos de Apple.",
-    "Limpia carpetas locales compatibles, luego deduplica y comprime los archivos que conservas. Crea tus propios perfiles y programa flujos con Atajos de Apple.",
-    "Очищуйте підтримувані локальні папки, а потім дедуплікуйте й стискайте файли, що залишилися. Створюйте власні профілі й плануйте процеси через Apple Shortcuts."
-  ],
-  "e1f3d9d89392": [
-    "用自己的清理规则删除不需要的文件，再为其余文件去重和压缩。为每个支持的本地文件夹配置专属工作流程。",
-    "用自己的清理規則刪除不需要的檔案，再為其餘檔案去重與壓縮。為每個支援的本機資料夾設定專屬工作流程。",
-    "Entferne unerwünschte Dateien nach deinen Regeln. Dedupliziere und komprimiere den Rest. Gib jedem unterstützten lokalen Ordner seinen eigenen Ablauf.",
-    "Elimina archivos no deseados con tus propias reglas de limpieza, luego deduplica y comprime el resto. Dale a cada carpeta local compatible su propio flujo de trabajo.",
-    "Elimina archivos no deseados con tus propias reglas de limpieza, luego deduplica y comprime el resto. Dale a cada carpeta local compatible su propio flujo de trabajo.",
-    "Видаляйте непотрібні файли за власними правилами очищення, а потім дедуплікуйте й стискайте решту. Налаштуйте окремий процес для кожної підтримуваної локальної папки."
-  ],
-  "a3da47afbdcd": [
-    "DiskPress for Files 将 Mac 版 DiskPress 的清理和原生优化引擎带到 iPhone 和 iPad。保留的文件内容不变，可照常打开。无需解压归档。",
-    "DiskPress for Files 將 Mac 版 DiskPress 的清理與原生最佳化引擎帶到 iPhone 和 iPad。保留的檔案內容不變，可照常開啟。不必解壓縮封存檔。",
-    "DiskPress for Files bringt dieselbe Engine für Bereinigung und native Optimierung wie DiskPress für Mac auf iPhone und iPad. Behaltene Dateien bewahren ihren Inhalt und öffnen sich wie gewohnt. Keine Archive zum Entpacken.",
-    "DiskPress for Files lleva el mismo motor de limpieza y optimización nativa de DiskPress para Mac al iPhone y iPad. Los archivos que conservas mantienen su contenido y se abren normalmente. Sin archivos que descomprimir.",
-    "DiskPress for Files lleva el mismo motor de limpieza y optimización nativa de DiskPress para Mac al iPhone y iPad. Los archivos que conservas mantienen su contenido y se abren normalmente. Sin archivos que descomprimir.",
-    "DiskPress for Files переносить рушій очищення й системної оптимізації DiskPress для Mac на iPhone та iPad. Збережені файли не змінюють вмісту й відкриваються як завжди. Без архівів для розпакування."
-  ],
-  "49111005b318": [
-    "先清理，再优化",
-    "先清理，再最佳化",
-    "Bereinigung vor der Optimierung",
-    "Limpieza antes de optimizar",
-    "Limpieza antes de optimizar",
-    "Очищення перед оптимізацією"
-  ],
-  "8c3d8ab6fac6": [
-    "使用清理方案删除文件，再为其余文件去重和压缩。保留规则保护匹配的文件和文件夹。最近修改过的文件会等待保护时段结束。",
-    "使用清理設定檔刪除檔案，再為其餘檔案去重與壓縮。保留規則保護符合條件的檔案與資料夾。最近修改過的檔案會等待保護期間結束。",
-    "Entferne Dateien mit einem Bereinigungsprofil. Dedupliziere und komprimiere dann den Rest. Behalteregeln schützen passende Dateien und Ordner. Kürzlich geänderte Dateien warten bis zum Ende deiner Schutzfrist.",
-    "Elimina archivos con un perfil de limpieza, luego deduplica y comprime el resto. Las reglas de conservación protegen los archivos y carpetas coincidentes. Los archivos modificados recientemente esperan a que termine el periodo de protección.",
-    "Elimina archivos con un perfil de limpieza, luego deduplica y comprime el resto. Las reglas de conservación protegen los archivos y carpetas coincidentes. Los archivos modificados recientemente esperan a que termine el periodo de protección.",
-    "Видаляйте файли за профілем очищення, потім дедуплікуйте й стискайте решту. Правила збереження захищають відповідні файли й папки. Нещодавно змінені файли чекають завершення періоду захисту."
-  ],
-  "f5b5d259cfbb": [
-    "从清理、去重和压缩的七种组合中任选一种。启用清理时，请选择清理方案。单独优化某个已保存位置，或将其纳入全部优化。",
-    "從清理、去重與壓縮的七種組合中任選一種。啟用清理時，請選擇清理設定檔。單獨最佳化某個已儲存位置，或將其納入全部最佳化。",
-    "Wähle eine der sieben Kombinationen aus Bereinigung, Deduplizierung und Komprimierung. Wähle bei aktivierter Bereinigung ein Profil. Optimiere einen gespeicherten Ordner einzeln oder nimm ihn in Alle optimieren auf.",
-    "Elige cualquiera de las siete combinaciones de limpieza, deduplicación y compresión. Selecciona un perfil siempre que actives la limpieza. Optimiza una ubicación guardada o inclúyela en Optimizar todo.",
-    "Elige cualquiera de las siete combinaciones de limpieza, deduplicación y compresión. Selecciona un perfil siempre que actives la limpieza. Optimiza una ubicación guardada o inclúyela en Optimizar todo.",
-    "Вибирайте будь-яке із семи поєднань очищення, дедуплікації й стиснення. Коли очищення ввімкнено, виберіть профіль. Оптимізуйте одне збережене розташування або включіть його до оптимізації всіх."
   ],
   "f220e3ffe774": [
     "选择每个文件夹的工作流程",
@@ -367,14 +119,6 @@
     "DiskPress for Files en iPhone Duo mostrando los siete modos de optimización y el perfil de limpieza seleccionado.",
     "DiskPress for Files на iPhone Duo з усіма сімома режимами оптимізації та вибраним профілем очищення."
   ],
-  "7ddfcacbd53f": [
-    "1.2.0 中的清理方案",
-    "1.2.0 中的清理設定檔",
-    "Bereinigungsprofile in 1.2.0",
-    "Perfiles de limpieza en 1.2.0",
-    "Perfiles de limpieza en 1.2.0",
-    "Профілі очищення у 1.2.0"
-  ],
   "4a7845c01ecd": [
     "设定保留规则。{1}清除杂乱。",
     "設定保留規則。{1}清除雜亂。",
@@ -398,14 +142,6 @@
     "Elige un método de eliminación por perfil. La eliminación permanente no se puede deshacer. Mover a la papelera depende de la ubicación y no está disponible en todas partes en iOS. Si no se admite, el elemento permanece en su lugar. Los elementos recuperables pueden seguir ocupando espacio.",
     "Elige un método de eliminación por perfil. La eliminación permanente no se puede deshacer. Mover a la papelera depende de la ubicación y no está disponible en todas partes en iOS. Si no se admite, el elemento permanece en su lugar. Los elementos recuperables pueden seguir ocupando espacio.",
     "Вибирайте спосіб видалення для кожного профілю. Остаточне видалення не можна скасувати. Можливість переміщення до Смітника залежить від розташування й доступна не всюди в iOS. Якщо вона не підтримується, об'єкт залишається на місці. Об'єкти, які можна відновити, можуть і далі займати місце."
-  ],
-  "12b79b3f1e48": [
-    "通过 Apple 快捷指令为已保存文件夹安排任务，在去重和压缩前应用其清理方案。DiskPress 不会持续监控文件夹。",
-    "透過 Apple 捷徑為已儲存資料夾安排工作，在去重與壓縮前套用其清理設定檔。DiskPress 不會持續監控資料夾。",
-    "Plane den gespeicherten Ordner mit Apple Kurzbefehle, um sein Bereinigungsprofil vor Deduplizierung und Komprimierung anzuwenden. DiskPress überwacht Ordner nicht kontinuierlich.",
-    "Programa la carpeta guardada con Atajos de Apple para aplicar su perfil de limpieza antes de deduplicar y comprimir. DiskPress no monitorea carpetas continuamente.",
-    "Programa la carpeta guardada con Atajos de Apple para aplicar su perfil de limpieza antes de deduplicar y comprimir. DiskPress no supervisa carpetas continuamente.",
-    "Заплануйте збережену папку через Apple Shortcuts, щоб застосувати її профіль очищення перед дедуплікацією та стисненням. DiskPress не відстежує папки постійно."
   ],
   "85f3fa1158cd": [
     "iPhone 和 iPad 上的清理",
@@ -462,14 +198,6 @@
     "Guía de Atajos de DiskPress for Files en iPhone Duo sobre carpetas guardadas, subcarpetas y copias de archivos.",
     "Guía de Atajos de DiskPress for Files en iPhone Duo sobre carpetas guardadas, subcarpetas y copias de archivos.",
     "Вказівки Shortcuts у DiskPress for Files на iPhone Duo для збережених папок, підпапок і копій файлів."
-  ],
-  "be1bee1a1d5d": [
-    "两款应用都提供清理方案，并对保留的文件进行原生优化。Mac 另有自动文件夹监控及用于压缩和去重的 CLI。iPhone 和 iPad 使用 Apple 快捷指令安排工作流程。",
-    "兩款 App 都提供清理設定檔，並對保留的檔案進行原生最佳化。Mac 另有自動資料夾監控及用於壓縮與去重的 CLI。iPhone 和 iPad 使用 Apple 捷徑安排工作流程。",
-    "Beide Apps bieten Bereinigungsprofile und native Optimierung der behaltenen Dateien. Der Mac ergänzt automatische Ordnerüberwachung und eine CLI für Komprimierung und Deduplizierung. iPhone und iPad nutzen Apple Kurzbefehle für geplante Abläufe.",
-    "Ambas apps ofrecen perfiles de limpieza y optimización nativa de los archivos que conservas. Mac añade monitoreo automático de carpetas y una CLI para comprimir y deduplicar. iPhone y iPad usan Atajos de Apple para programar flujos.",
-    "Ambas apps ofrecen perfiles de limpieza y optimización nativa de los archivos que conservas. Mac añade supervisión automática de carpetas y una CLI para comprimir y deduplicar. iPhone y iPad usan Atajos de Apple para programar flujos.",
-    "Обидві програми пропонують профілі очищення й системну оптимізацію файлів, які залишаються. Mac додає автоматичний моніторинг папок і CLI для стиснення й дедуплікації. iPhone та iPad використовують Apple Shortcuts для запланованих процесів."
   ],
   "200fb919614a": [
     "清理方案与保留规则",
@@ -542,14 +270,6 @@
     "Elige mover a la papelera o eliminar permanentemente por perfil. La papelera no libera espacio hasta vaciarla. La eliminación permanente no se puede deshacer y cancelar una ejecución no restaura archivos ya eliminados.",
     "Elige mover a la papelera o eliminar permanentemente por perfil. La papelera no libera espacio hasta vaciarla. La eliminación permanente no se puede deshacer y cancelar una ejecución no restaura archivos ya eliminados.",
     "Вибирайте переміщення до Смітника або остаточне видалення для кожного профілю. Смітник звільняє місце лише після спорожнення. Остаточне видалення не можна скасувати, а скасування запуску не відновлює вже видалені файли."
-  ],
-  "3718b879b8a4": [
-    "DiskPress 结合可配置清理、APFS 去重和无损原生压缩。为每个已保存文件夹选择工作流程。清理删除方案匹配的文件，再通过去重和压缩减少保留文件的存储占用。",
-    "DiskPress 結合可設定清理、APFS 去重與無損原生壓縮。為每個已儲存資料夾選擇工作流程。清理刪除設定檔比對的檔案，再透過去重與壓縮減少保留檔案的儲存佔用。",
-    "DiskPress verbindet konfigurierbare Bereinigung, APFS-Deduplizierung und verlustfreie native Komprimierung. Wähle einen Ablauf für jeden gespeicherten Ordner. Die Bereinigung entfernt Dateien nach deinem Profil. Deduplizierung und Komprimierung reduzieren danach den Speicherbedarf der behaltenen Dateien.",
-    "DiskPress combina limpieza configurable, deduplicación APFS y compresión nativa sin pérdida. Elige un flujo para cada carpeta guardada. La limpieza elimina los archivos que coinciden con tu perfil, luego la deduplicación y la compresión reducen el espacio de los que conservas.",
-    "DiskPress combina limpieza configurable, deduplicación APFS y compresión nativa sin pérdida. Elige un flujo para cada carpeta guardada. La limpieza elimina los archivos que coinciden con tu perfil, luego la deduplicación y la compresión reducen el espacio de los que conservas.",
-    "DiskPress поєднує налаштовуване очищення, дедуплікацію APFS і системне стиснення без втрат. Вибирайте процес для кожної збереженої папки. Очищення видаляє файли за вашим профілем, а дедуплікація й стиснення зменшують місце, яке займають збережені файли."
   ],
   "9e94961b16f2": [
     "手动运行已保存位置，或在 Mac 上启用自动监控。一次性选择和 Mac CLI 也提供压缩和去重。",
@@ -670,13 +390,5 @@
     "El perfil de limpieza seleccionado aparece junto al modo de optimización.",
     "El perfil de limpieza seleccionado aparece junto al modo de optimización.",
     "Вибраний профіль очищення відображається поруч із режимом оптимізації."
-  ],
-  "DiskPress - Cleanup, compression and deduplication": [
-    "DiskPress - 清理、压缩与去重",
-    "DiskPress - 清理、壓縮與去重",
-    "DiskPress - Bereinigung, Komprimierung und Deduplizierung",
-    "DiskPress - Limpieza, compresión y deduplicación",
-    "DiskPress - Limpieza, compresión y deduplicación",
-    "DiskPress - Очищення, стиснення й дедуплікація"
   ]
 }
