@@ -1,5 +1,13 @@
 # DiskPress website verification
 
+## Folded iPhone Duo captures on October 30, 2026
+
+Replaced 35 inner-display captures with current native outer-display captures across all seven website languages. Together with the existing file-copy captures, all 42 iOS images now show the folded Duo at 1398 by 2034 pixels. Fastline captured the same screenshot app and localized sample data as the existing 1.2.0 media. Pixel checks confirmed that the prepared PNGs preserve the native captures, and the website source manifest records their paths, dimensions, and hashes.
+
+The enlarged homepage preview keeps its proportional column layout. Its largest WebP variant now uses the source width of 1398 pixels to avoid upscaling. The modes caption and alternative text were updated directly in all seven languages because the folded screen requires scrolling through the complete list. Media checks now require outer-display sources for every iOS capture.
+
+The production build, TypeScript check, Cloudflare deployment dry run, built-site checks, source catalog checks, language-routing checks, changelog checks, and whitespace checks passed. Built-output verification covered 71 routes, 3,459 internal links, 1,043 asset references, and all 98 native image hashes. Browser checks passed 36 layout cases across both product pages and all seven languages, including mobile and desktop layouts and breakpoint edges. They confirmed original image proportions, equal screenshot-card heights, full-width homepage preview images, desktop top alignment, and no horizontal overflow. The Ukrainian preview was also visually inspected after its image loaded. No browser console errors were observed.
+
 ## Larger homepage iPhone preview on October 30, 2026
 
 Replaced the fixed 280 pixel media column and 240 pixel image with proportional columns and an image that fills its column. Removed the separate copy-width limit that left unused horizontal space. Text and media now align at the top with a 32 pixel gap. At a 1440 pixel desktop viewport the screenshot is about 457 pixels wide, compared with 240 pixels before. The image retains its full original proportions.

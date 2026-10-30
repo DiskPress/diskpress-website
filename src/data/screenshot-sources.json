@@ -75,46 +75,46 @@
     "locale": "en",
     "name": "diskpress-for-files-overview",
     "file": "src/assets/releases/en/diskpress-for-files-overview.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/en-US/1_IPHONE_DUO_INNER_overview.png",
-    "sha256": "a14b0c7d34cdc7b13cc7ae0dc73a43d09f08be1107c6a79b211c36aac016c697",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/en-US/1_IPHONE_DUO_OUTER_overview.png",
+    "sha256": "50b6b73fa4f4c15a9e2858deb040ce84854f017cfebf806e0cc630da420bb4af",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "en",
     "name": "diskpress-for-files-selection",
     "file": "src/assets/releases/en/diskpress-for-files-selection.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/en-US/2_IPHONE_DUO_INNER_modes.png",
-    "sha256": "5988247854e3b2e0ae87a30e226d1d662038b4fe4e4a68f2e22782e02f6129a1",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/en-US/2_IPHONE_DUO_OUTER_modes.png",
+    "sha256": "c5fe4ceff4f971f154de41cd406669afa3f8f336364458d73f5aca0a68e983a6",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "en",
     "name": "diskpress-for-files-cleanup",
     "file": "src/assets/releases/en/diskpress-for-files-cleanup.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/en-US/3_IPHONE_DUO_INNER_cleanup.png",
-    "sha256": "10faee5c6e2a1a831c898e9da3db03785119f8921ade73d6d235c68013727dbc",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/en-US/3_IPHONE_DUO_OUTER_cleanup.png",
+    "sha256": "186fbe73cc119d63450f1bdeec633e90dd2fa1fc3f2c4c22e812309b092f47a4",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "en",
     "name": "diskpress-for-files-results",
     "file": "src/assets/releases/en/diskpress-for-files-results.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/en-US/5_IPHONE_DUO_INNER_results.png",
-    "sha256": "a69ee0bdceb8feac3509c9ece243f1be1894b66cc0ffd7a3f8087fdae918f072",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/en-US/5_IPHONE_DUO_OUTER_results.png",
+    "sha256": "8bfe1ba5950f61d721da857a8b54dd4f385f73182c4956e4b066ef12f501fd3e",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "en",
     "name": "diskpress-for-files-automation",
     "file": "src/assets/releases/en/diskpress-for-files-automation.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/en-US/7_IPHONE_DUO_INNER_shortcuts.png",
-    "sha256": "32f061dcd23d6b2c0102be61658b45f04add7748e557b1cd357440eccde7c61e",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/en-US/7_IPHONE_DUO_OUTER_shortcuts.png",
+    "sha256": "4a03365361173124bc299127c1d7329b519c40153e548ff0d838da7944cefbf7",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "en",
@@ -201,46 +201,46 @@
     "locale": "zh-hans",
     "name": "diskpress-for-files-overview",
     "file": "src/assets/releases/zh-hans/diskpress-for-files-overview.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hans/1_IPHONE_DUO_INNER_overview.png",
-    "sha256": "cadd72312a76b03ca0de0c9309d1b74841fe3b4022dab6de7107b4b56248289e",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/zh-Hans/1_IPHONE_DUO_OUTER_overview.png",
+    "sha256": "24f1434346d9248dec90309534b043198d7f4c4d373eb9fa77e477dea29323e1",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "zh-hans",
     "name": "diskpress-for-files-selection",
     "file": "src/assets/releases/zh-hans/diskpress-for-files-selection.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hans/2_IPHONE_DUO_INNER_modes.png",
-    "sha256": "f70499b4ec03ccb2509c0aa912856131c9ef0a06823c71126678545085164c35",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/zh-Hans/2_IPHONE_DUO_OUTER_modes.png",
+    "sha256": "79473235f4611b57da0696d1907f0eadc90bf8e94efa9b8c5f811d425e30d4ec",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "zh-hans",
     "name": "diskpress-for-files-cleanup",
     "file": "src/assets/releases/zh-hans/diskpress-for-files-cleanup.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hans/3_IPHONE_DUO_INNER_cleanup.png",
-    "sha256": "d87093af1b49d112fecfa654632fbbb37955ff718655df4a4640ef73de2345e3",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/zh-Hans/3_IPHONE_DUO_OUTER_cleanup.png",
+    "sha256": "b596fd731173085da404d3ccbc71c9113e1af342c46972df385cc4fcc8439313",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "zh-hans",
     "name": "diskpress-for-files-results",
     "file": "src/assets/releases/zh-hans/diskpress-for-files-results.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hans/5_IPHONE_DUO_INNER_results.png",
-    "sha256": "1342526da92d4a9da25536cb76400b73a46e6e9fb2fc1de566cee01f020b294f",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/zh-Hans/5_IPHONE_DUO_OUTER_results.png",
+    "sha256": "6597449b34ce0ebb00a89c844e5f8b2a816135e7024fb6318776f8a9a6974f13",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "zh-hans",
     "name": "diskpress-for-files-automation",
     "file": "src/assets/releases/zh-hans/diskpress-for-files-automation.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hans/7_IPHONE_DUO_INNER_shortcuts.png",
-    "sha256": "2395f95608189b173f83c9b94fd7dbf455c0a45320aea7c4fda34b0f57a09ed7",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/zh-Hans/7_IPHONE_DUO_OUTER_shortcuts.png",
+    "sha256": "8b6f57df4af1c62b41f73e58cf29e4a30622ccf99f8b987d4b408bffbc6cc651",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "zh-hans",
@@ -327,46 +327,46 @@
     "locale": "zh-hant",
     "name": "diskpress-for-files-overview",
     "file": "src/assets/releases/zh-hant/diskpress-for-files-overview.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hant/1_IPHONE_DUO_INNER_overview.png",
-    "sha256": "5399c0d20a2b4ab769c4cb8e7d5893521d2206ffe19c79963a3b3b1142872140",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/zh-Hant/1_IPHONE_DUO_OUTER_overview.png",
+    "sha256": "d968619da8ca461789a17db39ab1adde7c5143eaffd206c9554d837d389718af",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "zh-hant",
     "name": "diskpress-for-files-selection",
     "file": "src/assets/releases/zh-hant/diskpress-for-files-selection.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hant/2_IPHONE_DUO_INNER_modes.png",
-    "sha256": "e931fe5a838e6474e788f3fdbf4aa4f9d1a5616e2db2ebaf92c77e4365050696",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/zh-Hant/2_IPHONE_DUO_OUTER_modes.png",
+    "sha256": "25a9735e0335e02d27041f1d3fb89b865fe5e07080a075374bc7ce5280fc641b",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "zh-hant",
     "name": "diskpress-for-files-cleanup",
     "file": "src/assets/releases/zh-hant/diskpress-for-files-cleanup.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hant/3_IPHONE_DUO_INNER_cleanup.png",
-    "sha256": "6729da6ea377699d5d74adf71346f6e8f4c403361a48012718e0885dfc2aa4f8",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/zh-Hant/3_IPHONE_DUO_OUTER_cleanup.png",
+    "sha256": "b00befb69cd2255c3135096eede02da48a49c66bb656ab55b65ebdcf29b28150",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "zh-hant",
     "name": "diskpress-for-files-results",
     "file": "src/assets/releases/zh-hant/diskpress-for-files-results.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hant/5_IPHONE_DUO_INNER_results.png",
-    "sha256": "c394efd09081d6591e579c38e18656d9b7ce0b6eb1d6228e25187365acb32ead",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/zh-Hant/5_IPHONE_DUO_OUTER_results.png",
+    "sha256": "277d9c889f90162e9a1a0198966f32a0ba8e46a792fd209169c74dec7062b1bd",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "zh-hant",
     "name": "diskpress-for-files-automation",
     "file": "src/assets/releases/zh-hant/diskpress-for-files-automation.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hant/7_IPHONE_DUO_INNER_shortcuts.png",
-    "sha256": "a9ad2575724b42daab36558621a695a8e3d7a8291f8730ee99181d28c4938f56",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/zh-Hant/7_IPHONE_DUO_OUTER_shortcuts.png",
+    "sha256": "2117fe0762a7383a81b63d1dcf0b3b1580a904ff4e87f9a99ab3235c33bbea2b",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "zh-hant",
@@ -453,46 +453,46 @@
     "locale": "de",
     "name": "diskpress-for-files-overview",
     "file": "src/assets/releases/de/diskpress-for-files-overview.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/de-DE/1_IPHONE_DUO_INNER_overview.png",
-    "sha256": "3f999a94f6fc7ebd3f2a4f3b97b591ec459e5b8706737c8f3a9283645dad92ea",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/de-DE/1_IPHONE_DUO_OUTER_overview.png",
+    "sha256": "6478a378558fe5316c5276033fa50d41997f90516d818e086bc410a68b1f7c6f",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "de",
     "name": "diskpress-for-files-selection",
     "file": "src/assets/releases/de/diskpress-for-files-selection.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/de-DE/2_IPHONE_DUO_INNER_modes.png",
-    "sha256": "33272407372738cc84284134523ba72f2d772b1fd197c69854aa888509164cd2",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/de-DE/2_IPHONE_DUO_OUTER_modes.png",
+    "sha256": "d85789ea24efdf749e4bab984332281981f556c04e25ae0a4ded78b4a7f1401f",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "de",
     "name": "diskpress-for-files-cleanup",
     "file": "src/assets/releases/de/diskpress-for-files-cleanup.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/de-DE/3_IPHONE_DUO_INNER_cleanup.png",
-    "sha256": "4fb3981efaec70c25a85c4ef787b0f430eb20a9b82f91e866774b4706b35f474",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/de-DE/3_IPHONE_DUO_OUTER_cleanup.png",
+    "sha256": "82147b984c1e6bbeefb4a09207d128558584a1f3c1ca052f947b2b709bbfc8af",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "de",
     "name": "diskpress-for-files-results",
     "file": "src/assets/releases/de/diskpress-for-files-results.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/de-DE/5_IPHONE_DUO_INNER_results.png",
-    "sha256": "515345b8544414bf9cb3bb5427f803f0e5633f4d8b906907081817115ec5ccaf",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/de-DE/5_IPHONE_DUO_OUTER_results.png",
+    "sha256": "02c38efd1174dddc75e3fbaaf05eb2c5568c047f3c5f30c9392bdc59cda6f55e",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "de",
     "name": "diskpress-for-files-automation",
     "file": "src/assets/releases/de/diskpress-for-files-automation.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/de-DE/7_IPHONE_DUO_INNER_shortcuts.png",
-    "sha256": "065235f73ad11f40e58fba19e3133774e392ae9df766fb05499a5d9d941980cb",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/de-DE/7_IPHONE_DUO_OUTER_shortcuts.png",
+    "sha256": "bc9794a1b19d8e1fb16de002440cc7f7c4efb61cdcdb041483bf436b9a5756fc",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "de",
@@ -579,46 +579,46 @@
     "locale": "es-mx",
     "name": "diskpress-for-files-overview",
     "file": "src/assets/releases/es-mx/diskpress-for-files-overview.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-MX/1_IPHONE_DUO_INNER_overview.png",
-    "sha256": "6c2d9636c9a40c62e43c7ec006d58411fb8c9457c47ffa507a6d30f43b367ef5",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/es-MX/1_IPHONE_DUO_OUTER_overview.png",
+    "sha256": "e3e9a8699c3088a5b97a13091f1c3a961d80f8909d0380990958a1f569d9a1b8",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "es-mx",
     "name": "diskpress-for-files-selection",
     "file": "src/assets/releases/es-mx/diskpress-for-files-selection.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-MX/2_IPHONE_DUO_INNER_modes.png",
-    "sha256": "fc0e2289cf1509667d72ac4da618a7445ee47a4d75c13a5df3434e465e414635",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/es-MX/2_IPHONE_DUO_OUTER_modes.png",
+    "sha256": "6d9fbd86dc20e768d3990f8a13f773f21b77b7f21dc2ef8b1971eee683a5539e",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "es-mx",
     "name": "diskpress-for-files-cleanup",
     "file": "src/assets/releases/es-mx/diskpress-for-files-cleanup.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-MX/3_IPHONE_DUO_INNER_cleanup.png",
-    "sha256": "fd4eef2458be01c7965c38d3b10a39d1ca9e1a8fb7ad16a05ce679e14ec1571e",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/es-MX/3_IPHONE_DUO_OUTER_cleanup.png",
+    "sha256": "9640e8e517799e0b19ae4b52c68327d912e39d06ad915c2c6e33acb46e44c43c",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "es-mx",
     "name": "diskpress-for-files-results",
     "file": "src/assets/releases/es-mx/diskpress-for-files-results.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-MX/5_IPHONE_DUO_INNER_results.png",
-    "sha256": "0827329b97e4ea1fc4b860fb184014028037613f0a7e2dbe523bbd8badb15012",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/es-MX/5_IPHONE_DUO_OUTER_results.png",
+    "sha256": "f679c637314cc4ea100b97fdd23d822e4d561aefbcac357da02bcf32a0b45a59",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "es-mx",
     "name": "diskpress-for-files-automation",
     "file": "src/assets/releases/es-mx/diskpress-for-files-automation.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-MX/7_IPHONE_DUO_INNER_shortcuts.png",
-    "sha256": "d690b5dbbf64723dc1f30c38db226733ca5b28a62b133193e583fa0c17bad5e9",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/es-MX/7_IPHONE_DUO_OUTER_shortcuts.png",
+    "sha256": "febc4b8112d79c59336f43efd5480719a76d5ec1a7b007ed12e32a8bc5ca8db6",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "es-mx",
@@ -705,46 +705,46 @@
     "locale": "es-es",
     "name": "diskpress-for-files-overview",
     "file": "src/assets/releases/es-es/diskpress-for-files-overview.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-ES/1_IPHONE_DUO_INNER_overview.png",
-    "sha256": "c94a60b3fdb93f460b7321fd43ccf2d9e0f6fa7ec226cb443176226171176403",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/es-ES/1_IPHONE_DUO_OUTER_overview.png",
+    "sha256": "7bcaa6c4f163f22bb8c3b03921f6324e28978f4bfa1f4a320f01851da9c960ba",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "es-es",
     "name": "diskpress-for-files-selection",
     "file": "src/assets/releases/es-es/diskpress-for-files-selection.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-ES/2_IPHONE_DUO_INNER_modes.png",
-    "sha256": "fc0e2289cf1509667d72ac4da618a7445ee47a4d75c13a5df3434e465e414635",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/es-ES/2_IPHONE_DUO_OUTER_modes.png",
+    "sha256": "6d9fbd86dc20e768d3990f8a13f773f21b77b7f21dc2ef8b1971eee683a5539e",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "es-es",
     "name": "diskpress-for-files-cleanup",
     "file": "src/assets/releases/es-es/diskpress-for-files-cleanup.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-ES/3_IPHONE_DUO_INNER_cleanup.png",
-    "sha256": "fd4eef2458be01c7965c38d3b10a39d1ca9e1a8fb7ad16a05ce679e14ec1571e",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/es-ES/3_IPHONE_DUO_OUTER_cleanup.png",
+    "sha256": "97c0d3c6b3ca03c4bc977e608738a2e1d2929c1b3555a8c88f2cebe07c85a0c5",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "es-es",
     "name": "diskpress-for-files-results",
     "file": "src/assets/releases/es-es/diskpress-for-files-results.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-ES/5_IPHONE_DUO_INNER_results.png",
-    "sha256": "6764e49001c9d39bf758c25d3e1c9746bcb8794ef56838473f17e0299c257940",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/es-ES/5_IPHONE_DUO_OUTER_results.png",
+    "sha256": "00fb9e7341eebf9461666835c5c6251f50c56188047550cb07e8ceddaede1bed",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "es-es",
     "name": "diskpress-for-files-automation",
     "file": "src/assets/releases/es-es/diskpress-for-files-automation.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-ES/7_IPHONE_DUO_INNER_shortcuts.png",
-    "sha256": "077feea1812d9f372c0f481a358c2ecca8338cb08fd667d17112bb1ce5d18700",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/es-ES/7_IPHONE_DUO_OUTER_shortcuts.png",
+    "sha256": "f86144a9e8857c7220bd29f286cef7d3b6700dc3eddbe8fa639883fb599407f9",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "es-es",
@@ -831,46 +831,46 @@
     "locale": "uk",
     "name": "diskpress-for-files-overview",
     "file": "src/assets/releases/uk/diskpress-for-files-overview.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/uk/1_IPHONE_DUO_INNER_overview.png",
-    "sha256": "17f7a43104b5f4edaf381962962853809f81a5b069d3bbb3abde0307a419838b",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/uk/1_IPHONE_DUO_OUTER_overview.png",
+    "sha256": "0900ff6e379182c3d98e0bbabe009a4984b2c156f6e774a6eaaccd6b680bdefd",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "uk",
     "name": "diskpress-for-files-selection",
     "file": "src/assets/releases/uk/diskpress-for-files-selection.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/uk/2_IPHONE_DUO_INNER_modes.png",
-    "sha256": "7c850b118afee001235b66390ad68fce6be0219215751e4b3b05a945ee2a49e8",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/uk/2_IPHONE_DUO_OUTER_modes.png",
+    "sha256": "cf5740e0251a6edc82e8be09f6016212337c644ae3aa4763585635afb35f98d8",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "uk",
     "name": "diskpress-for-files-cleanup",
     "file": "src/assets/releases/uk/diskpress-for-files-cleanup.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/uk/3_IPHONE_DUO_INNER_cleanup.png",
-    "sha256": "a5da3899dee4ecb51334a243dbcdf9ca843468ad08f02c7d50677361a9a3f024",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/uk/3_IPHONE_DUO_OUTER_cleanup.png",
+    "sha256": "5c6d07cba96495826f62d6f0e91e849e2e692c2b9310421627c1f80e8fcd97f2",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "uk",
     "name": "diskpress-for-files-results",
     "file": "src/assets/releases/uk/diskpress-for-files-results.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/uk/5_IPHONE_DUO_INNER_results.png",
-    "sha256": "cb8270fb448022e469c34d4b819dde9f0f7955c88821c7618c5529544e320db6",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/uk/5_IPHONE_DUO_OUTER_results.png",
+    "sha256": "25106a9f015312a377b5fbee5bef773eb6f546dadcd52b3710c187b8b3662744",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "uk",
     "name": "diskpress-for-files-automation",
     "file": "src/assets/releases/uk/diskpress-for-files-automation.png",
-    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/uk/7_IPHONE_DUO_INNER_shortcuts.png",
-    "sha256": "1d7894207bc3b93688d309b0ea7f8f5dc4bb8cf6f97dfd9404eb1804bf6c3173",
-    "width": 2007,
-    "height": 2853
+    "source": "../../DiskPressForFiles/Fastline/generated/screenshots/website-folded/uk/7_IPHONE_DUO_OUTER_shortcuts.png",
+    "sha256": "ef4d0f1d1e44ac1344d7fb6e5a7f485db50e4f241a92048cbb332e242d898722",
+    "width": 1398,
+    "height": 2034
   },
   {
     "locale": "uk",

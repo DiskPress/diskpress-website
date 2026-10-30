@@ -16,6 +16,11 @@ export async function verifyReleaseMedia(documents) {
     assert.deepEqual((await readdir(new URL(locale + '/', root))).sort(), names.map(name => name + '.png'), `${locale} must have no unused screenshot files`);
     const pages = [documents.get(localePath(locale, '/')), documents.get(localePath(locale, '/ios/'))].join('\n');
     for (const entry of entries) {
+      if (entry.name.startsWith('diskpress-for-files-')) {
+        assert.ok(entry.source.includes('_IPHONE_DUO_OUTER_'), `${entry.file} must use the folded Duo display`);
+        assert.equal(entry.width, 1398);
+        assert.equal(entry.height, 2034);
+      }
       const bytes = await readFile(new URL('../' + entry.file, import.meta.url));
       assert.equal(createHash('sha256').update(bytes).digest('hex'), entry.sha256, `${entry.file} must preserve the Fastlane capture`);
       assert.equal(bytes.readUInt32BE(16), entry.width);
