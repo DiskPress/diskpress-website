@@ -11,9 +11,10 @@ import terms from './catalog/terms.json' with { type: 'json' };
 import support from './catalog/support.json' with { type: 'json' };
 import integrity from './catalog/integrity.json' with { type: 'json' };
 import error from './catalog/error.json' with { type: 'json' };
+import release120 from './catalog/release120.json' with { type: 'json' };
 
 const catalogs = Object.fromEntries(translatedLocales.map(locale => [locale, {}]));
-for (const [file, entries] of Object.entries({ common, home, ios, faq, cli, changelog, privacy, terms, support, integrity, error })) {
+for (const [file, entries] of Object.entries({ common, home, ios, faq, cli, changelog, privacy, terms, support, integrity, error, release120 })) {
   for (const [source, translations] of Object.entries(entries)) {
     if (!Array.isArray(translations) || translations.length !== translatedLocales.length) throw new Error('Six translations required in ' + file);
     const id = /^[a-f0-9]{12}$/.test(source) ? source : messageId(source);

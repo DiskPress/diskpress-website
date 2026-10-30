@@ -3,6 +3,8 @@ import DocumentLayout from '../layouts/DocumentLayout.astro';
 import { APP_STORE_URL, IOS_APP_STORE_URL } from '../consts';
 
 const sections = [
+  { id: 'v1-2-0', label: 'Mac 1.2.0' },
+  { id: 'ios-v1-2-0', label: 'iOS 1.2.0' },
   { id: 'v1-1-1', label: 'Mac 1.1.1' },
   { id: 'ios-v1-0-2', label: 'iOS 1.0.2' },
   { id: 'ios-v1-0-1', label: 'iOS 1.0.1' },
@@ -19,6 +21,32 @@ const sections = [
 ];
 ---
 <DocumentLayout title="Changelog" eyebrow="DiskPress changelog" heading="What's new in DiskPress" description="Release notes for DiskPress for Mac and DiskPress for Files for iPhone and iPad." sections={sections}>
+  <section id="v1-2-0" class="changelog-release">
+    <div class="changelog-release-heading"><p class="eyebrow">Mac App Store</p><h2>DiskPress v1.2.0</h2><p>Cleanup profiles and a workflow for every location.</p></div>
+    <ul class="changelog-list">
+      <li>Added cleanup before deduplication and compression.</li>
+      <li>Choose any combination of the three stages for each location.</li>
+      <li>Create editable profiles with removal and keep rules using masks or regex.</li>
+      <li>Start with presets for logs and temporary files.</li>
+      <li>Choose a removal method for each profile, including permanent deletion.</li>
+      <li>Cleanup respects your recent-file protection setting.</li>
+      <li>The selected cleanup profile is visible alongside the optimization mode.</li>
+    </ul>
+    <p class="fine">Release notes from the <a href={APP_STORE_URL}>Mac App Store</a>.</p>
+  </section>
+  <section id="ios-v1-2-0" class="changelog-release">
+    <div class="changelog-release-heading"><p class="eyebrow">iPhone and iPad</p><h2>DiskPress for Files v1.2.0</h2><p>Cleanup profiles and a workflow for every location.</p></div>
+    <ul class="changelog-list">
+      <li>Added cleanup before deduplication and compression.</li>
+      <li>Choose any combination of the three stages for each location.</li>
+      <li>Create editable profiles with removal and keep rules using masks or regex.</li>
+      <li>Start with presets for logs and temporary files.</li>
+      <li>Choose a removal method for each profile, including permanent deletion.</li>
+      <li>Cleanup respects your recent-file protection setting.</li>
+      <li>The selected cleanup profile is visible alongside the optimization mode.</li>
+    </ul>
+    <p class="fine">Release notes from the <a href={IOS_APP_STORE_URL}>App Store</a>.</p>
+  </section>
   <section id="v1-1-1" class="changelog-release">
     <div class="changelog-release-heading"><p class="eyebrow">Latest Mac release</p><h2>DiskPress v1.1.1</h2><p class="fine">Mac - <time datetime="2026-10-19T00:53:12Z">October 18, 2026</time></p><p>More reliable saved locations and savings reporting, with faster optimization of large folders.</p></div>
     <ul class="changelog-list">

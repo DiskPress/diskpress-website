@@ -1,0 +1,884 @@
+[
+  {
+    "locale": "en",
+    "name": "diskpress-overview",
+    "file": "src/assets/releases/en/diskpress-overview.png",
+    "source": "../Fastline/generated/screenshots/raw/en-US/1_APP_DESKTOP_1.png",
+    "sha256": "5124cd6e95e31b9a1d12010be585790d6beecc0f36ee515fd7f8c3fa85139e14",
+    "width": 1622,
+    "height": 1490
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-locations",
+    "file": "src/assets/releases/en/diskpress-locations.png",
+    "source": "../Fastline/generated/screenshots/raw/en-US/2_APP_DESKTOP_2.png",
+    "sha256": "16cbd86819312a12879adf2cccd80caa9f2279940a92e439a9412188caa423a7",
+    "width": 2080,
+    "height": 1500
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-cleanup-profiles",
+    "file": "src/assets/releases/en/diskpress-cleanup-profiles.png",
+    "source": "../Fastline/generated/screenshots/raw/en-US/3_APP_DESKTOP_3.png",
+    "sha256": "08b1be735a5364619a210afd1de24328ef8b97f57d26db1f42428d1154830e25",
+    "width": 1880,
+    "height": 1440
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-cleanup-rules",
+    "file": "src/assets/releases/en/diskpress-cleanup-rules.png",
+    "source": "../Fastline/generated/screenshots/raw/en-US/4_APP_DESKTOP_4.png",
+    "sha256": "dd194ddabc56f95ef27db43734e5502d1685f3b4528e8cbfa64e2a04a2209863",
+    "width": 1520,
+    "height": 1464
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-one-time-results",
+    "file": "src/assets/releases/en/diskpress-one-time-results.png",
+    "source": "../Fastline/generated/screenshots/raw/en-US/5_APP_DESKTOP_5.png",
+    "sha256": "99ce70ebc28185b603e71d5f6085d60acc2d224e4a8c90675296d8a3862ff594",
+    "width": 1280,
+    "height": 1094
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-one-time-review",
+    "file": "src/assets/releases/en/diskpress-one-time-review.png",
+    "source": "../Fastline/generated/screenshots/raw/en-US/6_APP_DESKTOP_6.png",
+    "sha256": "a4e43b782a1435ae9354810b1f3a201ea1b760462499e7df28586bc114b41d03",
+    "width": 1280,
+    "height": 1188
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-exclusions",
+    "file": "src/assets/releases/en/diskpress-exclusions.png",
+    "source": "../Fastline/generated/screenshots/raw/en-US/7_APP_DESKTOP_7.png",
+    "sha256": "884a970c4f2eccdfddc307c8cf0113c1249e2667f11f117891574dd00c65cd09",
+    "width": 1622,
+    "height": 1300
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-menu-bar",
+    "file": "src/assets/releases/en/diskpress-menu-bar.png",
+    "source": "../Fastline/generated/screenshots/raw/en-US/8_APP_DESKTOP_8.png",
+    "sha256": "63e00eb38de4945385c7327178e24a7de19a4b1becddb918e5eaab8ac8a810ea",
+    "width": 720,
+    "height": 1178
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-for-files-overview",
+    "file": "src/assets/releases/en/diskpress-for-files-overview.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/en-US/1_IPHONE_DUO_INNER_overview.png",
+    "sha256": "a14b0c7d34cdc7b13cc7ae0dc73a43d09f08be1107c6a79b211c36aac016c697",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-for-files-selection",
+    "file": "src/assets/releases/en/diskpress-for-files-selection.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/en-US/2_IPHONE_DUO_INNER_modes.png",
+    "sha256": "5988247854e3b2e0ae87a30e226d1d662038b4fe4e4a68f2e22782e02f6129a1",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-for-files-cleanup",
+    "file": "src/assets/releases/en/diskpress-for-files-cleanup.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/en-US/3_IPHONE_DUO_INNER_cleanup.png",
+    "sha256": "10faee5c6e2a1a831c898e9da3db03785119f8921ade73d6d235c68013727dbc",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-for-files-results",
+    "file": "src/assets/releases/en/diskpress-for-files-results.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/en-US/5_IPHONE_DUO_INNER_results.png",
+    "sha256": "a69ee0bdceb8feac3509c9ece243f1be1894b66cc0ffd7a3f8087fdae918f072",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-for-files-automation",
+    "file": "src/assets/releases/en/diskpress-for-files-automation.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/en-US/7_IPHONE_DUO_INNER_shortcuts.png",
+    "sha256": "32f061dcd23d6b2c0102be61658b45f04add7748e557b1cd357440eccde7c61e",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "en",
+    "name": "diskpress-for-files-filecopy",
+    "file": "src/assets/releases/en/diskpress-for-files-filecopy.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/en-US/8_IPHONE_DUO_OUTER_filecopy.png",
+    "sha256": "320c1352e658e405f5593c5e37c4b27e64f363e3ab400c3f864881fcba264c32",
+    "width": 1398,
+    "height": 2034
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-overview",
+    "file": "src/assets/releases/zh-hans/diskpress-overview.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hans/1_APP_DESKTOP_1.png",
+    "sha256": "737da5dc51d2efa331d3c28e4732cf01dfb1bb057ceb8250ed55f2dca3415ea4",
+    "width": 1622,
+    "height": 1472
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-locations",
+    "file": "src/assets/releases/zh-hans/diskpress-locations.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hans/2_APP_DESKTOP_2.png",
+    "sha256": "53bc630fffb9ec6e52e71495bb3fcf229ad3e9582c36b1a647b15d6359b6cfab",
+    "width": 2080,
+    "height": 1500
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-cleanup-profiles",
+    "file": "src/assets/releases/zh-hans/diskpress-cleanup-profiles.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hans/3_APP_DESKTOP_3.png",
+    "sha256": "a7585d7627d8abcf9a8f7c638417e36ab68695b3ed704157ead438250af27260",
+    "width": 1880,
+    "height": 1440
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-cleanup-rules",
+    "file": "src/assets/releases/zh-hans/diskpress-cleanup-rules.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hans/4_APP_DESKTOP_4.png",
+    "sha256": "3c34ae6f9f39cbb68a72980a8e8697553e718ec4bc724ccb42113a34146d4407",
+    "width": 1520,
+    "height": 1464
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-one-time-results",
+    "file": "src/assets/releases/zh-hans/diskpress-one-time-results.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hans/5_APP_DESKTOP_5.png",
+    "sha256": "7a74aa1cd8a2f7bf2aafc354a3c8e301440f805252e33b6e54a5253c9fdacd64",
+    "width": 1280,
+    "height": 1094
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-one-time-review",
+    "file": "src/assets/releases/zh-hans/diskpress-one-time-review.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hans/6_APP_DESKTOP_6.png",
+    "sha256": "5c752d2e4149b97bad2b6dee37fea2ed11d680ecdc0e44aec45154c238f9e831",
+    "width": 1280,
+    "height": 1188
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-exclusions",
+    "file": "src/assets/releases/zh-hans/diskpress-exclusions.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hans/7_APP_DESKTOP_7.png",
+    "sha256": "0d0778528f59a4a8052bd50e6cb5ddd4e1e9b168100e8f35de17a1d5c808cd53",
+    "width": 1622,
+    "height": 1300
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-menu-bar",
+    "file": "src/assets/releases/zh-hans/diskpress-menu-bar.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hans/8_APP_DESKTOP_8.png",
+    "sha256": "334e8ecb4023b62a03160e96d5f8c22fc535995cfd10039c680a2ee6e5f6ff68",
+    "width": 720,
+    "height": 1178
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-for-files-overview",
+    "file": "src/assets/releases/zh-hans/diskpress-for-files-overview.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hans/1_IPHONE_DUO_INNER_overview.png",
+    "sha256": "cadd72312a76b03ca0de0c9309d1b74841fe3b4022dab6de7107b4b56248289e",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-for-files-selection",
+    "file": "src/assets/releases/zh-hans/diskpress-for-files-selection.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hans/2_IPHONE_DUO_INNER_modes.png",
+    "sha256": "f70499b4ec03ccb2509c0aa912856131c9ef0a06823c71126678545085164c35",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-for-files-cleanup",
+    "file": "src/assets/releases/zh-hans/diskpress-for-files-cleanup.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hans/3_IPHONE_DUO_INNER_cleanup.png",
+    "sha256": "d87093af1b49d112fecfa654632fbbb37955ff718655df4a4640ef73de2345e3",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-for-files-results",
+    "file": "src/assets/releases/zh-hans/diskpress-for-files-results.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hans/5_IPHONE_DUO_INNER_results.png",
+    "sha256": "1342526da92d4a9da25536cb76400b73a46e6e9fb2fc1de566cee01f020b294f",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-for-files-automation",
+    "file": "src/assets/releases/zh-hans/diskpress-for-files-automation.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hans/7_IPHONE_DUO_INNER_shortcuts.png",
+    "sha256": "2395f95608189b173f83c9b94fd7dbf455c0a45320aea7c4fda34b0f57a09ed7",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "zh-hans",
+    "name": "diskpress-for-files-filecopy",
+    "file": "src/assets/releases/zh-hans/diskpress-for-files-filecopy.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hans/8_IPHONE_DUO_OUTER_filecopy.png",
+    "sha256": "d778411f9ae36b8c7dcdc1c94424d228d502121997d7e01231afc8e6e82e8a7d",
+    "width": 1398,
+    "height": 2034
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-overview",
+    "file": "src/assets/releases/zh-hant/diskpress-overview.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hant/1_APP_DESKTOP_1.png",
+    "sha256": "ba7afa49d33025428ed17cd5a68ecf60def4ca54eec91ad82bbed269d8c6dd04",
+    "width": 1622,
+    "height": 1472
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-locations",
+    "file": "src/assets/releases/zh-hant/diskpress-locations.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hant/2_APP_DESKTOP_2.png",
+    "sha256": "9d62bcca1cffaefb6496275b5e8244829f7e5c50cc46c5350de5549c4f4645c4",
+    "width": 2080,
+    "height": 1500
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-cleanup-profiles",
+    "file": "src/assets/releases/zh-hant/diskpress-cleanup-profiles.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hant/3_APP_DESKTOP_3.png",
+    "sha256": "fde4ac5a072a3e2c61ac4690184a3fe1b7fb1286079ed1f5ad655ecb2f292653",
+    "width": 1880,
+    "height": 1440
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-cleanup-rules",
+    "file": "src/assets/releases/zh-hant/diskpress-cleanup-rules.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hant/4_APP_DESKTOP_4.png",
+    "sha256": "170792a46eeb466fcf79c134c3b5ef3e57fe7007cd7dedc51aa10be2c186ebd2",
+    "width": 1520,
+    "height": 1464
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-one-time-results",
+    "file": "src/assets/releases/zh-hant/diskpress-one-time-results.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hant/5_APP_DESKTOP_5.png",
+    "sha256": "90eb7cfb3382c2484b592d274f1c3b1c03d164e76cd2095bb517c65415713949",
+    "width": 1280,
+    "height": 1094
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-one-time-review",
+    "file": "src/assets/releases/zh-hant/diskpress-one-time-review.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hant/6_APP_DESKTOP_6.png",
+    "sha256": "860024a683665e829b3a3817b13ace975e9754f04e068bad28254d84244b42d3",
+    "width": 1280,
+    "height": 1188
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-exclusions",
+    "file": "src/assets/releases/zh-hant/diskpress-exclusions.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hant/7_APP_DESKTOP_7.png",
+    "sha256": "1e395c27d756450d641854958bfa50bc1ee0abbf65e1042fa5cd73f51eba8400",
+    "width": 1622,
+    "height": 1300
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-menu-bar",
+    "file": "src/assets/releases/zh-hant/diskpress-menu-bar.png",
+    "source": "../Fastline/generated/screenshots/raw/zh-Hant/8_APP_DESKTOP_8.png",
+    "sha256": "2ffd8c1ab061c350b49ef33f6922621c77e8b3cba25eb03e3fee21cf5e8055d5",
+    "width": 720,
+    "height": 1178
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-for-files-overview",
+    "file": "src/assets/releases/zh-hant/diskpress-for-files-overview.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hant/1_IPHONE_DUO_INNER_overview.png",
+    "sha256": "5399c0d20a2b4ab769c4cb8e7d5893521d2206ffe19c79963a3b3b1142872140",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-for-files-selection",
+    "file": "src/assets/releases/zh-hant/diskpress-for-files-selection.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hant/2_IPHONE_DUO_INNER_modes.png",
+    "sha256": "e931fe5a838e6474e788f3fdbf4aa4f9d1a5616e2db2ebaf92c77e4365050696",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-for-files-cleanup",
+    "file": "src/assets/releases/zh-hant/diskpress-for-files-cleanup.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hant/3_IPHONE_DUO_INNER_cleanup.png",
+    "sha256": "6729da6ea377699d5d74adf71346f6e8f4c403361a48012718e0885dfc2aa4f8",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-for-files-results",
+    "file": "src/assets/releases/zh-hant/diskpress-for-files-results.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hant/5_IPHONE_DUO_INNER_results.png",
+    "sha256": "c394efd09081d6591e579c38e18656d9b7ce0b6eb1d6228e25187365acb32ead",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-for-files-automation",
+    "file": "src/assets/releases/zh-hant/diskpress-for-files-automation.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hant/7_IPHONE_DUO_INNER_shortcuts.png",
+    "sha256": "a9ad2575724b42daab36558621a695a8e3d7a8291f8730ee99181d28c4938f56",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "zh-hant",
+    "name": "diskpress-for-files-filecopy",
+    "file": "src/assets/releases/zh-hant/diskpress-for-files-filecopy.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/zh-Hant/8_IPHONE_DUO_OUTER_filecopy.png",
+    "sha256": "e3656fd262df5aabda93beca3f0170c1fb366a81f91090905892aea7ebaae2d6",
+    "width": 1398,
+    "height": 2034
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-overview",
+    "file": "src/assets/releases/de/diskpress-overview.png",
+    "source": "../Fastline/generated/screenshots/raw/de-DE/1_APP_DESKTOP_1.png",
+    "sha256": "da699f870d61d46218c313f988dfad04ac30c094863075ffa934dd59945b1a58",
+    "width": 1622,
+    "height": 1490
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-locations",
+    "file": "src/assets/releases/de/diskpress-locations.png",
+    "source": "../Fastline/generated/screenshots/raw/de-DE/2_APP_DESKTOP_2.png",
+    "sha256": "41c63dac807fe2bb92034399a27bf78e4979f215ba82550300dd37cb7e0e824a",
+    "width": 2262,
+    "height": 1500
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-cleanup-profiles",
+    "file": "src/assets/releases/de/diskpress-cleanup-profiles.png",
+    "source": "../Fastline/generated/screenshots/raw/de-DE/3_APP_DESKTOP_3.png",
+    "sha256": "cb8fcf5050798aa845956fedfc3f31a137420784f185bcd602d04dc38c68db89",
+    "width": 1880,
+    "height": 1440
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-cleanup-rules",
+    "file": "src/assets/releases/de/diskpress-cleanup-rules.png",
+    "source": "../Fastline/generated/screenshots/raw/de-DE/4_APP_DESKTOP_4.png",
+    "sha256": "aa356ce8e0722e5c6c438193fab037da35698307bad8c0cefc5d0fea68edac6a",
+    "width": 1520,
+    "height": 1464
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-one-time-results",
+    "file": "src/assets/releases/de/diskpress-one-time-results.png",
+    "source": "../Fastline/generated/screenshots/raw/de-DE/5_APP_DESKTOP_5.png",
+    "sha256": "3d4d860c8a723aae5ba38da26d085b2e655a7d0eaececa2acc2aad830c724b59",
+    "width": 1280,
+    "height": 1094
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-one-time-review",
+    "file": "src/assets/releases/de/diskpress-one-time-review.png",
+    "source": "../Fastline/generated/screenshots/raw/de-DE/6_APP_DESKTOP_6.png",
+    "sha256": "b154d66649076652fac2175b7762d2c06684b73902f5b24d07728187ac24be26",
+    "width": 1280,
+    "height": 1188
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-exclusions",
+    "file": "src/assets/releases/de/diskpress-exclusions.png",
+    "source": "../Fastline/generated/screenshots/raw/de-DE/7_APP_DESKTOP_7.png",
+    "sha256": "5bcc7825ad7fd29d27d7f9ea4e35c7a12393209d3eec725a27fc6a2ca4d44333",
+    "width": 1868,
+    "height": 1300
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-menu-bar",
+    "file": "src/assets/releases/de/diskpress-menu-bar.png",
+    "source": "../Fastline/generated/screenshots/raw/de-DE/8_APP_DESKTOP_8.png",
+    "sha256": "bef2b27875a64759ffa6a793fd00a5196814ca66b43ceee3f4f76748e20f2442",
+    "width": 720,
+    "height": 1178
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-for-files-overview",
+    "file": "src/assets/releases/de/diskpress-for-files-overview.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/de-DE/1_IPHONE_DUO_INNER_overview.png",
+    "sha256": "3f999a94f6fc7ebd3f2a4f3b97b591ec459e5b8706737c8f3a9283645dad92ea",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-for-files-selection",
+    "file": "src/assets/releases/de/diskpress-for-files-selection.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/de-DE/2_IPHONE_DUO_INNER_modes.png",
+    "sha256": "33272407372738cc84284134523ba72f2d772b1fd197c69854aa888509164cd2",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-for-files-cleanup",
+    "file": "src/assets/releases/de/diskpress-for-files-cleanup.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/de-DE/3_IPHONE_DUO_INNER_cleanup.png",
+    "sha256": "4fb3981efaec70c25a85c4ef787b0f430eb20a9b82f91e866774b4706b35f474",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-for-files-results",
+    "file": "src/assets/releases/de/diskpress-for-files-results.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/de-DE/5_IPHONE_DUO_INNER_results.png",
+    "sha256": "515345b8544414bf9cb3bb5427f803f0e5633f4d8b906907081817115ec5ccaf",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-for-files-automation",
+    "file": "src/assets/releases/de/diskpress-for-files-automation.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/de-DE/7_IPHONE_DUO_INNER_shortcuts.png",
+    "sha256": "065235f73ad11f40e58fba19e3133774e392ae9df766fb05499a5d9d941980cb",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "de",
+    "name": "diskpress-for-files-filecopy",
+    "file": "src/assets/releases/de/diskpress-for-files-filecopy.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/de-DE/8_IPHONE_DUO_OUTER_filecopy.png",
+    "sha256": "b7c9320076120b3f84060a042a7fd867074e45a3646008b7fcb5896df50fb11b",
+    "width": 1398,
+    "height": 2034
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-overview",
+    "file": "src/assets/releases/es-mx/diskpress-overview.png",
+    "source": "../Fastline/generated/screenshots/raw/es-MX/1_APP_DESKTOP_1.png",
+    "sha256": "db8ee8c9f9ca39851c8b9bbad60001296505ef62029a447eb58eaac1a4a818e4",
+    "width": 1656,
+    "height": 1490
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-locations",
+    "file": "src/assets/releases/es-mx/diskpress-locations.png",
+    "source": "../Fastline/generated/screenshots/raw/es-MX/2_APP_DESKTOP_2.png",
+    "sha256": "ebe3a0e2a06c18d75bb8d608da0e5767e40f4e60e9ed5ddf086cbc08dd0d50b8",
+    "width": 2170,
+    "height": 1500
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-cleanup-profiles",
+    "file": "src/assets/releases/es-mx/diskpress-cleanup-profiles.png",
+    "source": "../Fastline/generated/screenshots/raw/es-MX/3_APP_DESKTOP_3.png",
+    "sha256": "4d3d97d46537e433e530bf6e8da36f43af7389c7f9287ee81035e74d04358d37",
+    "width": 1880,
+    "height": 1440
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-cleanup-rules",
+    "file": "src/assets/releases/es-mx/diskpress-cleanup-rules.png",
+    "source": "../Fastline/generated/screenshots/raw/es-MX/4_APP_DESKTOP_4.png",
+    "sha256": "a29ea13db95a2b9e532be663ea085682860e795d4cd31e7fe643243bfa920c9d",
+    "width": 1520,
+    "height": 1464
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-one-time-results",
+    "file": "src/assets/releases/es-mx/diskpress-one-time-results.png",
+    "source": "../Fastline/generated/screenshots/raw/es-MX/5_APP_DESKTOP_5.png",
+    "sha256": "d40fd3d088b8d726535133ad0a7c2571d46867e36a202306973656423d86d3e7",
+    "width": 1280,
+    "height": 1094
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-one-time-review",
+    "file": "src/assets/releases/es-mx/diskpress-one-time-review.png",
+    "source": "../Fastline/generated/screenshots/raw/es-MX/6_APP_DESKTOP_6.png",
+    "sha256": "b4f2738b725ea3487725377cb1e7e2e4da668a4862d3bab3536530438fc11931",
+    "width": 1280,
+    "height": 1188
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-exclusions",
+    "file": "src/assets/releases/es-mx/diskpress-exclusions.png",
+    "source": "../Fastline/generated/screenshots/raw/es-MX/7_APP_DESKTOP_7.png",
+    "sha256": "3db01ec041e0b409f32a65a1882a4c390ce5033d2117e78b407374a19b6a46e8",
+    "width": 1656,
+    "height": 1300
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-menu-bar",
+    "file": "src/assets/releases/es-mx/diskpress-menu-bar.png",
+    "source": "../Fastline/generated/screenshots/raw/es-MX/8_APP_DESKTOP_8.png",
+    "sha256": "ea94bd918fffa0c421c363708b3924dfab48a92affbbadeecd9e046468f0e005",
+    "width": 720,
+    "height": 1178
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-for-files-overview",
+    "file": "src/assets/releases/es-mx/diskpress-for-files-overview.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-MX/1_IPHONE_DUO_INNER_overview.png",
+    "sha256": "6c2d9636c9a40c62e43c7ec006d58411fb8c9457c47ffa507a6d30f43b367ef5",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-for-files-selection",
+    "file": "src/assets/releases/es-mx/diskpress-for-files-selection.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-MX/2_IPHONE_DUO_INNER_modes.png",
+    "sha256": "fc0e2289cf1509667d72ac4da618a7445ee47a4d75c13a5df3434e465e414635",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-for-files-cleanup",
+    "file": "src/assets/releases/es-mx/diskpress-for-files-cleanup.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-MX/3_IPHONE_DUO_INNER_cleanup.png",
+    "sha256": "fd4eef2458be01c7965c38d3b10a39d1ca9e1a8fb7ad16a05ce679e14ec1571e",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-for-files-results",
+    "file": "src/assets/releases/es-mx/diskpress-for-files-results.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-MX/5_IPHONE_DUO_INNER_results.png",
+    "sha256": "0827329b97e4ea1fc4b860fb184014028037613f0a7e2dbe523bbd8badb15012",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-for-files-automation",
+    "file": "src/assets/releases/es-mx/diskpress-for-files-automation.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-MX/7_IPHONE_DUO_INNER_shortcuts.png",
+    "sha256": "d690b5dbbf64723dc1f30c38db226733ca5b28a62b133193e583fa0c17bad5e9",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "es-mx",
+    "name": "diskpress-for-files-filecopy",
+    "file": "src/assets/releases/es-mx/diskpress-for-files-filecopy.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-MX/8_IPHONE_DUO_OUTER_filecopy.png",
+    "sha256": "ad9c043c48e5a9ded4aa2878ea9f80935895c8bcb00cf5af8ab9641dfd3b4b36",
+    "width": 1398,
+    "height": 2034
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-overview",
+    "file": "src/assets/releases/es-es/diskpress-overview.png",
+    "source": "../Fastline/generated/screenshots/raw/es-ES/1_APP_DESKTOP_1.png",
+    "sha256": "e4589f570617888c71a191b788a89a1c2077a8ceb65326bf6ce8ee22e658ec67",
+    "width": 1656,
+    "height": 1490
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-locations",
+    "file": "src/assets/releases/es-es/diskpress-locations.png",
+    "source": "../Fastline/generated/screenshots/raw/es-ES/2_APP_DESKTOP_2.png",
+    "sha256": "b9c7905c1d3d7f80250bb5e2479472646797b17ca6c641b25b8e250ae2295925",
+    "width": 2170,
+    "height": 1500
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-cleanup-profiles",
+    "file": "src/assets/releases/es-es/diskpress-cleanup-profiles.png",
+    "source": "../Fastline/generated/screenshots/raw/es-ES/3_APP_DESKTOP_3.png",
+    "sha256": "866d4b697e8adb09c0a000a9b74897d62d204afa79f777f3e0858f3fef0a7c16",
+    "width": 1880,
+    "height": 1440
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-cleanup-rules",
+    "file": "src/assets/releases/es-es/diskpress-cleanup-rules.png",
+    "source": "../Fastline/generated/screenshots/raw/es-ES/4_APP_DESKTOP_4.png",
+    "sha256": "ee0a5e50a855ead6218da7d4bdb3738b4d6f80d41f8d737b04856f0a7e44bf06",
+    "width": 1520,
+    "height": 1464
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-one-time-results",
+    "file": "src/assets/releases/es-es/diskpress-one-time-results.png",
+    "source": "../Fastline/generated/screenshots/raw/es-ES/5_APP_DESKTOP_5.png",
+    "sha256": "4ff213dbe7ddbe260f561982c9885e563d1a07f26137dabeee2e99a806b36d22",
+    "width": 1280,
+    "height": 1094
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-one-time-review",
+    "file": "src/assets/releases/es-es/diskpress-one-time-review.png",
+    "source": "../Fastline/generated/screenshots/raw/es-ES/6_APP_DESKTOP_6.png",
+    "sha256": "79320e144710c184dd6d0bd8a1d33ff39ef2e990b2d28c6737365034c484f50c",
+    "width": 1280,
+    "height": 1188
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-exclusions",
+    "file": "src/assets/releases/es-es/diskpress-exclusions.png",
+    "source": "../Fastline/generated/screenshots/raw/es-ES/7_APP_DESKTOP_7.png",
+    "sha256": "cf9e49e38b94accf6256cb33c45360018d0d0436c1baf1cc71624a2dfe9c72cd",
+    "width": 1656,
+    "height": 1300
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-menu-bar",
+    "file": "src/assets/releases/es-es/diskpress-menu-bar.png",
+    "source": "../Fastline/generated/screenshots/raw/es-ES/8_APP_DESKTOP_8.png",
+    "sha256": "70d91f869319f7b6bbe1763eeaef4c58949ab8770efad862df05dbf2a6a8b346",
+    "width": 720,
+    "height": 1178
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-for-files-overview",
+    "file": "src/assets/releases/es-es/diskpress-for-files-overview.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-ES/1_IPHONE_DUO_INNER_overview.png",
+    "sha256": "c94a60b3fdb93f460b7321fd43ccf2d9e0f6fa7ec226cb443176226171176403",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-for-files-selection",
+    "file": "src/assets/releases/es-es/diskpress-for-files-selection.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-ES/2_IPHONE_DUO_INNER_modes.png",
+    "sha256": "fc0e2289cf1509667d72ac4da618a7445ee47a4d75c13a5df3434e465e414635",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-for-files-cleanup",
+    "file": "src/assets/releases/es-es/diskpress-for-files-cleanup.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-ES/3_IPHONE_DUO_INNER_cleanup.png",
+    "sha256": "fd4eef2458be01c7965c38d3b10a39d1ca9e1a8fb7ad16a05ce679e14ec1571e",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-for-files-results",
+    "file": "src/assets/releases/es-es/diskpress-for-files-results.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-ES/5_IPHONE_DUO_INNER_results.png",
+    "sha256": "6764e49001c9d39bf758c25d3e1c9746bcb8794ef56838473f17e0299c257940",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-for-files-automation",
+    "file": "src/assets/releases/es-es/diskpress-for-files-automation.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-ES/7_IPHONE_DUO_INNER_shortcuts.png",
+    "sha256": "077feea1812d9f372c0f481a358c2ecca8338cb08fd667d17112bb1ce5d18700",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "es-es",
+    "name": "diskpress-for-files-filecopy",
+    "file": "src/assets/releases/es-es/diskpress-for-files-filecopy.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/es-ES/8_IPHONE_DUO_OUTER_filecopy.png",
+    "sha256": "fc4fba332c5e1c96136a930ed9807eaaca1c0d1bebd372cf5a70097c1a5f7c52",
+    "width": 1398,
+    "height": 2034
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-overview",
+    "file": "src/assets/releases/uk/diskpress-overview.png",
+    "source": "../Fastline/generated/screenshots/raw/uk/1_APP_DESKTOP_1.png",
+    "sha256": "8396a7c9fc668d5f30948d6d2b9968d1a07a98105f58d21299862a1a709c8ba9",
+    "width": 1672,
+    "height": 1490
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-locations",
+    "file": "src/assets/releases/uk/diskpress-locations.png",
+    "source": "../Fastline/generated/screenshots/raw/uk/2_APP_DESKTOP_2.png",
+    "sha256": "77b732c5f9f4fedb16b99e4801731bb0281c2702503ca4ebdc4dc6c099925b4b",
+    "width": 2360,
+    "height": 1500
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-cleanup-profiles",
+    "file": "src/assets/releases/uk/diskpress-cleanup-profiles.png",
+    "source": "../Fastline/generated/screenshots/raw/uk/3_APP_DESKTOP_3.png",
+    "sha256": "313ec8d39a675efbec5109b773d3e04b27aa12d1cf8d399eac87a022bf9842e0",
+    "width": 1880,
+    "height": 1440
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-cleanup-rules",
+    "file": "src/assets/releases/uk/diskpress-cleanup-rules.png",
+    "source": "../Fastline/generated/screenshots/raw/uk/4_APP_DESKTOP_4.png",
+    "sha256": "890e9c16485eb81044d91263ff80d9e570d2e810845421cee3b7eab57db82653",
+    "width": 1520,
+    "height": 1464
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-one-time-results",
+    "file": "src/assets/releases/uk/diskpress-one-time-results.png",
+    "source": "../Fastline/generated/screenshots/raw/uk/5_APP_DESKTOP_5.png",
+    "sha256": "4ebd1ef612e69a2e8cec5ee854449b7c98bb59c9c2e9e6feecdf7d3d1e0318be",
+    "width": 1280,
+    "height": 1094
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-one-time-review",
+    "file": "src/assets/releases/uk/diskpress-one-time-review.png",
+    "source": "../Fastline/generated/screenshots/raw/uk/6_APP_DESKTOP_6.png",
+    "sha256": "a0b5a576cef40129b0012ea640a4f83d869734c0967cc875ecfd80d0d9b4212b",
+    "width": 1280,
+    "height": 1252
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-exclusions",
+    "file": "src/assets/releases/uk/diskpress-exclusions.png",
+    "source": "../Fastline/generated/screenshots/raw/uk/7_APP_DESKTOP_7.png",
+    "sha256": "4f740098e92aa27da71f3e2da341a3d3f7aaf9ab2c0cbc7c3bc184ce09bce9ed",
+    "width": 1794,
+    "height": 1300
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-menu-bar",
+    "file": "src/assets/releases/uk/diskpress-menu-bar.png",
+    "source": "../Fastline/generated/screenshots/raw/uk/8_APP_DESKTOP_8.png",
+    "sha256": "91d1867492e5a9dd2730ac83a9fb7b245b894c8342a43b8729c4b242c11cd7c0",
+    "width": 758,
+    "height": 1178
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-for-files-overview",
+    "file": "src/assets/releases/uk/diskpress-for-files-overview.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/uk/1_IPHONE_DUO_INNER_overview.png",
+    "sha256": "17f7a43104b5f4edaf381962962853809f81a5b069d3bbb3abde0307a419838b",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-for-files-selection",
+    "file": "src/assets/releases/uk/diskpress-for-files-selection.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/uk/2_IPHONE_DUO_INNER_modes.png",
+    "sha256": "7c850b118afee001235b66390ad68fce6be0219215751e4b3b05a945ee2a49e8",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-for-files-cleanup",
+    "file": "src/assets/releases/uk/diskpress-for-files-cleanup.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/uk/3_IPHONE_DUO_INNER_cleanup.png",
+    "sha256": "a5da3899dee4ecb51334a243dbcdf9ca843468ad08f02c7d50677361a9a3f024",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-for-files-results",
+    "file": "src/assets/releases/uk/diskpress-for-files-results.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/uk/5_IPHONE_DUO_INNER_results.png",
+    "sha256": "cb8270fb448022e469c34d4b819dde9f0f7955c88821c7618c5529544e320db6",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-for-files-automation",
+    "file": "src/assets/releases/uk/diskpress-for-files-automation.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/uk/7_IPHONE_DUO_INNER_shortcuts.png",
+    "sha256": "1d7894207bc3b93688d309b0ea7f8f5dc4bb8cf6f97dfd9404eb1804bf6c3173",
+    "width": 2007,
+    "height": 2853
+  },
+  {
+    "locale": "uk",
+    "name": "diskpress-for-files-filecopy",
+    "file": "src/assets/releases/uk/diskpress-for-files-filecopy.png",
+    "source": "../../DiskPressForFiles/Fastline/fastlane/screenshots/uk/8_IPHONE_DUO_OUTER_filecopy.png",
+    "sha256": "9d5da3d913cff17bece03dc5b72a6077e638d549d1d574d7aa375bd4bbf7aa43",
+    "width": 1398,
+    "height": 2034
+  }
+]

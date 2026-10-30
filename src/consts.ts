@@ -1,7 +1,7 @@
 export const SITE_TITLE = 'DiskPress';
 export const APP_STORE_AVAILABLE = true;
 export const IOS_APP_STORE_AVAILABLE = true;
-export const SITE_DESCRIPTION = 'Keep your files and use less storage with native compression and APFS deduplication. DiskPress for Mac, and DiskPress for Files for iPhone and iPad.';
+export const SITE_DESCRIPTION = 'Clean up unwanted files with your own rules, then deduplicate and compress the rest. DiskPress for Mac, iPhone and iPad.';
 export const APP_STORE_URL = 'https://apps.apple.com/app/apple-store/id6800504458?pt=127627850&ct=diskpress.app&mt=8';
 export const IOS_APP_STORE_URL = 'https://apps.apple.com/app/apple-store/id6814957268?pt=127627850&ct=www&mt=8';
 export const SETAPP_URL = 'https://setapp.com/apps/diskpress';

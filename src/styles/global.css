@@ -72,6 +72,8 @@
   .download-link svg { flex: none; }
   .download-group { display: grid; align-content: start; gap: 12px; width: 100%; max-width: 32rem; }
   .download-options { display: flex; flex-wrap: wrap; align-items: stretch; gap: 12px; width: 100%; max-width: 32rem; }
+  .setapp-download { background: var(--surface); color: var(--text); border-color: var(--accent); }
+  .setapp-download:hover { background: var(--accent-bg); color: var(--accent); }
   .download-options > * { flex: 1 1 12rem; min-width: 0; text-align: center; }
   .download-link.compact { min-height: 42px; padding: 10px 16px; font-size: .875rem; }
   .release-status { display: inline-flex; align-items: center; max-width: 100%; min-height: 54px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 999px; background: var(--accent-bg); color: var(--accent); font-weight: 600; line-height: 1.4; }

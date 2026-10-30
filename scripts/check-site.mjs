@@ -1,3 +1,4 @@
+import { verifyReleaseMedia } from './check-release-media.mjs';
 import assert from 'node:assert/strict';
 import {readFile,
         stat} from 'node:fs/promises';
@@ -57,7 +58,7 @@ for (const route of [...routes, ...unlistedRoutes, '/404.html'])
     }
     const siteHeader = html.match(/<header\b[^>]*class="site-header"[^>]*>[\s\S]*?<\/header>/)?.[0];
     assert.match(siteHeader || '', /<a class="download-link compact" href="\/#download">/, `${route} must let header visitors choose their store`);
-    assert.ok(productNavigation?.includes('href="/changelog/">Changelog</a>') && mobileNavigation?.includes('href="/changelog/">Changelog</a>'), `${route} must make the changelog easy to find`);
+    assert.ok([productNavigation, mobileNavigation].every(nav => /href="\/changelog\/"[^>]*>Changelog<\/a>/.test(nav || '')), `${route} must make the changelog easy to find`);
     assert.match(helpNavigation || '', /<a href="\/support\/"[^>]*>Contact support<\/a>/, `${route} must route footer support through the dedicated page`);
     assert.match(mobileNavigation || '', /<a href="\/support\/"[^>]*>Support<\/a>/, `${route} must route mobile support through the dedicated page`);
     const iconLinks = [...html.matchAll(/<link\b[^>]*rel="(?:icon|apple-touch-icon)"[^>]*>/g) ].map(match => match[0]);
@@ -312,9 +313,11 @@ for (const [route, html] of documents)
 const screenshotSpecs = [
     [ 'overview', 1622, 1490, [ 480, 768, 1024, 1440, 1622 ], 'eager' ],
     [ 'one-time-review', 1280, 1188, [ 480, 768, 1024, 1280 ], 'lazy' ],
-    [ 'one-time-results', 1280, 1218, [ 480, 768, 1024, 1280 ], 'lazy' ],
-    [ 'locations', 1880, 1200, [ 480, 768, 1024, 1440, 1880 ], 'lazy' ],
-    [ 'exclusions', 1622, 1200, [ 480, 768, 1024, 1440, 1622 ], 'lazy' ],
+    [ 'one-time-results', 1280, 1094, [ 480, 768, 1024, 1280 ], 'lazy' ],
+    [ 'locations', 2080, 1500, [ 480, 768, 1024, 1440, 2080 ], 'lazy' ],
+    [ 'exclusions', 1622, 1300, [ 480, 768, 1024, 1440, 1622 ], 'lazy' ],
+    [ 'cleanup-profiles', 1880, 1440, [ 480, 768, 1024, 1440, 1880 ], 'lazy' ],
+    [ 'cleanup-rules', 1520, 1464, [ 480, 768, 1024, 1440, 1520 ], 'lazy' ],
     [ 'menu-bar', 720, 1178, [ 360, 540, 720 ], 'lazy' ],
 ];
 const homepage = documents.get('/');
@@ -326,7 +329,7 @@ for (const [index, group] of downloadGroups.entries())
 {
     const label = index === 0 ? 'Download DiskPress for your device' : 'Download DiskPress for Mac';
     assert.ok(group.includes(`role="group" aria-label="${label}"`), 'Download choices must form a platform-specific accessible action group');
-    assert.ok(!group.includes(setapp), 'Setapp must remain outside the primary App Store button group');
+    assert.ok(group.includes(setapp), 'Each Mac download group must offer Setapp');
     if (appStoreAvailable)
         assert.ok(decode(group).includes(`href="${appStore}"`) && group.includes('aria-label="Download DiskPress on the Mac App Store"'), 'Mac App Store must remain a primary download');
     if (index === 0 && iosAppStoreAvailable)
@@ -334,14 +337,8 @@ for (const [index, group] of downloadGroups.entries())
     if (index === 1)
         assert.ok(!group.includes('id6814957268'), 'The Mac platform card must keep its download specific to Mac');
     const buttons = [...group.matchAll(/<a\b[^>]*>/g)].map(([tag]) => tag);
-    assert.ok(buttons.every(tag => /class="download-link"/.test(tag)), 'App Store buttons must share the same primary styling');
+    assert.ok(buttons.every(tag => /class="download-link(?: setapp-download)?"/.test(tag)), 'App Store buttons must share the same primary styling');
 }
-const setappOptions = [...homepage.matchAll(/<p class="fine setapp-option">[\s\S]*?<\/p>/g)].map(([paragraph]) => paragraph);
-assert.equal(setappOptions.length, 2, 'Keep a secondary Setapp text option below both Mac download groups');
-for (const option of setappOptions)
-    assert.ok(option.includes(`<a href="${setapp}">Setapp</a>`) && option.includes('one-time purchase'), 'Setapp must use a plain text link with its exact listing URL and one-time purchase wording');
-assert.ok(![...homepage.matchAll(/<a\b[^>]*>/g)].some(([tag]) => tag.includes(setapp) && /\bclass="[^"]*download-link/.test(tag)), 'Setapp must not appear as a download button');
-assert.ok(homepage.includes('Same features as the Mac App Store version.') && homepage.includes('one-time purchase on'), 'The homepage must scope store feature parity to Mac and describe the Setapp purchase');
 assert.ok(homepage.includes('No separate DiskPress account') && !homepage.includes('No account or file uploads'), 'Local file processing must not imply that the stores require no account');
 const downloadAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];
 assert.ok(downloadAnswer?.includes(`href="${setapp}"`) && downloadAnswer.includes('Same features in both Mac versions.'), 'The existing pricing FAQ must link Setapp and explain Mac feature parity');
@@ -404,7 +401,7 @@ const bundleSection = homepage.match(/<section\b[^>]*id="storage-saver-duo"[^>]*
 if (appStoreAvailable)
 {
     assert.ok(bundleSection?.includes('DiskPress for Mac and App Archiver together at a reduced price compared with buying them separately') && decode(bundleSection).includes(`href="${appBundle}"`), 'The companion section must explain the discounted Mac bundle and link to its exact listing');
-    assert.ok(homepage.includes('href="#storage-saver-duo"') && bundleSection.includes('Get Storage Saver Duo') && bundleSection.includes('current pricing and system requirements'), 'The bundle must be discoverable from the hero and direct visitors to current App Store details');
+    assert.ok(bundleSection.includes('Get Storage Saver Duo') && bundleSection.includes('current pricing and system requirements'), 'The bundle section must direct visitors to current App Store details');
     const priceAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];
     assert.ok(priceAnswer?.includes('Storage Saver Duo') && decode(priceAnswer).includes(`href="${appBundle}"`) && priceAnswer.includes('includes both Mac apps at a reduced price'), 'The pricing FAQ must include the Mac bundle alongside the standalone download');
 }
@@ -414,7 +411,6 @@ if (appStoreAvailable && iosAppStoreAvailable)
     assert.ok(trioCard?.includes('Get Storage Saver Trio') && decode(trioCard).includes(`href="${trioBundle}"`), 'Trio must sit beside Duo and link to the supplied bundle');
     assert.ok(trioCard.includes('DiskPress for Mac, App Archiver for Mac, and DiskPress for Files for iPhone and iPad'), 'Trio must name all three apps and their platforms');
     assert.equal((bundleSection.match(/class="bundle-card"/g) || []).length, 2, 'The bundle comparison must have separate Duo and Trio cards');
-    assert.ok(homepage.includes('href="#storage-saver-trio"'), 'The hero must make the Trio card discoverable');
     assert.ok(trioCard.includes('current pricing and system requirements'), 'Trio must send readers to current store details rather than hard-code a price');
     for (const route of ['/ios/', '/faq/', '/terms-of-service/'])
         assert.ok(decode(documents.get(route)).includes(`href="${trioBundle}"`), `${route} must explain and link the cross-platform bundle`);
@@ -621,10 +617,10 @@ assert.ok(homepage.includes('App screenshots use example data.'), 'Screenshot sa
 
 const iosPage = documents.get('/ios/');
 const iosDetails = (html, id) => html.match(new RegExp(`<details\\b[^>]*id="${id}"[^>]*>[\\s\\S]*?<\\/details>`))?.[0];
-assert.ok(iosPage.includes('same lossless compression and APFS file deduplication engine as DiskPress for Mac') && iosPage.includes('No archives to unpack'), 'The iOS page must explain the shared engine and normal file access');
-assert.ok(homepage.includes('same compression and deduplication engine as DiskPress for Mac') && homepage.includes('No continuous monitoring or CLI'), 'The homepage must distinguish the shared engine from Mac-only continuous monitoring and CLI');
+assert.ok(iosPage.includes('same cleanup and native optimization engine as DiskPress for Mac') && iosPage.includes('No archives to unpack'), 'The iOS page must explain the shared engine and normal file access');
+assert.ok(homepage.includes('same cleanup, compression and deduplication engine') && homepage.includes('No continuous monitoring or CLI'), 'The homepage must distinguish the shared engine from Mac-only continuous monitoring and CLI');
 for (const html of [homepage, iosPage])
-    assert.ok(html.includes('not photo or video optimization') && html.includes('local files in the Files app'), 'The iOS introduction must make its local-file purpose and media limitations explicit');
+    assert.ok(html.includes('not photo or video optimization') && /supported local (?:folders|files)/.test(html), 'The iOS introduction must make its local-file purpose and media limitations explicit');
 assert.ok(iosPage.includes('No continuous monitoring') && iosPage.includes('No CLI or menu bar'), 'The platform comparison must not promise Mac-only features on iOS');
 assert.ok(homepage.includes('href="/ios/#shortcuts"') && homepage.includes('iOS 16') && homepage.includes('iOS 27'), 'The homepage must introduce Shortcuts with version requirements');
 assert.ok(iosPage.includes('id="shortcuts"') && iosPage.includes('id="compressed-copy"'), 'Shortcuts and compressed copies need stable, linkable sections');
@@ -692,7 +688,7 @@ else
     assert.ok(!/when available|not yet available|awaiting App Store approval/i.test(iosTerms), 'Released iOS terms must not describe an unavailable listing');
 for (const route of ['/ios/', '/'])
 {
-    const names = route === '/ios/' ? ['overview', 'selection', 'results', 'automation', 'filecopy'] : ['overview'];
+    const names = route === '/ios/' ? ['overview', 'selection', 'cleanup', 'results', 'automation', 'filecopy'] : ['overview'];
     const images = [...documents.get(route).matchAll(/<img\b[^>]*>/g)].map(match => match[0]);
     for (const name of names)
     {
@@ -700,8 +696,8 @@ for (const route of ['/ios/', '/'])
         assert.equal(matches.length, 1, `${route} needs one ${name} iOS screenshot`);
         const tag = matches[0];
         const attr = key => tag.match(new RegExp(`\\b${key}="([^"]*)"`))?.[1];
-        assert.equal(attr('width'), '1398', 'iPhone Duo screenshots must reserve their original width');
-        assert.equal(attr('height'), '2034', 'iPhone Duo screenshots must reserve their original height');
+        assert.equal(attr('width'), name === 'filecopy' ? '1398' : '2007', 'iPhone Duo screenshots must reserve their original width');
+        assert.equal(attr('height'), name === 'filecopy' ? '2034' : '2853', 'iPhone Duo screenshots must reserve their original height');
         const eager = route === '/ios/' && name === 'overview';
         assert.equal(attr('loading'), eager ? 'eager' : 'lazy', 'Only the iOS page hero should load eagerly');
         if (eager)
@@ -729,6 +725,7 @@ let appBundleLinks = 0;
 let trioBundleLinks = 0;
 let assets = 0;
 for (const [route, html] of await readLocalizedPages(root)) documents.set(route, html);
+await verifyReleaseMedia(documents);
 // Cloudflare serves the root 404.html through its extensionless URL as well.
 documents.set('/404/', documents.get('/404.html'));
 for (const [route, html] of documents)

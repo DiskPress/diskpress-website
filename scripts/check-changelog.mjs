@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -8,7 +9,10 @@ const snapshot = JSON.parse(readFileSync(new URL('./fixtures/changelog-app-store
 const siteConfig = readFileSync(new URL('../src/consts.ts', import.meta.url), 'utf8');
 const decode = value => value.replaceAll('&amp;', '&').replaceAll('&#38;', '&').replaceAll('&lt;', '<').replaceAll('&gt;', '>');
 const dateFormatter = new Intl.DateTimeFormat('en-US', { timeZone: snapshot.displayTimeZone, dateStyle: 'long' });
+const release120 = JSON.parse(readFileSync(new URL('./fixtures/changelog-1.2.0.json', import.meta.url), 'utf8'));
+const publishedHashes = JSON.parse(readFileSync(new URL('./fixtures/changelog-published-sections.json', import.meta.url), 'utf8'));
 const expectedIds = [
+    'v1-2-0', 'ios-v1-2-0',
     'v1-1-1', 'ios-v1-0-2', 'ios-v1-0-1', 'ios-v1-0-0', 'v1-0-8',
     'v1-0-7', 'v1-0-6', 'v1-0-5', 'v1-0-4', 'v1-0-3', 'v1-0-2', 'v1-0-1', 'v1-0-0',
 ];
@@ -19,6 +23,20 @@ export function verifyChangelog(content, { rendered = false } = {})
     const releases = new Map(sections.map(([html, id]) => [id, html]));
     assert.deepEqual(sections.map(([, id]) => id), expectedIds, 'Keep every published release in reverse chronological order with distinct platform anchors');
     assert.ok(content.includes('Release notes for DiskPress for Mac and DiskPress for Files for iPhone and iPad.'), 'The changelog introduction must cover both apps');
+
+    if (!rendered) for (const [id, hash] of Object.entries(publishedHashes))
+        assert.equal(createHash('sha256').update(releases.get(id)).digest('hex'), hash, `${id} must remain byte-for-byte unchanged`);
+    for (const release of release120)
+    {
+        const ios = release.platform === 'ios';
+        const id = `${ios ? 'ios-' : ''}v1-2-0`;
+        const entry = releases.get(id);
+        assert.ok(entry.includes(`<h2>${ios ? 'DiskPress for Files' : 'DiskPress'} v1.2.0</h2>`), `${id} must identify the correct app`);
+        assert.deepEqual([...entry.matchAll(/<li>([\s\S]*?)<\/li>/g)].map(([, note]) => decode(note)), release.notes, `${id} must preserve the approved Fastlane notes`);
+        const setting = ios ? 'IOS_APP_STORE_URL' : 'APP_STORE_URL';
+        const url = siteConfig.match(new RegExp(`export const ${setting} = '([^']+)';`))?.[1];
+        assert.ok(rendered ? decode(entry).includes(`href="${url}"`) : entry.includes(`href={${setting}}`), `${id} must link to the correct product`);
+    }
 
     for (const release of snapshot.releases)
     {

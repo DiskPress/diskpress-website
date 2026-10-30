@@ -1,5 +1,21 @@
 # DiskPress website verification
 
+## Version 1.2.0 website update on October 30, 2026
+
+Updated the Mac and iOS product pages, FAQ, CLI guide, and cleanup responsibilities to match the released 1.2.0 apps. The pages describe all seven stage combinations, editable cleanup profiles, removal and keep patterns, recent-file protection, Mac automatic monitoring, iOS Shortcuts, and the limits of iOS Trash support. Both Mac download areas now show a Setapp button and retain the one-time purchase explanation.
+
+Added the approved Fastlane notes for Mac 1.2.0 and iOS 1.2.0, including the existing six localized versions. A source hash fixture confirms all 13 historical release sections are unchanged. The website has 1,021 active source messages with complete six-language catalog coverage. New wording was translated directly. Automated checks validate only structure, coverage, placeholders, routes, and markup, not translated wording.
+
+Replaced 11 old captures with 98 untouched localized Fastlane PNGs, covering 14 screens in each website language. Source paths, hashes, dimensions, and usage are checked. Removed 51 obsolete catalog entries. Astro generated 441 responsive WebP assets and 70 page variants.
+
+Updated Astro to 7.4.4 and Wrangler to 4.156.0 to resolve dependency advisories. The lockfile audit reports zero vulnerabilities. The declared Node minimum now matches Astro's 22.23.4 requirement.
+
+The production build, TypeScript check, and Cloudflare deployment dry run passed. The normal native compiler loader stalled on this Mac, so the successful local build used the matching official WebAssembly backends for Rolldown, Satteri, and the Astro compiler. These local verification packages and environment settings are not committed. No macOS security settings were changed. Cloudflare's existing build and deployment commands remain unchanged.
+
+Built-output checks passed for 71 served routes including the root 404 alias, 3,459 internal links, 1,036 asset references, store and bundle destinations, metadata, sitemap, inline styles, and all localized screenshots. Source checks passed for all 70 page variants, all 56 public sitemap URLs, language routing, placeholders, and error pages.
+
+Browser review covered both product pages in all seven languages at 320, 768, and 1440 pixels. All 42 layout cases had no horizontal page overflow, clipped headings or download labels, or unequal heights within card rows. Light and dark appearances were inspected. Language switching preserved the cleanup anchor and selected the corresponding app screenshot. The iOS cleanup FAQ deep link opened its answer. Both new release entries displayed seven notes. No browser console errors were observed, and the temporary viewport override was reset.
+
 ## Setapp one-time purchase correction on October 19, 2026
 
 Corrected the download options, pricing FAQ, support page, and terms to describe DiskPress on Setapp as a standalone one-time purchase, not an app included in a Setapp subscription. The supplied Setapp listing identifies it as a standalone app with a Buy now option. Removed renewal, cancellation, and subscription-expiry guidance. Added the same purchase clarification to the privacy policy without changing its existing activation and usage-reporting disclosures. No fixed price or entitlement to future upgrades was promised.

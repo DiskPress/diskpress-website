@@ -39,8 +39,14 @@ function render(node) {
   const start = `<${node.type}${attrs}>`;
   return voidTags.has(node.type) ? start : `${start}${node.props['set:html'] ?? render(node.children)}</${node.type}>`;
 }
+const screenshotSources = JSON.parse(await read('src/data/screenshot-sources.json'));
+function getScreenshot(name, locale) {
+  const entry = screenshotSources.find(image => image.name === name && image.locale === locale);
+  assert.ok(entry, `Missing ${locale}/${name} screenshot`);
+  return { file: entry.file.replace('src/assets/', ''), width: entry.width, height: entry.height };
+}
 let currentPath = '/';
-const shared = { ...constants, ...faq.exports, ...routes, languageScript, h, Fragment, URL, Image: props => { const {src,widths,format,quality,children,...rest}=props; return h('img',{...rest,src:'/qa-assets/'+src.file,width:src.width,height:src.height}); } };
+const shared = { ...constants, ...faq.exports, ...routes, getScreenshot, languageScript, h, Fragment, URL, Image: props => { const {src,widths,format,quality,children,...rest}=props; return h('img',{...rest,src:'/qa-assets/'+src.file,width:src.width,height:src.height}); } };
 async function compile(file) {
   const source = await read(file);
   const match = source.match(/^---\n([\s\S]*?)\n---\s*([\s\S]*)$/);

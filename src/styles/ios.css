@@ -11,6 +11,7 @@
   .ios-preview-visual img { width: 240px; height: auto; }
   .ios-preview-visual figcaption, .ios-hero-visual figcaption { color: var(--muted); font-size: .8125rem; text-align: center; }
   .ios-hero { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: min(48px, var(--gutter)); align-items: center; padding-block: 48px; }
+  .cleanup-layout { padding-block: 0; }
   .ios-hero h1 { font-size: clamp(2.75rem, 5.4vw, 5rem); }
   .ios-hero h1 span { color: var(--accent); }
   .ios-hero-visual img { width: min(100%, 320px); height: auto; }

@@ -6,13 +6,16 @@ export function verifySetappPurchase(documents) {
   const listing = 'https://setapp.com/apps/diskpress';
   const homepage = documents.get('/') || '';
   const options = [...homepage.matchAll(/<p\b[^>]*class="fine setapp-option"[^>]*>[\s\S]*?<\/p>/g)].map(([html]) => html);
-  assert.equal(options.length, 2, 'Both Mac download areas need a secondary Setapp option');
+  assert.equal(options.length, 2, 'Both Mac download areas must explain the Setapp purchase');
   for (const option of options) {
-    assert.ok(option.includes('one-time purchase') && option.includes(`<a href="${listing}">Setapp</a>`), 'Setapp must be a plain text link described as a one-time purchase');
+    assert.ok(option.includes('Setapp offers a one-time purchase for Mac.'), 'Setapp must be described as a one-time purchase');
     assert.ok(option.includes('Same features as the Mac App Store version.'), 'Mac feature parity must remain explicit');
   }
-  for (const [tag] of homepage.matchAll(/<a\b[^>]*>/g)) {
-    assert.ok(!(tag.includes(listing) && /\bclass="[^"]*download-link/.test(tag)), 'Setapp must remain secondary to the App Store buttons');
+  const buttons = [...homepage.matchAll(/<a\b[^>]*class="download-link setapp-download"[^>]*>[\s\S]*?<\/a>/g)].map(([html]) => html);
+  assert.equal(buttons.length, 2, 'Both Mac download areas must include a visible Setapp button');
+  for (const button of buttons) {
+    assert.ok(button.includes(`href="${listing}"`) && button.includes('Get it on Setapp'), 'Setapp buttons must have a visible label and the correct destination');
+    assert.ok(button.includes('aria-label="Get DiskPress for Mac on Setapp"'), 'Setapp must identify the Mac product for assistive technology');
   }
 
   const faq = documents.get('/faq/')?.match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0] || '';

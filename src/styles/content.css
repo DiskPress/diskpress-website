@@ -2,6 +2,7 @@
   /* Sibling panels share the tallest content-driven height in each row, never across stacked rows. */
   .comparison-grid, .native-grid, .savings-stages, .control-grid, .screenshot-grid, .document-content > .support-options { align-items: stretch; }
   .comparison-section, .workflow-section, .automation-section, .faq-section { background: var(--surface); border-block: 1px solid var(--line); }
+  .cleanup-details { margin-top: 24px; }
   .comparison-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
   .comparison-item { display: grid; grid-template-rows: auto auto 1fr auto; gap: 20px; padding: 28px; border: 1px solid var(--line); border-radius: 16px; }
   .comparison-item.featured { border-color: var(--accent); background: var(--accent-bg); }

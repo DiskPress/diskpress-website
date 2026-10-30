@@ -1,0 +1,28 @@
+[
+  {
+    "platform": "mac",
+    "version": "1.2.0",
+    "notes": [
+      "Added cleanup before deduplication and compression.",
+      "Choose any combination of the three stages for each location.",
+      "Create editable profiles with removal and keep rules using masks or regex.",
+      "Start with presets for logs and temporary files.",
+      "Choose a removal method for each profile, including permanent deletion.",
+      "Cleanup respects your recent-file protection setting.",
+      "The selected cleanup profile is visible alongside the optimization mode."
+    ]
+  },
+  {
+    "platform": "ios",
+    "version": "1.2.0",
+    "notes": [
+      "Added cleanup before deduplication and compression.",
+      "Choose any combination of the three stages for each location.",
+      "Create editable profiles with removal and keep rules using masks or regex.",
+      "Start with presets for logs and temporary files.",
+      "Choose a removal method for each profile, including permanent deletion.",
+      "Cleanup respects your recent-file protection setting.",
+      "The selected cleanup profile is visible alongside the optimization mode."
+    ]
+  }
+]
