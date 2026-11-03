@@ -7,12 +7,14 @@ const available = isIos ? IOS_APP_STORE_AVAILABLE : APP_STORE_AVAILABLE;
 const storeUrl = isIos ? IOS_APP_STORE_URL : APP_STORE_URL;
 const storeName = isIos ? 'App Store' : 'Mac App Store';
 const label = shortLabel ? (isIos ? 'iOS App Store' : 'Mac App Store') : compact ? (isIos ? 'Get DiskPress for Files' : 'Get DiskPress') : `Download on the ${storeName}`;
-const accessibleLabel = isIos ? `Download DiskPress for Files on the ${shortLabel ? 'iOS App Store' : 'App Store'}` : shortLabel ? 'Download DiskPress on the Mac App Store' : undefined;
+const accessibleLabel = isIos ? `Download DiskPress for Files on the ${shortLabel ? 'iOS App Store' : 'App Store'}` : 'Download DiskPress on the Mac App Store';
 ---
 {available ? (
-  <a class:list={['download-link', { compact }]} href={storeUrl} aria-label={accessibleLabel}>
-    <span>{label}</span>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+  <a class:list={['download-link', { compact, 'mac-store-badge': !isIos }]} href={storeUrl} aria-label={accessibleLabel}>
+    {isIos ? <>
+      <span>{label}</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+    </> : <img src="/images/mac-app-store-badge.svg" width="156" height="40" alt="" />}
   </a>
 ) : (
   <span class:list={['release-status', { compact }]} data-platform={isIos ? 'ios' : undefined}>

@@ -329,7 +329,7 @@ for (const [index, group] of downloadGroups.entries())
 {
     const label = index === 0 ? 'Download DiskPress for your device' : 'Download DiskPress for Mac';
     assert.ok(group.includes(`role="group" aria-label="${label}"`), 'Download choices must form a platform-specific accessible action group');
-    assert.ok(group.includes(setapp), 'Each Mac download group must offer Setapp');
+    assert.ok(!group.includes(setapp) && !group.includes('setapp-badge'), 'Setapp must stay in its own secondary row below the App Store buttons');
     if (appStoreAvailable)
         assert.ok(decode(group).includes(`href="${appStore}"`) && group.includes('aria-label="Download DiskPress on the Mac App Store"'), 'Mac App Store must remain a primary download');
     if (index === 0 && iosAppStoreAvailable)
@@ -337,7 +337,9 @@ for (const [index, group] of downloadGroups.entries())
     if (index === 1)
         assert.ok(!group.includes('id6814957268'), 'The Mac platform card must keep its download specific to Mac');
     const buttons = [...group.matchAll(/<a\b[^>]*>/g)].map(([tag]) => tag);
-    assert.ok(buttons.every(tag => /class="download-link(?: setapp-download)?"/.test(tag)), 'App Store buttons must share the same primary styling');
+    assert.ok(buttons.every(tag => /class="download-link(?: mac-store-badge)?"/.test(tag)), 'Both App Store downloads must remain in the primary action group');
+    if (appStoreAvailable)
+        assert.ok(group.includes('src="/images/mac-app-store-badge.svg"'), 'Mac downloads must use the supplied App Store badge');
 }
 assert.ok(homepage.includes('No separate DiskPress account') && !homepage.includes('No account or file uploads'), 'Local file processing must not imply that the stores require no account');
 const downloadAnswer = documents.get('/faq/').match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0];

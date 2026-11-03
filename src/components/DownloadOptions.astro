@@ -7,8 +7,12 @@ const { includeIos = false } = Astro.props;
 <div class="download-group">
   <div class="download-options" role="group" aria-label={includeIos ? 'Download DiskPress for your device' : 'Download DiskPress for Mac'}>
     <DownloadLink shortLabel />
-    <a class="download-link setapp-download" href={SETAPP_URL} aria-label="Get DiskPress for Mac on Setapp"><span>Get it on Setapp</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
     {includeIos && <DownloadLink platform="ios" shortLabel />}
   </div>
-  <p class="fine setapp-option">Setapp offers a one-time purchase for Mac. Same features as the Mac App Store version.</p>
+  <div class="setapp-purchase">
+    <setapp-badge appId="2085" vendorId="1651" theme="dark">
+      <a class="setapp-fallback" href={SETAPP_URL} aria-label="Get DiskPress for Mac on Setapp"><span>Get it on Setapp</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+    </setapp-badge>
+    <p class="fine setapp-option">Setapp offers a one-time purchase for Mac. Same features as the Mac App Store version.</p>
+  </div>
 </div>

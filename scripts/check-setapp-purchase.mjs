@@ -11,12 +11,27 @@ export function verifySetappPurchase(documents) {
     assert.ok(option.includes('Setapp offers a one-time purchase for Mac.'), 'Setapp must be described as a one-time purchase');
     assert.ok(option.includes('Same features as the Mac App Store version.'), 'Mac feature parity must remain explicit');
   }
-  const buttons = [...homepage.matchAll(/<a\b[^>]*class="download-link setapp-download"[^>]*>[\s\S]*?<\/a>/g)].map(([html]) => html);
-  assert.equal(buttons.length, 2, 'Both Mac download areas must include a visible Setapp button');
-  for (const button of buttons) {
-    assert.ok(button.includes(`href="${listing}"`) && button.includes('Get it on Setapp'), 'Setapp buttons must have a visible label and the correct destination');
-    assert.ok(button.includes('aria-label="Get DiskPress for Mac on Setapp"'), 'Setapp must identify the Mac product for assistive technology');
+  const badges = [...homepage.matchAll(/<setapp-badge\b[^>]*>[\s\S]*?<\/setapp-badge>/g)].map(([html]) => html);
+  assert.equal(badges.length, 2, 'Both Mac download areas must use the official Setapp badge');
+  for (const badge of badges) {
+    assert.match(badge, /\bappId="2085"/i, 'The badge must identify DiskPress');
+    assert.match(badge, /\bvendorId="1651"/i, 'The badge must use the supplied vendor attribution');
+    assert.match(badge, /\btheme="dark"/, 'Keep the supplied official badge appearance');
+    assert.ok(badge.includes('class="setapp-fallback"') && badge.includes(`href="${listing}"`) && badge.includes('Get it on Setapp'), 'Keep a usable fallback if the badge script is unavailable');
+    assert.ok(badge.includes('aria-label="Get DiskPress for Mac on Setapp"'), 'The fallback must identify the Mac product for assistive technology');
   }
+  const scriptUrl = 'https://developer.setapp.com/setapp-badge/index.js';
+  const scripts = [...homepage.matchAll(/<script\b[^>]*>/g)].map(([tag]) => tag).filter(tag => tag.includes(`src="${scriptUrl}"`));
+  assert.equal(scripts.length, 1, 'Load the official script once for both badges');
+  assert.match(scripts[0], /\sasync(?:\s|=|>)/, 'The third-party badge must load asynchronously');
+  for (const [route, html] of documents) if (route !== '/') {
+    assert.ok(!html.includes(scriptUrl), `${route} must not load a badge script when it has no badge`);
+  }
+  for (const [group] of homepage.matchAll(/<div\b[^>]*class="download-options"[^>]*>[\s\S]*?<\/div>/g)) {
+    assert.ok(!group.includes('setapp-badge') && !group.includes(listing), 'The App Store buttons must remain primary, with Setapp in its own secondary row');
+  }
+  assert.ok(!homepage.includes('class="download-link setapp-download"'), 'The handmade Setapp download button must be replaced');
+  assert.ok(documents.get('/privacy-policy/')?.includes('developer.setapp.com') && documents.get('/privacy-policy/').includes('app and vendor referral identifiers'), 'The privacy policy must disclose the third-party badge request and referral link');
 
   const faq = documents.get('/faq/')?.match(/<details\b[^>]*id="download-price"[^>]*>[\s\S]*?<\/details>/)?.[0] || '';
   assert.ok(faq.includes(`href="${listing}"`) && faq.includes('standalone app with a one-time payment'), 'The pricing FAQ must explain the standalone Setapp purchase');

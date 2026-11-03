@@ -1,5 +1,17 @@
 # DiskPress website verification
 
+## Official store badges on November 2, 2026
+
+Replaced both custom Setapp download buttons with the supplied official badge using app ID 2085, vendor ID 1651, and the dark theme. Its async script loads once per homepage, including localized homepages. Setapp stays below the primary App Store actions with the existing one-time purchase explanation. The badge reserves 150 by 60 pixels and supplies a normal link if the script is unavailable. The homepage's narrow layout centers the badge when it wraps above its explanation.
+
+Copied the supplied Mac App Store SVG unchanged into `public/images` and used it for Mac downloads in both homepage purchase areas and the application recovery page. Its proportions and accessible link names are preserved. Store destinations and their existing campaign parameters are unchanged. The privacy policy now discloses the external Setapp badge request and referral identifiers, with six directly authored translations. Existing changelog posts and their translations are unchanged.
+
+TypeScript, JavaScript syntax, source rendering, changelog preservation, and whitespace checks passed. The source preview structurally verified all 70 page variants and all 56 public sitemap URLs. Badge checks confirm the official Setapp script, app and vendor IDs, fallback destinations, and secondary placement. The copied Mac badge matches the supplied source byte for byte.
+
+Browser review covered dark and light appearances and widths from 320 to 1280 pixels. The badges retain their dimensions, App Store click targets match in size, desktop platform cards share a height, and no horizontal overflow was observed. The Mac badge and Setapp badge are keyboard accessible. The official Setapp destination contains the expected vendor and app attribution. With the Setapp script omitted, the fallback remains usable and the download groups retain the same dimensions. The privacy page does not load the badge script. No browser console errors were observed.
+
+Verification used the plain-JavaScript source preview with current templates, CSS, and original assets. No unsigned native build tools were run. This check does not validate a fresh Astro production bundle, generated WebP assets, or Cloudflare deployment output.
+
 ## Folded iPhone Duo captures on October 30, 2026
 
 Replaced 35 inner-display captures with current native outer-display captures across all seven website languages. Together with the existing file-copy captures, all 42 iOS images now show the folded Duo at 1398 by 2034 pixels. Fastline captured the same screenshot app and localized sample data as the existing 1.2.0 media. Pixel checks confirmed that the prepared PNGs preserve the native captures, and the website source manifest records their paths, dimensions, and hashes.
